@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>快樂學習樂園</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <header>
+        <h1>快樂學習樂園</h1>
+    </header>
+    <main>
+        <div class="container">
+            <a href="/numbers/learn" class="card">
+                <div class="card-icon">123</div>
+                <h2>數字 1-100</h2>
+                <p>一起來學數數吧！</p>
+                <span class="btn">開始學習</span>
+                <span class="btn" onclick="event.preventDefault(); location.href='/numbers/game'">找數字遊戲</span>
+                <span class="btn" onclick="event.preventDefault(); location.href='/numbers/counting-game'">數數看遊戲</span>
+                <span class="btn" onclick="event.preventDefault(); location.href='/numbers/stroke'">筆畫練習</span>
+            </a>
+            <a href="/english/learn" class="card">
+                <div class="card-icon">ABC</div>
+                <h2>英文 A-Z</h2>
+                <p>認識英文字母！</p>
+                <span class="btn">開始學習</span>
+                <span class="btn" onclick="event.preventDefault(); location.href='/english/game'">找字母遊戲</span>
+                <span class="btn" onclick="event.preventDefault(); location.href='/english/animal-game'">動物遊戲</span>
+                <span class="btn" onclick="event.preventDefault(); location.href='/english/stroke'">筆畫練習</span>
+            </a>
+            <a href="/bopomofo/learn" class="card">
+                <div class="card-icon">ㄅㄆㄇ</div>
+                <h2>注音符號</h2>
+                <p>學習ㄅㄆㄇ！</p>
+                <span class="btn">開始學習</span>
+                <span class="btn" onclick="event.preventDefault(); location.href='/bopomofo/game'">找注音遊戲</span>
+                <span class="btn" onclick="event.preventDefault(); location.href='/bopomofo/stroke'">筆畫練習</span>
+            </a>
+        </div>
+    </main>
+    <script th:src="@{/js/script.js}"></script>
+</body>
+
+</html>
