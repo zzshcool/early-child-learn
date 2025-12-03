@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>注音學習 - 快樂學習樂園</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <header>
+        <h1>注音學習</h1>
+    </header>
+    <main>
+        <a href="/" class="back-link">← 返回首頁</a>
+        <div class="container">
+            <a href="/bopomofo/learn" class="card">
+                <div class="card-icon">ㄅㄆㄇ</div>
+                <h2>認識注音</h2>
+                <p>學習ㄅㄆㄇ！</p>
+                <span class="btn">開始學習</span>
+            </a>
+            <a href="/bopomofo/game" class="card">
+                <div class="card-icon">🔍</div>
+                <h2>找注音遊戲</h2>
+                <p>找出正確的注音！</p>
+                <span class="btn">開始遊戲</span>
+            </a>
+            <a href="/bopomofo/stroke" class="card">
+                <div class="card-icon">✏️</div>
+                <h2>筆畫練習</h2>
+                <p>跟著寫寫看！</p>
+                <span class="btn">開始練習</span>
+            </a>
+        </div>
+    </main>
+</body>
+
+</html>

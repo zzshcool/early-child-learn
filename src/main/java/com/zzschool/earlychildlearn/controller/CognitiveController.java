@@ -27,4 +27,14 @@ public class CognitiveController {
     public String size() {
         return "cognitive/size";
     }
+
+    @GetMapping("/odd-one")
+    public String oddOne() {
+        return "cognitive/odd_one";
+    }
+
+    @GetMapping("/pattern")
+    public String pattern() {
+        return "cognitive/pattern";
+    }
 }

@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/numbers")
 public class NumberController {
 
+    @GetMapping("/menu")
+    public String menu() {
+        return "numbers/menu";
+    }
+
     @GetMapping("/learn")
     public String learn() {
         return "numbers/learn";

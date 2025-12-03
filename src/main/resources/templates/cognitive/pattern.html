@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>規律排序 - 快樂學習樂園</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .sequence-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem auto;
+            flex-wrap: wrap;
+        }
+
+        .sequence-item {
+            width: 80px;
+            height: 80px;
+            background-color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-mark {
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            font-weight: bold;
+        }
+
+        .options-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .option-btn {
+            width: 100px;
+            height: 100px;
+            border-radius: 15px;
+            border: none;
+            background-color: white;
+            font-size: 3.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .option-btn:hover {
+            transform: scale(1.1);
+            background-color: var(--secondary-color);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>規律排序</h1>
+    </header>
+    <main>
+        <a href="/cognitive/menu" class="back-link">← 返回選單</a>
+        <div class="game-area">
+            <div class="question">下一個是什麼？</div>
+            <div id="sequence-container" class="sequence-container">
+                <!-- Sequence items go here -->
+            </div>
+            <div id="options-container" class="options-container">
+                <!-- Options go here -->
+            </div>
+            <div id="feedback" style="font-size: 2rem; margin-top: 20px; min-height: 3rem;"></div>
+            <button onclick="initGame()" class="btn" style="margin-top: 20px;">下一題</button>
+        </div>
+    </main>
+
+    <script>
+        const items = ['🍎', '🍌', '🍇', '🍊', '🐶', '🐱', '🚗', '⭐'];
+
+        function initGame() {
+            const feedback = document.getElementById('feedback');
+            feedback.textContent = '';
+            feedback.style.color = 'inherit';
+
+            // Pick 2 items for the pattern
+            const itemA = items[Math.floor(Math.random() * items.length)];
+            let itemB = items[Math.floor(Math.random() * items.length)];
+            while (itemB === itemA) {
+                itemB = items[Math.floor(Math.random() * items.length)];
+            }
+
+            // Define pattern types: ABABAB, AABAAB, ABBABB
+            const patternType = Math.floor(Math.random() * 3);
+            let sequence = [];
+            let answer = '';
+
+            if (patternType === 0) { // ABABAB
+                sequence = [itemA, itemB, itemA, itemB, itemA];
+                answer = itemB;
+            } else if (patternType === 1) { // AABAAB
+                sequence = [itemA, itemA, itemB, itemA, itemA];
+                answer = itemB;
+            } else { // ABBABB
+                sequence = [itemA, itemB, itemB, itemA, itemB];
+                answer = itemB;
+            }
+
+            // Display sequence
+            const seqContainer = document.getElementById('sequence-container');
+            seqContainer.innerHTML = '';
+            sequence.forEach(icon => {
+                const div = document.createElement('div');
+                div.className = 'sequence-item';
+                div.textContent = icon;
+                seqContainer.appendChild(div);
+            });
+            // Add question mark
+            const qDiv = document.createElement('div');
+            qDiv.className = 'sequence-item question-mark';
+            qDiv.textContent = '?';
+            seqContainer.appendChild(qDiv);
+
+            // Generate options (Correct answer + 1 distractor)
+            // Distractor should be the other item in the pattern usually, or random?
+            // If pattern is A, B. Distractor should be A (if answer is B).
+            const distractor = (answer === itemA) ? itemB : itemA;
+
+            const options = [answer, distractor];
+            options.sort(() => Math.random() - 0.5);
+
+            const optContainer = document.getElementById('options-container');
+            optContainer.innerHTML = '';
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.textContent = opt;
+                btn.onclick = () => checkAnswer(opt, answer);
+                optContainer.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selected, correct) {
+            const feedback = document.getElementById('feedback');
+            if (selected === correct) {
+                feedback.textContent = '答對了！好棒！ 🎉';
+                feedback.style.color = 'green';
+
+                // Reveal the answer in the sequence
+                const qMark = document.querySelector('.question-mark');
+                if (qMark) {
+                    qMark.textContent = correct;
+                    qMark.classList.remove('question-mark');
+                    qMark.style.backgroundColor = '#95E1D3'; // Success color
+                }
+
+                setTimeout(initGame, 1500);
+            } else {
+                feedback.textContent = '再想一想喔！ 🤔';
+                feedback.style.color = 'red';
+            }
+        }
+
+        window.onload = initGame;
+    </script>
+</body>
+
+</html>

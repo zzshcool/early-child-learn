@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>數字學習 - 快樂學習樂園</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <header>
+        <h1>數字學習</h1>
+    </header>
+    <main>
+        <a href="/" class="back-link">← 返回首頁</a>
+        <div class="container">
+            <a href="/numbers/learn" class="card">
+                <div class="card-icon">123</div>
+                <h2>認識數字</h2>
+                <p>一起來學數數吧！</p>
+                <span class="btn">開始學習</span>
+            </a>
+            <a href="/numbers/game" class="card">
+                <div class="card-icon">🔍</div>
+                <h2>找數字遊戲</h2>
+                <p>找出正確的數字！</p>
+                <span class="btn">開始遊戲</span>
+            </a>
+            <a href="/numbers/counting-game" class="card">
+                <div class="card-icon">🍎</div>
+                <h2>數數看遊戲</h2>
+                <p>數數看有幾個？</p>
+                <span class="btn">開始遊戲</span>
+            </a>
+            <a href="/numbers/stroke" class="card">
+                <div class="card-icon">✏️</div>
+                <h2>筆畫練習</h2>
+                <p>跟著寫寫看！</p>
+                <span class="btn">開始練習</span>
+            </a>
+        </div>
+    </main>
+</body>
+
+</html>

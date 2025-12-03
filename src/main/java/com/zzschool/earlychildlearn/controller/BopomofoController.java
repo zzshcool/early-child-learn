@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/bopomofo")
 public class BopomofoController {
 
+    @GetMapping("/menu")
+    public String menu() {
+        return "bopomofo/menu";
+    }
+
     @GetMapping("/learn")
     public String learn() {
         return "bopomofo/learn";
