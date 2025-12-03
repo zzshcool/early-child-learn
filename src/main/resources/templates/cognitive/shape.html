@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>形狀認知 - 快樂學習樂園</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .shape-display {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .shape {
+            width: 100px;
+            height: 100px;
+            background-color: var(--primary-color);
+            display: inline-block;
+        }
+
+        .circle {
+            border-radius: 50%;
+        }
+
+        .square {
+            border-radius: 0;
+        }
+
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 100px solid var(--primary-color);
+            background-color: transparent;
+        }
+
+        .rectangle {
+            width: 120px;
+            height: 80px;
+        }
+
+        .option-btn {
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .option-btn .shape {
+            pointer-events: none;
+            /* Let click pass to button */
+        }
+
+        /* Different colors for options to make it interesting, or keep same to focus on shape? 
+           Request says "Select same shape", usually implies shape matching regardless of color or same color.
+           Let's keep color consistent for now to avoid confusion, or randomize colors but ensure shape is the key.
+           Let's stick to same color for target and options to focus purely on shape.
+        */
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>形狀認知</h1>
+    </header>
+    <main>
+        <a href="/cognitive/menu" class="back-link">← 返回選單</a>
+        <div class="game-area">
+            <div class="question">找出一樣的形狀！</div>
+            <div id="target-container" class="shape-display">
+                <!-- Target shape goes here -->
+            </div>
+            <div id="options-container" class="options">
+                <!-- Options go here -->
+            </div>
+            <div id="feedback" style="font-size: 2rem; margin-top: 20px; min-height: 3rem;"></div>
+            <button onclick="initGame()" class="btn" style="margin-top: 20px;">下一題</button>
+        </div>
+    </main>
+
+    <script>
+        const shapes = ['circle', 'square', 'triangle', 'rectangle'];
+
+        function initGame() {
+            const feedback = document.getElementById('feedback');
+            feedback.textContent = '';
+            feedback.style.color = 'inherit';
+
+            // Pick target
+            const targetShape = shapes[Math.floor(Math.random() * shapes.length)];
+            const targetContainer = document.getElementById('target-container');
+            targetContainer.innerHTML = `<div class="shape ${targetShape}"></div>`;
+
+            // Generate options
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+
+            let options = [targetShape];
+            while (options.length < 4) {
+                const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
+                // Allow duplicates in options? Usually no for simple matching.
+                if (!options.includes(randomShape)) {
+                    options.push(randomShape);
+                }
+                // If we run out of unique shapes (only 4 defined), we just shuffle the 4.
+                if (shapes.length <= 4 && options.length === shapes.length) break;
+            }
+
+            // Shuffle options
+            options.sort(() => Math.random() - 0.5);
+
+            options.forEach(shape => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerHTML = `<div class="shape ${shape}"></div>`;
+                btn.onclick = () => checkAnswer(shape, targetShape);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selected, target) {
+            const feedback = document.getElementById('feedback');
+            if (selected === target) {
+                feedback.textContent = '答對了！好棒！ 🎉';
+                feedback.style.color = 'green';
+                // Optional: Auto next after delay
+                setTimeout(initGame, 1500);
+            } else {
+                feedback.textContent = '再試試看喔！ 💪';
+                feedback.style.color = 'red';
+            }
+        }
+
+        // Start game on load
+        window.onload = initGame;
+    </script>
+</body>
+
+</html>

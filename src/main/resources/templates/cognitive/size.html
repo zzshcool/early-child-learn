@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>大小認知 - 快樂學習樂園</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .size-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            margin: 2rem 0;
+            min-height: 200px;
+        }
+
+        .size-item {
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .size-item:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+            transform: scale(1.1);
+            /* Hover effect adds to existing scale */
+        }
+
+        .item-content {
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>大小認知</h1>
+    </header>
+    <main>
+        <a href="/cognitive/menu" class="back-link">← 返回選單</a>
+        <div class="game-area">
+            <div id="question" class="question"></div>
+            <div id="options-container" class="size-container">
+                <!-- Options go here -->
+            </div>
+            <div id="feedback" style="font-size: 2rem; margin-top: 20px; min-height: 3rem;"></div>
+            <button onclick="initGame()" class="btn" style="margin-top: 20px;">下一題</button>
+        </div>
+    </main>
+
+    <script>
+        const emojis = ['🍎', '🚗', '🐶', '⚽', '🐻', '⭐'];
+
+        function initGame() {
+            const feedback = document.getElementById('feedback');
+            feedback.textContent = '';
+            feedback.style.color = 'inherit';
+
+            // Randomly choose question type: 0 for Big, 1 for Small
+            const isFindBig = Math.random() > 0.5;
+            const questionText = isFindBig ? '哪一個比較大？ (Big)' : '哪一個比較小？ (Small)';
+            document.getElementById('question').textContent = questionText;
+
+            // Pick an emoji
+            const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+
+            // Generate sizes (scale factors)
+            // We want one clearly big and one clearly small, or 3 sizes.
+            // Let's do 2 options for simplicity for toddlers.
+            const sizes = [
+                { id: 'big', scale: 3.0, isBig: true },
+                { id: 'small', scale: 1.5, isBig: false }
+            ];
+
+            // Shuffle positions
+            sizes.sort(() => Math.random() - 0.5);
+
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+
+            sizes.forEach(size => {
+                const btn = document.createElement('button');
+                btn.className = 'size-item';
+                // We apply font-size directly to scale the emoji
+                btn.innerHTML = `<span class="item-content" style="font-size: ${size.scale}rem;">${emoji}</span>`;
+
+                btn.onclick = () => checkAnswer(size.isBig, isFindBig);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(isBigItem, isFindBigQuestion) {
+            const feedback = document.getElementById('feedback');
+            // If looking for Big and clicked Big -> Correct
+            // If looking for Small and clicked Small (not Big) -> Correct
+            if (isBigItem === isFindBigQuestion) {
+                feedback.textContent = '答對了！好棒！ 🎉';
+                feedback.style.color = 'green';
+                setTimeout(initGame, 1500);
+            } else {
+                feedback.textContent = '再試試看喔！ 💪';
+                feedback.style.color = 'red';
+            }
+        }
+
+        window.onload = initGame;
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>顏色認知 - 快樂學習樂園</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .color-sample {
+            width: 150px;
+            height: 150px;
+            border-radius: 20px;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #333;
+            background-color: #eee;
+            /* Default */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .option-btn {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>顏色認知</h1>
+    </header>
+    <main>
+        <a href="/cognitive/menu" class="back-link">← 返回選單</a>
+        <div class="game-area">
+            <div class="question">找出正確的顏色！</div>
+            <div id="target-display" style="font-size: 3rem; margin-bottom: 2rem; font-weight: bold;">
+                <!-- Target color name -->
+            </div>
+            <div id="options-container" class="options">
+                <!-- Options go here -->
+            </div>
+            <div id="feedback" style="font-size: 2rem; margin-top: 20px; min-height: 3rem;"></div>
+            <button onclick="initGame()" class="btn" style="margin-top: 20px;">下一題</button>
+        </div>
+    </main>
+
+    <script>
+        const colors = [
+            { name: '紅色', hex: '#FF6B6B' },
+            { name: '藍色', hex: '#4ECDC4' },
+            { name: '黃色', hex: '#FFE66D' },
+            { name: '綠色', hex: '#95E1D3' },
+            { name: '橘色', hex: '#FFA500' },
+            { name: '紫色', hex: '#9B59B6' }
+        ];
+
+        function initGame() {
+            const feedback = document.getElementById('feedback');
+            feedback.textContent = '';
+            feedback.style.color = 'inherit';
+
+            // Pick target
+            const target = colors[Math.floor(Math.random() * colors.length)];
+            const targetDisplay = document.getElementById('target-display');
+            targetDisplay.textContent = `找出: ${target.name}`;
+            targetDisplay.style.color = target.hex; // Hint: text color matches target
+
+            // Generate options
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+
+            let options = [target];
+            while (options.length < 4) {
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                if (!options.includes(randomColor)) {
+                    options.push(randomColor);
+                }
+            }
+
+            // Shuffle options
+            options.sort(() => Math.random() - 0.5);
+
+            options.forEach(color => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.style.backgroundColor = color.hex;
+                btn.onclick = () => checkAnswer(color, target);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selected, target) {
+            const feedback = document.getElementById('feedback');
+            if (selected.name === target.name) {
+                feedback.textContent = '答對了！好棒！ 🎉';
+                feedback.style.color = 'green';
+                setTimeout(initGame, 1500);
+            } else {
+                feedback.textContent = '再試試看喔！ 💪';
+                feedback.style.color = 'red';
+            }
+        }
+
+        window.onload = initGame;
+    </script>
+</body>
+
+</html>

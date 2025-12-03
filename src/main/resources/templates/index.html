@@ -39,6 +39,15 @@
                 <span class="btn" onclick="event.preventDefault(); location.href='/bopomofo/game'">找注音遊戲</span>
                 <span class="btn" onclick="event.preventDefault(); location.href='/bopomofo/stroke'">筆畫練習</span>
             </a>
+            <a href="/cognitive/menu" class="card">
+                <div class="card-icon">🧠</div>
+                <h2>認知學習</h2>
+                <p>形狀、顏色、大小！</p>
+                <span class="btn">開始學習</span>
+                <span class="btn" onclick="event.preventDefault(); location.href='/cognitive/shape'">形狀認知</span>
+                <span class="btn" onclick="event.preventDefault(); location.href='/cognitive/color'">顏色認知</span>
+                <span class="btn" onclick="event.preventDefault(); location.href='/cognitive/size'">大小認知</span>
+            </a>
         </div>
     </main>
     <script th:src="@{/js/script.js}"></script>

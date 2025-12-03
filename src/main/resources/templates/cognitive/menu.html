@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>認知學習 - 快樂學習樂園</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <header>
+        <h1>認知學習</h1>
+    </header>
+    <main>
+        <a href="/" class="back-link">← 返回首頁</a>
+        <div class="container">
+            <a href="/cognitive/shape" class="card">
+                <div class="card-icon">△○□</div>
+                <h2>形狀認知</h2>
+                <p>找出一樣的形狀！</p>
+                <span class="btn">開始遊戲</span>
+            </a>
+            <a href="/cognitive/color" class="card">
+                <div class="card-icon">🎨</div>
+                <h2>顏色認知</h2>
+                <p>找出正確的顏色！</p>
+                <span class="btn">開始遊戲</span>
+            </a>
+            <a href="/cognitive/size" class="card">
+                <div class="card-icon">🐘🐁</div>
+                <h2>大小認知</h2>
+                <p>比比看誰大誰小！</p>
+                <span class="btn">開始遊戲</span>
+            </a>
+        </div>
+    </main>
+</body>
+
+</html>
