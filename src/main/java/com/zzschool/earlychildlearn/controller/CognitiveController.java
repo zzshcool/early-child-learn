@@ -37,4 +37,9 @@ public class CognitiveController {
     public String pattern() {
         return "cognitive/pattern";
     }
+
+    @GetMapping("/memory-flip")
+    public String memoryFlip() {
+        return "cognitive/memory_flip";
+    }
 }

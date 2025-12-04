@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>圖像記憶 - 快樂學習樂園</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .game-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        .memory-card {
+            background-color: #fff;
+            border: 3px solid #FFD700;
+            border-radius: 15px;
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .memory-card.flipped {
+            background-color: #FFD700;
+            color: transparent;
+        }
+
+        .memory-card:hover {
+            transform: scale(1.05);
+        }
+
+        .target-display {
+            font-size: 2rem;
+            margin: 20px;
+            padding: 15px;
+            background-color: #e0f7fa;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        .message {
+            font-size: 1.5rem;
+            margin: 20px;
+            height: 40px;
+            color: #333;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .btn-restart {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .btn-restart:hover {
+            background-color: #45a049;
+        }
+
+        @keyframes shake {
+            0% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px);
+            }
+
+            50% {
+                transform: translateX(5px);
+            }
+
+            75% {
+                transform: translateX(-5px);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        .shake {
+            animation: shake 0.5s;
+            border-color: #ff5252;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>圖像記憶翻翻卡</h1>
+    </header>
+    <main>
+        <a href="/cognitive/menu" class="back-link">← 返回選單</a>
+        <div class="game-container">
+            <div id="instruction" class="message">記住這些圖片的位置！</div>
+            <div id="target-container" class="hidden">
+                <div class="target-display">
+                    請找出：<span id="target-emoji"></span>
+                </div>
+            </div>
+
+            <div class="cards-grid" id="cards-grid">
+                <!-- Cards will be generated here -->
+            </div>
+
+            <button id="restart-btn" class="btn-restart hidden" onclick="initGame()">再玩一次</button>
+        </div>
+    </main>
+
+    <script>
+        const emojis = ['🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼', '🐨', '🐯', '🦁', '🐮', '🐷', '🐸', '🐵', '🐔'];
+        let currentCards = [];
+        let targetCard = null;
+        let isGameActive = false;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function initGame() {
+            const grid = document.getElementById('cards-grid');
+            const instruction = document.getElementById('instruction');
+            const targetContainer = document.getElementById('target-container');
+            const restartBtn = document.getElementById('restart-btn');
+
+            grid.innerHTML = '';
+            targetContainer.classList.add('hidden');
+            restartBtn.classList.add('hidden');
+            instruction.textContent = '記住這些圖片的位置！';
+            instruction.style.color = '#333';
+
+            // Randomly select 4 to 8 cards
+            const numCards = Math.floor(Math.random() * 5) + 4; // 4 to 8
+            const gameEmojis = shuffle([...emojis]).slice(0, numCards);
+
+            currentCards = gameEmojis.map((emoji, index) => ({
+                id: index,
+                emoji: emoji
+            }));
+
+            // Render cards
+            currentCards.forEach(card => {
+                const cardEl = document.createElement('div');
+                cardEl.className = 'memory-card';
+                cardEl.textContent = card.emoji;
+                cardEl.dataset.id = card.id;
+                cardEl.onclick = () => handleCardClick(cardEl, card);
+                grid.appendChild(cardEl);
+            });
+
+            isGameActive = false;
+
+            // Countdown
+            let countdown = 2;
+            const timer = setInterval(() => {
+                instruction.textContent = `倒數 ${countdown} 秒...`;
+                countdown--;
+                if (countdown < 0) {
+                    clearInterval(timer);
+                    startGame();
+                }
+            }, 1000);
+        }
+
+        function startGame() {
+            const cards = document.querySelectorAll('.memory-card');
+            cards.forEach(card => card.classList.add('flipped'));
+
+            // Select target
+            const randomIndex = Math.floor(Math.random() * currentCards.length);
+            targetCard = currentCards[randomIndex];
+
+            const instruction = document.getElementById('instruction');
+            const targetContainer = document.getElementById('target-container');
+            const targetEmoji = document.getElementById('target-emoji');
+
+            instruction.textContent = '圖片在哪裡？';
+            targetEmoji.textContent = targetCard.emoji;
+            targetContainer.classList.remove('hidden');
+
+            isGameActive = true;
+        }
+
+        function handleCardClick(cardEl, card) {
+            if (!isGameActive) return;
+            // If already revealed or matched, ignore
+            if (!cardEl.classList.contains('flipped')) return;
+
+            // Reveal the card
+            cardEl.classList.remove('flipped');
+
+            if (card.id === targetCard.id) {
+                // Correct
+                cardEl.style.backgroundColor = '#4CAF50';
+                cardEl.style.color = 'white';
+
+                const instruction = document.getElementById('instruction');
+                instruction.textContent = '答對了！太棒了！🎉';
+                instruction.style.color = '#4CAF50';
+
+                isGameActive = false;
+                document.getElementById('restart-btn').classList.remove('hidden');
+
+                // Reveal all cards after a short delay
+                setTimeout(() => {
+                    document.querySelectorAll('.memory-card').forEach(c => c.classList.remove('flipped'));
+                }, 1000);
+            } else {
+                // Wrong
+                isGameActive = false; // Prevent clicking others while showing wrong card
+                cardEl.classList.add('shake');
+
+                const instruction = document.getElementById('instruction');
+                instruction.textContent = '再試一次看看！';
+                instruction.style.color = '#ff5252';
+
+                setTimeout(() => {
+                    cardEl.classList.remove('shake');
+                    cardEl.classList.add('flipped'); // Cover back
+                    isGameActive = true; // Re-enable clicking
+                }, 800);
+            }
+        }
+
+        // Start game on load
+        window.onload = initGame;
+    </script>
+</body>
+
+</html>
