@@ -118,7 +118,7 @@
         <a href="/" class="back-link">← 回首頁</a>
         <div class="game-container" style="position: relative;">
             <canvas id="mazeCanvas" width="500" height="500"></canvas>
-            <div id="start-msg" class="start-overlay">點擊人物開始！</div>
+            <div id="start-msg" class="start-overlay">點擊或滑動開始！</div>
 
             <div class="controls">
                 <div></div>
@@ -158,6 +158,11 @@
         let end = { x: cols - 2, y: rows - 2 };
         let gameStarted = false;
 
+        // 觸控/滑鼠拖曳相關變數
+        let isDragging = false;
+        let lastTouchPos = null;
+        const swipeThreshold = cellSize * 0.5; // 滑動閾值
+
         // Initialize
         function init() {
             // Generate random maze
@@ -168,29 +173,123 @@
 
             player = { x: 1, y: 1 };
             gameStarted = false;
+            startMsg.textContent = '點擊迷宮開始遊戲！';
             startMsg.style.display = 'block';
             draw();
 
-            // Add click listener to canvas to start
-            canvas.addEventListener('click', handleCanvasClick);
+            // 設置事件監聽器
+            setupEventListeners();
         }
 
+        function setupEventListeners() {
+            // 點擊開始遊戲（點擊迷宮任意處）
+            canvas.addEventListener('click', handleCanvasClick);
+
+            // 滑鼠拖曳控制
+            canvas.addEventListener('mousedown', handleMouseDown);
+            canvas.addEventListener('mousemove', handleMouseMove);
+            canvas.addEventListener('mouseup', handleMouseUp);
+            canvas.addEventListener('mouseleave', handleMouseUp);
+
+            // 觸控滑動控制
+            canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
+            canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
+            canvas.addEventListener('touchend', handleTouchEnd);
+        }
+
+        // 點擊迷宮任意處開始遊戲
         function handleCanvasClick(e) {
-            if (gameStarted) return;
+            if (!gameStarted) {
+                startGame();
+            }
+        }
+
+        // ============ 滑鼠拖曳控制 ============
+        function handleMouseDown(e) {
+            if (!gameStarted) return;
+            isDragging = true;
+            const rect = canvas.getBoundingClientRect();
+            lastTouchPos = {
+                x: e.clientX - rect.left,
+                y: e.clientY - rect.top
+            };
+        }
+
+        function handleMouseMove(e) {
+            if (!gameStarted || !isDragging || !lastTouchPos) return;
 
             const rect = canvas.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
+            const currentPos = {
+                x: e.clientX - rect.left,
+                y: e.clientY - rect.top
+            };
 
-            // Check if clicked near player
-            const playerPixelX = player.x * cellSize;
-            const playerPixelY = player.y * cellSize;
+            processSwipe(lastTouchPos, currentPos);
+        }
 
-            // Simple distance check or just click anywhere to start for kids?
-            // User said "Click character to start". Let's be generous.
-            if (x >= playerPixelX && x <= playerPixelX + cellSize &&
-                y >= playerPixelY && y <= playerPixelY + cellSize) {
+        function handleMouseUp(e) {
+            isDragging = false;
+            lastTouchPos = null;
+        }
+
+        // ============ 觸控滑動控制 ============
+        function handleTouchStart(e) {
+            e.preventDefault();
+            if (!gameStarted) {
                 startGame();
+                return;
+            }
+
+            const touch = e.touches[0];
+            const rect = canvas.getBoundingClientRect();
+            lastTouchPos = {
+                x: touch.clientX - rect.left,
+                y: touch.clientY - rect.top
+            };
+        }
+
+        function handleTouchMove(e) {
+            e.preventDefault();
+            if (!gameStarted || !lastTouchPos) return;
+
+            const touch = e.touches[0];
+            const rect = canvas.getBoundingClientRect();
+            const currentPos = {
+                x: touch.clientX - rect.left,
+                y: touch.clientY - rect.top
+            };
+
+            processSwipe(lastTouchPos, currentPos);
+        }
+
+        function handleTouchEnd(e) {
+            lastTouchPos = null;
+        }
+
+        // ============ 滑動處理邏輯 ============
+        function processSwipe(startPos, endPos) {
+            const deltaX = endPos.x - startPos.x;
+            const deltaY = endPos.y - startPos.y;
+
+            // 判斷滑動方向並移動玩家
+            if (Math.abs(deltaX) > swipeThreshold || Math.abs(deltaY) > swipeThreshold) {
+                if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                    // 水平滑動
+                    if (deltaX > 0) {
+                        movePlayer(1, 0); // 向右
+                    } else {
+                        movePlayer(-1, 0); // 向左
+                    }
+                } else {
+                    // 垂直滑動
+                    if (deltaY > 0) {
+                        movePlayer(0, 1); // 向下
+                    } else {
+                        movePlayer(0, -1); // 向上
+                    }
+                }
+                // 更新起始位置以實現連續滑動
+                lastTouchPos = endPos;
             }
         }
 
@@ -247,15 +346,14 @@
             ctx.textBaseline = 'middle';
             ctx.fillText('🏁', end.x * cellSize + cellSize / 2, end.y * cellSize + cellSize / 2);
 
-            // Draw Player (Mario)
-            // Using emoji for simplicity
+            // Draw Player
             ctx.fillText('👷', player.x * cellSize + cellSize / 2, player.y * cellSize + cellSize / 2);
 
-            // If not started, maybe dim the rest?
+            // If not started, show hint overlay
             if (!gameStarted) {
                 ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
-                // Redraw player on top so they see what to click
+                // Redraw player on top so they can see
                 ctx.fillText('👷', player.x * cellSize + cellSize / 2, player.y * cellSize + cellSize / 2);
             }
         }
@@ -284,13 +382,19 @@
 
         // Keyboard controls
         window.addEventListener('keydown', (e) => {
-            if (!gameStarted) return;
+            // 如果遊戲尚未開始，任意按鍵皆可開始
+            if (!gameStarted) {
+                if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+                    startGame();
+                    return;
+                }
+            }
 
             switch (e.key) {
-                case 'ArrowUp': movePlayer(0, -1); break;
-                case 'ArrowDown': movePlayer(0, 1); break;
-                case 'ArrowLeft': movePlayer(-1, 0); break;
-                case 'ArrowRight': movePlayer(1, 0); break;
+                case 'ArrowUp': movePlayer(0, -1); e.preventDefault(); break;
+                case 'ArrowDown': movePlayer(0, 1); e.preventDefault(); break;
+                case 'ArrowLeft': movePlayer(-1, 0); e.preventDefault(); break;
+                case 'ArrowRight': movePlayer(1, 0); e.preventDefault(); break;
             }
         });
 
