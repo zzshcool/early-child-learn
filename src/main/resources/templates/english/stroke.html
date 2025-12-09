@@ -74,6 +74,131 @@
             gap: 1rem;
             flex-wrap: wrap;
         }
+
+        /* 完成動畫效果 */
+        .success-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .success-overlay.show {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .success-content {
+            text-align: center;
+            animation: bounceIn 0.5s ease;
+        }
+
+        .success-emoji {
+            font-size: 6rem;
+            animation: pulse 0.5s ease infinite alternate;
+        }
+
+        .success-text {
+            font-size: 2rem;
+            color: white;
+            margin-top: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .star {
+            position: absolute;
+            font-size: 2rem;
+            animation: starFloat 1.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes starFloat {
+            0% {
+                transform: translateY(0) scale(0) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100px) scale(1) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* 相似度顯示 */
+        .similarity-bar {
+            width: 90%;
+            max-width: 300px;
+            height: 20px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            margin: 1rem auto;
+            overflow: hidden;
+        }
+
+        .similarity-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b, #ffc107, #4caf50);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .similarity-text {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
     </style>
 </head>
 
@@ -82,7 +207,10 @@
         <h1>英文筆畫練習</h1>
     </header>
     <main>
-        <a href="/" class="back-link">← 回首頁</a>
+        <div class="nav-container">
+            <a href="/english/menu" class="nav-link">← 回上一頁</a>
+            <a href="/" class="nav-link home-link">🏠 回首頁</a>
+        </div>
 
         <div class="controls" style="margin-bottom: 2rem;">
             <button class="btn" onclick="prevChar()">← 上一個</button>
@@ -103,15 +231,32 @@
             <canvas id="drawing-canvas" width="300" height="300"></canvas>
         </div>
 
+        <div class="similarity-text" id="similarity-text">開始練習吧！</div>
+        <div class="similarity-bar">
+            <div class="similarity-fill" id="similarity-fill"></div>
+        </div>
+
         <div class="controls">
-            <button class="btn" style="background-color: #ff6b6b;" onclick="clearCanvas()">擦乾淨 (Wipe)</button>
+            <button class="btn" style="background-color: #ff6b6b;" onclick="clearCanvas()">擦乾淨</button>
+            <button class="btn" style="background-color: #4CAF50;" onclick="checkSimilarity()">檢查</button>
         </div>
     </main>
+
+    <!-- 成功動畫 -->
+    <div class="success-overlay" id="success-overlay">
+        <div class="success-content">
+            <div class="success-emoji">🎉</div>
+            <div class="success-text">太棒了！寫得很好！</div>
+        </div>
+    </div>
+    <div class="stars-container" id="stars-container"></div>
+
     <script th:src="@{/js/script.js}"></script>
     <script th:src="@{/js/stroke-data.js}"></script>
     <script>
         const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
         let currentIndex = 0;
+        let hasDrawn = false;
 
         function updateChar() {
             const char = chars[currentIndex];
@@ -119,6 +264,8 @@
             clearCanvas();
             renderGuide('english', char);
             speak(char, 'en-US');
+            document.getElementById('similarity-text').textContent = '開始練習吧！';
+            document.getElementById('similarity-fill').style.width = '0%';
         }
 
         function renderGuide(type, char) {
@@ -166,6 +313,7 @@
 
         function startDraw(e) {
             isDrawing = true;
+            hasDrawn = true;
             draw(e);
         }
 
@@ -203,6 +351,131 @@
 
         function clearCanvas() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+            hasDrawn = false;
+            document.getElementById('similarity-text').textContent = '開始練習吧！';
+            document.getElementById('similarity-fill').style.width = '0%';
+        }
+
+        // 相似度檢查功能
+        function checkSimilarity() {
+            if (!hasDrawn) {
+                document.getElementById('similarity-text').textContent = '請先練習寫字！';
+                return;
+            }
+
+            const char = chars[currentIndex];
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const userPixels = getBlackPixels(imageData);
+            const guidePixels = getGuidePixels(char);
+            const similarity = calculateSimilarity(userPixels, guidePixels);
+
+            const percentage = Math.round(similarity * 100);
+            document.getElementById('similarity-fill').style.width = percentage + '%';
+
+            if (percentage >= 90) {
+                document.getElementById('similarity-text').textContent = `完美！${percentage}% 🌟`;
+                showSuccessAnimation();
+            } else if (percentage >= 70) {
+                document.getElementById('similarity-text').textContent = `很好！${percentage}% 👍`;
+            } else if (percentage >= 50) {
+                document.getElementById('similarity-text').textContent = `繼續加油！${percentage}%`;
+            } else {
+                document.getElementById('similarity-text').textContent = `再試試看！${percentage}%`;
+            }
+        }
+
+        function getBlackPixels(imageData) {
+            const pixels = [];
+            const data = imageData.data;
+            for (let y = 0; y < imageData.height; y++) {
+                for (let x = 0; x < imageData.width; x++) {
+                    const idx = (y * imageData.width + x) * 4;
+                    if (data[idx + 3] > 50) {
+                        pixels.push({ x, y });
+                    }
+                }
+            }
+            return pixels;
+        }
+
+        function getGuidePixels(char) {
+            const paths = getStrokePaths('english', char);
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = 300;
+            tempCanvas.height = 300;
+            const tempCtx = tempCanvas.getContext('2d');
+
+            tempCtx.strokeStyle = '#000';
+            tempCtx.lineWidth = 20;
+            tempCtx.lineCap = 'round';
+            tempCtx.lineJoin = 'round';
+
+            paths.forEach(pathData => {
+                const path = new Path2D(pathData);
+                tempCtx.stroke(path);
+            });
+
+            const imageData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
+            return getBlackPixels(imageData);
+        }
+
+        function calculateSimilarity(userPixels, guidePixels) {
+            if (userPixels.length === 0 || guidePixels.length === 0) {
+                return 0;
+            }
+
+            const guideSet = new Set();
+            guidePixels.forEach(p => guideSet.add(`${Math.floor(p.x / 3)},${Math.floor(p.y / 3)}`));
+
+            let matchCount = 0;
+            const userSet = new Set();
+            userPixels.forEach(p => {
+                const key = `${Math.floor(p.x / 3)},${Math.floor(p.y / 3)}`;
+                userSet.add(key);
+                if (guideSet.has(key)) {
+                    matchCount++;
+                }
+            });
+
+            let coverCount = 0;
+            guidePixels.forEach(p => {
+                const key = `${Math.floor(p.x / 3)},${Math.floor(p.y / 3)}`;
+                if (userSet.has(key)) {
+                    coverCount++;
+                }
+            });
+
+            const accuracy = userPixels.length > 0 ? matchCount / userPixels.length : 0;
+            const coverage = guidePixels.length > 0 ? coverCount / guidePixels.length : 0;
+
+            return (accuracy * 0.5 + coverage * 0.5);
+        }
+
+        function showSuccessAnimation() {
+            const overlay = document.getElementById('success-overlay');
+            const starsContainer = document.getElementById('stars-container');
+
+            overlay.classList.add('show');
+
+            const starEmojis = ['⭐', '🌟', '✨', '💫', '🎉', '🎊'];
+            for (let i = 0; i < 20; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.textContent = starEmojis[Math.floor(Math.random() * starEmojis.length)];
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 0.5 + 's';
+                starsContainer.appendChild(star);
+            }
+
+            setTimeout(() => {
+                overlay.classList.remove('show');
+                starsContainer.innerHTML = '';
+                if (currentIndex < chars.length - 1) {
+                    currentIndex++;
+                    updateChar();
+                }
+            }, 2500);
         }
 
         window.onload = updateChar;

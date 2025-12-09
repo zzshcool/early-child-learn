@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>小遊戲 - 快樂學習樂園</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <header>
+        <h1>🎮 小遊戲</h1>
+    </header>
+    <main>
+        <a href="/" class="back-link">← 返回首頁</a>
+        <div class="container">
+            <a href="/games/rock-paper-scissors" class="card">
+                <div class="card-icon">✊✌️🖐️</div>
+                <h2>剪刀石頭布</h2>
+                <p>跟電腦比比看！</p>
+                <span class="btn">開始遊戲</span>
+            </a>
+            <a href="/games/maze/loading" class="card">
+                <div class="card-icon">🏃‍♂️</div>
+                <h2>走迷宮</h2>
+                <p>幫忙找到出口吧！</p>
+                <span class="btn">開始遊戲</span>
+            </a>
+        </div>
+    </main>
+</body>
+
+</html>

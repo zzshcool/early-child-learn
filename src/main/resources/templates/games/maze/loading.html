@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>迷宮載入中... - 快樂學習樂園</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 80vh;
+        }
+
+        .spinner {
+            width: 80px;
+            height: 80px;
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 2rem;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-text {
+            font-size: 2rem;
+            color: var(--text-color);
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        // Redirect to game after 2 seconds
+        setTimeout(() => {
+            window.location.href = '/games/maze/game';
+        }, 2000);
+    </script>
+</head>
+
+<body>
+    <div class="loading-container">
+        <div class="spinner"></div>
+        <div class="loading-text">迷宮產生中...</div>
+    </div>
+</body>
+
+</html>

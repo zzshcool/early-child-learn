@@ -179,6 +179,47 @@ main {
     text-decoration: underline;
 }
 
+/* 導航容器 - 支援雙按鈕佈局 */
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 25px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.nav-link.home-link {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+}
+
+.nav-link.home-link:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
 /* ============================================
    響應式設計 - 手機裝置優化
    ============================================ */
