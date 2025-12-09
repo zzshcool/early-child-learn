@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>圖像記憶 - 快樂學習樂園</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <style>
@@ -104,6 +103,12 @@
             animation: shake 0.5s;
             border-color: #ff5252;
         }
+
+        .countdown-big {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #FF6B6B;
+        }
     </style>
 </head>
 
@@ -112,17 +117,14 @@
         <h1>圖像記憶翻翻卡</h1>
     </header>
     <main>
-        <div class="nav-container">
-            <a href="/cognitive/menu" class="nav-link">← 回上一頁</a>
-            <a href="/" class="nav-link home-link">🏠 回首頁</a>
-        </div>
+        <a href="/cognitive/menu" class="back-link">← 返回選單</a>
         <div class="game-container">
-            <div id="instruction" class="message">記住這些圖片的位置！</div>
-            <div id="target-container" class="hidden">
+            <div id="target-container">
                 <div class="target-display">
-                    請找出：<span id="target-emoji"></span>
+                    請記住：<span id="target-emoji"></span>
                 </div>
             </div>
+            <div id="instruction" class="message">記住這個圖片的位置！</div>
 
             <div class="cards-grid" id="cards-grid">
                 <!-- Cards will be generated here -->
@@ -150,12 +152,13 @@
             const grid = document.getElementById('cards-grid');
             const instruction = document.getElementById('instruction');
             const targetContainer = document.getElementById('target-container');
+            const targetEmoji = document.getElementById('target-emoji');
             const restartBtn = document.getElementById('restart-btn');
 
             grid.innerHTML = '';
-            targetContainer.classList.add('hidden');
+            targetContainer.classList.remove('hidden');
             restartBtn.classList.add('hidden');
-            instruction.textContent = '記住這些圖片的位置！';
+            instruction.textContent = '記住這個圖片的位置！';
             instruction.style.color = '#333';
 
             // Randomly select 4 to 8 cards
@@ -167,7 +170,12 @@
                 emoji: emoji
             }));
 
-            // Render cards
+            // Select target first (before showing cards)
+            const randomIndex = Math.floor(Math.random() * currentCards.length);
+            targetCard = currentCards[randomIndex];
+            targetEmoji.textContent = targetCard.emoji;
+
+            // Render cards (face-up initially)
             currentCards.forEach(card => {
                 const cardEl = document.createElement('div');
                 cardEl.className = 'memory-card';
@@ -179,12 +187,14 @@
 
             isGameActive = false;
 
-            // Countdown
-            let countdown = 2;
+            // Countdown 6 seconds
+            let countdown = 6;
+            instruction.innerHTML = `<span class="countdown-big">倒數 ${countdown} 秒</span>`;
             const timer = setInterval(() => {
-                instruction.textContent = `倒數 ${countdown} 秒...`;
                 countdown--;
-                if (countdown < 0) {
+                if (countdown > 0) {
+                    instruction.innerHTML = `<span class="countdown-big">倒數 ${countdown} 秒</span>`;
+                } else {
                     clearInterval(timer);
                     startGame();
                 }
@@ -195,24 +205,20 @@
             const cards = document.querySelectorAll('.memory-card');
             cards.forEach(card => card.classList.add('flipped'));
 
-            // Select target
-            const randomIndex = Math.floor(Math.random() * currentCards.length);
-            targetCard = currentCards[randomIndex];
-
             const instruction = document.getElementById('instruction');
             const targetContainer = document.getElementById('target-container');
-            const targetEmoji = document.getElementById('target-emoji');
 
-            instruction.textContent = '圖片在哪裡？';
-            targetEmoji.textContent = targetCard.emoji;
-            targetContainer.classList.remove('hidden');
+            // Hide the target hint
+            targetContainer.classList.add('hidden');
+            instruction.textContent = '圖片在哪裡？點選找出來！';
+            instruction.style.color = '#333';
 
             isGameActive = true;
         }
 
         function handleCardClick(cardEl, card) {
             if (!isGameActive) return;
-            // If already revealed or matched, ignore
+            // If already revealed, ignore
             if (!cardEl.classList.contains('flipped')) return;
 
             // Reveal the card
@@ -240,12 +246,14 @@
                 cardEl.classList.add('shake');
 
                 const instruction = document.getElementById('instruction');
-                instruction.textContent = '再試一次看看！';
+                instruction.textContent = '錯了！再試一次！';
                 instruction.style.color = '#ff5252';
 
                 setTimeout(() => {
                     cardEl.classList.remove('shake');
                     cardEl.classList.add('flipped'); // Cover back
+                    instruction.textContent = '圖片在哪裡？點選找出來！';
+                    instruction.style.color = '#333';
                     isGameActive = true; // Re-enable clicking
                 }, 800);
             }
