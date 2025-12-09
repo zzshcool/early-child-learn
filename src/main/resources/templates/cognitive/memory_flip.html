@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>圖像記憶 - 快樂學習樂園</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <style>
@@ -54,7 +55,7 @@
         .message {
             font-size: 1.5rem;
             margin: 20px;
-            height: 40px;
+            min-height: 40px;
             color: #333;
         }
 
@@ -109,6 +110,70 @@
             font-weight: bold;
             color: #FF6B6B;
         }
+
+        /* 響應式設計 - 平板 */
+        @media (max-width: 768px) {
+            .cards-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+                max-width: 100%;
+                padding: 0 10px;
+            }
+
+            .memory-card {
+                height: 100px;
+                font-size: 2.5rem;
+            }
+
+            .target-display {
+                font-size: 1.5rem;
+                padding: 10px;
+                margin: 10px;
+            }
+
+            .message {
+                font-size: 1.2rem;
+                margin: 10px;
+            }
+
+            .countdown-big {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* 響應式設計 - 手機 */
+        @media (max-width: 480px) {
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+
+            .memory-card {
+                height: 80px;
+                font-size: 2rem;
+                border-radius: 10px;
+            }
+
+            .target-display {
+                font-size: 1.3rem;
+                padding: 8px;
+                margin: 8px;
+            }
+
+            .message {
+                font-size: 1rem;
+                margin: 8px;
+            }
+
+            .countdown-big {
+                font-size: 2rem;
+            }
+
+            .btn-restart {
+                padding: 8px 16px;
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 
@@ -117,7 +182,10 @@
         <h1>圖像記憶翻翻卡</h1>
     </header>
     <main>
-        <a href="/cognitive/menu" class="back-link">← 返回選單</a>
+        <div class="nav-container">
+            <a href="/cognitive/menu" class="nav-link">← 返回選單</a>
+            <a href="/" class="nav-link home-link">🏠 首頁</a>
+        </div>
         <div class="game-container">
             <div id="target-container">
                 <div class="target-display">
