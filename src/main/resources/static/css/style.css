@@ -220,6 +220,37 @@ main {
     color: white;
 }
 
+/* 美化的導航按鈕 */
+.nav-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%);
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4);
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.nav-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(78, 205, 196, 0.5);
+}
+
+.nav-btn.home-btn {
+    background: linear-gradient(135deg, #FFE66D 0%, #FFB830 100%);
+    color: #333;
+    box-shadow: 0 4px 15px rgba(255, 230, 109, 0.4);
+}
+
+.nav-btn.home-btn:hover {
+    box-shadow: 0 6px 20px rgba(255, 230, 109, 0.5);
+}
+
 /* ============================================
    響應式設計 - 手機裝置優化
    ============================================ */
