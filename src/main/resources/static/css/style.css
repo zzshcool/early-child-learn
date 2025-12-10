@@ -1058,85 +1058,85 @@ main {
         left: 15px !important;
     }
 }
- 
- / *   = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =  
-       P r o j e c t   F r o n t e n d   E n g i n e e r   R e f a c t o r :   N a v i g a t i o n   &   F l o a t i n g   C o n t r o l s  
-       T a r g e t :   F i x   m i s s i n g   i n t e r a c t i o n s ,   l a y o u t   b u g s ,   a n d   v i s u a l   c o n s i s t e n c y  
-       = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =   * /  
-  
- / *   1 .   E n s u r e   F l o a t i n g   B u t t o n s   I n t e r a c t i o n   &   B a s e   S t y l e s   ( H i g h   P r i o r i t y )   * /  
- . h o m e - l i n k - f l o a t i n g ,  
- . b a c k - l i n k - f l o a t i n g   {  
-         t r a n s i t i o n :   a l l   0 . 3 s   c u b i c - b e z i e r ( 0 . 1 7 5 ,   0 . 8 8 5 ,   0 . 3 2 ,   1 . 2 7 5 )   ! i m p o r t a n t ;   / *   B o u n c y   p l a y f u l   f e e l   * /  
-         c u r s o r :   p o i n t e r   ! i m p o r t a n t ;  
-         p o i n t e r - e v e n t s :   a u t o   ! i m p o r t a n t ;  
-         / *   E n s u r e   h a r d w a r e   a c c e l e r a t i o n   f o r   s m o o t h   a n i m a t i o n   * /  
-         t r a n s f o r m :   t r a n s l a t e Z ( 0 ) ;    
-         b a c k f a c e - v i s i b i l i t y :   h i d d e n ;  
- }  
-  
- / *   2 .   E n h a n c e d   H o v e r   E f f e c t s   ( F l o a t i n g   E f f e c t )   * /  
- . h o m e - l i n k - f l o a t i n g : h o v e r ,  
- . b a c k - l i n k - f l o a t i n g : h o v e r   {  
-         t r a n s f o r m :   t r a n s l a t e Y ( - 5 p x )   s c a l e ( 1 . 0 5 )   ! i m p o r t a n t ;   / *   P r o n o u n c e d   f l o a t   * /  
-         b o x - s h a d o w :   0   8 p x   2 0 p x   r g b a ( 0 ,   0 ,   0 ,   0 . 3 )   ! i m p o r t a n t ;  
-         f i l t e r :   b r i g h t n e s s ( 1 . 1 ) ;  
- }  
-  
- / *   3 .   A c t i v e / C l i c k   E f f e c t s   ( T a c t i l e   F e e d b a c k )   * /  
- . h o m e - l i n k - f l o a t i n g : a c t i v e ,  
- . b a c k - l i n k - f l o a t i n g : a c t i v e   {  
-         t r a n s f o r m :   t r a n s l a t e Y ( - 2 p x )   s c a l e ( 0 . 9 5 )   ! i m p o r t a n t ;  
-         b o x - s h a d o w :   0   4 p x   1 0 p x   r g b a ( 0 ,   0 ,   0 ,   0 . 2 )   ! i m p o r t a n t ;  
-         t r a n s i t i o n :   a l l   0 . 1 s   e a s e   ! i m p o r t a n t ;  
- }  
-  
- / *   = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =  
-       M o b i l e   L a y o u t   F i x e s   ( C r i t i c a l   f o r   F u n c t i o n a l i t y )  
-       = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =   * /  
- @ m e d i a   ( m a x - w i d t h :   7 6 8 p x )   {  
-          
-         / *    
-               R e s e t   n a v - c o n t a i n e r   t o   b e   t r a n s p a r e n t   a n d   n o n - b l o c k i n g    
-               T h i s   p r e v e n t s   t h e   h i d d e n   n a v   b a r   f r o m   b l o c k i n g   c l i c k s   o n   t h e   p a g e  
-         * /  
-         . n a v - c o n t a i n e r   {  
-                 b a c k g r o u n d :   t r a n s p a r e n t   ! i m p o r t a n t ;  
-                 m a r g i n :   0   ! i m p o r t a n t ;  
-                 p a d d i n g :   0   ! i m p o r t a n t ;  
-                 m i n - h e i g h t :   0   ! i m p o r t a n t ;  
-                 h e i g h t :   0   ! i m p o r t a n t ;   / *   C o l l a p s e   h e i g h t   * /  
-                 o v e r f l o w :   v i s i b l e   ! i m p o r t a n t ;   / *   A l l o w   f l o a t i n g   c h i l d r e n   t o   e s c a p e   * /  
-                 p o i n t e r - e v e n t s :   n o n e   ! i m p o r t a n t ;   / *   C l i c k   t h r o u g h   t h e   c o n t a i n e r   * /  
-                 p o s i t i o n :   r e l a t i v e   ! i m p o r t a n t ;  
-                 z - i n d e x :   9 9 8 ;  
-         }  
-  
-         / *    
-               H i d e   a l l   r e g u l a r   n a v   l i n k s   t o   c l e a n   u p   m o b i l e   v i e w  
-               B U T   e x c l u d e   o u r   f l o a t i n g   b u t t o n s  
-         * /  
-         . n a v - c o n t a i n e r   . n a v - l i n k : n o t ( . h o m e - l i n k - f l o a t i n g ) : n o t ( . b a c k - l i n k - f l o a t i n g )   {  
-                 d i s p l a y :   n o n e   ! i m p o r t a n t ;  
-         }  
-  
-         / *    
-               E n s u r e   f l o a t i n g   b u t t o n s   a r e   e x p l i c i t l y   v i s i b l e   a n d   i n t e r a c t a b l e  
-               e v e n   t h o u g h   p a r e n t   h a s   p o i n t e r - e v e n t s :   n o n e  
-         * /  
-         . n a v - c o n t a i n e r   . h o m e - l i n k - f l o a t i n g ,  
-         . n a v - c o n t a i n e r   . b a c k - l i n k - f l o a t i n g ,  
-         . h o m e - l i n k - f l o a t i n g ,  
-         . b a c k - l i n k - f l o a t i n g   {  
-                 d i s p l a y :   i n l i n e - f l e x   ! i m p o r t a n t ;  
-                 p o s i t i o n :   f i x e d   ! i m p o r t a n t ;  
-                 v i s i b i l i t y :   v i s i b l e   ! i m p o r t a n t ;  
-                 o p a c i t y :   1   ! i m p o r t a n t ;  
-                 p o i n t e r - e v e n t s :   a u t o   ! i m p o r t a n t ;   / *   R e - e n a b l e   c l i c k s   * /  
-                 z - i n d e x :   1 0 0 0   ! i m p o r t a n t ;  
-         }  
- }  
- 
+
+/* ==========================================================================
+   Project Frontend Engineer Refactor: Navigation & Floating Controls
+   Target: Fix missing interactions, layout bugs, and visual consistency
+   ========================================================================== */
+
+/* 1. Ensure Floating Buttons Interaction & Base Styles (High Priority) */
+.home-link-floating,
+.back-link-floating {
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important; /* Bouncy playful feel */
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    /* Ensure hardware acceleration for smooth animation */
+    transform: translateZ(0); 
+    backface-visibility: hidden;
+}
+
+/* 2. Enhanced Hover Effects (Floating Effect) */
+.home-link-floating:hover,
+.back-link-floating:hover {
+    transform: translateY(-5px) scale(1.05) !important; /* Pronounced float */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3) !important;
+    filter: brightness(1.1);
+}
+
+/* 3. Active/Click Effects (Tactile Feedback) */
+.home-link-floating:active,
+.back-link-floating:active {
+    transform: translateY(-2px) scale(0.95) !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
+    transition: all 0.1s ease !important;
+}
+
+/* ==========================================================================
+   Mobile Layout Fixes (Critical for Functionality)
+   ========================================================================== */
+@media (max-width: 768px) {
+    
+    /* 
+       Reset nav-container to be transparent and non-blocking 
+       This prevents the hidden nav bar from blocking clicks on the page
+    */
+    .nav-container {
+        background: transparent !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        min-height: 0 !important;
+        height: 0 !important; /* Collapse height */
+        overflow: visible !important; /* Allow floating children to escape */
+        pointer-events: none !important; /* Click through the container */
+        position: relative !important;
+        z-index: 998;
+    }
+
+    /* 
+       Hide all regular nav links to clean up mobile view
+       BUT exclude our floating buttons
+    */
+    .nav-container .nav-link:not(.home-link-floating):not(.back-link-floating) {
+        display: none !important;
+    }
+
+    /* 
+       Ensure floating buttons are explicitly visible and interactable
+       even though parent has pointer-events: none
+    */
+    .nav-container .home-link-floating,
+    .nav-container .back-link-floating,
+    .home-link-floating,
+    .back-link-floating {
+        display: inline-flex !important;
+        position: fixed !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important; /* Re-enable clicks */
+        z-index: 1000 !important;
+    }
+}
+
 
 /* ==========================================================================
    Frontend Refactor: Unified Cross-Platform Experience (Desktop = Mobile)
