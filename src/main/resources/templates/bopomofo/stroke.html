@@ -316,15 +316,13 @@
             const percentage = Math.round(similarity * 100);
             document.getElementById('similarity-fill').style.width = percentage + '%';
 
-            if (percentage >= 90) {
-                document.getElementById('similarity-text').textContent = `完美！${percentage}% 🌟`;
+            if (percentage >= 50) {
+                document.getElementById('similarity-text').textContent = `太棒了！寫得很好！${percentage}% 🌟`;
                 showSuccessAnimation();
-            } else if (percentage >= 70) {
-                document.getElementById('similarity-text').textContent = `很好！${percentage}% 👍`;
-            } else if (percentage >= 50) {
-                document.getElementById('similarity-text').textContent = `繼續加油！${percentage}%`;
+            } else if (percentage >= 30) {
+                document.getElementById('similarity-text').textContent = `很好喔！繼續加油！${percentage}% 👍`;
             } else {
-                document.getElementById('similarity-text').textContent = `再試試看！${percentage}%`;
+                document.getElementById('similarity-text').textContent = `再試試看，你一定可以的！${percentage}% 💪`;
             }
         }
 

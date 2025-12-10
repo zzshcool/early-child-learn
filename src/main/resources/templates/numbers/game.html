@@ -38,6 +38,7 @@
             currentAnswer = Math.floor(Math.random() * 100) + 1;
             document.getElementById('question').textContent = `請找出數字：${currentAnswer}`;
             speak(`請找出數字 ${currentAnswer}`);
+            playGameSound('數字遊戲，找出正確的數字喔！');
 
             // Generate options (1 correct, 3 wrong)
             const options = [currentAnswer];
@@ -74,7 +75,20 @@
         }
 
         // Start game on load
-        window.onload = nextQuestion;
+        window.onload = function () {
+            playGameSound('歡迎來到數字遊戲！');
+            setTimeout(nextQuestion, 1500);
+        };
+
+        function playGameSound(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'zh-TW';
+                utterance.rate = 0.9;
+                utterance.pitch = 1.2;
+                speechSynthesis.speak(utterance);
+            }
+        }
     </script>
 </body>
 

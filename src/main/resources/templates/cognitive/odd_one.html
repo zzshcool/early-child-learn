@@ -112,7 +112,20 @@
             }
         }
 
-        window.onload = initGame;
+        window.onload = function () {
+            playGameSound('歡迎來到找不同遊戲！');
+            setTimeout(initGame, 1500);
+        };
+
+        function playGameSound(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'zh-TW';
+                utterance.rate = 0.9;
+                utterance.pitch = 1.2;
+                speechSynthesis.speak(utterance);
+            }
+        }
     </script>
 </body>
 

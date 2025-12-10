@@ -113,23 +113,25 @@ main {
 
 .grid-item {
     background-color: white;
-    border-radius: 10px;
-    padding: 0.5rem;
+    border-radius: 15px;
+    padding: 0.8rem;
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 2rem;
     font-weight: bold;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: all 0.3s ease;
     aspect-ratio: 1;
     display: flex;
     align-items: center;
     justify-content: center;
+    color: var(--text-color);
 }
 
 .grid-item:hover {
-    transform: scale(1.1);
-    background-color: var(--accent-color);
+    transform: scale(1.15);
+    background: linear-gradient(135deg, #FFE66D 0%, #FFF9E6 100%);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
 }
 
 .game-area {
@@ -167,16 +169,26 @@ main {
     color: white;
 }
 
-.back-link {
+/* 統一的返回按鈕樣式 - 適合3-6歲兒童 */
+.back-btn {
     display: inline-block;
-    margin-bottom: 1rem;
-    color: var(--text-color);
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%);
+    color: white;
     text-decoration: none;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4);
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 1rem;
 }
 
-.back-link:hover {
-    text-decoration: underline;
+.back-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(78, 205, 196, 0.5);
 }
 
 /* 導航容器 - 支援雙按鈕佈局 */

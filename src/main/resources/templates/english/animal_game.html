@@ -144,7 +144,20 @@
             }
         }
 
-        window.onload = nextQuestion;
+        window.onload = function () {
+            playGameSound('Welcome to the Animal Game!', 'en-US');
+            setTimeout(nextQuestion, 1500);
+        };
+
+        function playGameSound(text, lang = 'en-US') {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = lang;
+                utterance.rate = 0.9;
+                utterance.pitch = 1.2;
+                speechSynthesis.speak(utterance);
+            }
+        }
     </script>
 </body>
 

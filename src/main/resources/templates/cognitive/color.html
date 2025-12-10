@@ -74,6 +74,7 @@
             const targetDisplay = document.getElementById('target-display');
             targetDisplay.textContent = `找出: ${target.name}`;
             targetDisplay.style.color = target.hex; // Hint: text color matches target
+            playGameSound('找出正確的顏色喔！');
 
             // Generate options
             const optionsContainer = document.getElementById('options-container');
@@ -111,7 +112,20 @@
             }
         }
 
-        window.onload = initGame;
+        window.onload = function () {
+            playGameSound('歡迎來到顏色認知遊戲！');
+            setTimeout(initGame, 1500);
+        };
+
+        function playGameSound(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'zh-TW';
+                utterance.rate = 0.9;
+                utterance.pitch = 1.2;
+                speechSynthesis.speak(utterance);
+            }
+        }
     </script>
 </body>
 

@@ -40,6 +40,7 @@
             document.getElementById('question').textContent = `請找出字母：${currentAnswer}`;
             speak(`請找出字母 ${currentAnswer}`, 'zh-TW'); // Instruction in Chinese, letter in English context usually understood, or speak letter separately
             setTimeout(() => speak(currentAnswer, 'en-US'), 1500);
+            playGameSound('Find the correct letter!', 'en-US');
 
             // Generate options (1 correct, 3 wrong)
             const options = [currentAnswer];
@@ -76,7 +77,20 @@
         }
 
         // Start game on load
-        window.onload = nextQuestion;
+        window.onload = function () {
+            playGameSound('Welcome to the Alphabet Game!', 'en-US');
+            setTimeout(nextQuestion, 1500);
+        };
+
+        function playGameSound(text, lang = 'zh-TW') {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = lang;
+                utterance.rate = 0.9;
+                utterance.pitch = 1.2;
+                speechSynthesis.speak(utterance);
+            }
+        }
     </script>
 </body>
 

@@ -31,6 +31,16 @@
             div.onclick = () => speak(i.toString());
             grid.appendChild(div);
         }
+
+        window.onload = function () {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance('開始學習數字囉！');
+                utterance.lang = 'zh-TW';
+                utterance.rate = 0.9;
+                utterance.pitch = 1.2;
+                speechSynthesis.speak(utterance);
+            }
+        };
     </script>
 </body>
 

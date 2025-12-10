@@ -33,6 +33,16 @@
             div.onclick = () => speak(letter, 'en-US');
             grid.appendChild(div);
         });
+
+        window.onload = function () {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance("Let's learn ABC!");
+                utterance.lang = 'en-US';
+                utterance.rate = 0.9;
+                utterance.pitch = 1.2;
+                speechSynthesis.speak(utterance);
+            }
+        };
     </script>
 </body>
 

@@ -101,6 +101,7 @@
             const targetShape = shapes[Math.floor(Math.random() * shapes.length)];
             const targetContainer = document.getElementById('target-container');
             targetContainer.innerHTML = `<div class="shape ${targetShape}"></div>`;
+            playGameSound('找出一樣的形狀喔！');
 
             // Generate options
             const optionsContainer = document.getElementById('options-container');
@@ -143,7 +144,20 @@
         }
 
         // Start game on load
-        window.onload = initGame;
+        window.onload = function () {
+            playGameSound('歡迎來到形狀認知遊戲！');
+            setTimeout(initGame, 1500);
+        };
+
+        function playGameSound(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'zh-TW';
+                utterance.rate = 0.9;
+                utterance.pitch = 1.2;
+                speechSynthesis.speak(utterance);
+            }
+        }
     </script>
 </body>
 

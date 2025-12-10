@@ -33,6 +33,16 @@
             div.onclick = () => speak(char, 'zh-TW');
             grid.appendChild(div);
         });
+
+        window.onload = function () {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance('開始學習注音符號囉！');
+                utterance.lang = 'zh-TW';
+                utterance.rate = 0.9;
+                utterance.pitch = 1.2;
+                speechSynthesis.speak(utterance);
+            }
+        };
     </script>
 </body>
 
