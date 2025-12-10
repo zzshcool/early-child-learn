@@ -45,7 +45,34 @@
                 <span class="btn">開始遊戲</span>
             </a>
         </div>
+
+        <!-- Scroll to Top Button -->
+        <button id="scrollToTop" class="scroll-to-top" title="回到頂部">
+            ⬆️ 回頂部
+        </button>
     </main>
+
+    <script>
+        // Scroll to top functionality
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+
+        // Show button when scrolled away from top (懸浮效果)
+        window.addEventListener('scroll', function () {
+            if (window.pageYOffset > 0) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+
+        // Scroll to top when clicked
+        scrollToTopBtn.addEventListener('click', function () {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
     <script th:src="@{/js/script.js}"></script>
 </body>
 
