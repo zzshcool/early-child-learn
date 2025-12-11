@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>注音配對遊戲 - 快樂學習樂園</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .game-container {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+        }
+
+        .size-selection {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px auto;
+            max-width: 600px;
+        }
+
+        .size-btn {
+            padding: 20px 30px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4);
+            transition: all 0.3s ease;
+            min-width: 100px;
+        }
+
+        .size-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(78, 205, 196, 0.6);
+        }
+
+        .cards-grid {
+            display: grid;
+            gap: 10px;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 10px;
+        }
+
+        .memory-card {
+            background: linear-gradient(135deg, #FFE66D 0%, #FFF9E6 100%);
+            border: 4px solid #FFB830;
+            border-radius: 15px;
+            aspect-ratio: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .memory-card.flipped {
+            background: linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%);
+            color: transparent;
+            user-select: none;
+        }
+
+        .memory-card.matched {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            border-color: #4CAF50;
+            color: white;
+            cursor: default;
+            animation: match-celebrate 0.5s ease;
+        }
+
+        .memory-card:not(.flipped):not(.matched):hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        @keyframes match-celebrate {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-10px);
+            }
+
+            75% {
+                transform: translateX(10px);
+            }
+        }
+
+        .shake {
+            animation: shake 0.5s;
+        }
+
+        .game-info {
+            font-size: 2rem;
+            margin: 20px;
+            padding: 15px;
+            background-color: #e0f7fa;
+            border-radius: 15px;
+            display: inline-block;
+            min-width: 300px;
+        }
+
+        .timer {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #FF6B6B;
+            margin: 15px 0;
+        }
+
+        .message {
+            font-size: 1.8rem;
+            margin: 20px;
+            min-height: 50px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .btn-restart {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-restart:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.6);
+        }
+
+        .countdown-big {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #FF6B6B;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .size-btn {
+                padding: 15px 20px;
+                font-size: 1.2rem;
+                min-width: 80px;
+            }
+
+            .memory-card {
+                font-size: 2rem;
+                border-width: 3px;
+            }
+
+            .game-info {
+                font-size: 1.5rem;
+                min-width: 250px;
+            }
+
+            .timer {
+                font-size: 2rem;
+            }
+
+            .message {
+                font-size: 1.3rem;
+            }
+
+            .countdown-big {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .size-btn {
+                padding: 12px 18px;
+                font-size: 1rem;
+            }
+
+            .memory-card {
+                font-size: 1.5rem;
+                border-width: 2px;
+                border-radius: 10px;
+            }
+
+            .game-info {
+                font-size: 1.2rem;
+                min-width: 200px;
+                padding: 10px;
+            }
+
+            .timer {
+                font-size: 1.5rem;
+            }
+
+            .message {
+                font-size: 1rem;
+            }
+
+            .countdown-big {
+                font-size: 2.5rem;
+            }
+
+            .btn-restart {
+                padding: 12px 24px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>ㄅㄆㄇ 注音配對遊戲</h1>
+    </header>
+    <main>
+        <div class="nav-container">
+            <a href="/bopomofo/menu" class="nav-link back-link-floating">← 返回選單</a>
+            <a href="/" class="nav-link home-link home-link-floating">🏠 回首頁</a>
+        </div>
+
+        <div class="game-container">
+            <!-- 尺寸選擇界面 -->
+            <div id="size-selection" class="size-selection">
+                <h2 style="width: 100%; color: var(--primary-color);">選擇遊戲難度</h2>
+                <button class="size-btn" onclick="startGame(2, 2)">2×2<br>(4張)</button>
+                <button class="size-btn" onclick="startGame(2, 3)">2×3<br>(6張)</button>
+                <button class="size-btn" onclick="startGame(2, 4)">2×4<br>(8張)</button>
+                <button class="size-btn" onclick="startGame(2, 5)">2×5<br>(10張)</button>
+                <button class="size-btn" onclick="startGame(2, 6)">2×6<br>(12張)</button>
+            </div>
+
+            <!-- 遊戲區域 -->
+            <div id="game-area" class="hidden">
+                <div class="game-info">
+                    <div id="timer" class="timer">00:00</div>
+                    <div id="message" class="message">記住注音的位置！</div>
+                </div>
+
+                <div id="cards-grid" class="cards-grid"></div>
+
+                <button id="restart-btn" class="btn-restart hidden" onclick="resetGame()">再玩一次</button>
+                <button id="back-btn" class="btn-restart hidden" onclick="backToSelection()">選擇其他難度</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const bopomofo = ['ㄅ', 'ㄆ', 'ㄇ', 'ㄈ', 'ㄉ', 'ㄊ', 'ㄋ', 'ㄌ', 'ㄍ', 'ㄎ', 'ㄏ', 'ㄐ', 'ㄑ', 'ㄒ', 'ㄓ', 'ㄔ', 'ㄕ', 'ㄖ', 'ㄗ', 'ㄘ', 'ㄙ', 'ㄧ', 'ㄨ', 'ㄩ', 'ㄚ', 'ㄛ', 'ㄜ', 'ㄝ', 'ㄞ', 'ㄟ', 'ㄠ', 'ㄡ', 'ㄢ', 'ㄣ', 'ㄤ', 'ㄥ', 'ㄦ'];
+        let currentCards = [];
+        let flippedCards = [];
+        let matchedPairs = 0;
+        let totalPairs = 0;
+        let gameStarted = false;
+        let startTime = null;
+        let timerInterval = null;
+        let rows = 2;
+        let cols = 2;
+
+        function shuffle(array) {
+            const arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function startGame(r, c) {
+            rows = r;
+            cols = c;
+            totalPairs = (rows * cols) / 2;
+
+            // 隱藏選擇界面，顯示遊戲區域
+            document.getElementById('size-selection').classList.add('hidden');
+            document.getElementById('game-area').classList.remove('hidden');
+
+            // 選擇注音並配對
+            const selectedBopomofo = shuffle(bopomofo).slice(0, totalPairs);
+            const cardValues = shuffle([...selectedBopomofo, ...selectedBopomofo]);
+
+            currentCards = cardValues.map((value, index) => ({
+                id: index,
+                value: value,
+                matched: false
+            }));
+
+            // 設置網格
+            const grid = document.getElementById('cards-grid');
+            grid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+            grid.innerHTML = '';
+
+            // 渲染卡片（正面朝上）
+            currentCards.forEach(card => {
+                const cardEl = document.createElement('div');
+                cardEl.className = 'memory-card';
+                cardEl.textContent = card.value;
+                cardEl.dataset.id = card.id;
+                cardEl.onclick = () => handleCardClick(cardEl, card);
+                grid.appendChild(cardEl);
+            });
+
+            // 重置遊戲狀態
+            flippedCards = [];
+            matchedPairs = 0;
+            gameStarted = false;
+            startTime = null;
+
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+
+            document.getElementById('timer').textContent = '00:00';
+            document.getElementById('message').textContent = '記住注音的位置！';
+            document.getElementById('restart-btn').classList.add('hidden');
+            document.getElementById('back-btn').classList.add('hidden');
+
+            // 3秒倒數後翻面
+            let countdown = 3;
+            const messageEl = document.getElementById('message');
+            messageEl.innerHTML = `<span class="countdown-big">${countdown}</span>`;
+
+            playGameSound('記住注音的位置！');
+
+            const countdownTimer = setInterval(() => {
+                countdown--;
+                if (countdown > 0) {
+                    messageEl.innerHTML = `<span class="countdown-big">${countdown}</span>`;
+                } else {
+                    clearInterval(countdownTimer);
+                    flipAllCards();
+                    messageEl.textContent = '開始配對！';
+                    gameStarted = true;
+                    startTimer();
+                    playGameSound('開始！');
+                }
+            }, 1000);
+        }
+
+        function flipAllCards() {
+            document.querySelectorAll('.memory-card').forEach(card => {
+                card.classList.add('flipped');
+            });
+        }
+
+        function startTimer() {
+            startTime = Date.now();
+            timerInterval = setInterval(updateTimer, 100);
+        }
+
+        function updateTimer() {
+            if (!startTime) return;
+            const elapsed = Date.now() - startTime;
+            const seconds = Math.floor(elapsed / 1000);
+            const milliseconds = Math.floor((elapsed % 1000) / 100);
+            const minutes = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+
+            document.getElementById('timer').textContent =
+                `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}.${milliseconds}`;
+        }
+
+        function handleCardClick(cardEl, card) {
+            if (!gameStarted) return;
+            if (card.matched) return;
+            if (flippedCards.length >= 2) return;
+            if (flippedCards.some(c => c.id === card.id)) return;
+
+            // 翻開卡片
+            cardEl.classList.remove('flipped');
+            flippedCards.push({ el: cardEl, card: card });
+
+            if (flippedCards.length === 2) {
+                checkMatch();
+            }
+        }
+
+        function checkMatch() {
+            const [first, second] = flippedCards;
+
+            if (first.card.value === second.card.value) {
+                // 配對成功
+                setTimeout(() => {
+                    first.el.classList.add('matched');
+                    second.el.classList.add('matched');
+                    first.card.matched = true;
+                    second.card.matched = true;
+                    matchedPairs++;
+
+                    flippedCards = [];
+
+                    playGameSound('答對了！');
+
+                    if (matchedPairs === totalPairs) {
+                        gameWon();
+                    }
+                }, 300);
+            } else {
+                // 配對失敗
+                gameStarted = false;
+                first.el.classList.add('shake');
+                second.el.classList.add('shake');
+
+                setTimeout(() => {
+                    first.el.classList.remove('shake');
+                    second.el.classList.remove('shake');
+                    first.el.classList.add('flipped');
+                    second.el.classList.add('flipped');
+                    flippedCards = [];
+                    gameStarted = true;
+                }, 800);
+            }
+        }
+
+        function gameWon() {
+            clearInterval(timerInterval);
+            gameStarted = false;
+
+            const elapsed = Date.now() - startTime;
+            const seconds = (elapsed / 1000).toFixed(1);
+
+            document.getElementById('message').innerHTML =
+                `🎉 恭喜完成！<br>用時：${seconds} 秒`;
+            document.getElementById('restart-btn').classList.remove('hidden');
+            document.getElementById('back-btn').classList.remove('hidden');
+
+            playGameSound(`太棒了！你用了 ${Math.floor(seconds)} 秒完成遊戲！`);
+        }
+
+        function resetGame() {
+            startGame(rows, cols);
+        }
+
+        function backToSelection() {
+            document.getElementById('size-selection').classList.remove('hidden');
+            document.getElementById('game-area').classList.add('hidden');
+
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+        }
+
+        function playGameSound(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'zh-TW';
+                utterance.rate = 0.9;
+                utterance.pitch = 1.2;
+                speechSynthesis.speak(utterance);
+            }
+        }
+
+        // 頁面載入時播放歡迎語音
+        window.onload = function () {
+            playGameSound('歡迎來到注音配對遊戲！請選擇難度。');
+        };
+    </script>
+</body>
+
+</html>

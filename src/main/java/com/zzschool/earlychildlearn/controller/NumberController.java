@@ -32,4 +32,9 @@ public class NumberController {
     public String stroke() {
         return "numbers/stroke";
     }
+
+    @GetMapping("/memory-match")
+    public String memoryMatch() {
+        return "numbers/memory_match";
+    }
 }

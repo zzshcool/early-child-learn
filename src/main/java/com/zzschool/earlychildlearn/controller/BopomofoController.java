@@ -27,4 +27,9 @@ public class BopomofoController {
     public String stroke() {
         return "bopomofo/stroke";
     }
+
+    @GetMapping("/memory-match")
+    public String memoryMatch() {
+        return "bopomofo/memory_match";
+    }
 }

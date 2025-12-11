@@ -32,4 +32,9 @@ public class EnglishController {
     public String stroke() {
         return "english/stroke";
     }
+
+    @GetMapping("/memory-match")
+    public String memoryMatch() {
+        return "english/memory_match";
+    }
 }
