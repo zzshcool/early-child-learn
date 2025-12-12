@@ -16,6 +16,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// System Heartbeat Check
+setInterval(() => {
+    fetch('/heartbeat')
+        .then(response => {
+            if (response.ok) {
+                console.log('System heartbeat: OK');
+            } else {
+                console.warn('System heartbeat: Server returned error', response.status);
+            }
+        })
+        .catch(error => {
+            console.error('System heartbeat: Connection failed', error);
+        });
+}, 60000);
+
 function speak(text, lang = 'zh-TW') {
     if ('speechSynthesis' in window) {
         const utterance = new SpeechSynthesisUtterance(text);
