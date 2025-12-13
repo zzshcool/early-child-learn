@@ -1,8 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('game-container');
     const scoreElement = document.getElementById('score');
-    const totalElement = document.getElementById('total');
+    const timeElement = document.getElementById('time');
     const overlay = document.getElementById('message-overlay');
+    const messageText = document.getElementById('message-text');
+    const bubbleText = document.querySelector('#bubble');
 
     // Game Config
     const giftImages = [
@@ -12,13 +14,13 @@ document.addEventListener('DOMContentLoaded', () => {
         '/images/games/santa-rescue/gift-gold.png'
     ];
 
-    // Randomly choose between 3 to 6 gifts
-    const totalGifts = Math.floor(Math.random() * 4) + 3;
-    let giftsCollected = 0;
+    let score = 0;
+    let timeLeft = 10;
+    let gameActive = false;
+    let spawnInterval;
+    let timerInterval;
 
-    totalElement.textContent = totalGifts;
-
-    // Sound effects (Audio API for generated beep/melodies since we don't have files yet)
+    // Sound effects based on previous context
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
     function playCollectSound() {
@@ -26,8 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const oscillator = audioCtx.createOscillator();
         const gainNode = audioCtx.createGain();
         oscillator.type = 'sine';
-        oscillator.frequency.setValueAtTime(500, audioCtx.currentTime);
-        oscillator.frequency.exponentialRampToValueAtTime(1000, audioCtx.currentTime + 0.1);
+        oscillator.frequency.setValueAtTime(600, audioCtx.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.1);
         gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
         gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
         oscillator.connect(gainNode);
@@ -38,8 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function playWinSound() {
         if (audioCtx.state === 'suspended') audioCtx.resume();
-        // Simple "Ho Ho Ho" melody effect
-        const notes = [523.25, 659.25, 783.99]; // C E G
+        const notes = [523.25, 659.25, 783.99, 1046.50]; // C E G C
         notes.forEach((note, index) => {
             const oscillator = audioCtx.createOscillator();
             const gainNode = audioCtx.createGain();
@@ -65,72 +66,129 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function spawnGifts() {
-        for (let i = 0; i < totalGifts; i++) {
-            const gift = document.createElement('img');
-            gift.src = giftImages[Math.floor(Math.random() * giftImages.length)];
-            gift.classList.add('gift');
+    function spawnGift() {
+        if (!gameActive) return;
 
-            // Random position with padding
-            const x = Math.random() * (window.innerWidth - 140) + 10;
-            const y = Math.random() * (window.innerHeight - 300) + 100; // Keep away from top score and bottom logic
+        const gift = document.createElement('img');
+        gift.src = giftImages[Math.floor(Math.random() * giftImages.length)];
+        gift.classList.add('gift');
 
-            gift.style.left = `${x}px`;
-            gift.style.top = `${y}px`;
+        // Random position
+        const x = Math.random() * (window.innerWidth - 120) + 10;
+        const y = Math.random() * (window.innerHeight - 250) + 100;
 
-            // Random float delay
-            gift.style.animationDelay = `${Math.random() * 2}s`;
+        gift.style.left = `${x}px`;
+        gift.style.top = `${y}px`;
+        // Make it appear immediately
+        gift.style.transform = 'scale(0)';
+        gift.style.transition = 'transform 0.2s';
 
-            gift.addEventListener('click', (e) => collectGift(e, gift));
-            gift.addEventListener('touchstart', (e) => {
-                e.preventDefault(); // Prevent double firing
-                collectGift(e, gift);
-            });
+        // Touch/Click handler
+        const collectHandler = (e) => {
+            e.preventDefault();
+            if (!gameActive || gift.classList.contains('collected')) return;
+            collectGift(e, gift);
+        };
 
-            container.appendChild(gift);
-        }
+        gift.addEventListener('click', collectHandler);
+        gift.addEventListener('touchstart', collectHandler);
+
+        container.appendChild(gift);
+
+        // Pop in animation
+        requestAnimationFrame(() => {
+            gift.style.transform = 'scale(1)';
+        });
+
+        // Auto remove after 1 second (1000ms)
+        const removeTimer = setTimeout(() => {
+            if (gift.parentNode && !gift.classList.contains('collected')) {
+                gift.style.transform = 'scale(0)';
+                setTimeout(() => gift.remove(), 200);
+            }
+        }, 1000); // 1 Second lifetime requirement
+
+        // Cleanup timer if collected
+        gift.dataset.timerId = removeTimer;
     }
 
     function collectGift(e, gift) {
-        if (gift.classList.contains('collected')) return;
-
+        clearTimeout(gift.dataset.timerId); // Stop auto-remove
         gift.classList.add('collected');
         playCollectSound();
-        createSparkle(e.clientX || e.touches[0].clientX, e.clientY || e.touches[0].clientY);
 
-        giftsCollected++;
-        scoreElement.textContent = giftsCollected;
+        // Use clientX/Y for click, or center of element for fallback
+        let cx = e.clientX;
+        let cy = e.clientY;
+        if (!cx && e.touches && e.touches.length > 0) {
+            cx = e.touches[0].clientX;
+            cy = e.touches[0].clientY;
+        }
+        createSparkle(cx, cy);
 
-        // Remove from DOM after animation
-        setTimeout(() => {
-            gift.remove();
-            if (giftsCollected >= totalGifts) {
-                gameWin();
-            }
-        }, 500);
+        score++;
+        scoreElement.textContent = score;
+
+        setTimeout(() => gift.remove(), 500);
     }
 
-    function gameWin() {
-        setTimeout(() => {
-            playWinSound();
-            overlay.classList.remove('hidden');
-            createSnow();
-        }, 300);
+    function startGame() {
+        score = 0;
+        timeLeft = 10;
+        gameActive = true;
+
+        scoreElement.textContent = score;
+        timeElement.textContent = timeLeft;
+        overlay.classList.add('hidden');
+
+        // Clear any existing gifts
+        document.querySelectorAll('.gift').forEach(el => el.remove());
+
+        // Spawn a gift every 0.8 seconds (slightly faster than lifetime to ensure density)
+        spawnInterval = setInterval(spawnGift, 800);
+
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            timeElement.textContent = timeLeft;
+            if (timeLeft <= 0) {
+                endGame();
+            }
+        }, 1000);
+
+        // Initial spawn
+        spawnGift();
+    }
+
+    function endGame() {
+        gameActive = false;
+        clearInterval(spawnInterval);
+        clearInterval(timerInterval);
+        showResult();
+    }
+
+    function showResult() {
+        playWinSound();
+        messageText.textContent = `時間到! 得分: ${score}`;
+        bubbleText.textContent = `太棒了!`;
+        overlay.classList.remove('hidden');
+        createSnow();
     }
 
     function createSnow() {
-        setInterval(() => {
-            const flake = document.createElement('div');
-            flake.classList.add('snowflake');
-            flake.innerHTML = '❄';
-            flake.style.left = Math.random() * 100 + 'vw';
-            flake.style.animationDuration = Math.random() * 3 + 2 + 's';
-            flake.style.fontSize = Math.random() * 20 + 10 + 'px';
-            container.appendChild(flake);
-
-            setTimeout(() => flake.remove(), 5000);
-        }, 200);
+        // Simple snow effect reuse
+        const flake = document.createElement('div');
+        flake.classList.add('snowflake');
+        flake.innerHTML = '❄';
+        flake.style.left = Math.random() * 100 + 'vw';
+        flake.style.animationDuration = Math.random() * 3 + 2 + 's';
+        flake.style.fontSize = Math.random() * 20 + 10 + 'px';
+        container.appendChild(flake);
+        setTimeout(() => flake.remove(), 5000);
     }
 
-    spawnGifts();
+    // Start loop for snow in background regardless of game state
+    setInterval(createSnow, 300);
+
+    // Initial Start
+    startGame();
 });

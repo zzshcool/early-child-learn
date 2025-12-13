@@ -32,4 +32,34 @@ public class GamesController {
     public String santaRescue() {
         return "games/santa-rescue";
     }
+
+    @GetMapping("/cat-fishing")
+    public String catFishing() {
+        return "games/cat-fishing";
+    }
+
+    @GetMapping("/dino-fruit")
+    public String dinoFruit() {
+        return "games/dino-fruit";
+    }
+
+    @GetMapping("/shape-helper")
+    public String shapeHelper() {
+        return "games/shape-helper";
+    }
+
+    @GetMapping("/farm-harvest")
+    public String farmHarvest() {
+        return "games/farm-harvest";
+    }
+
+    @GetMapping("/balloon-pop")
+    public String balloonPop() {
+        return "games/balloon-pop";
+    }
+
+    @GetMapping("/car-home")
+    public String carHome() {
+        return "games/car-home";
+    }
 }

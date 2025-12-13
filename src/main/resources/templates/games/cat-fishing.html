@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>小貓釣魚 - 快樂學習樂園</title>
+    <link rel="stylesheet" th:href="@{/css/cat-fishing.css}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+    </style>
+</head>
+
+<body>
+    <div id="game-container">
+        <div id="score-board">魚魚: <span id="score">0</span></div>
+        <div id="cat-container">
+            <img th:src="@{/images/games/cat-fishing/cat.png}" id="cat-img">
+            <div id="rod"></div>
+            <div id="line"></div>
+            <div id="hook">J</div>
+        </div>
+        <div id="water-overlay"></div>
+        <div id="message-overlay" class="hidden">
+            <div class="message-content">
+                <h1>太棒了!</h1>
+                <p>你釣到了好多魚!</p>
+                <button onclick="location.reload()">再玩一次</button>
+                <a href="/games/menu" class="btn-home">回選單</a>
+            </div>
+        </div>
+        <div id="tutorial-overlay">
+            <h1>小貓釣魚 🐱🎣</h1>
+            <p>點擊畫面下鉤，等待魚兒上鉤！</p>
+            <button onclick="startGame()">開始!</button>
+        </div>
+    </div>
+    <script th:src="@{/js/cat-fishing.js}"></script>
+</body>
+
+</html>

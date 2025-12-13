@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -9,9 +10,12 @@
         @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
     </style>
 </head>
+
 <body>
     <div id="game-container">
-        <div id="score-board">禮物: <span id="score">0</span> / <span id="total">0</span></div>
+        <div id="score-board">
+            分數: <span id="score">0</span> | 時間: <span id="time">10</span>
+        </div>
         <div id="message-overlay" class="hidden">
             <div class="message-content">
                 <h1 id="message-text">聖誕快樂!</h1>
@@ -26,7 +30,8 @@
     </div>
 
     <!-- Audio Placeholders (using standard browser beeps/sounds via JS or optional files if they existed, for now just visual) -->
-    
+
     <script th:src="@{/js/santa-rescue.js}"></script>
 </body>
+
 </html>
