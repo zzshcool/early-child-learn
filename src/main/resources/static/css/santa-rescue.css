@@ -1,320 +1,605 @@
+﻿/* 拯救禮物大作戰 - 遊戲樣式 */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     margin: 0;
     padding: 0;
     overflow: hidden;
     font-family: 'Fredoka One', cursive;
-    background-color: #0d1b2a;
+    background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
     user-select: none;
-    touch-action: none; /* Prevent scrolling on mobile */
+    touch-action: none;
+    min-height: 100vh;
 }
 
 #game-container {
     width: 100vw;
     height: 100vh;
-    background-image: url('../images/games/santa-rescue/bg-night.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
     position: relative;
+    overflow: hidden;
 }
 
-#score-board {
+/* ===== 遊戲 UI ===== */
+#game-ui {
     position: absolute;
-    top: 20px;
-    left: 20px;
-    font-size: 2rem;
-    color: #fff;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-    z-index: 10;
-    background: rgba(0,0,0,0.3);
+    top: 60px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
     padding: 10px 20px;
-    border-radius: 15px;
+    z-index: 50;
+    flex-wrap: wrap;
 }
 
+#level-indicator {
+    background: linear-gradient(145deg, #e74c3c, #c0392b);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+#timer-display {
+    background: rgba(255, 255, 255, 0.95);
+    color: #333;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+#timer-display.warning {
+    background: linear-gradient(145deg, #FF6B6B, #FF4757);
+    color: white;
+    animation: pulse 0.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+#progress-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#progress-bar {
+    width: 150px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #27ae60, #2ecc71);
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    background: rgba(255, 255, 255, 0.95);
+    color: #333;
+    padding: 5px 15px;
+    border-radius: 15px;
+    font-size: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+#combo-display {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(145deg, #e74c3c, #c0392b);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-size: 1.5rem;
+    z-index: 60;
+    box-shadow: 0 5px 20px rgba(231, 76, 60, 0.5);
+    pointer-events: none;
+}
+
+@keyframes comboPopup {
+    0% { transform: translate(-50%, -50%) scale(0.5); }
+    50% { transform: translate(-50%, -50%) scale(1.2); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* ===== 禮物 ===== */
 .gift {
     position: absolute;
-    width: 120px; /* Adjust size as needed suitable for 4 year olds */
-    height: 120px;
+    width: 80px;
+    height: 80px;
     cursor: pointer;
-    transition: transform 0.2s;
-    filter: drop-shadow(0 5px 5px rgba(0,0,0,0.3));
-    /* Animation for idle floating */
-    animation: float 3s ease-in-out infinite;
+    z-index: 20;
+    transition: transform 0.2s ease;
+    filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.3));
+    animation: giftBounce 0.8s ease-in-out infinite;
+}
+
+.gift:hover {
+    transform: scale(1.15);
 }
 
 .gift:active {
     transform: scale(0.9);
 }
 
-@keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
-}
-
-@keyframes jumpAndFade {
-    0% { transform: scale(1) translateY(0); opacity: 1; }
-    50% { transform: scale(1.2) translateY(-50px); opacity: 1; }
-    100% { transform: scale(0) translateY(-100px); opacity: 0; }
-}
-
-.collected {
-    animation: jumpAndFade 0.5s forwards ease-out;
+.gift.collected {
+    animation: giftCollected 0.3s ease-out forwards !important;
     pointer-events: none;
 }
 
+@keyframes giftBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+@keyframes giftCollected {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5) rotate(15deg);
+    }
+    100% {
+        transform: scale(0) translateY(-50px);
+        opacity: 0;
+    }
+}
+
+/* ===== 特效 ===== */
+.score-popup {
+    position: fixed;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #FFD700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    animation: scoreFloat 0.8s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes scoreFloat {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-80px) scale(1.5);
+    }
+}
+
+.sparkle {
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    background: radial-gradient(circle, #FFD700, #FFA500);
+    border-radius: 50%;
+    z-index: 99;
+    animation: sparkleFade 0.6s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes sparkleFade {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0);
+    }
+}
+
+/* ===== 雪花 ===== */
+.snowflake {
+    position: fixed;
+    top: -20px;
+    color: white;
+    z-index: 5;
+    animation: snowfall linear forwards;
+    pointer-events: none;
+}
+
+@keyframes snowfall {
+    to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* ===== 覆蓋層共用 ===== */
+#difficulty-overlay,
+#level-transition,
 #message-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.9);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 100;
-    opacity: 0;
-    transition: opacity 0.5s;
-    pointer-events: none; /* transparent to clicks when hidden */
-}
-
-#message-overlay:not(.hidden) {
-    opacity: 1;
-    pointer-events: auto;
 }
 
 .hidden {
     display: none !important;
 }
 
-.message-content {
+/* ===== 難度選擇 ===== */
+.difficulty-content {
+    text-align: center;
+    color: white;
+    max-width: 500px;
+    padding: 30px;
+}
+
+.difficulty-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+.game-rules {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.game-rules h3 {
+    margin-bottom: 10px;
+    color: #FFD700;
+}
+
+.game-rules ul {
+    list-style: none;
+    padding: 0;
+}
+
+.game-rules li {
+    margin: 8px 0;
+    font-size: 0.95rem;
+    opacity: 0.9;
+}
+
+.game-rules li::before {
+    content: '🎄 ';
+}
+
+.choose-text {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: #FFD700;
+}
+
+.difficulty-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+}
+
+.difficulty-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 40px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 200px;
+    font-family: 'Fredoka One', cursive;
+}
+
+.difficulty-btn.easy {
+    background: linear-gradient(145deg, #27ae60, #2ecc71);
+    color: white;
+}
+
+.difficulty-btn.normal {
+    background: linear-gradient(145deg, #f39c12, #e67e22);
+    color: white;
+}
+
+.difficulty-btn.hard {
+    background: linear-gradient(145deg, #e74c3c, #c0392b);
+    color: white;
+}
+
+.difficulty-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.difficulty-icon {
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.difficulty-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.difficulty-desc {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* ===== 關卡過場 ===== */
+.transition-content {
     text-align: center;
     color: white;
 }
 
-#message-text {
-    font-size: 4rem;
+.transition-level {
+    font-size: 3rem;
+    color: #e74c3c;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     margin-bottom: 20px;
-    color: #ff9f1c;
-    text-shadow: 0 0 10px #ffbf69;
+}
+
+.transition-info {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+}
+
+.transition-info p {
+    margin: 10px 0;
+    opacity: 0.9;
+}
+
+.ready-text {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    opacity: 0.8;
+}
+
+.countdown {
+    font-size: 4rem;
+    color: #e74c3c;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+    animation: countdownPop 1s ease-in-out infinite;
+}
+
+@keyframes countdownPop {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+/* ===== 結果覆蓋層 ===== */
+.message-content {
+    text-align: center;
+    color: white;
+    padding: 30px;
+}
+
+#message-text {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 #santa-celebration {
     position: relative;
-    display: inline-block;
-    margin-bottom: 30px;
+    margin: 20px 0;
 }
 
 #santa-img {
-    height: 300px;
-    animation: wave 2s infinite ease-in-out;
+    width: 150px;
+    animation: santaBounce 0.8s ease-in-out infinite;
 }
 
-@keyframes wave {
-    0%, 100% { transform: rotate(-5deg); }
-    50% { transform: rotate(5deg); }
+@keyframes santaBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
 }
 
 #bubble {
     position: absolute;
     top: -20px;
-    right: -40px;
+    right: -30px;
     background: white;
-    color: black;
-    padding: 15px 25px;
-    border-radius: 20px;
-    font-size: 1.5rem;
-    font-weight: bold;
+    color: #e74c3c;
+    padding: 10px 15px;
+    border-radius: 15px;
+    font-size: 1rem;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
 
 #bubble::after {
     content: '';
     position: absolute;
-    bottom: -10px;
+    bottom: -8px;
     left: 20px;
-    border-width: 10px 10px 0;
+    border-width: 8px 8px 0;
     border-style: solid;
-    border-color: white transparent;
-    display: block;
-    width: 0;
+    border-color: white transparent transparent;
 }
 
-.btn-home, #restart-btn {
-    display: inline-block;
-    padding: 15px 30px;
-    margin: 10px;
-    font-size: 1.5rem;
+.result-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+/* ===== 按鈕 ===== */
+button {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.3rem;
+    padding: 15px 35px;
+    border-radius: 30px;
     border: none;
-    border-radius: 50px;
+    background: linear-gradient(145deg, #27ae60, #2ecc71);
+    color: white;
     cursor: pointer;
-    text-decoration: none;
-    font-family: inherit;
-    transition: transform 0.2s;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
 }
 
-#restart-btn {
-    background-color: #2ec4b6;
-    color: white;
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+button:active {
+    transform: translateY(0);
 }
 
 .btn-home {
-    background-color: #e71d36;
+    background: linear-gradient(145deg, #3498db, #2980b9);
     color: white;
+    text-decoration: none;
+    padding: 15px 35px;
+    border-radius: 30px;
+    font-size: 1.3rem;
+    display: inline-block;
+    font-family: 'Fredoka One', cursive;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
 }
 
-.btn-home:hover, #restart-btn:hover {
-    transform: scale(1.1);
+.btn-home:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
 }
 
-/* Sparkle Effect */
-.sparkle {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background: radial-gradient(circle, #fff 0%, rgba(255,255,255,0) 70%);
-    border-radius: 50%;
-    pointer-events: none;
-    animation: sparkleAnim 0.6s linear forwards;
-}
-
-@keyframes sparkleAnim {
-    0% { transform: scale(0); opacity: 0; }
-    50% { transform: scale(1); opacity: 1; }
-    100% { transform: scale(0); opacity: 0; }
-}
-
-/* Snow */
-.snowflake {
-    position: absolute;
-    top: -10vh;
-    color: #fff;
-    font-size: 1.5em;
-    user-select: none;
-    pointer-events: none;
-    animation: fall linear infinite;
-}
-
-@keyframes fall {
-    0% { transform: translateY(0) rotate(0deg); }
-    100% { transform: translateY(110vh) rotate(360deg); }
-}
-/* ========================================
-   統�?導覽?�樣�?- ?�剪?�?�頭布�???
-   ======================================== */
-
-/* 導航容器 - ?�援?��??��?局 */
+/* ===== 導覽列 ===== */
 .nav-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    position: relative;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    right: 10px;
     z-index: 150;
-}
-
-/* Mobile optimization - hide non-floating nav-links, keep floating buttons visible */
-@media (max-width: 768px) {
-
-    /* Hide nav-container background and spacing, but keep it in layout for floating buttons */
-    .nav-container {
-        background: transparent !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        min-height: 0 !important;
-        height: auto !important;
-    }
 }
 
 .nav-link {
     display: inline-flex;
     align-items: center;
     gap: 0.3rem;
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1.2rem;
     background-color: #FFFFFF;
     color: #2C3E50;
     text-decoration: none;
     font-size: 1rem;
     border-radius: 25px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
     font-family: 'Fredoka One', cursive;
 }
 
 .nav-link:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    background-color: #4ECDC4;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+    background-color: #e74c3c;
     color: white;
 }
 
 .nav-link.home-link {
-    background-color: #FF6B6B;
-    color: #2C3E50;
+    background-color: #FFE66D;
 }
 
 .nav-link.home-link:hover {
-    background-color: #FF6B6B;
-    color: white;
+    background-color: #FFD700;
 }
 
-/* Desktop override: yellow background with dark text */
-@media (min-width: 769px) {
-    .nav-link.home-link-floating {
-        background-color: #FFE66D !important;
-        color: #2C3E50 !important;
-    }
-
-    .nav-link.home-link-floating:hover {
-        background-color: #FFD700 !important;
-        color: #333 !important;
-    }
-}
-
-/* Mobile optimization for floating button */
+/* ===== 響應式設計 ===== */
 @media (max-width: 768px) {
-    .nav-link.home-link-floating {
-        position: fixed !important;
-        top: 10px !important;
-        right: 10px !important;
-        background-color: #FFE66D !important;
-        color: #2C3E50 !important;
-        z-index: 200 !important;
+    #game-ui {
+        top: 55px;
+        gap: 10px;
+        padding: 5px 10px;
     }
-
-    .nav-link.home-link-floating:hover {
-        background-color: #FFD700 !important;
+    
+    #level-indicator,
+    #timer-display {
+        font-size: 1rem;
+        padding: 6px 12px;
+    }
+    
+    #progress-bar {
+        width: 100px;
+    }
+    
+    .gift {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .difficulty-content h1 {
+        font-size: 1.8rem;
+    }
+    
+    .difficulty-btn {
+        min-width: 180px;
+        padding: 12px 30px;
+    }
+    
+    #combo-display {
+        font-size: 1.2rem;
+        padding: 10px 20px;
     }
 }
 
-/* Desktop override: white background with dark text */
-@media (min-width: 769px) {
-    .nav-link.back-link-floating {
-        background-color: #FFFFFF !important;
-        color: #2C3E50 !important;
+@media (max-width: 480px) {
+    .gift {
+        width: 60px;
+        height: 60px;
     }
-
-    .nav-link.back-link-floating:hover {
-        background-color: #4ECDC4 !important;
-        color: white !important;
+    
+    .difficulty-content h1 {
+        font-size: 1.5rem;
     }
-}
-
-/* Mobile optimization for back button - horizontal alignment with home button */
-@media (max-width: 768px) {
-    .nav-link.back-link-floating {
-        position: fixed !important;
-        top: 10px !important;
-        left: 10px !important;
-        background-color: #FFFFFF !important;
-        color: #2C3E50 !important;
-        z-index: 200 !important;
+    
+    button {
+        font-size: 1.1rem;
+        padding: 12px 25px;
     }
-
-    .nav-link.back-link-floating:hover {
-        background-color: #4ECDC4 !important;
-        color: white !important;
+    
+    .countdown {
+        font-size: 3rem;
+    }
+    
+    #santa-img {
+        width: 120px;
     }
 }

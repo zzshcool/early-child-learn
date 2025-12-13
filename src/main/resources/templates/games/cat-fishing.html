@@ -17,26 +17,70 @@
             <a href="/games/menu" class="nav-link back-link-floating">上一頁</a>
             <a href="/" class="nav-link home-link home-link-floating">🏠 回首頁</a>
         </div>
-        <div id="score-board">魚魚: <span id="score">0</span></div>
-        <div id="cat-container">
-            <img th:src="@{/images/games/cat-fishing/cat.png}" id="cat-img">
-            <div id="rod"></div>
-            <div id="line"></div>
-            <div id="hook">J</div>
-        </div>
-        <div id="water-overlay"></div>
-        <div id="message-overlay" class="hidden">
-            <div class="message-content">
-                <h1>太棒了!</h1>
-                <p>你釣到了好多魚!</p>
-                <button onclick="location.reload()">再玩一次</button>
-                <a href="/games/menu" class="btn-home">回選單</a>
+
+        <!-- 遊戲 UI -->
+        <div id="game-ui" class="hidden">
+            <div id="level-indicator">第 <span id="current-level">1</span> 關</div>
+            <div id="timer-display">⏱️ <span id="time-left">30</span>秒</div>
+            <div id="progress-container">
+                <div id="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-text">🐟 <span id="score">0</span> / <span id="target-score">10</span></div>
             </div>
         </div>
+
+        <!-- 場景 -->
+        <div id="scene">
+            <div id="cat-container">
+                <img th:src="@{/images/games/cat-fishing/cat.png}" id="cat-img" alt="小貓">
+                <div id="rod"></div>
+                <div id="line"></div>
+            </div>
+            <div id="water-area">
+                <!-- 魚會動態生成在這裡 -->
+            </div>
+        </div>
+
+        <!-- 教學覆蓋層 -->
         <div id="tutorial-overlay">
-            <h1>小貓釣魚 🐱🎣</h1>
-            <p>點擊畫面下鉤，等待魚兒上鉤！</p>
-            <button onclick="startGame()">開始!</button>
+            <div class="tutorial-content">
+                <h1>🐱 小貓釣魚 🐟</h1>
+                <p>點擊水中游動的魚幫小貓捕魚！</p>
+                <div class="fish-legend">
+                    <div class="legend-item"><span>🐟</span> 普通魚 +1分</div>
+                    <div class="legend-item"><span>🐠</span> 金魚 +2分</div>
+                    <div class="legend-item"><span>🐡</span> 河豚 +3分</div>
+                    <div class="legend-item"><span>🦈</span> 鯊魚 +5分</div>
+                </div>
+                <button onclick="startGame()">開始遊戲!</button>
+            </div>
+        </div>
+
+        <!-- 關卡過場 -->
+        <div id="level-transition" class="hidden">
+            <div class="transition-content">
+                <h1 class="transition-level">第 <span id="transition-level-num">1</span> 關</h1>
+                <div class="transition-info">
+                    <p>⏱️ 時間: <span id="transition-time">30</span>秒</p>
+                    <p>🎯 目標: <span id="transition-target">10</span>條魚</p>
+                </div>
+                <p class="ready-text">準備好了嗎？</p>
+                <div class="countdown" id="countdown">3</div>
+            </div>
+        </div>
+
+        <!-- 結果覆蓋層 -->
+        <div id="result-overlay" class="hidden">
+            <div class="result-content">
+                <div id="result-icon">🎉</div>
+                <h1 id="result-title">太棒了!</h1>
+                <p id="result-message">你釣到了好多魚!</p>
+                <div class="result-buttons">
+                    <button onclick="location.reload()">再玩一次</button>
+                    <a href="/games/menu" class="btn-home">回選單</a>
+                </div>
+            </div>
         </div>
     </div>
     <script th:src="@{/js/cat-fishing.js}"></script>

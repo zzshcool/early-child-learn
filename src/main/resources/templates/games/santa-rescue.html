@@ -16,10 +16,72 @@
         <a href="/games/menu" class="nav-link back-link-floating">上一頁</a>
         <a href="/" class="nav-link home-link home-link-floating">🏠 回首頁</a>
     </div>
+
     <div id="game-container">
-        <div id="score-board">
-            分數: <span id="score">0</span> | 時間: <span id="time">10</span>
+        <!-- 遊戲 UI -->
+        <div id="game-ui" class="hidden">
+            <div id="level-indicator">第 <span id="current-level">1</span> 關</div>
+            <div id="timer-display">⏱️ <span id="time">20</span>秒</div>
+            <div id="progress-container">
+                <div id="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-text">🎁 <span id="score">0</span> / <span id="target-score">10</span></div>
+            </div>
+            <div id="combo-display" class="hidden">🔥 0 連擊！</div>
         </div>
+
+        <!-- 難度選擇 -->
+        <div id="difficulty-overlay">
+            <div class="difficulty-content">
+                <h1>🎄 拯救禮物大作戰 🎁</h1>
+                <p class="subtitle">聖誕老人的禮物掉落了！<br>快點擊收集禮物幫助他！</p>
+
+                <div class="game-rules">
+                    <h3>遊戲規則</h3>
+                    <ul>
+                        <li>點擊畫面上出現的禮物收集分數</li>
+                        <li>禮物會隨時間消失，動作要快！</li>
+                        <li>連續收集可獲得連擊加分</li>
+                        <li>達到目標分數即可過關</li>
+                    </ul>
+                </div>
+
+                <p class="choose-text">選擇難度開始遊戲！</p>
+                <div class="difficulty-options">
+                    <button class="difficulty-btn easy" onclick="startGameWithDifficulty('easy')">
+                        <span class="difficulty-icon">😊</span>
+                        <span class="difficulty-name">簡單模式</span>
+                        <span class="difficulty-desc">禮物存在較久</span>
+                    </button>
+                    <button class="difficulty-btn normal" onclick="startGameWithDifficulty('normal')">
+                        <span class="difficulty-icon">😄</span>
+                        <span class="difficulty-name">普通模式</span>
+                        <span class="difficulty-desc">標準難度</span>
+                    </button>
+                    <button class="difficulty-btn hard" onclick="startGameWithDifficulty('hard')">
+                        <span class="difficulty-icon">😈</span>
+                        <span class="difficulty-name">困難模式</span>
+                        <span class="difficulty-desc">禮物稍縱即逝</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 關卡過場 -->
+        <div id="level-transition" class="hidden">
+            <div class="transition-content">
+                <h1 class="transition-level">第 <span id="transition-level-num">1</span> 關</h1>
+                <div class="transition-info">
+                    <p>⏱️ 時間: <span id="transition-time">20</span>秒</p>
+                    <p>🎯 目標: <span id="transition-target">10</span>個禮物</p>
+                </div>
+                <p class="ready-text">準備好了嗎？</p>
+                <div class="countdown" id="countdown">3</div>
+            </div>
+        </div>
+
+        <!-- 結果覆蓋層 -->
         <div id="message-overlay" class="hidden">
             <div class="message-content">
                 <h1 id="message-text">聖誕快樂!</h1>
@@ -27,13 +89,13 @@
                     <img th:src="@{/images/games/santa-rescue/santa.png}" alt="Santa" id="santa-img">
                     <div id="bubble">Ho Ho Ho!</div>
                 </div>
-                <button id="restart-btn" onclick="location.reload()">再玩一次</button>
-                <a href="/games/menu" class="btn-home">回選單</a>
+                <div class="result-buttons">
+                    <button id="restart-btn" onclick="location.reload()">再玩一次</button>
+                    <a href="/games/menu" class="btn-home">回選單</a>
+                </div>
             </div>
         </div>
     </div>
-
-    <!-- Audio Placeholders (using standard browser beeps/sounds via JS or optional files if they existed, for now just visual) -->
 
     <script th:src="@{/js/santa-rescue.js}"></script>
 </body>
