@@ -17,55 +17,64 @@
             <a href="/games/menu" class="nav-link back-link-floating">上一頁</a>
             <a href="/" class="nav-link home-link home-link-floating">🏠 回首頁</a>
         </div>
-        <h1>🚙 小車回家 🏡</h1>
-        <div id="hint-text">拖動道路磚塊，幫小車鋪路回家！</div>
+
+        <!-- 遊戲 UI -->
+        <div id="game-ui" class="hidden">
+            <div id="level-indicator">第 <span id="current-level">1</span> 關</div>
+            <div id="move-display">🚗 走了 <span id="move-count">0</span> 步</div>
+        </div>
+
+        <h1 class="game-title">🚙 小車回家 🏡</h1>
+        <div id="hint-text">點擊亮亮的格子，幫小車回家！</div>
 
         <div id="game-board">
-            <!-- 5x5 網格將由 JavaScript 生成 -->
+            <!-- 網格由 JavaScript 生成 -->
         </div>
 
-        <div id="tiles-palette">
-            <div class="palette-title">道路磚塊</div>
-            <div class="tiles-container">
-                <!-- 可用的道路磚塊 -->
-                <div class="tile-option" data-type="straight-h" draggable="true">
-                    <div class="road-tile straight-h"></div>
-                </div>
-                <div class="tile-option" data-type="straight-v" draggable="true">
-                    <div class="road-tile straight-v"></div>
-                </div>
-                <div class="tile-option" data-type="corner-tl" draggable="true">
-                    <div class="road-tile corner-tl"></div>
-                </div>
-                <div class="tile-option" data-type="corner-tr" draggable="true">
-                    <div class="road-tile corner-tr"></div>
-                </div>
-                <div class="tile-option" data-type="corner-bl" draggable="true">
-                    <div class="road-tile corner-bl"></div>
-                </div>
-                <div class="tile-option" data-type="corner-br" draggable="true">
-                    <div class="road-tile corner-br"></div>
-                </div>
-            </div>
-        </div>
-
-        <div id="message-overlay" class="hidden">
-            <div class="message-content">
-                <div class="celebration">🎉</div>
-                <h2>太棒了!</h2>
-                <p>小車安全到家了!</p>
-                <button onclick="location.reload()">再玩一次</button>
-                <a href="/games/menu" class="btn-home">回選單</a>
-            </div>
-        </div>
-
+        <!-- 教學覆蓋層 -->
         <div id="tutorial-overlay">
-            <h2>小車回家 🚙🏡</h2>
-            <p>拖動道路磚塊到網格上</p>
-            <p>幫小車鋪一條回家的路！</p>
-            <button onclick="startGame()">開始!</button>
+            <div class="tutorial-content">
+                <h1>🚙 小車回家 🏡</h1>
+                <p>點擊旁邊的格子，幫小車走回家！</p>
+                <div class="legend">
+                    <div class="legend-item"><span>🚗</span> 小車</div>
+                    <div class="legend-item"><span>🏠</span> 家</div>
+                    <div class="legend-item"><span>🪨</span> 石頭（不能走）</div>
+                    <div class="legend-item"><span>🌊</span> 水坑（不能走）</div>
+                </div>
+                <button onclick="startGame()">開始遊戲!</button>
+            </div>
+        </div>
+
+        <!-- 關卡過場 -->
+        <div id="level-transition" class="hidden">
+            <div class="transition-content">
+                <h1 class="transition-level">第 <span id="transition-level-num">1</span> 關</h1>
+                <div class="transition-info">
+                    <p>📐 地圖大小: <span id="transition-grid-size">3x3</span></p>
+                    <p>🪨 障礙物數量: <span id="transition-obstacles">0</span></p>
+                </div>
+                <p class="ready-text">準備好了嗎？</p>
+                <div class="countdown" id="countdown">3</div>
+            </div>
+        </div>
+
+        <!-- 結果覆蓋層 -->
+        <div id="result-overlay" class="hidden">
+            <div class="result-content">
+                <div class="celebration">🎉🏆🎉</div>
+                <h1>太棒了！</h1>
+                <p>你幫小車全部回家了！</p>
+                <div class="result-buttons">
+                    <button onclick="location.reload()">再玩一次</button>
+                    <a href="/games/menu" class="btn-home">回選單</a>
+                </div>
+            </div>
         </div>
     </div>
+
+    <!-- 載入語音輔助系統 -->
+    <script th:src="@{/js/speech-helper.js}"></script>
     <script th:src="@{/js/car-home.js}"></script>
 </body>
 
