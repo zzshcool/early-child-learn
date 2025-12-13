@@ -17,6 +17,14 @@
             <a href="/games/menu" class="nav-link back-link-floating">上一頁</a>
             <a href="/" class="nav-link home-link home-link-floating">🏠 回首頁</a>
         </div>
+        <!-- 進度顯示 -->
+        <div id="progress-container">
+            <div id="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <div id="progress">0 / 5</div>
+        </div>
+
         <div id="dino-container">
             <img th:src="@{/images/games/dino-fruit/dino.png}" id="dino-img">
             <div id="bubble" class="hidden">我想吃蘋果! 🍎</div>
@@ -38,6 +46,8 @@
             <button onclick="startGame()">開始!</button>
         </div>
     </div>
+    <!-- 載入語音輔助系統 -->
+    <script th:src="@{/js/speech-helper.js}"></script>
     <script th:src="@{/js/dino-fruit.js}"></script>
 </body>
 

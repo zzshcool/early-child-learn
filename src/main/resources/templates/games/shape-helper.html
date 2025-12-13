@@ -17,15 +17,27 @@
             <a href="/games/menu" class="nav-link back-link-floating">上一頁</a>
             <a href="/" class="nav-link home-link home-link-floating">🏠 回首頁</a>
         </div>
+
+        <!-- 進度顯示 -->
+        <div id="progress-container">
+            <div id="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <div id="progress">0 / 3</div>
+        </div>
+
         <div id="targets-container">
             <div class="target-slot" data-shape="circle">
                 <div class="slot-outline circle"></div>
+                <div class="slot-label">圓形</div>
             </div>
             <div class="target-slot" data-shape="triangle">
                 <div class="slot-outline triangle"></div>
+                <div class="slot-label">三角形</div>
             </div>
             <div class="target-slot" data-shape="square">
                 <div class="slot-outline square"></div>
+                <div class="slot-label">正方形</div>
             </div>
         </div>
 
@@ -44,11 +56,21 @@
         </div>
 
         <div id="tutorial-overlay">
-            <h1>形狀小幫手 ⭕🔺</h1>
-            <p>把形狀拖到正確的洞裡！</p>
-            <button onclick="document.getElementById('tutorial-overlay').classList.add('hidden')">開始!</button>
+            <div class="tutorial-content">
+                <h1>形狀小幫手 ⭕🔺</h1>
+                <p>把形狀拖到正確的洞裡！</p>
+                <div class="shape-preview">
+                    <span>⭕ 圓形</span>
+                    <span>🔺 三角形</span>
+                    <span>⬜ 正方形</span>
+                </div>
+                <button onclick="startGame()">開始!</button>
+            </div>
         </div>
     </div>
+
+    <!-- 載入語音輔助系統 -->
+    <script th:src="@{/js/speech-helper.js}"></script>
     <script th:src="@{/js/shape-helper.js}"></script>
 </body>
 

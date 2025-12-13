@@ -7,17 +7,35 @@
     <title>剪刀石頭布 - 快樂學習樂園</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+        body {
+            font-family: 'Fredoka One', cursive;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
         .game-container {
             text-align: center;
             margin-top: 20px;
-            padding: 0 10px;
+            padding: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .game-title {
+            font-size: 2.2rem;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
         }
 
         .battle-area {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 30px;
+            gap: 20px;
             margin: 30px 0;
             flex-wrap: wrap;
         }
@@ -30,34 +48,36 @@
         }
 
         .player-label {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: bold;
             color: #4ECDC4;
             margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
         }
 
         .computer-label {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: bold;
             color: #FF6B6B;
             margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
         }
 
         .choice-display {
-            width: 120px;
-            height: 120px;
+            width: 130px;
+            height: 130px;
             border-radius: 50%;
             background: linear-gradient(145deg, #f0f0f0, #cacaca);
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 4rem;
-            box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
+            font-size: 4.5rem;
+            box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.2), -5px -5px 15px rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
         }
 
         .choice-display.waiting {
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: #999;
         }
 
@@ -68,29 +88,30 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
+        /* 放大按鈕適合幼兒 */
         .choices-container {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 25px;
             margin: 30px 0;
             flex-wrap: wrap;
         }
 
         .choice-btn {
-            width: 100px;
-            height: 100px;
+            width: 130px;
+            height: 130px;
             border-radius: 50%;
-            border: none;
-            font-size: 3rem;
+            border: 5px solid white;
+            font-size: 4rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
             background: white;
         }
 
         .choice-btn:hover {
             transform: scale(1.15);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
         }
 
         .choice-btn:active {
@@ -123,31 +144,34 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .btn-restart {
             background: linear-gradient(145deg, #4CAF50, #45a049);
             color: white;
-            padding: 15px 40px;
+            padding: 18px 50px;
             border: none;
             border-radius: 50px;
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             cursor: pointer;
             margin-top: 20px;
-            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.5);
             transition: all 0.3s ease;
+            font-family: 'Fredoka One', cursive;
         }
 
         .btn-restart:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.5);
+            box-shadow: 0 12px 35px rgba(76, 175, 80, 0.6);
         }
 
         .hidden {
             display: none !important;
         }
 
-        /* 動畫效果 */
+        /* 動畫 */
         @keyframes pop-in {
             0% {
                 transform: scale(0);
@@ -174,7 +198,7 @@
 
             50% {
                 transform: scale(1.1);
-                box-shadow: 0 0 30px 10px rgba(255, 215, 0, 0.5);
+                box-shadow: 0 0 40px 15px rgba(255, 215, 0, 0.5);
             }
         }
 
@@ -187,12 +211,12 @@
 
             20%,
             60% {
-                transform: translateX(-8px);
+                transform: translateX(-10px);
             }
 
             40%,
             80% {
-                transform: translateX(8px);
+                transform: translateX(10px);
             }
         }
 
@@ -204,7 +228,7 @@
             }
 
             50% {
-                transform: translateY(-15px);
+                transform: translateY(-20px);
             }
         }
 
@@ -216,44 +240,6 @@
 
             100% {
                 transform: translateY(100vh) rotate(720deg);
-                opacity: 0;
-            }
-        }
-
-        @keyframes rainbow-bg {
-            0% {
-                background-color: #ff9a9e;
-            }
-
-            25% {
-                background-color: #fad0c4;
-            }
-
-            50% {
-                background-color: #a1c4fd;
-            }
-
-            75% {
-                background-color: #c2e9fb;
-            }
-
-            100% {
-                background-color: #ff9a9e;
-            }
-        }
-
-        @keyframes star-spin {
-            0% {
-                transform: rotate(0deg) scale(0);
-                opacity: 0;
-            }
-
-            50% {
-                opacity: 1;
-            }
-
-            100% {
-                transform: rotate(360deg) scale(1);
                 opacity: 0;
             }
         }
@@ -274,25 +260,20 @@
 
         .choice-display.draw {
             animation: draw-bounce 0.5s ease-in-out infinite;
-            background: linear-gradient(145deg, #E0E0E0, #BDBDBD);
         }
 
         .result-message.win {
             color: #4CAF50;
-            animation: pop-in 0.5s ease-out;
         }
 
         .result-message.lose {
-            color: #F44336;
-            animation: loser-shake 0.5s ease-in-out;
+            color: #FF6B6B;
         }
 
         .result-message.draw {
-            color: #FF9800;
-            animation: draw-bounce 0.6s ease-in-out 3;
+            color: #FFE66D;
         }
 
-        /* 慶祝效果 */
         .celebration {
             position: fixed;
             top: 0;
@@ -311,89 +292,91 @@
             animation: confetti-fall 3s linear forwards;
         }
 
-        .star-burst {
+        /* 選項名稱標籤 */
+        .choice-label {
+            font-size: 1.2rem;
+            color: white;
+            margin-top: 8px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .choice-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 導覽列 */
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             position: fixed;
-            font-size: 2rem;
-            animation: star-spin 1s ease-out forwards;
-            pointer-events: none;
-            z-index: 101;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            z-index: 150;
         }
 
-        /* 遊戲背景效果 */
-        .game-container.win-bg {
-            animation: rainbow-bg 2s ease-in-out;
-            border-radius: 20px;
+        .nav-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.6rem 1.2rem;
+            background-color: #FFFFFF;
+            color: #2C3E50;
+            text-decoration: none;
+            font-size: 1rem;
+            border-radius: 25px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
         }
 
-        /* 說明文字 */
-        .instruction {
-            font-size: 1.3rem;
-            color: #666;
-            margin-bottom: 20px;
+        .nav-link:hover {
+            transform: translateY(-2px);
+            background-color: #4ECDC4;
+            color: white;
         }
 
-        /* 響應式設計 */
+        .nav-link.home-link {
+            background-color: #FFE66D;
+        }
+
         @media (max-width: 480px) {
             .choice-display {
-                width: 90px;
-                height: 90px;
-                font-size: 3rem;
+                width: 100px;
+                height: 100px;
+                font-size: 3.5rem;
             }
 
             .choice-btn {
-                width: 80px;
-                height: 80px;
-                font-size: 2.5rem;
+                width: 110px;
+                height: 110px;
+                font-size: 3.5rem;
             }
 
-            .vs-text {
+            .game-title {
                 font-size: 1.8rem;
-            }
-
-            .player-label,
-            .computer-label {
-                font-size: 1.2rem;
-            }
-
-            .result-message {
-                font-size: 1.5rem;
-            }
-
-            .battle-area {
-                gap: 15px;
-            }
-
-            .choices-container {
-                gap: 15px;
-            }
-
-            .instruction {
-                font-size: 1.1rem;
             }
         }
     </style>
 </head>
 
 <body>
-    <header>
-        <h1>✊ 剪刀石頭布 ✌️</h1>
-    </header>
-    <main>
-        <div class="nav-container">
-            <a href="/games/menu" class="nav-link back-link-floating">上一頁</a>
-            <a href="/" class="nav-link home-link home-link-floating">🏠 回首頁</a>
-        </div>
+    <div class="nav-container">
+        <a href="/games/menu" class="nav-link back-link-floating">上一頁</a>
+        <a href="/" class="nav-link home-link home-link-floating">🏠 回首頁</a>
+    </div>
+
+    <main style="padding-top: 60px;">
         <div class="game-container" id="game-container">
-            <div class="instruction">選擇你要出的拳！</div>
+            <h1 class="game-title">✊ 剪刀石頭布 ✌️</h1>
 
             <div class="battle-area">
                 <div class="player-side">
                     <div class="player-label">👤 你</div>
                     <div class="choice-display waiting" id="player-choice">?</div>
                 </div>
-
                 <div class="vs-text">VS</div>
-
                 <div class="computer-side">
                     <div class="computer-label">🤖 電腦</div>
                     <div class="choice-display waiting" id="computer-choice">?</div>
@@ -401,61 +384,71 @@
             </div>
 
             <div class="choices-container" id="choices-container">
-                <button class="choice-btn rock" onclick="play('rock')" title="石頭">✊</button>
-                <button class="choice-btn scissors" onclick="play('scissors')" title="剪刀">✌️</button>
-                <button class="choice-btn paper" onclick="play('paper')" title="布">🖐️</button>
+                <div class="choice-wrapper">
+                    <button class="choice-btn rock" onclick="play('rock')" title="石頭">✊</button>
+                    <div class="choice-label">石頭</div>
+                </div>
+                <div class="choice-wrapper">
+                    <button class="choice-btn scissors" onclick="play('scissors')" title="剪刀">✌️</button>
+                    <div class="choice-label">剪刀</div>
+                </div>
+                <div class="choice-wrapper">
+                    <button class="choice-btn paper" onclick="play('paper')" title="布">🖐️</button>
+                    <div class="choice-label">布</div>
+                </div>
             </div>
 
             <div class="result-message" id="result-message"></div>
-
             <button class="btn-restart hidden" id="restart-btn" onclick="resetGame()">再玩一次 🔄</button>
         </div>
 
         <div class="celebration hidden" id="celebration"></div>
     </main>
 
+    <!-- 載入語音輔助系統 -->
+    <script th:src="@{/js/speech-helper.js}"></script>
+
     <script>
-        const choices = {
-            rock: '✊',
-            scissors: '✌️',
-            paper: '🖐️'
-        };
+        const choices = { rock: '✊', scissors: '✌️', paper: '🖐️' };
+        const choiceNames = { rock: '石頭', scissors: '剪刀', paper: '布' };
 
-        const choiceNames = {
-            rock: '石頭',
-            scissors: '剪刀',
-            paper: '布'
-        };
+        // 頁面載入時播放說明
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                SpeechHelper.speak('選擇石頭、剪刀或布！');
+            }, 500);
+        });
 
-        // 勝負判定: 返回 'win', 'lose', 'draw'
         function getResult(player, computer) {
             if (player === computer) return 'draw';
-            if (
-                (player === 'rock' && computer === 'scissors') ||
+            if ((player === 'rock' && computer === 'scissors') ||
                 (player === 'scissors' && computer === 'paper') ||
-                (player === 'paper' && computer === 'rock')
-            ) {
+                (player === 'paper' && computer === 'rock')) {
                 return 'win';
             }
             return 'lose';
         }
 
-        // 電腦隨機出拳
         function getComputerChoice() {
             const options = ['rock', 'scissors', 'paper'];
             return options[Math.floor(Math.random() * options.length)];
         }
 
-        // 遊戲主邏輯
         function play(playerChoice) {
             const computerChoice = getComputerChoice();
             const result = getResult(playerChoice, computerChoice);
+
+            // 播放點擊音效
+            SoundHelper.play('click');
+
+            // 語音念出玩家選擇
+            SpeechHelper.speak('你出' + choiceNames[playerChoice]);
 
             // 禁用按鈕
             const buttons = document.querySelectorAll('.choice-btn');
             buttons.forEach(btn => btn.disabled = true);
 
-            // 顯示選擇
+            // 顯示玩家選擇
             const playerDisplay = document.getElementById('player-choice');
             const computerDisplay = document.getElementById('computer-choice');
 
@@ -463,60 +456,69 @@
             playerDisplay.classList.remove('waiting');
             playerDisplay.classList.add('pop-in');
 
-            // 延遲顯示電腦選擇，製造懸念
+            // 延遲顯示電腦選擇
             setTimeout(() => {
                 computerDisplay.textContent = choices[computerChoice];
                 computerDisplay.classList.remove('waiting');
                 computerDisplay.classList.add('pop-in');
 
-                // 顯示結果
-                setTimeout(() => {
-                    showResult(result, playerDisplay, computerDisplay);
-                }, 300);
-            }, 500);
+                // 語音念出電腦選擇
+                SpeechHelper.speak('電腦出' + choiceNames[computerChoice], () => {
+                    // 顯示結果
+                    setTimeout(() => {
+                        showResult(result, playerDisplay, computerDisplay);
+                    }, 300);
+                });
+            }, 800);
         }
 
-        // 顯示結果動畫
         function showResult(result, playerDisplay, computerDisplay) {
             const resultMessage = document.getElementById('result-message');
             const restartBtn = document.getElementById('restart-btn');
-            const gameContainer = document.getElementById('game-container');
 
-            // 移除之前的動畫類別
             playerDisplay.classList.remove('pop-in', 'winner', 'loser', 'draw');
             computerDisplay.classList.remove('pop-in', 'winner', 'loser', 'draw');
             resultMessage.classList.remove('win', 'lose', 'draw');
-            gameContainer.classList.remove('win-bg');
 
             if (result === 'win') {
                 playerDisplay.classList.add('winner');
                 computerDisplay.classList.add('loser');
                 resultMessage.innerHTML = '🎉 你贏了！太棒了！ 🎉';
                 resultMessage.classList.add('win');
-                gameContainer.classList.add('win-bg');
+
+                // 音效和語音
+                SoundHelper.play('win');
+                setTimeout(() => SpeechHelper.speak('太棒了！你贏了！'), 300);
+
                 createCelebration();
             } else if (result === 'lose') {
                 playerDisplay.classList.add('loser');
                 computerDisplay.classList.add('winner');
-                resultMessage.innerHTML = '😢 你輸了！再試一次！ 💪';
+                resultMessage.innerHTML = '😢 電腦贏了！再試一次！ 💪';
                 resultMessage.classList.add('lose');
+
+                // 音效和語音（正向鼓勵）
+                SoundHelper.play('wrong');
+                setTimeout(() => SpeechHelper.speak('沒關係！再試一次！'), 300);
             } else {
                 playerDisplay.classList.add('draw');
                 computerDisplay.classList.add('draw');
                 resultMessage.innerHTML = '🤝 平手！再來一局！ 🤝';
                 resultMessage.classList.add('draw');
+
+                // 音效和語音
+                SoundHelper.play('pop');
+                setTimeout(() => SpeechHelper.speak('平手！再來一次！'), 300);
             }
 
             restartBtn.classList.remove('hidden');
         }
 
-        // 建立慶祝效果（彩帶 + 星星）
         function createCelebration() {
             const celebration = document.getElementById('celebration');
             celebration.classList.remove('hidden');
             celebration.innerHTML = '';
 
-            // 建立彩帶
             const colors = ['#FF6B6B', '#4ECDC4', '#FFE66D', '#95E1D3', '#F38181', '#AA96DA'];
             for (let i = 0; i < 30; i++) {
                 const confetti = document.createElement('div');
@@ -528,53 +530,30 @@
                 celebration.appendChild(confetti);
             }
 
-            // 建立星星
-            const starEmojis = ['⭐', '🌟', '✨', '💫'];
-            for (let i = 0; i < 10; i++) {
-                const star = document.createElement('div');
-                star.className = 'star-burst';
-                star.textContent = starEmojis[Math.floor(Math.random() * starEmojis.length)];
-                star.style.left = Math.random() * 80 + 10 + '%';
-                star.style.top = Math.random() * 60 + 20 + '%';
-                star.style.animationDelay = Math.random() * 0.5 + 's';
-                document.body.appendChild(star);
-
-                setTimeout(() => star.remove(), 1500);
-            }
-
-            // 清除慶祝效果
-            setTimeout(() => {
-                celebration.classList.add('hidden');
-            }, 3000);
+            setTimeout(() => celebration.classList.add('hidden'), 3000);
         }
 
-        // 重置遊戲
         function resetGame() {
             const playerDisplay = document.getElementById('player-choice');
             const computerDisplay = document.getElementById('computer-choice');
             const resultMessage = document.getElementById('result-message');
             const restartBtn = document.getElementById('restart-btn');
-            const gameContainer = document.getElementById('game-container');
             const buttons = document.querySelectorAll('.choice-btn');
 
-            // 重置顯示
             playerDisplay.textContent = '?';
             playerDisplay.className = 'choice-display waiting';
             computerDisplay.textContent = '?';
             computerDisplay.className = 'choice-display waiting';
 
-            // 清除結果訊息
             resultMessage.innerHTML = '';
             resultMessage.className = 'result-message';
 
-            // 隱藏重新開始按鈕
             restartBtn.classList.add('hidden');
-
-            // 移除背景效果
-            gameContainer.classList.remove('win-bg');
-
-            // 啟用按鈕
             buttons.forEach(btn => btn.disabled = false);
+
+            // 音效和語音
+            SoundHelper.play('click');
+            SpeechHelper.speak('再來一次！選擇石頭、剪刀或布！');
         }
     </script>
 </body>

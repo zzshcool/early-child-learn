@@ -68,6 +68,12 @@ class CatFishingGame {
         if (this.audioCtx.state === 'suspended') {
             this.audioCtx.resume();
         }
+
+        // 語音提示
+        if (window.SpeechHelper) {
+            SpeechHelper.speak('點擊水中的魚幫小貓捕魚！');
+        }
+
         this.startLevel(0);
     }
 
@@ -345,11 +351,21 @@ class CatFishingGame {
             title.textContent = '太棒了！全部通關！';
             message.textContent = `你成功完成了所有 ${this.levels.length} 個關卡！🎊`;
             this.playCelebration();
+
+            // 語音回饋
+            if (window.SpeechHelper) {
+                SpeechHelper.speak('太棒了！你全部通關了！');
+            }
         } else if (!won && reason === 'timeout') {
             const level = this.levels[this.currentLevel];
             icon.textContent = '⏰';
             title.textContent = `第 ${this.currentLevel + 1} 關時間到了！`;
             message.textContent = `得到 ${this.score}/${level.target} 分，還差 ${level.target - this.score} 分！`;
+
+            // 語音鼓勵
+            if (window.SpeechHelper) {
+                SpeechHelper.speak('時間到了！沒關係，再試一次！');
+            }
         }
 
         this.resultOverlay.classList.remove('hidden');
