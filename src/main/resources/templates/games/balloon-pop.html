@@ -17,29 +17,66 @@
             <a href="/games/menu" class="nav-link back-link-floating">上一頁</a>
             <a href="/" class="nav-link home-link home-link-floating">🏠 回首頁</a>
         </div>
-        <div id="score-board">戳破: <span id="score">0</span> / 15</div>
 
-        <div id="balloons-area">
-            <!-- 氣球將由 JavaScript 動態生成 -->
-        </div>
-
-        <div id="message-overlay" class="hidden">
-            <div class="message-content">
-                <div class="celebration">🎉</div>
-                <h1>太棒了!</h1>
-                <p>你戳破了所有氣球!</p>
-                <button onclick="location.reload()">再玩一次</button>
-                <a href="/games/menu" class="btn-home">回選單</a>
+        <!-- 遊戲 UI -->
+        <div id="game-ui" class="hidden">
+            <div id="level-indicator">第 <span id="current-level">1</span> 關</div>
+            <div id="timer-display">⏱️ <span id="time-left">10</span>秒</div>
+            <div id="progress-container">
+                <div id="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-text"><span id="current-score">0</span> / <span id="target-score">10</span></div>
             </div>
         </div>
 
-        <div id="tutorial-overlay">
-            <h1>氣球戳戳樂 🎈🎉</h1>
-            <p>看到氣球就戳破它！</p>
-            <p>目標：戳破 15 個氣球</p>
-            <button onclick="startGame()">開始!</button>
+        <div id="balloons-area"></div>
+
+        <!-- 難度選擇 -->
+        <div id="difficulty-overlay">
+            <h1>🎈 氣球戳戳樂 🎈</h1>
+            <p class="subtitle">選擇難度開始遊戲！</p>
+            <div class="difficulty-options">
+                <button class="difficulty-btn easy" onclick="startGameWithDifficulty('easy')">
+                    <span class="difficulty-icon">😊</span>
+                    <span class="difficulty-name">簡單模式</span>
+                    <span class="difficulty-desc">氣球存在2秒</span>
+                </button>
+                <button class="difficulty-btn normal" onclick="startGameWithDifficulty('normal')">
+                    <span class="difficulty-icon">😄</span>
+                    <span class="difficulty-name">普通模式</span>
+                    <span class="difficulty-desc">氣球存在1秒</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 關卡過場 -->
+        <div id="level-transition" class="hidden">
+            <div class="transition-content">
+                <h1 class="transition-level">第 <span id="transition-level-num">1</span> 關</h1>
+                <div class="transition-info">
+                    <p>⏱️ 時間: <span id="transition-time">10</span>秒</p>
+                    <p>🎯 目標: <span id="transition-target">10</span>個</p>
+                </div>
+                <p class="ready-text">準備好了嗎？</p>
+                <div class="countdown" id="countdown">3</div>
+            </div>
+        </div>
+
+        <!-- 結果覆蓋層 -->
+        <div id="result-overlay" class="hidden">
+            <div class="result-content">
+                <div id="result-icon">🎉</div>
+                <h1 id="result-title">恭喜過關！</h1>
+                <p id="result-message">你真棒！</p>
+                <div class="result-buttons">
+                    <button class="btn-retry" onclick="location.reload()">重新開始</button>
+                    <a href="/games/menu" class="btn-home">回選單</a>
+                </div>
+            </div>
         </div>
     </div>
+
     <script th:src="@{/js/balloon-pop.js}"></script>
 </body>
 
