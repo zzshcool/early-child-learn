@@ -1,0 +1,201 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: 'Fredoka One', cursive;
+    background-color: #0d1b2a;
+    user-select: none;
+    touch-action: none; /* Prevent scrolling on mobile */
+}
+
+#game-container {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../images/games/santa-rescue/bg-night.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+#score-board {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 2rem;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    z-index: 10;
+    background: rgba(0,0,0,0.3);
+    padding: 10px 20px;
+    border-radius: 15px;
+}
+
+.gift {
+    position: absolute;
+    width: 120px; /* Adjust size as needed suitable for 4 year olds */
+    height: 120px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    filter: drop-shadow(0 5px 5px rgba(0,0,0,0.3));
+    /* Animation for idle floating */
+    animation: float 3s ease-in-out infinite;
+}
+
+.gift:active {
+    transform: scale(0.9);
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes jumpAndFade {
+    0% { transform: scale(1) translateY(0); opacity: 1; }
+    50% { transform: scale(1.2) translateY(-50px); opacity: 1; }
+    100% { transform: scale(0) translateY(-100px); opacity: 0; }
+}
+
+.collected {
+    animation: jumpAndFade 0.5s forwards ease-out;
+    pointer-events: none;
+}
+
+#message-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.5s;
+    pointer-events: none; /* transparent to clicks when hidden */
+}
+
+#message-overlay:not(.hidden) {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.message-content {
+    text-align: center;
+    color: white;
+}
+
+#message-text {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    color: #ff9f1c;
+    text-shadow: 0 0 10px #ffbf69;
+}
+
+#santa-celebration {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 30px;
+}
+
+#santa-img {
+    height: 300px;
+    animation: wave 2s infinite ease-in-out;
+}
+
+@keyframes wave {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+}
+
+#bubble {
+    position: absolute;
+    top: -20px;
+    right: -40px;
+    background: white;
+    color: black;
+    padding: 15px 25px;
+    border-radius: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+#bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 20px;
+    border-width: 10px 10px 0;
+    border-style: solid;
+    border-color: white transparent;
+    display: block;
+    width: 0;
+}
+
+.btn-home, #restart-btn {
+    display: inline-block;
+    padding: 15px 30px;
+    margin: 10px;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: inherit;
+    transition: transform 0.2s;
+}
+
+#restart-btn {
+    background-color: #2ec4b6;
+    color: white;
+}
+
+.btn-home {
+    background-color: #e71d36;
+    color: white;
+}
+
+.btn-home:hover, #restart-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Sparkle Effect */
+.sparkle {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, #fff 0%, rgba(255,255,255,0) 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: sparkleAnim 0.6s linear forwards;
+}
+
+@keyframes sparkleAnim {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(0); opacity: 0; }
+}
+
+/* Snow */
+.snowflake {
+    position: absolute;
+    top: -10vh;
+    color: #fff;
+    font-size: 1.5em;
+    user-select: none;
+    pointer-events: none;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(110vh) rotate(360deg); }
+}

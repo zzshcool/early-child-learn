@@ -27,4 +27,9 @@ public class GamesController {
     public String mazeGame() {
         return "games/maze/game";
     }
+
+    @GetMapping("/santa-rescue")
+    public String santaRescue() {
+        return "games/santa-rescue";
+    }
 }
