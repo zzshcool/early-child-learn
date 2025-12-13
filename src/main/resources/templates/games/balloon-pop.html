@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>恐龍吃水果 - 快樂學習樂園</title>
-    <link rel="stylesheet" th:href="@{/css/dino-fruit.css}">
+    <title>氣球戳戳樂 - 快樂學習樂園</title>
+    <link rel="stylesheet" th:href="@{/css/balloon-pop.css}">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
     </style>
@@ -17,28 +17,30 @@
             <a href="/games/menu" class="nav-link back-link-floating">上一頁</a>
             <a href="/" class="nav-link home-link home-link-floating">🏠 回首頁</a>
         </div>
-        <div id="dino-container">
-            <img th:src="@{/images/games/dino-fruit/dino.png}" id="dino-img">
-            <div id="bubble" class="hidden">我想吃蘋果! 🍎</div>
+        <div id="score-board">戳破: <span id="score">0</span> / 15</div>
+
+        <div id="balloons-area">
+            <!-- 氣球將由 JavaScript 動態生成 -->
         </div>
-        <div id="fruits-container">
-            <!-- Fruits will be injected by JS -->
-        </div>
+
         <div id="message-overlay" class="hidden">
             <div class="message-content">
-                <h1>恐龍吃飽了!</h1>
-                <p>謝謝你餵我吃東西!</p>
+                <div class="celebration">🎉</div>
+                <h1>太棒了!</h1>
+                <p>你戳破了所有氣球!</p>
                 <button onclick="location.reload()">再玩一次</button>
                 <a href="/games/menu" class="btn-home">回選單</a>
             </div>
         </div>
+
         <div id="tutorial-overlay">
-            <h1>恐龍吃水果 🦕🍎</h1>
-            <p>點擊恐龍想吃的水果！</p>
+            <h1>氣球戳戳樂 🎈🎉</h1>
+            <p>看到氣球就戳破它！</p>
+            <p>目標：戳破 15 個氣球</p>
             <button onclick="startGame()">開始!</button>
         </div>
     </div>
-    <script th:src="@{/js/dino-fruit.js}"></script>
+    <script th:src="@{/js/balloon-pop.js}"></script>
 </body>
 
 </html>

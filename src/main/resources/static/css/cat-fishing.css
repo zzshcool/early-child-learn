@@ -149,4 +149,122 @@ button {
     border-radius: 20px;
     font-size: 1.5rem;
     display: inline-block;
+}/* ========================================
+   Áµ±‰?Â∞éË¶Ω?óÊ®£Âº?- ?áÂâ™?Ä?≥È†≠Â∏É‰???
+   ======================================== */
+
+/* Â∞éËà™ÂÆπÂô® - ?ØÊè¥?ôÊ??ï‰?Â±Ä */
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    position: relative;
+    z-index: 150;
+}
+
+/* Mobile optimization - hide non-floating nav-links, keep floating buttons visible */
+@media (max-width: 768px) {
+
+    /* Hide nav-container background and spacing, but keep it in layout for floating buttons */
+    .nav-container {
+        background: transparent !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        min-height: 0 !important;
+        height: auto !important;
+    }
+}
+
+.nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.5rem 1rem;
+    background-color: #FFFFFF;
+    color: #2C3E50;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 25px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    font-family: 'Fredoka One', cursive;
+}
+
+.nav-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background-color: #4ECDC4;
+    color: white;
+}
+
+.nav-link.home-link {
+    background-color: #FF6B6B;
+    color: #2C3E50;
+}
+
+.nav-link.home-link:hover {
+    background-color: #FF6B6B;
+    color: white;
+}
+
+/* Desktop override: yellow background with dark text */
+@media (min-width: 769px) {
+    .nav-link.home-link-floating {
+        background-color: #FFE66D !important;
+        color: #2C3E50 !important;
+    }
+
+    .nav-link.home-link-floating:hover {
+        background-color: #FFD700 !important;
+        color: #333 !important;
+    }
+}
+
+/* Mobile optimization for floating button */
+@media (max-width: 768px) {
+    .nav-link.home-link-floating {
+        position: fixed !important;
+        top: 10px !important;
+        right: 10px !important;
+        background-color: #FFE66D !important;
+        color: #2C3E50 !important;
+        z-index: 200 !important;
+    }
+
+    .nav-link.home-link-floating:hover {
+        background-color: #FFD700 !important;
+    }
+}
+
+/* Desktop override: white background with dark text */
+@media (min-width: 769px) {
+    .nav-link.back-link-floating {
+        background-color: #FFFFFF !important;
+        color: #2C3E50 !important;
+    }
+
+    .nav-link.back-link-floating:hover {
+        background-color: #4ECDC4 !important;
+        color: white !important;
+    }
+}
+
+/* Mobile optimization for back button - horizontal alignment with home button */
+@media (max-width: 768px) {
+    .nav-link.back-link-floating {
+        position: fixed !important;
+        top: 10px !important;
+        left: 10px !important;
+        background-color: #FFFFFF !important;
+        color: #2C3E50 !important;
+        z-index: 200 !important;
+    }
+
+    .nav-link.back-link-floating:hover {
+        background-color: #4ECDC4 !important;
+        color: white !important;
+    }
 }
