@@ -188,11 +188,13 @@ main {
 
     display: grid;
 
-    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(85px, 1fr));
 
-    gap: 0.5rem;
+    gap: 1rem;
 
     margin-top: 1rem;
+
+    padding: 0.5rem;
 
 }
 
@@ -200,21 +202,21 @@ main {
 
     background-color: white;
 
-    border-radius: 15px;
+    border-radius: 18px;
 
-    padding: 0.8rem;
+    padding: 1rem;
 
     text-align: center;
 
-    font-size: 2rem;
+    font-size: 2.2rem;
 
     font-weight: bold;
 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
     cursor: pointer;
 
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
 
     aspect-ratio: 1;
 
@@ -226,15 +228,88 @@ main {
 
     color: var(--text-color);
 
+    user-select: none;
+
 }
 
 .grid-item:hover {
 
-    transform: scale(1.15);
+    transform: scale(1.1);
 
     background: linear-gradient(135deg, #FFE66D 0%, #FFF9E6 100%);
 
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+
+}
+
+.grid-item:active {
+
+    transform: scale(0.95);
+
+}
+
+/* 點擊動畫 */
+.grid-item.clicked {
+
+    animation: itemClick 0.4s ease-out;
+
+    background: linear-gradient(135deg, #4ECDC4 0%, #45B7D1 100%);
+
+    color: white;
+
+}
+
+@keyframes itemClick {
+
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
+
+/* 已學習標記 */
+.grid-item.learned {
+
+    background: linear-gradient(135deg, #a8e6cf 0%, #88d8b0 100%);
+
+    box-shadow: 0 4px 12px rgba(168, 230, 207, 0.4);
+
+}
+
+.grid-item.learned::after {
+
+    content: '✓';
+
+    position: absolute;
+
+    top: 2px;
+
+    right: 5px;
+
+    font-size: 0.8rem;
+
+    color: #2d8a5e;
+
+}
+
+/* 注音分類顏色 */
+.grid-item.consonant {
+
+    background: linear-gradient(135deg, #FFB6C1 0%, #FFD1DC 100%);
+
+}
+
+.grid-item.vowel {
+
+    background: linear-gradient(135deg, #98FB98 0%, #BDFCC9 100%);
 
 }
 
