@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--
+    共用 Thymeleaf Fragment 模板
+    用於減少重複代碼，提高維護性
+-->
+
+<!-- 導覽列 Fragment：支援參數化返回連結 -->
+<div th:fragment="nav(backUrl, backText)" class="nav-container">
+    <a th:href="@{${backUrl}}" class="nav-link back-link-floating" th:text="${backText} ?: '上一頁'">上一頁</a>
+    <a href="/" class="nav-link home-link home-link-floating">🏠 回首頁</a>
+</div>
+
+<!-- 僅首頁連結（用於選單頁面）-->
+<a th:fragment="homeLink" href="/" class="nav-link home-link home-link-floating">🏠 回首頁</a>
+
+</html>

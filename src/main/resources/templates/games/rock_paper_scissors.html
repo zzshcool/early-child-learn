@@ -362,10 +362,7 @@
 </head>
 
 <body>
-    <div class="nav-container">
-        <a href="/games/menu" class="nav-link back-link-floating">上一頁</a>
-        <a href="/" class="nav-link home-link home-link-floating">🏠 回首頁</a>
-    </div>
+    <div th:replace="~{fragments :: nav('/games/menu', '上一頁')}"></div>
 
     <main style="padding-top: 60px;">
         <div class="game-container" id="game-container">

@@ -115,10 +115,7 @@
         <h1>走迷宮</h1>
     </header>
     <main>
-        <div class="nav-container">
-            <a href="/games/menu" class="nav-link back-link-floating">上一頁</a>
-            <a href="/" class="nav-link home-link home-link-floating">🏠 回首頁</a>
-        </div>
+        <div th:replace="~{fragments :: nav('/games/menu', '上一頁')}"></div>
         <div class="game-container" style="position: relative;">
             <canvas id="mazeCanvas" width="500" height="500"></canvas>
             <div id="start-msg" class="start-overlay">點擊或滑動開始！</div>

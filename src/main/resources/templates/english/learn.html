@@ -143,10 +143,7 @@
         <h1>英文教學 A-Z</h1>
     </header>
     <main>
-        <div class="nav-container">
-            <a href="/english/menu" class="nav-link back-link-floating">上一頁</a>
-            <a href="/" class="nav-link home-link home-link-floating">🏠 回首頁</a>
-        </div>
+        <div th:replace="~{fragments :: nav('/english/menu', '上一頁')}"></div>
 
         <!-- 學習進度 -->
         <div class="progress-text">已學習: <span id="learned-count">0</span> / 26</div>

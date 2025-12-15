@@ -42,10 +42,7 @@
         <h1>數數看遊戲</h1>
     </header>
     <main>
-        <div class="nav-container">
-            <a href="/numbers/menu" class="nav-link back-link-floating">上一頁</a>
-            <a href="/" class="nav-link home-link home-link-floating">🏠 回首頁</a>
-        </div>
+        <div th:replace="~{fragments :: nav('/numbers/menu', '上一頁')}"></div>
         <div class="game-area">
             <div class="question" id="question">請數數看有多少個？</div>
             <div class="counting-area" id="counting-area">

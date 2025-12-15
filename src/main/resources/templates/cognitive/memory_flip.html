@@ -182,10 +182,7 @@
         <h1>圖像記憶翻翻卡</h1>
     </header>
     <main>
-        <div class="nav-container">
-            <a href="/cognitive/menu" class="nav-link back-link-floating">上一頁</a>
-            <a href="/" class="nav-link home-link home-link-floating">🏠 回首頁</a>
-        </div>
+        <div th:replace="~{fragments :: nav('/cognitive/menu', '上一頁')}"></div>
         <div class="game-container">
             <div id="target-container">
                 <div class="target-display">

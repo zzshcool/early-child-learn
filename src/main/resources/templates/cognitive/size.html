@@ -42,10 +42,7 @@
         <h1>大小認知</h1>
     </header>
     <main>
-        <div class="nav-container">
-            <a href="/cognitive/menu" class="nav-link back-link-floating">上一頁</a>
-            <a href="/" class="nav-link home-link home-link-floating">🏠 回首頁</a>
-        </div>
+        <div th:replace="~{fragments :: nav('/cognitive/menu', '上一頁')}"></div>
         <div class="game-area">
             <div id="question" class="question"></div>
             <div id="options-container" class="size-container">
