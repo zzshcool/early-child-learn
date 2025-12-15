@@ -453,6 +453,9 @@
             const overlay = document.getElementById('success-overlay');
             const starsContainer = document.getElementById('stars-container');
 
+            // 播放成功語音回饋
+            speak('太棒了！寫得很好！', 'zh-TW');
+
             overlay.classList.add('show');
 
             const starEmojis = ['⭐', '🌟', '✨', '💫', '🎉', '🎊'];

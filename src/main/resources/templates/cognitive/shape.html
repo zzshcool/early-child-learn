@@ -135,11 +135,13 @@
             if (selected === target) {
                 feedback.textContent = '答對了！好棒！ 🎉';
                 feedback.style.color = 'green';
+                playGameSound('答對了！好棒！');
                 // Optional: Auto next after delay
                 setTimeout(initGame, 1500);
             } else {
                 feedback.textContent = '再試試看喔！ 💪';
                 feedback.style.color = 'red';
+                playGameSound('再試試看喔！');
             }
         }
 

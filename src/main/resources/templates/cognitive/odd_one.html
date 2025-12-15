@@ -105,10 +105,12 @@
             if (type === 'odd') {
                 feedback.textContent = '答對了！好眼力！ 🎉';
                 feedback.style.color = 'green';
+                playGameSound('答對了！好眼力！');
                 setTimeout(initGame, 1500);
             } else {
                 feedback.textContent = '再仔細看看喔！ 👀';
                 feedback.style.color = 'red';
+                playGameSound('再仔細看看喔！');
             }
         }
 

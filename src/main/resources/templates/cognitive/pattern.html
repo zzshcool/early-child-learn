@@ -153,6 +153,7 @@
             if (selected === correct) {
                 feedback.textContent = '答對了！好棒！ 🎉';
                 feedback.style.color = 'green';
+                playGameSound('答對了！好棒！');
 
                 // Reveal the answer in the sequence
                 const qMark = document.querySelector('.question-mark');
@@ -166,6 +167,7 @@
             } else {
                 feedback.textContent = '再想一想喔！ 🤔';
                 feedback.style.color = 'red';
+                playGameSound('再想一想喔！');
             }
         }
 
