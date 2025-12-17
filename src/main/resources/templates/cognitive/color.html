@@ -18,7 +18,6 @@
             font-size: 2rem;
             color: #333;
             background-color: #eee;
-            /* Default */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
@@ -51,6 +50,8 @@
         </div>
     </main>
 
+    <th:block th:replace="~{fragments :: game-scripts}"></th:block>
+
     <script>
         const colors = [
             { name: '紅色', hex: '#FF6B6B' },
@@ -66,14 +67,12 @@
             feedback.textContent = '';
             feedback.style.color = 'inherit';
 
-            // Pick target
             const target = colors[Math.floor(Math.random() * colors.length)];
             const targetDisplay = document.getElementById('target-display');
             targetDisplay.textContent = `找出: ${target.name}`;
-            targetDisplay.style.color = target.hex; // Hint: text color matches target
-            playGameSound('找出正確的顏色喔！');
+            targetDisplay.style.color = target.hex;
+            GameAudio.speak('找出正確的顏色喔！');
 
-            // Generate options
             const optionsContainer = document.getElementById('options-container');
             optionsContainer.innerHTML = '';
 
@@ -84,8 +83,6 @@
                     options.push(randomColor);
                 }
             }
-
-            // Shuffle options
             options.sort(() => Math.random() - 0.5);
 
             options.forEach(color => {
@@ -99,32 +96,28 @@
 
         function checkAnswer(selected, target) {
             const feedback = document.getElementById('feedback');
+            GameSound.play('click');
+
             if (selected.name === target.name) {
                 feedback.textContent = '答對了！好棒！ 🎉';
                 feedback.style.color = 'green';
-                playGameSound('答對了！好棒！');
+                GameSound.play('correct');
+                GameAudio.correct();
+                RewardSystem.recordCorrectAnswer();
                 setTimeout(initGame, 1500);
             } else {
                 feedback.textContent = '再試試看喔！ 💪';
                 feedback.style.color = 'red';
-                playGameSound('再試試看喔！');
+                GameSound.play('wrong');
+                GameAudio.tryAgain();
+                RewardSystem.resetCorrectStreak();
             }
         }
 
         window.onload = function () {
-            playGameSound('歡迎來到顏色認知遊戲！');
+            GameAudio.speak('歡迎來到顏色認知遊戲！');
             setTimeout(initGame, 1500);
         };
-
-        function playGameSound(text) {
-            if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'zh-TW';
-                utterance.rate = 0.9;
-                utterance.pitch = 1.2;
-                speechSynthesis.speak(utterance);
-            }
-        }
     </script>
 </body>
 

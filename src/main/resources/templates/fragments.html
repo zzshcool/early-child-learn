@@ -14,4 +14,38 @@
 <!-- 僅首頁連結（用於選單頁面）-->
 <a th:fragment="homeLink" href="/" class="nav-link home-link home-link-floating">🏠 回首頁</a>
 
+<!-- 遊戲共用腳本引入 -->
+<th:block th:fragment="game-scripts">
+    <script th:src="@{/js/script.js}"></script>
+    <script th:src="@{/js/game-helper.js}"></script>
+    <script th:src="@{/js/reward-system.js}"></script>
+    <script>
+        // 初始化獎勵系統星星顯示
+        document.addEventListener('DOMContentLoaded', function () {
+            RewardSystem.createStarDisplay();
+        });
+    </script>
+</th:block>
+
+<!-- 成功動畫 overlay（供筆畫練習等使用）-->
+<th:block th:fragment="success-overlay">
+    <div class="success-overlay" id="success-overlay">
+        <div class="success-content">
+            <div class="success-emoji">🎉</div>
+            <div class="success-text">太棒了！寫得很好！</div>
+        </div>
+    </div>
+    <div class="stars-container" id="stars-container"></div>
+</th:block>
+
+<!-- 筆畫練習樣式 -->
+<th:block th:fragment="stroke-styles">
+    <link rel="stylesheet" th:href="@{/css/stroke-practice.css}">
+</th:block>
+
+<!-- 記憶配對遊戲樣式 -->
+<th:block th:fragment="memory-game-styles">
+    <link rel="stylesheet" th:href="@{/css/memory-game.css}">
+</th:block>
+
 </html>

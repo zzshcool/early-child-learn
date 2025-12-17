@@ -69,16 +69,14 @@
         <div th:replace="~{fragments :: nav('/cognitive/menu', '上一頁')}"></div>
         <div class="game-area">
             <div class="question">下一個是什麼？</div>
-            <div id="sequence-container" class="sequence-container">
-                <!-- Sequence items go here -->
-            </div>
-            <div id="options-container" class="options-container">
-                <!-- Options go here -->
-            </div>
+            <div id="sequence-container" class="sequence-container"></div>
+            <div id="options-container" class="options-container"></div>
             <div id="feedback" style="font-size: 2rem; margin-top: 20px; min-height: 3rem;"></div>
             <button onclick="initGame()" class="btn" style="margin-top: 20px;">下一題</button>
         </div>
     </main>
+
+    <th:block th:replace="~{fragments :: game-scripts}"></th:block>
 
     <script>
         const items = ['🍎', '🍌', '🍇', '🍊', '🐶', '🐱', '🚗', '⭐'];
@@ -88,30 +86,27 @@
             feedback.textContent = '';
             feedback.style.color = 'inherit';
 
-            // Pick 2 items for the pattern
             const itemA = items[Math.floor(Math.random() * items.length)];
             let itemB = items[Math.floor(Math.random() * items.length)];
             while (itemB === itemA) {
                 itemB = items[Math.floor(Math.random() * items.length)];
             }
 
-            // Define pattern types: ABABAB, AABAAB, ABBABB
             const patternType = Math.floor(Math.random() * 3);
             let sequence = [];
             let answer = '';
 
-            if (patternType === 0) { // ABABAB
+            if (patternType === 0) {
                 sequence = [itemA, itemB, itemA, itemB, itemA];
                 answer = itemB;
-            } else if (patternType === 1) { // AABAAB
+            } else if (patternType === 1) {
                 sequence = [itemA, itemA, itemB, itemA, itemA];
                 answer = itemB;
-            } else { // ABBABB
+            } else {
                 sequence = [itemA, itemB, itemB, itemA, itemB];
                 answer = itemB;
             }
 
-            // Display sequence
             const seqContainer = document.getElementById('sequence-container');
             seqContainer.innerHTML = '';
             sequence.forEach(icon => {
@@ -120,17 +115,12 @@
                 div.textContent = icon;
                 seqContainer.appendChild(div);
             });
-            // Add question mark
             const qDiv = document.createElement('div');
             qDiv.className = 'sequence-item question-mark';
             qDiv.textContent = '?';
             seqContainer.appendChild(qDiv);
 
-            // Generate options (Correct answer + 1 distractor)
-            // Distractor should be the other item in the pattern usually, or random?
-            // If pattern is A, B. Distractor should be A (if answer is B).
             const distractor = (answer === itemA) ? itemB : itemA;
-
             const options = [answer, distractor];
             options.sort(() => Math.random() - 0.5);
 
@@ -147,41 +137,36 @@
 
         function checkAnswer(selected, correct) {
             const feedback = document.getElementById('feedback');
+            GameSound.play('click');
+
             if (selected === correct) {
                 feedback.textContent = '答對了！好棒！ 🎉';
                 feedback.style.color = 'green';
-                playGameSound('答對了！好棒！');
+                GameSound.play('correct');
+                GameAudio.correct();
+                RewardSystem.recordCorrectAnswer();
 
-                // Reveal the answer in the sequence
                 const qMark = document.querySelector('.question-mark');
                 if (qMark) {
                     qMark.textContent = correct;
                     qMark.classList.remove('question-mark');
-                    qMark.style.backgroundColor = '#95E1D3'; // Success color
+                    qMark.style.backgroundColor = '#95E1D3';
                 }
 
                 setTimeout(initGame, 1500);
             } else {
                 feedback.textContent = '再想一想喔！ 🤔';
                 feedback.style.color = 'red';
-                playGameSound('再想一想喔！');
+                GameSound.play('wrong');
+                GameAudio.speak('再想一想喔！');
+                RewardSystem.resetCorrectStreak();
             }
         }
 
         window.onload = function () {
-            playGameSound('歡迎來到規律排序遊戲！');
+            GameAudio.speak('歡迎來到規律排序遊戲！');
             setTimeout(initGame, 1500);
         };
-
-        function playGameSound(text) {
-            if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'zh-TW';
-                utterance.rate = 0.9;
-                utterance.pitch = 1.2;
-                speechSynthesis.speak(utterance);
-            }
-        }
     </script>
 </body>
 

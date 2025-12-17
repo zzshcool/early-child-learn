@@ -46,25 +46,24 @@
         <div th:replace="~{fragments :: nav('/cognitive/menu', '上一頁')}"></div>
         <div class="game-area">
             <div class="question">哪一個不一樣？</div>
-            <div id="game-container" class="grid-container">
-                <!-- Items go here -->
-            </div>
+            <div id="game-container" class="grid-container"></div>
             <div id="feedback" style="font-size: 2rem; margin-top: 20px; min-height: 3rem;"></div>
             <button onclick="initGame()" class="btn" style="margin-top: 20px;">下一題</button>
         </div>
     </main>
 
+    <th:block th:replace="~{fragments :: game-scripts}"></th:block>
+
     <script>
-        // Pairs of (Common, Odd)
         const pairs = [
-            { common: '🍎', odd: '🍌' }, // Apple vs Banana
-            { common: '🐶', odd: '🐱' }, // Dog vs Cat
-            { common: '🚗', odd: '✈️' }, // Car vs Plane
-            { common: '⚽', odd: '🏀' }, // Soccer vs Basketball
-            { common: '🌞', odd: '🌛' }, // Sun vs Moon
-            { common: '🟩', odd: '🟥' }, // Green vs Red
-            { common: '🐟', odd: '🦀' }, // Fish vs Crab
-            { common: '👕', odd: '👖' }, // Shirt vs Jeans
+            { common: '🍎', odd: '🍌' },
+            { common: '🐶', odd: '🐱' },
+            { common: '🚗', odd: '✈️' },
+            { common: '⚽', odd: '🏀' },
+            { common: '🌞', odd: '🌛' },
+            { common: '🟩', odd: '🟥' },
+            { common: '🐟', odd: '🦀' },
+            { common: '👕', odd: '👖' },
         ];
 
         function initGame() {
@@ -72,17 +71,10 @@
             feedback.textContent = '';
             feedback.style.color = 'inherit';
 
-            // Pick a pair
             const pair = pairs[Math.floor(Math.random() * pairs.length)];
-
-            // Determine total items (e.g., 6 items: 5 common, 1 odd)
-            const totalItems = 6; // 3x2 grid roughly, or just 6 items
-
-            // Create array
+            const totalItems = 6;
             let items = Array(totalItems - 1).fill({ type: 'common', icon: pair.common });
             items.push({ type: 'odd', icon: pair.odd });
-
-            // Shuffle
             items.sort(() => Math.random() - 0.5);
 
             const container = document.getElementById('game-container');
@@ -99,32 +91,28 @@
 
         function checkAnswer(type) {
             const feedback = document.getElementById('feedback');
+            GameSound.play('click');
+
             if (type === 'odd') {
                 feedback.textContent = '答對了！好眼力！ 🎉';
                 feedback.style.color = 'green';
-                playGameSound('答對了！好眼力！');
+                GameSound.play('correct');
+                GameAudio.speak('答對了！好眼力！');
+                RewardSystem.recordCorrectAnswer();
                 setTimeout(initGame, 1500);
             } else {
                 feedback.textContent = '再仔細看看喔！ 👀';
                 feedback.style.color = 'red';
-                playGameSound('再仔細看看喔！');
+                GameSound.play('wrong');
+                GameAudio.speak('再仔細看看喔！');
+                RewardSystem.resetCorrectStreak();
             }
         }
 
         window.onload = function () {
-            playGameSound('歡迎來到找不同遊戲！');
+            GameAudio.speak('歡迎來到找不同遊戲！');
             setTimeout(initGame, 1500);
         };
-
-        function playGameSound(text) {
-            if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'zh-TW';
-                utterance.rate = 0.9;
-                utterance.pitch = 1.2;
-                speechSynthesis.speak(utterance);
-            }
-        }
     </script>
 </body>
 

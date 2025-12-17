@@ -14,7 +14,6 @@
     </header>
     <main>
         <div th:replace="~{fragments :: nav('/bopomofo/menu', '上一頁')}"></div>
-        <!-- 手持裝置懸浮回首頁按鈕 -->
         <div class="game-area">
             <div class="question" id="question">請找出注音：?</div>
             <button class="sound-btn" id="soundBtn" onclick="playCurrentAnswer()">🔊 聽聽看</button>
@@ -25,10 +24,14 @@
             <button class="btn" onclick="nextQuestion()">下一題</button>
         </div>
     </main>
-    <script th:src="@{/js/script.js}"></script>
+
+    <!-- 使用共用腳本 -->
+    <th:block th:replace="~{fragments :: game-scripts}"></th:block>
+
     <script>
         const bopomofo = "ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑㄒㄓㄔㄕㄖㄗㄘㄙㄧㄨㄩㄚㄛㄜㄝㄞㄟㄠㄡㄢㄣㄤㄥㄦ".split("");
         let currentAnswer = '';
+        let correctStreak = 0;
 
         function nextQuestion() {
             const resultDiv = document.getElementById('result');
@@ -37,8 +40,9 @@
             // Generate random bopomofo
             currentAnswer = bopomofo[Math.floor(Math.random() * bopomofo.length)];
             document.getElementById('question').textContent = `請找出注音：?`;
+
             // 自動播放一次提示音
-            playGameSound('請仔細聽喔！', 'zh-TW');
+            GameAudio.speak('請仔細聽喔！', 'zh-TW');
             setTimeout(() => playCurrentAnswer(), 1000);
 
             // Generate options (1 correct, 3 wrong)
@@ -63,38 +67,44 @@
 
         function checkAnswer(char) {
             const resultDiv = document.getElementById('result');
+            GameSound.play('click');
+
             if (char === currentAnswer) {
                 resultDiv.textContent = '答對了！好棒！';
                 resultDiv.style.color = 'green';
-                speak('答對了！好棒！');
+                GameSound.play('correct');
+                GameAudio.correct();
+
+                // 獎勵系統
+                RewardSystem.recordCorrectAnswer();
+                correctStreak++;
+
+                if (correctStreak >= 5) {
+                    RewardSystem.recordGameComplete('bopomofo');
+                    correctStreak = 0;
+                }
+
                 setTimeout(nextQuestion, 2000);
             } else {
                 resultDiv.textContent = '再試一次喔！';
                 resultDiv.style.color = 'red';
-                speak('再試一次喔！');
+                GameSound.play('wrong');
+                GameAudio.tryAgain();
+                RewardSystem.resetCorrectStreak();
+                correctStreak = 0;
             }
         }
 
         // 播放當前答案的聲音
         function playCurrentAnswer() {
-            speak(`${currentAnswer}`, 'zh-TW');
+            GameAudio.speak(`${currentAnswer}`, 'zh-TW');
         }
 
         // Start game on load
         window.onload = function () {
-            playGameSound('歡迎來到注音遊戲！');
+            GameAudio.speak('歡迎來到注音遊戲！');
             setTimeout(nextQuestion, 1500);
         };
-
-        function playGameSound(text) {
-            if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'zh-TW';
-                utterance.rate = 0.9;
-                utterance.pitch = 1.2;
-                speechSynthesis.speak(utterance);
-            }
-        }
     </script>
 </body>
 

@@ -260,6 +260,8 @@
     <main>
         <div th:replace="~{fragments :: nav('/english/menu', '上一頁')}"></div>
 
+        <th:block th:replace="~{fragments :: game-scripts}"></th:block>
+
         <div class="game-container">
             <!-- 尺寸選擇界面 -->
             <div id="size-selection" class="size-selection">
@@ -420,7 +422,6 @@
             const [first, second] = flippedCards;
 
             if (first.card.value === second.card.value) {
-                // 配對成功
                 setTimeout(() => {
                     first.el.classList.add('matched');
                     second.el.classList.add('matched');
@@ -430,17 +431,19 @@
 
                     flippedCards = [];
 
-                    playGameSound('答對了！');
+                    GameSound.play('correct');
+                    GameAudio.speak('答對了！');
+                    RewardSystem.addStars(1);
 
                     if (matchedPairs === totalPairs) {
                         gameWon();
                     }
                 }, 300);
             } else {
-                // 配對失敗
                 gameStarted = false;
                 first.el.classList.add('shake');
                 second.el.classList.add('shake');
+                GameSound.play('wrong');
 
                 setTimeout(() => {
                     first.el.classList.remove('shake');
@@ -465,7 +468,10 @@
             document.getElementById('restart-btn').classList.remove('hidden');
             document.getElementById('back-btn').classList.remove('hidden');
 
-            playGameSound(`太棒了！你用了 ${Math.floor(seconds)} 秒完成遊戲！`);
+            GameSound.play('win');
+            GameAudio.speak(`太棒了！你用了 ${Math.floor(seconds)} 秒完成遊戲！`);
+            RewardSystem.addStars(3);
+            RewardSystem.recordGameComplete('english');
         }
 
         function resetGame() {
@@ -481,19 +487,8 @@
             }
         }
 
-        function playGameSound(text) {
-            if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'zh-TW';
-                utterance.rate = 0.9;
-                utterance.pitch = 1.2;
-                speechSynthesis.speak(utterance);
-            }
-        }
-
-        // 頁面載入時播放歡迎語音
         window.onload = function () {
-            playGameSound('歡迎來到字母配對遊戲！請選擇難度。');
+            GameAudio.speak('歡迎來到字母配對遊戲！請選擇難度。');
         };
     </script>
 </body>

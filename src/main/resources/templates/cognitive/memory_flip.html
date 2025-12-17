@@ -199,6 +199,8 @@
         </div>
     </main>
 
+    <th:block th:replace="~{fragments :: game-scripts}"></th:block>
+
     <script>
         const emojis = ['🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼', '🐨', '🐯', '🦁', '🐮', '🐷', '🐸', '🐵', '🐔'];
         let currentCards = [];
@@ -289,8 +291,9 @@
             // Reveal the card
             cardEl.classList.remove('flipped');
 
+            GameSound.play('click');
+
             if (card.id === targetCard.id) {
-                // Correct
                 cardEl.style.backgroundColor = '#4CAF50';
                 cardEl.style.color = 'white';
 
@@ -301,44 +304,37 @@
                 isGameActive = false;
                 document.getElementById('restart-btn').classList.remove('hidden');
 
-                // Reveal all cards after a short delay
+                GameSound.play('correct');
+                GameAudio.correct();
+                RewardSystem.addStars(2);
+                RewardSystem.recordGameComplete('memory');
+
                 setTimeout(() => {
                     document.querySelectorAll('.memory-card').forEach(c => c.classList.remove('flipped'));
                 }, 1000);
             } else {
-                // Wrong
-                isGameActive = false; // Prevent clicking others while showing wrong card
+                isGameActive = false;
                 cardEl.classList.add('shake');
 
                 const instruction = document.getElementById('instruction');
                 instruction.textContent = '錯了！再試一次！';
                 instruction.style.color = '#ff5252';
+                GameSound.play('wrong');
 
                 setTimeout(() => {
                     cardEl.classList.remove('shake');
-                    cardEl.classList.add('flipped'); // Cover back
+                    cardEl.classList.add('flipped');
                     instruction.textContent = '圖片在哪裡？點選找出來！';
                     instruction.style.color = '#333';
-                    isGameActive = true; // Re-enable clicking
+                    isGameActive = true;
                 }, 800);
             }
         }
 
-        // Start game on load
         window.onload = function () {
-            playGameSound('歡迎來到圖像記憶遊戲！');
+            GameAudio.speak('歡迎來到圖像記憶遊戲！');
             setTimeout(initGame, 1500);
         };
-
-        function playGameSound(text) {
-            if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'zh-TW';
-                utterance.rate = 0.9;
-                utterance.pitch = 1.2;
-                speechSynthesis.speak(utterance);
-            }
-        }
     </script>
 </body>
 

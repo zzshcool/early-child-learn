@@ -1,0 +1,273 @@
+/**
+ * 記憶配對遊戲共用樣式
+ * 適用於 numbers/memory_match.html, english/memory_match.html, bopomofo/memory_match.html
+ */
+
+/* ============================================
+   遊戲容器
+   ============================================ */
+.memory-game-container {
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+/* ============================================
+   難度選擇
+   ============================================ */
+.size-selection {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin: 30px auto;
+    max-width: 600px;
+}
+
+.size-btn {
+    padding: 20px 30px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4);
+    transition: all 0.3s ease;
+    min-width: 100px;
+}
+
+.size-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(78, 205, 196, 0.6);
+}
+
+/* ============================================
+   卡片網格
+   ============================================ */
+.cards-grid {
+    display: grid;
+    gap: 10px;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 10px;
+}
+
+/* ============================================
+   記憶卡片
+   ============================================ */
+.memory-card {
+    background: linear-gradient(135deg, #FFE66D 0%, #FFF9E6 100%);
+    border: 4px solid #FFB830;
+    border-radius: 15px;
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.memory-card.flipped {
+    background: linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%);
+    color: transparent;
+    user-select: none;
+}
+
+.memory-card.matched {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    border-color: #4CAF50;
+    color: white;
+    cursor: default;
+    animation: match-celebrate 0.5s ease;
+}
+
+.memory-card:not(.flipped):not(.matched):hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================
+   動畫效果
+   ============================================ */
+@keyframes match-celebrate {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-10px);
+    }
+
+    75% {
+        transform: translateX(10px);
+    }
+}
+
+.shake {
+    animation: shake 0.5s;
+}
+
+/* ============================================
+   遊戲資訊
+   ============================================ */
+.game-info {
+    font-size: 2rem;
+    margin: 20px;
+    padding: 15px;
+    background-color: #e0f7fa;
+    border-radius: 15px;
+    display: inline-block;
+    min-width: 300px;
+}
+
+.timer {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #FF6B6B;
+    margin: 15px 0;
+}
+
+.message {
+    font-size: 1.8rem;
+    margin: 20px;
+    min-height: 50px;
+    color: #333;
+    font-weight: bold;
+}
+
+/* ============================================
+   重新開始按鈕
+   ============================================ */
+.btn-restart {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+    transition: all 0.3s ease;
+}
+
+.btn-restart:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.6);
+}
+
+/* ============================================
+   倒數計時
+   ============================================ */
+.countdown-big {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #FF6B6B;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+/* ============================================
+   響應式設計 - 平板
+   ============================================ */
+@media (max-width: 768px) {
+    .size-btn {
+        padding: 15px 20px;
+        font-size: 1.2rem;
+        min-width: 80px;
+    }
+
+    .memory-card {
+        font-size: 2rem;
+        border-width: 3px;
+    }
+
+    .game-info {
+        font-size: 1.5rem;
+        min-width: 250px;
+    }
+
+    .timer {
+        font-size: 2rem;
+    }
+
+    .message {
+        font-size: 1.3rem;
+    }
+
+    .countdown-big {
+        font-size: 3rem;
+    }
+}
+
+/* ============================================
+   響應式設計 - 手機
+   ============================================ */
+@media (max-width: 480px) {
+    .size-btn {
+        padding: 12px 18px;
+        font-size: 1rem;
+    }
+
+    .memory-card {
+        font-size: 1.5rem;
+        border-width: 2px;
+        border-radius: 10px;
+    }
+
+    .game-info {
+        font-size: 1.2rem;
+        min-width: 200px;
+        padding: 10px;
+    }
+
+    .timer {
+        font-size: 1.5rem;
+    }
+
+    .message {
+        font-size: 1rem;
+    }
+
+    .countdown-big {
+        font-size: 2.5rem;
+    }
+
+    .btn-restart {
+        padding: 12px 24px;
+        font-size: 1.2rem;
+    }
+}

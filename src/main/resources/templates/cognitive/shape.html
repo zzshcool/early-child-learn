@@ -56,14 +56,7 @@
 
         .option-btn .shape {
             pointer-events: none;
-            /* Let click pass to button */
         }
-
-        /* Different colors for options to make it interesting, or keep same to focus on shape? 
-           Request says "Select same shape", usually implies shape matching regardless of color or same color.
-           Let's keep color consistent for now to avoid confusion, or randomize colors but ensure shape is the key.
-           Let's stick to same color for target and options to focus purely on shape.
-        */
     </style>
 </head>
 
@@ -75,16 +68,14 @@
         <div th:replace="~{fragments :: nav('/cognitive/menu', '上一頁')}"></div>
         <div class="game-area">
             <div class="question">找出一樣的形狀！</div>
-            <div id="target-container" class="shape-display">
-                <!-- Target shape goes here -->
-            </div>
-            <div id="options-container" class="options">
-                <!-- Options go here -->
-            </div>
+            <div id="target-container" class="shape-display"></div>
+            <div id="options-container" class="options"></div>
             <div id="feedback" style="font-size: 2rem; margin-top: 20px; min-height: 3rem;"></div>
             <button onclick="initGame()" class="btn" style="margin-top: 20px;">下一題</button>
         </div>
     </main>
+
+    <th:block th:replace="~{fragments :: game-scripts}"></th:block>
 
     <script>
         const shapes = ['circle', 'square', 'triangle', 'rectangle'];
@@ -94,28 +85,22 @@
             feedback.textContent = '';
             feedback.style.color = 'inherit';
 
-            // Pick target
             const targetShape = shapes[Math.floor(Math.random() * shapes.length)];
             const targetContainer = document.getElementById('target-container');
             targetContainer.innerHTML = `<div class="shape ${targetShape}"></div>`;
-            playGameSound('找出一樣的形狀喔！');
+            GameAudio.speak('找出一樣的形狀喔！');
 
-            // Generate options
             const optionsContainer = document.getElementById('options-container');
             optionsContainer.innerHTML = '';
 
             let options = [targetShape];
             while (options.length < 4) {
                 const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
-                // Allow duplicates in options? Usually no for simple matching.
                 if (!options.includes(randomShape)) {
                     options.push(randomShape);
                 }
-                // If we run out of unique shapes (only 4 defined), we just shuffle the 4.
                 if (shapes.length <= 4 && options.length === shapes.length) break;
             }
-
-            // Shuffle options
             options.sort(() => Math.random() - 0.5);
 
             options.forEach(shape => {
@@ -129,34 +114,28 @@
 
         function checkAnswer(selected, target) {
             const feedback = document.getElementById('feedback');
+            GameSound.play('click');
+
             if (selected === target) {
                 feedback.textContent = '答對了！好棒！ 🎉';
                 feedback.style.color = 'green';
-                playGameSound('答對了！好棒！');
-                // Optional: Auto next after delay
+                GameSound.play('correct');
+                GameAudio.correct();
+                RewardSystem.recordCorrectAnswer();
                 setTimeout(initGame, 1500);
             } else {
                 feedback.textContent = '再試試看喔！ 💪';
                 feedback.style.color = 'red';
-                playGameSound('再試試看喔！');
+                GameSound.play('wrong');
+                GameAudio.tryAgain();
+                RewardSystem.resetCorrectStreak();
             }
         }
 
-        // Start game on load
         window.onload = function () {
-            playGameSound('歡迎來到形狀認知遊戲！');
+            GameAudio.speak('歡迎來到形狀認知遊戲！');
             setTimeout(initGame, 1500);
         };
-
-        function playGameSound(text) {
-            if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'zh-TW';
-                utterance.rate = 0.9;
-                utterance.pitch = 1.2;
-                speechSynthesis.speak(utterance);
-            }
-        }
     </script>
 </body>
 
