@@ -164,11 +164,19 @@ class CatFishingGame extends BaseGame {
 
 let gameInstance = null;
 function startGame() {
+    // 先隱藏教學覆蓋層
+    const tutorialOverlay = document.getElementById('tutorial-overlay');
+    if (tutorialOverlay) tutorialOverlay.classList.add('hidden');
+
+    // 顯示遊戲 UI
+    const gameUI = document.getElementById('game-ui');
+    if (gameUI) gameUI.classList.remove('hidden');
+
     if (!gameInstance) {
         gameInstance = new CatFishingGame();
         gameInstance.init();
     }
-    gameInstance.startWithDifficulty('normal'); // 小貓釣魚原版無難度選擇，預設普通
+    gameInstance.startWithDifficulty('normal');
 }
 
 window.addEventListener('load', () => {

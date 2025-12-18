@@ -80,8 +80,8 @@
             </div>
         </div>
     </div>
-    <!-- 載入語音輔助系統 -->
-    <script th:src="@{/js/speech-helper.js}"></script>
+    <!-- 載入共用遊戲腳本 -->
+    <div th:replace="~{fragments :: game-scripts}"></div>
     <script th:src="@{/js/cat-fishing.js}"></script>
 </body>
 
