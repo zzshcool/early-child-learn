@@ -249,8 +249,13 @@
     <div class="stars-container" id="stars-container"></div>
 
     <script th:src="@{/js/script.js}"></script>
+    <script th:src="@{/js/game-helper.js}"></script>
+    <script th:src="@{/js/reward-system.js}"></script>
     <script th:src="@{/js/stroke-data.js}"></script>
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            RewardSystem.createStarDisplay();
+        });
         const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
         let currentIndex = 0;
         let hasDrawn = false;
@@ -450,8 +455,10 @@
             const overlay = document.getElementById('success-overlay');
             const starsContainer = document.getElementById('stars-container');
 
-            // 播放成功語音回饋
-            speak('太棒了！寫得很好！', 'zh-TW');
+            GameAudio.correct();
+            GameSound.play('win');
+            RewardSystem.addStars(2);
+            RewardSystem.recordGameComplete('english');
 
             overlay.classList.add('show');
 

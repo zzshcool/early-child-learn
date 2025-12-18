@@ -43,7 +43,8 @@ const RewardSystem = {
                 english: 0,
                 bopomofo: 0,
                 memory: 0,
-                cognitive: 0
+                cognitive: 0,
+                'santa-rescue': 0
             },
             streakDays: 0,
             lastPlayDate: null,
@@ -71,6 +72,7 @@ const RewardSystem = {
         this.saveData(data);
         this.checkBadges(data);
         this.showStarAnimation(count);
+        this.updateStarDisplay(); // 即時更新顯示
         return data.stars;
     },
 
@@ -293,12 +295,29 @@ const RewardSystem = {
                 box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
                 z-index: 9999;
                 cursor: pointer;
+                transition: transform 0.3s ease;
             `;
             display.onclick = () => this.showRewardPanel();
             document.body.appendChild(display);
         }
-        display.innerHTML = `⭐ ${this.getStars()}`;
+        this.updateStarDisplay();
         return display;
+    },
+
+    /**
+     * 更新星星顯示（即時）
+     */
+    updateStarDisplay() {
+        const display = document.getElementById('reward-star-display');
+        if (display) {
+            const stars = this.getStars();
+            display.innerHTML = `⭐ ${stars}`;
+            // 添加彈跳效果
+            display.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                display.style.transform = 'scale(1)';
+            }, 200);
+        }
     },
 
     /**

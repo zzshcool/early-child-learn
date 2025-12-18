@@ -67,8 +67,15 @@ body {
 }
 
 @keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
 }
 
 #progress-container {
@@ -119,29 +126,59 @@ body {
 }
 
 @keyframes comboPopup {
-    0% { transform: translate(-50%, -50%) scale(0.5); }
-    50% { transform: translate(-50%, -50%) scale(1.2); }
-    100% { transform: translate(-50%, -50%) scale(1); }
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
 }
 
 /* ===== 禮物 ===== */
 .gift {
     position: absolute;
-    width: 80px;
-    height: 80px;
+    width: 90px;
+    height: 90px;
     cursor: pointer;
     z-index: 20;
-    transition: transform 0.2s ease;
-    filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.3));
-    animation: giftBounce 0.8s ease-in-out infinite;
+    transition: transform 0.1s ease;
+    filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.4));
+    /* 取消舊的 bounce，改用 js 控制或新的 falling 類 */
 }
 
-.gift:hover {
-    transform: scale(1.15);
+.gift-type-1 {
+    width: 90px;
+    height: 90px;
+}
+
+.gift-type-2 {
+    width: 85px;
+    height: 85px;
+}
+
+.gift-type-3 {
+    width: 80px;
+    height: 80px;
+}
+
+.gift-type-4 {
+    width: 85px;
+    height: 85px;
+}
+
+.gift-type-5 {
+    width: 100px;
+    height: 100px;
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
 }
 
 .gift:active {
-    transform: scale(0.9);
+    transform: scale(0.85);
 }
 
 .gift.collected {
@@ -149,21 +186,19 @@ body {
     pointer-events: none;
 }
 
-@keyframes giftBounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-}
-
 @keyframes giftCollected {
     0% {
         transform: scale(1);
         opacity: 1;
     }
+
     50% {
-        transform: scale(1.5) rotate(15deg);
+        transform: scale(1.4) rotate(20deg);
+        filter: brightness(1.5);
     }
+
     100% {
-        transform: scale(0) translateY(-50px);
+        transform: scale(0) translateY(-100px);
         opacity: 0;
     }
 }
@@ -185,6 +220,7 @@ body {
         opacity: 1;
         transform: translateY(0) scale(1);
     }
+
     100% {
         opacity: 0;
         transform: translateY(-80px) scale(1.5);
@@ -207,6 +243,7 @@ body {
         opacity: 1;
         transform: scale(1);
     }
+
     100% {
         opacity: 0;
         transform: scale(0);
@@ -397,8 +434,15 @@ body {
 }
 
 @keyframes countdownPop {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.2); }
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
 }
 
 /* ===== 結果覆蓋層 ===== */
@@ -425,8 +469,15 @@ body {
 }
 
 @keyframes santaBounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
 }
 
 #bubble {
@@ -549,31 +600,31 @@ button:active {
         gap: 10px;
         padding: 5px 10px;
     }
-    
+
     #level-indicator,
     #timer-display {
         font-size: 1rem;
         padding: 6px 12px;
     }
-    
+
     #progress-bar {
         width: 100px;
     }
-    
+
     .gift {
         width: 70px;
         height: 70px;
     }
-    
+
     .difficulty-content h1 {
         font-size: 1.8rem;
     }
-    
+
     .difficulty-btn {
         min-width: 180px;
         padding: 12px 30px;
     }
-    
+
     #combo-display {
         font-size: 1.2rem;
         padding: 10px 20px;
@@ -585,20 +636,20 @@ button:active {
         width: 60px;
         height: 60px;
     }
-    
+
     .difficulty-content h1 {
         font-size: 1.5rem;
     }
-    
+
     button {
         font-size: 1.1rem;
         padding: 12px 25px;
     }
-    
+
     .countdown {
         font-size: 3rem;
     }
-    
+
     #santa-img {
         width: 120px;
     }

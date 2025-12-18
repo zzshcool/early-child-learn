@@ -60,9 +60,11 @@
             <button class="btn" onclick="nextQuestion()">下一題</button>
         </div>
     </main>
-    <script th:src="@{/js/script.js}"></script>
+    <div th:replace="~{fragments :: game-scripts}"></div>
+    <script th:src="@{/js/reward-system.js}"></script>
     <script>
         const animals = [
+            // ... (keep same data)
             { name: 'Cat', emoji: '🐱', zh: '貓咪' },
             { name: 'Dog', emoji: '🐶', zh: '狗狗' },
             { name: 'Elephant', emoji: '🐘', zh: '大象' },
@@ -90,22 +92,16 @@
         function nextQuestion() {
             const resultDiv = document.getElementById('result');
             resultDiv.textContent = '';
-
-            // Pick random answer
             currentAnswer = animals[Math.floor(Math.random() * animals.length)];
-
             document.getElementById('question').textContent = `請找出：${currentAnswer.name}`;
 
-            // Speak: "Please find [Animal Name]"
-            speak(`Please find the ${currentAnswer.name}`, 'en-US');
+            GameAudio.speak(`Please find the ${currentAnswer.name}`, 'en-US');
 
-            // Generate 4 options including answer
             const options = [currentAnswer];
             while (options.length < 4) {
                 const r = animals[Math.floor(Math.random() * animals.length)];
                 if (!options.includes(r)) options.push(r);
             }
-            // Shuffle
             options.sort(() => Math.random() - 0.5);
 
             const optionsDiv = document.getElementById('options');
@@ -113,7 +109,6 @@
             options.forEach(animal => {
                 const div = document.createElement('div');
                 div.className = 'animal-card';
-
                 if (animal.image) {
                     const img = document.createElement('img');
                     img.src = animal.image;
@@ -121,7 +116,6 @@
                 } else {
                     div.textContent = animal.emoji;
                 }
-
                 div.onclick = () => checkAnswer(animal);
                 optionsDiv.appendChild(div);
             });
@@ -132,29 +126,29 @@
             if (animal === currentAnswer) {
                 resultDiv.textContent = 'Correct! 答對了！';
                 resultDiv.style.color = 'green';
-                speak('Correct!', 'en-US');
+                GameAudio.speak('Correct!', 'en-US');
+                GameSound.play('correct');
+
+                RewardSystem.recordCorrectAnswer();
+                if (RewardSystem.getCorrectStreak() >= 5) {
+                    RewardSystem.addStars(1);
+                }
+
                 setTimeout(nextQuestion, 2000);
             } else {
                 resultDiv.textContent = 'Try Again! 再試一次！';
                 resultDiv.style.color = 'red';
-                speak('Try Again', 'en-US');
+                GameAudio.speak('Try Again', 'en-US');
+                GameSound.play('wrong');
+                RewardSystem.resetCorrectStreak();
             }
         }
 
         window.onload = function () {
-            playGameSound('Welcome to the Animal Game!', 'en-US');
+            RewardSystem.createStarDisplay();
+            GameAudio.speak('Welcome to the Animal Game!', 'en-US');
             setTimeout(nextQuestion, 1500);
         };
-
-        function playGameSound(text, lang = 'en-US') {
-            if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = lang;
-                utterance.rate = 0.9;
-                utterance.pitch = 1.2;
-                speechSynthesis.speak(utterance);
-            }
-        }
     </script>
 </body>
 

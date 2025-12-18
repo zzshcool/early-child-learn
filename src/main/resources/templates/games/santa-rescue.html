@@ -23,9 +23,8 @@
                 <div id="progress-bar">
                     <div class="progress-fill"></div>
                 </div>
-                <div class="progress-text">🎁 <span id="score">0</span> / <span id="target-score">10</span></div>
+                <div class="progress-text">🎯 <span id="score">0</span> / <span id="target-score">10</span></div>
             </div>
-            <div id="combo-display" class="hidden">🔥 0 連擊！</div>
         </div>
 
         <!-- 難度選擇 -->
@@ -37,10 +36,10 @@
                 <div class="game-rules">
                     <h3>遊戲規則</h3>
                     <ul>
-                        <li>點擊畫面上出現的禮物收集分數</li>
-                        <li>禮物會隨時間消失，動作要快！</li>
-                        <li>連續收集可獲得連擊加分</li>
-                        <li>達到目標分數即可過關</li>
+                        <li>點擊從上方掉落的禮物收集分數</li>
+                        <li>禮物等級越高，分數越多且速度越快</li>
+                        <li>沒點到禮物不會扣分，加油！</li>
+                        <li>每得到 100 分可獲贈 1 顆星星 ⭐</li>
                     </ul>
                 </div>
 
@@ -94,8 +93,9 @@
         </div>
     </div>
 
-    <!-- 載入語音輔助系統 -->
-    <script th:src="@{/js/speech-helper.js}"></script>
+    <!-- 載入共用腳本 -->
+    <div th:replace="~{fragments :: game-scripts}"></div>
+    <script th:src="@{/js/reward-system.js}"></script>
     <script th:src="@{/js/santa-rescue.js}"></script>
 </body>
 
