@@ -45,21 +45,9 @@
 
                 <p class="choose-text">選擇難度開始遊戲！</p>
                 <div class="difficulty-options">
-                    <button class="difficulty-btn easy" onclick="startGameWithDifficulty('easy')">
-                        <span class="difficulty-icon">😊</span>
-                        <span class="difficulty-name">簡單模式</span>
-                        <span class="difficulty-desc">禮物存在較久</span>
-                    </button>
-                    <button class="difficulty-btn normal" onclick="startGameWithDifficulty('normal')">
-                        <span class="difficulty-icon">😄</span>
-                        <span class="difficulty-name">普通模式</span>
-                        <span class="difficulty-desc">標準難度</span>
-                    </button>
-                    <button class="difficulty-btn hard" onclick="startGameWithDifficulty('hard')">
-                        <span class="difficulty-icon">😈</span>
-                        <span class="difficulty-name">困難模式</span>
-                        <span class="difficulty-desc">禮物稍縱即逝</span>
-                    </button>
+                    <button class="btn btn-elastic hitbox-large" onclick="startGameWithDifficulty('easy')">簡單</button>
+                    <button class="btn btn-elastic hitbox-large" onclick="startGameWithDifficulty('normal')">普通</button>
+                    <button class="btn btn-elastic hitbox-large" onclick="startGameWithDifficulty('hard')">困難</button>
                 </div>
             </div>
         </div>
@@ -86,8 +74,8 @@
                     <div id="bubble">Ho Ho Ho!</div>
                 </div>
                 <div class="result-buttons">
-                    <button id="restart-btn" onclick="location.reload()">再玩一次</button>
-                    <a href="/games/menu" class="btn-home">回選單</a>
+                    <button class="btn btn-elastic hitbox-large" onclick="location.reload()">再試一次</button>
+                    <button class="btn btn-elastic hitbox-large" onclick="location.href='/games/menu'">返回選單</button>
                 </div>
             </div>
         </div>

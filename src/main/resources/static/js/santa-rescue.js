@@ -1,15 +1,17 @@
 /**
- * 拯救禮物大作戰 - 遊戲引擎 (V2 落下式)
+ * 拯救禮物大作戰 - 遊戲引擎 (高品質重構 V3)
+ * 繼承自 BaseGame 以獲得統一生命週期管理。
  */
-class SantaRescueGame {
+class SantaRescueGame extends BaseGame {
     constructor() {
-        this.levels = [
+        const levels = [
             { time: 20, target: 20, spawnRate: 600 },
             { time: 30, target: 60, spawnRate: 500 },
             { time: 40, target: 150, spawnRate: 400 },
             { time: 50, target: 300, spawnRate: 350 },
             { time: 60, target: 500, spawnRate: 300 }
         ];
+        super('santa-rescue', levels);
 
         this.giftTypes = [
             { type: 1, score: 1, speed: 2, img: '/images/games/santa-rescue/gift-box.png', weight: 40 },
@@ -19,30 +21,24 @@ class SantaRescueGame {
             { type: 5, score: 10, speed: 7, img: '/images/games/santa-rescue/reindeer.png', weight: 5 }
         ];
 
-        this.currentLevel = 0;
-        this.score = 0;
-        this.totalStarsAdded = 0;
-        this.timeLeft = 0;
         this.activeGifts = [];
-        this.gameActive = false;
-        this.timerInterval = null;
         this.spawnTimeout = null;
         this.lastFrameTime = 0;
+        this.totalStarsAdded = 0;
     }
 
-    init() {
+    onInit() {
         this.container = document.getElementById('game-container');
-        this.scoreElement = document.getElementById('score');
-        this.timeElement = document.getElementById('time');
-        this.levelElement = document.getElementById('current-level');
-        this.targetElement = document.getElementById('target-score');
-        this.progressFill = document.querySelector('.progress-fill');
-
-        // 初始化背景雪花
         this.startSnow();
-
-        // 監聽視窗縮放
         window.addEventListener('resize', () => this.handleResize());
+    }
+
+    onDifficultySet(difficulty) {
+        if (difficulty === 'easy') {
+            this.giftTypes.forEach(t => t.speed *= 0.8);
+        } else if (difficulty === 'hard') {
+            this.giftTypes.forEach(t => t.speed *= 1.2);
+        }
     }
 
     startSnow() {
@@ -50,92 +46,23 @@ class SantaRescueGame {
     }
 
     createSnowflake() {
-        if (document.hidden) return;
+        if (document.hidden || this.gameState === 'IDLE') return;
         const snowflake = document.createElement('div');
         snowflake.classList.add('snowflake');
         snowflake.innerHTML = '❄';
         snowflake.style.left = Math.random() * 100 + 'vw';
         snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
-        snowflake.style.fontSize = Math.random() * 15 + 10 + 'px';
-        snowflake.style.opacity = Math.random() * 0.5 + 0.3;
         this.container.appendChild(snowflake);
         setTimeout(() => snowflake.remove(), 5000);
     }
 
-    startWithDifficulty(difficulty) {
-        document.getElementById('difficulty-overlay').classList.add('hidden');
-        document.getElementById('game-ui').classList.remove('hidden');
-
-        // 難度調整邏輯 (V2 簡化)
-        this.difficulty = difficulty;
-        if (difficulty === 'easy') {
-            this.giftTypes.forEach(t => t.speed *= 0.8);
-        } else if (difficulty === 'hard') {
-            this.giftTypes.forEach(t => t.speed *= 1.2);
-        }
-
-        if (typeof RewardSystem !== 'undefined') {
-            RewardSystem.createStarDisplay();
-        }
-
-        this.startLevel(0);
-    }
-
-    startLevel(levelIndex) {
-        this.currentLevel = levelIndex;
-        this.score = 0;
-        const level = this.levels[levelIndex];
-        this.timeLeft = level.time;
-        this.gameActive = false;
-
-        this.showLevelTransition(levelIndex, () => {
-            this.gameActive = true;
-            this.updateUI();
-            this.startTimer();
-            this.loop(performance.now());
-            this.scheduleSpawn();
-        });
-    }
-
-    showLevelTransition(levelIndex, callback) {
-        const overlay = document.getElementById('level-transition');
-        const level = this.levels[levelIndex];
-        document.getElementById('transition-level-num').textContent = levelIndex + 1;
-        document.getElementById('transition-time').textContent = level.time;
-        document.getElementById('transition-target').textContent = level.target;
-        overlay.classList.remove('hidden');
-
-        let count = 3;
-        const countEl = document.getElementById('countdown');
-        countEl.textContent = count;
-
-        const countInt = setInterval(() => {
-            count--;
-            if (count > 0) {
-                countEl.textContent = count;
-                GameSound.play('click');
-            } else {
-                countEl.textContent = 'GO!';
-                GameSound.play('correct');
-                clearInterval(countInt);
-                setTimeout(() => {
-                    overlay.classList.add('hidden');
-                    callback();
-                }, 500);
-            }
-        }, 1000);
-    }
-
-    startTimer() {
-        this.timerInterval = setInterval(() => {
-            this.timeLeft--;
-            this.timeElement.textContent = this.timeLeft;
-            if (this.timeLeft <= 0) this.endLevel(false);
-        }, 1000);
+    onLevelStart() {
+        this.loop(performance.now());
+        this.scheduleSpawn();
     }
 
     scheduleSpawn() {
-        if (!this.gameActive) return;
+        if (this.gameState !== 'PLAYING') return;
         const level = this.levels[this.currentLevel];
         this.spawnTimeout = setTimeout(() => {
             this.spawnGift();
@@ -144,7 +71,6 @@ class SantaRescueGame {
     }
 
     spawnGift() {
-        // 加權隨機選擇禮物類型
         let rand = Math.random() * 100;
         let cumulative = 0;
         let selectedType = this.giftTypes[0];
@@ -160,11 +86,10 @@ class SantaRescueGame {
         giftEl.src = selectedType.img;
         giftEl.classList.add('gift', `gift-type-${selectedType.type}`);
 
-        // 隨機橫向位置
-        const padding = 50;
+        const padding = 60;
         const x = padding + Math.random() * (window.innerWidth - padding * 2 - 100);
         giftEl.style.left = x + 'px';
-        giftEl.style.top = '-120px'; // 從上方掉下
+        giftEl.style.top = '-120px';
 
         const giftObj = {
             el: giftEl,
@@ -187,12 +112,11 @@ class SantaRescueGame {
     }
 
     handleCollect(gift, e) {
-        if (!this.gameActive || gift.collected) return;
+        if (this.gameState !== 'PLAYING' || gift.collected) return;
         gift.collected = true;
         this.score += gift.type.score;
         this.updateUI();
 
-        // 視覺與音效回饋
         gift.el.classList.add('collected');
         GameSound.play('pop');
 
@@ -200,16 +124,17 @@ class SantaRescueGame {
         let cy = e.clientY || (e.touches ? e.touches[0].clientY : 0);
         this.showPopup(cx, cy, `+${gift.type.score}`);
 
-        // 檢查星星獎勵 (每100分得1星)
         const newStars = Math.floor(this.score / 100);
         if (newStars > this.totalStarsAdded) {
-            const diff = newStars - this.totalStarsAdded;
-            RewardSystem.addStars(diff);
+            RewardSystem.addStars(newStars - this.totalStarsAdded);
             this.totalStarsAdded = newStars;
         }
 
         setTimeout(() => this.removeGift(gift), 300);
-        this.checkLevelComplete();
+
+        if (this.score >= this.levels[this.currentLevel].target) {
+            this.endLevel(true);
+        }
     }
 
     showPopup(x, y, text) {
@@ -228,13 +153,11 @@ class SantaRescueGame {
     }
 
     loop(time) {
-        if (!this.gameActive) return;
+        if (this.gameState !== 'PLAYING') return;
         requestAnimationFrame((t) => this.loop(t));
 
-        const deltaTime = (time - this.lastFrameTime) / 16; // 基準為 60fps
+        const deltaTime = (time - this.lastFrameTime) / 16;
         this.lastFrameTime = time;
-
-        const screenHeight = window.innerHeight;
 
         for (let i = this.activeGifts.length - 1; i >= 0; i--) {
             const g = this.activeGifts[i];
@@ -242,85 +165,43 @@ class SantaRescueGame {
 
             g.y += g.speed * deltaTime;
             g.el.style.top = g.y + 'px';
-
-            // 旋轉微動
             g.el.style.transform = `rotate(${Math.sin(time / 200) * 5}deg)`;
 
-            // 沒點到掉出螢幕
-            if (g.y > screenHeight + 100) {
+            if (g.y > window.innerHeight + 100) {
                 this.removeGift(g);
             }
         }
     }
 
-    checkLevelComplete() {
-        const target = this.levels[this.currentLevel].target;
-        if (this.score >= target) {
-            this.endLevel(true);
-        }
-    }
-
-    endLevel(success) {
-        this.gameActive = false;
-        clearInterval(this.timerInterval);
+    onLevelEnd(success) {
         clearTimeout(this.spawnTimeout);
-
         this.activeGifts.forEach(g => g.el.remove());
         this.activeGifts = [];
-
-        if (success) {
-            const isLast = this.currentLevel === this.levels.length - 1;
-            this.showResult(true, isLast ? 'all_completed' : 'level_completed');
-        } else {
-            this.showResult(false, 'timeout');
-        }
     }
 
-    showResult(won, type) {
-        const overlay = document.getElementById('message-overlay');
-        const msg = document.getElementById('message-text');
-        overlay.classList.remove('hidden');
-
-        if (won) {
-            GameAudio.correct();
-            GameSound.play('win');
-            if (type === 'all_completed') {
-                msg.textContent = '🎄 恭喜！聖誕任務圓滿達成！ 🎁';
-                RewardSystem.recordGameComplete('santa-rescue');
-            } else {
-                msg.textContent = `第 ${this.currentLevel + 1} 關成功！`;
-                setTimeout(() => {
-                    overlay.classList.add('hidden');
-                    this.startLevel(this.currentLevel + 1);
-                }, 2000);
+    showHint() {
+        if (this.activeGifts.length > 0) {
+            const lowest = this.activeGifts.sort((a, b) => b.y - a.y)[0];
+            if (lowest && !lowest.collected) {
+                lowest.el.classList.add('hint-glow');
             }
-        } else {
-            GameAudio.tryAgain();
-            GameSound.play('wrong');
-            msg.textContent = `時間到了！得到 ${this.score} 分`;
         }
     }
 
-    updateUI() {
-        this.scoreElement.textContent = this.score;
-        this.targetElement.textContent = this.levels[this.currentLevel].target;
-        this.levelElement.textContent = this.currentLevel + 1;
-        const progress = Math.min(100, (this.score / this.levels[this.currentLevel].target) * 100);
-        this.progressFill.style.width = progress + '%';
+    hideHint() {
+        this.activeGifts.forEach(g => g.el.classList.remove('hint-glow'));
     }
 
-    handleResize() {
-        // 可擴展自適應邏輯
+    playWelcomeVoice() {
+        GameAudio.speak("🎅 聖誕節快到了，快幫我收集掉落的禮物吧！點擊它們！", "zh-TW");
     }
+
+    handleResize() { }
 }
 
 let gameInstance = null;
-
 function startGameWithDifficulty(d) {
-    if (!gameInstance) {
-        gameInstance = new SantaRescueGame();
-        gameInstance.init();
-    }
+    if (!gameInstance) gameInstance = new SantaRescueGame();
     gameInstance.startWithDifficulty(d);
 }
 

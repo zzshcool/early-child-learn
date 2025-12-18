@@ -34,16 +34,9 @@
             <h1>🎈 氣球戳戳樂 🎈</h1>
             <p class="subtitle">選擇難度開始遊戲！</p>
             <div class="difficulty-options">
-                <button class="difficulty-btn easy" onclick="startGameWithDifficulty('easy')">
-                    <span class="difficulty-icon">😊</span>
-                    <span class="difficulty-name">簡單模式</span>
-                    <span class="difficulty-desc">氣球存在2秒</span>
-                </button>
-                <button class="difficulty-btn normal" onclick="startGameWithDifficulty('normal')">
-                    <span class="difficulty-icon">😄</span>
-                    <span class="difficulty-name">普通模式</span>
-                    <span class="difficulty-desc">氣球存在1秒</span>
-                </button>
+                <button class="btn btn-elastic hitbox-large" onclick="startGameWithDifficulty('easy')">簡單</button>
+                <button class="btn btn-elastic hitbox-large" onclick="startGameWithDifficulty('normal')">普通</button>
+                <button class="btn btn-elastic hitbox-large" onclick="startGameWithDifficulty('hard')">困難</button>
             </div>
         </div>
 
@@ -67,8 +60,10 @@
                 <h1 id="result-title">恭喜過關！</h1>
                 <p id="result-message">你真棒！</p>
                 <div class="result-buttons">
-                    <button class="btn-retry" onclick="location.reload()">重新開始</button>
-                    <a href="/games/menu" class="btn-home">回選單</a>
+                    <button class="btn btn-elastic hitbox-large" id="retry-btn"
+                        onclick="location.reload()">再試一次</button>
+                    <button class="btn btn-elastic hitbox-large" id="menu-btn"
+                        onclick="location.href='/games/menu'">返回選單</button>
                 </div>
             </div>
         </div>
