@@ -4,19 +4,19 @@
 class SantaRescueGame {
     constructor() {
         this.levels = [
-            { time: 20, target: 50, spawnRate: 1000 },
-            { time: 30, target: 120, spawnRate: 800 },
-            { time: 40, target: 250, spawnRate: 600 },
-            { time: 50, target: 400, spawnRate: 500 },
-            { time: 60, target: 600, spawnRate: 400 }
+            { time: 20, target: 20, spawnRate: 600 },
+            { time: 30, target: 60, spawnRate: 500 },
+            { time: 40, target: 150, spawnRate: 400 },
+            { time: 50, target: 300, spawnRate: 350 },
+            { time: 60, target: 500, spawnRate: 300 }
         ];
 
         this.giftTypes = [
-            { type: 1, score: 1, speed: 2, img: '/images/games/santa-rescue/gift-box.png', weight: 50 },
+            { type: 1, score: 1, speed: 2, img: '/images/games/santa-rescue/gift-box.png', weight: 40 },
             { type: 2, score: 2, speed: 3, img: '/images/games/santa-rescue/cookie.png', weight: 25 },
-            { type: 3, score: 3, speed: 4, img: '/images/games/santa-rescue/candy.png', weight: 15 },
-            { type: 4, score: 4, speed: 5, img: '/images/games/santa-rescue/chocolate.png', weight: 8 },
-            { type: 5, score: 10, speed: 7, img: '/images/games/santa-rescue/reindeer.png', weight: 2 }
+            { type: 3, score: 3, speed: 4, img: '/images/games/santa-rescue/candy.png', weight: 20 },
+            { type: 4, score: 4, speed: 5, img: '/images/games/santa-rescue/chocolate.png', weight: 10 },
+            { type: 5, score: 10, speed: 7, img: '/images/games/santa-rescue/reindeer.png', weight: 5 }
         ];
 
         this.currentLevel = 0;
