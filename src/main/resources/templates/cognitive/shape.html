@@ -52,6 +52,35 @@
             align-items: center;
             justify-content: center;
             padding: 10px;
+            margin: 10px;
+            flex-shrink: 0;
+        }
+
+        /* 響應式選項容器 */
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            max-width: 100%;
+        }
+
+        @media (max-width: 480px) {
+            .option-btn {
+                width: 80px;
+                height: 80px;
+            }
+
+            .shape {
+                width: 60px;
+                height: 60px;
+            }
+
+            .triangle {
+                border-left-width: 30px;
+                border-right-width: 30px;
+                border-bottom-width: 60px;
+            }
         }
 
         .option-btn .shape {

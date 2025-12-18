@@ -1,4 +1,4 @@
-body {
+﻿body {
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -84,6 +84,17 @@ body {
     right: 20px;
     width: 150px;
     height: 150px;
+    z-index: 10;
+}
+
+/* 行動端響應式 */
+@media (max-width: 768px) {
+    #farmer-area {
+        width: 80px;
+        height: 80px;
+        bottom: 10px;
+        right: 10px;
+    }
 }
 
 #farmer-img {
@@ -171,10 +182,10 @@ button {
 .btn-back-floating:active {
     transform: scale(0.95);
 }/* ========================================
-   統�?導覽?�樣�?- ?�剪?�?�頭布�???
+   蝯曹?撠汗?見撘?- ???喲撣???
    ======================================== */
 
-/* 導航容器 - ?�援?��??��?局 */
+/* 撠摰孵 - ?舀????撅 */
 .nav-container {
     display: flex;
     justify-content: space-between;
@@ -289,3 +300,4 @@ button {
         color: white !important;
     }
 }
+

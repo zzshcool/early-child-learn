@@ -171,10 +171,10 @@ class BaseGame {
     showResultMessage(won, isFinal = false) {
         const overlay = this.ui.overlays.message;
         const msgEl = document.getElementById('message-text') || document.getElementById('result-title');
+        const resultBtns = document.querySelector('.result-buttons');
 
         if (overlay) {
             overlay.classList.remove('hidden');
-            // 確保按鈕有 Q 彈類
             const btns = overlay.querySelectorAll('.btn');
             btns.forEach(btn => btn.classList.add('btn-elastic'));
         }
@@ -186,14 +186,22 @@ class BaseGame {
                 if (msgEl) msgEl.textContent = '🎉 太棒了！任務圓滿達成！ 🏆';
                 if (typeof RewardSystem !== 'undefined') {
                     RewardSystem.recordGameComplete(this.gameId);
-                    RewardSystem.addStars(3); // 通關額外獎勵
+                    RewardSystem.addStars(3);
                 }
             } else {
-                if (msgEl) msgEl.textContent = `第 ${this.currentLevel + 1} 關成功！`;
-                setTimeout(() => {
-                    if (overlay) overlay.classList.add('hidden');
-                    this.startLevel(this.currentLevel + 1);
-                }, 2000);
+                if (msgEl) msgEl.textContent = `🎉 第 ${this.currentLevel + 1} 關成功！`;
+                // 顯示「下一關」按鈕，等待用戶確認
+                if (resultBtns) {
+                    const nextBtn = document.createElement('button');
+                    nextBtn.className = 'btn btn-elastic hitbox-large';
+                    nextBtn.textContent = '➡️ 下一關';
+                    nextBtn.onclick = () => {
+                        overlay.classList.add('hidden');
+                        nextBtn.remove();
+                        this.startLevel(this.currentLevel + 1);
+                    };
+                    resultBtns.insertBefore(nextBtn, resultBtns.firstChild);
+                }
             }
         } else {
             GameAudio.tryAgain();
