@@ -289,4 +289,135 @@
         padding: 15px 20px;
         font-size: 1.2rem;
     }
+
+    .image-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+
+    .theme-btn {
+        width: 120px;
+        padding: 15px;
+        font-size: 1rem;
+    }
+
+    .theme-btn .theme-icon {
+        font-size: 2.5rem;
+    }
+}
+
+/* ============================================
+   主題選擇
+   ============================================ */
+.theme-selection {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.theme-btn {
+    width: 150px;
+    padding: 20px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.theme-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+}
+
+.theme-btn .theme-icon {
+    font-size: 3rem;
+}
+
+/* ============================================
+   圖片選擇網格（擴展）
+   ============================================ */
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+.image-option {
+    aspect-ratio: 1;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 3px solid #ddd;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.image-option:hover {
+    transform: scale(1.08);
+    border-color: #4ECDC4;
+    box-shadow: 0 5px 15px rgba(78, 205, 196, 0.4);
+}
+
+.image-option canvas {
+    width: 100%;
+    height: 100%;
+}
+
+/* ============================================
+   Canvas 拼圖塊
+   ============================================ */
+.puzzle-piece-canvas {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 2px solid #ddd;
+}
+
+.puzzle-piece-canvas:hover {
+    transform: scale(1.03);
+    z-index: 10;
+}
+
+.puzzle-piece-canvas.selected {
+    border: 4px solid #FF6B6B;
+    box-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+}
+
+.puzzle-piece-canvas.correct {
+    border-color: #4CAF50;
+    opacity: 0.9;
+}
+
+/* ============================================
+   參考圖片容器
+   ============================================ */
+.reference-container {
+    margin: 15px 0;
+}
+
+.reference-image-display {
+    width: 120px;
+    height: 120px;
+    border-radius: 15px;
+    object-fit: cover;
+    border: 4px solid #4ECDC4;
+}
+
+/* ============================================
+   按鈕間距工具類
+   ============================================ */
+.btn-margin-top {
+    margin-top: 20px;
 }

@@ -17,22 +17,43 @@
         <div th:replace="~{fragments :: nav('/games/menu', '← 上一頁')}"></div>
 
         <div class="puzzle-container">
+            <!-- 主題選擇 -->
+            <div id="theme-selection">
+                <h2 class="section-title difficulty">選擇主題</h2>
+                <div class="theme-selection">
+                    <button class="theme-btn" onclick="selectTheme('animals')">
+                        <span class="theme-icon">🐾</span>
+                        可愛動物
+                    </button>
+                    <button class="theme-btn" onclick="selectTheme('fruits')">
+                        <span class="theme-icon">🍎</span>
+                        水果蔬菜
+                    </button>
+                    <button class="theme-btn" onclick="selectTheme('vehicles')">
+                        <span class="theme-icon">🚗</span>
+                        交通工具
+                    </button>
+                </div>
+            </div>
+
             <!-- 難度選擇 -->
-            <div id="difficulty-selection">
+            <div id="difficulty-selection" class="hidden">
                 <h2 class="section-title difficulty">選擇難度</h2>
                 <div class="difficulty-selection">
                     <button class="difficulty-btn" onclick="selectDifficulty(2)">2×2<br>(4片)</button>
                     <button class="difficulty-btn" onclick="selectDifficulty(3)">3×3<br>(9片)</button>
                     <button class="difficulty-btn" onclick="selectDifficulty(4)">4×4<br>(16片)</button>
                 </div>
+                <button class="control-btn btn-back btn-margin-top" onclick="backToTheme()">🔙 返回主題</button>
             </div>
 
             <!-- 圖片選擇 -->
             <div id="image-selection" class="hidden">
                 <h2 class="section-title image">選擇圖片</h2>
-                <div class="image-selection" id="image-grid">
+                <div class="image-grid" id="image-grid">
                     <!-- 由 JS 生成 -->
                 </div>
+                <button class="control-btn btn-back btn-margin-top" onclick="backToDifficulty()">🔙 返回難度</button>
             </div>
 
             <!-- 遊戲區域 -->
@@ -41,7 +62,9 @@
                     <span id="timer">00:00</span> | 移動次數：<span id="moves">0</span>
                 </div>
 
-                <div class="reference-image" id="reference"></div>
+                <div class="reference-container">
+                    <img id="reference-img" class="reference-image-display" src="" alt="參考圖片">
+                </div>
 
                 <div class="puzzle-grid" id="puzzle-grid">
                     <!-- 拼圖塊由 JS 生成 -->
@@ -72,21 +95,59 @@
     <th:block th:replace="~{fragments :: game-scripts}"></th:block>
 
     <script>
-        // 圖片定義（使用 emoji）
-        const images = [
-            { id: 'cat', emoji: '🐱', name: '小貓' },
-            { id: 'dog', emoji: '🐶', name: '小狗' },
-            { id: 'rabbit', emoji: '🐰', name: '兔子' },
-            { id: 'bear', emoji: '🐻', name: '小熊' },
-            { id: 'lion', emoji: '🦁', name: '獅子' },
-            { id: 'panda', emoji: '🐼', name: '熊貓' },
-            { id: 'apple', emoji: '🍎', name: '蘋果' },
-            { id: 'star', emoji: '⭐', name: '星星' },
-            { id: 'rainbow', emoji: '🌈', name: '彩虹' }
-        ];
+        // 主題圖片資料（使用 emoji 配合彩色背景生成卡通風格）
+        const themes = {
+            animals: {
+                name: '可愛動物',
+                images: [
+                    { id: 'cat', emoji: '🐱', bg: ['#FFE4E1', '#FFC0CB'], name: '小貓' },
+                    { id: 'dog', emoji: '🐶', bg: ['#FFECD2', '#FCB69F'], name: '小狗' },
+                    { id: 'rabbit', emoji: '🐰', bg: ['#E0C3FC', '#8EC5FC'], name: '兔子' },
+                    { id: 'bear', emoji: '🐻', bg: ['#D4A574', '#E8C9A0'], name: '小熊' },
+                    { id: 'panda', emoji: '🐼', bg: ['#C9D6FF', '#E2E2E2'], name: '熊貓' },
+                    { id: 'lion', emoji: '🦁', bg: ['#FFD89B', '#FF8E53'], name: '獅子' },
+                    { id: 'monkey', emoji: '🐵', bg: ['#FFC371', '#FF5F6D'], name: '猴子' },
+                    { id: 'elephant', emoji: '🐘', bg: ['#89CFF0', '#A0D2DB'], name: '大象' },
+                    { id: 'fox', emoji: '🦊', bg: ['#FF9966', '#FF5E62'], name: '狐狸' },
+                    { id: 'penguin', emoji: '🐧', bg: ['#667DB6', '#0082C8'], name: '企鵝' }
+                ]
+            },
+            fruits: {
+                name: '水果蔬菜',
+                images: [
+                    { id: 'apple', emoji: '🍎', bg: ['#FF6B6B', '#FFE66D'], name: '蘋果' },
+                    { id: 'orange', emoji: '🍊', bg: ['#FF9A44', '#FC6076'], name: '橘子' },
+                    { id: 'strawberry', emoji: '🍓', bg: ['#FF758C', '#FF7EB3'], name: '草莓' },
+                    { id: 'grape', emoji: '🍇', bg: ['#9B59B6', '#E056FD'], name: '葡萄' },
+                    { id: 'watermelon', emoji: '🍉', bg: ['#11998E', '#38EF7D'], name: '西瓜' },
+                    { id: 'banana', emoji: '🍌', bg: ['#F7DC6F', '#F9E79F'], name: '香蕉' },
+                    { id: 'cherry', emoji: '🍒', bg: ['#E91E63', '#FF5252'], name: '櫻桃' },
+                    { id: 'peach', emoji: '🍑', bg: ['#FFAB91', '#FFCCBC'], name: '桃子' },
+                    { id: 'pineapple', emoji: '🍍', bg: ['#FFEB3B', '#FFC107'], name: '鳳梨' },
+                    { id: 'carrot', emoji: '🥕', bg: ['#FF7043', '#FFAB91'], name: '紅蘿蔔' }
+                ]
+            },
+            vehicles: {
+                name: '交通工具',
+                images: [
+                    { id: 'car', emoji: '🚗', bg: ['#667EEA', '#764BA2'], name: '汽車' },
+                    { id: 'bus', emoji: '🚌', bg: ['#F093FB', '#F5576C'], name: '公車' },
+                    { id: 'train', emoji: '🚂', bg: ['#4ECDC4', '#556270'], name: '火車' },
+                    { id: 'plane', emoji: '✈️', bg: ['#00C6FF', '#0072FF'], name: '飛機' },
+                    { id: 'ship', emoji: '🚢', bg: ['#2193B0', '#6DD5ED'], name: '輪船' },
+                    { id: 'rocket', emoji: '🚀', bg: ['#8E2DE2', '#4A00E0'], name: '火箭' },
+                    { id: 'helicopter', emoji: '🚁', bg: ['#56CCF2', '#2F80ED'], name: '直升機' },
+                    { id: 'bicycle', emoji: '🚲', bg: ['#38EF7D', '#11998E'], name: '腳踏車' },
+                    { id: 'motorcycle', emoji: '🏍️', bg: ['#F2994A', '#F2C94C'], name: '摩托車' },
+                    { id: 'tractor', emoji: '🚜', bg: ['#56AB2F', '#A8E063'], name: '拖拉機' }
+                ]
+            }
+        };
 
+        let currentTheme = null;
         let gridSize = 3;
         let selectedImage = null;
+        let loadedImage = null;
         let pieces = [];
         let selectedPiece = null;
         let moves = 0;
@@ -94,28 +155,58 @@
         let timerInterval = null;
         let isGameActive = false;
 
+        // 動態生成卡通圖片
+        function generateCartoonImage(imgData) {
+            return new Promise((resolve) => {
+                const canvas = document.createElement('canvas');
+                canvas.width = 400;
+                canvas.height = 400;
+                const ctx = canvas.getContext('2d');
+
+                // 繪製漸層背景
+                const gradient = ctx.createLinearGradient(0, 0, 400, 400);
+                gradient.addColorStop(0, imgData.bg[0]);
+                gradient.addColorStop(1, imgData.bg[1]);
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, 400, 400);
+
+                // 繪製裝飾圓圈
+                ctx.globalAlpha = 0.3;
+                for (let i = 0; i < 5; i++) {
+                    ctx.beginPath(); ctx.arc(Math.random() * 400, Math.random() * 400, 30 + Math.random()
+                        * 50, 0, Math.PI * 2); ctx.fillStyle = '#ffffff'; ctx.fill();
+                } ctx.globalAlpha = 1; // 繪製 emoji（大尺寸）
+                ctx.font = '180px Arial'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(imgData.emoji, 200,
+                    200); // 轉換為圖片 const img=new Image(); img.onload=()=> resolve(img);
+                img.src = canvas.toDataURL();
+            });
+        }
+
         // 初始化
         function init() {
-            generateImageGrid();
             if (typeof RewardSystem !== 'undefined') {
                 RewardSystem.createStarDisplay();
             }
             if (typeof GameAudio !== 'undefined') {
-                GameAudio.speak('歡迎來到拼圖遊戲！選擇難度開始！');
+                GameAudio.speak('歡迎來到拼圖遊戲！選擇主題開始！');
             }
         }
 
-        // 生成圖片選擇網格
-        function generateImageGrid() {
-            const grid = document.getElementById('image-grid');
-            grid.innerHTML = '';
-            images.forEach(img => {
-                const btn = document.createElement('button');
-                btn.className = 'image-btn';
-                btn.textContent = img.emoji;
-                btn.onclick = () => selectImage(img);
-                grid.appendChild(btn);
-            });
+        // 選擇主題
+        function selectTheme(themeId) {
+            currentTheme = themes[themeId];
+            document.getElementById('theme-selection').classList.add('hidden');
+            document.getElementById('difficulty-selection').classList.remove('hidden');
+            if (typeof GameSound !== 'undefined') GameSound.play('click');
+            if (typeof GameAudio !== 'undefined') {
+                GameAudio.speak(`選擇了${currentTheme.name}主題！請選擇難度。`);
+            }
+        }
+
+        // 返回主題選擇
+        function backToTheme() {
+            document.getElementById('difficulty-selection').classList.add('hidden');
+            document.getElementById('theme-selection').classList.remove('hidden');
         }
 
         // 選擇難度
@@ -123,27 +214,74 @@
             gridSize = size;
             document.getElementById('difficulty-selection').classList.add('hidden');
             document.getElementById('image-selection').classList.remove('hidden');
+            generateImageGrid();
             if (typeof GameSound !== 'undefined') GameSound.play('click');
         }
 
+        // 返回難度選擇
+        function backToDifficulty() {
+            document.getElementById('image-selection').classList.add('hidden');
+            document.getElementById('difficulty-selection').classList.remove('hidden');
+        }
+
+        // 生成圖片選擇網格
+        function generateImageGrid() {
+            const grid = document.getElementById('image-grid');
+            grid.innerHTML = '';
+
+            currentTheme.images.forEach(async (img) => {
+                const div = document.createElement('div');
+                div.className = 'image-option';
+
+                // 使用 Canvas 生成預覽圖
+                const previewCanvas = document.createElement('canvas');
+                previewCanvas.width = 120;
+                previewCanvas.height = 120;
+                const ctx = previewCanvas.getContext('2d');
+
+                // 繪製漸層背景
+                const gradient = ctx.createLinearGradient(0, 0, 120, 120);
+                gradient.addColorStop(0, img.bg[0]);
+                gradient.addColorStop(1, img.bg[1]);
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, 120, 120);
+
+                // 繪製 emoji
+                ctx.font = '60px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(img.emoji, 60, 60);
+
+                div.appendChild(previewCanvas);
+                div.onclick = () => selectImage(img);
+                grid.appendChild(div);
+            });
+        }
+
         // 選擇圖片
-        function selectImage(img) {
+        async function selectImage(img) {
             selectedImage = img;
             document.getElementById('image-selection').classList.add('hidden');
             document.getElementById('puzzle-area').style.display = 'flex';
-            document.getElementById('reference').textContent = img.emoji;
+
+            // 使用 Canvas 生成卡通圖片
+            loadedImage = await generateCartoonImage(img);
+
+            // 設置參考圖片
+            document.getElementById('reference-img').src = loadedImage.src;
+
+            initPuzzle();
 
             if (typeof GameAudio !== 'undefined') {
                 GameAudio.speak(`選擇了${img.name}！開始拼圖！`);
             }
-
-            initPuzzle();
         }
 
         // 初始化拼圖
         function initPuzzle() {
             const grid = document.getElementById('puzzle-grid');
-            const pieceSize = Math.min(80, (window.innerWidth - 60) / gridSize);
+            const containerWidth = Math.min(360, window.innerWidth - 40);
+            const pieceSize = Math.floor(containerWidth / gridSize);
 
             grid.style.gridTemplateColumns = `repeat(${gridSize}, ${pieceSize}px)`;
             grid.innerHTML = '';
@@ -152,133 +290,95 @@
             pieces = [];
             const totalPieces = gridSize * gridSize;
 
-            for (let i = 0; i < totalPieces; i++) {
-                pieces.push({
-                    id: i,
-                    currentPos: i,
-                    correctPos: i
-                });
-            }
-
-            // 洗牌
-            shufflePuzzle();
-
-            // 重置狀態
-            moves = 0;
-            document.getElementById('moves').textContent = '0';
-            startTime = Date.now();
-            isGameActive = true;
-
-            if (timerInterval) clearInterval(timerInterval);
+            for (let i = 0; i < totalPieces; i++) { pieces.push({ id: i, currentPos: i, correctPos: i }); } // 洗牌
+            shuffleArray(); renderPuzzle(); // 重置狀態 moves=0; document.getElementById('moves').textContent='0' ;
+            startTime = Date.now(); isGameActive = true; if (timerInterval) clearInterval(timerInterval);
             timerInterval = setInterval(updateTimer, 1000);
+        } // 洗牌陣列 function shuffleArray() { const
+        positions = pieces.map((_, i) => i);
+        for (let i = positions.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [positions[i], positions[j]] = [positions[j], positions[i]];
         }
+        pieces.forEach((piece, index) => {
+            piece.currentPos = positions[index];
+        });
+            }
 
         // 渲染拼圖
         function renderPuzzle() {
             const grid = document.getElementById('puzzle-grid');
-            const pieceSize = Math.min(80, (window.innerWidth - 60) / gridSize);
+            const containerWidth = Math.min(360, window.innerWidth - 40);
+            const pieceSize = Math.floor(containerWidth / gridSize);
             grid.innerHTML = '';
 
             // 按當前位置排序
             const sortedPieces = [...pieces].sort((a, b) => a.currentPos - b.currentPos);
 
             sortedPieces.forEach(piece => {
-                const div = document.createElement('div');
-                div.className = 'puzzle-piece';
-                div.style.width = pieceSize + 'px';
-                div.style.height = pieceSize + 'px';
+                const canvas = document.createElement('canvas');
+                canvas.className = 'puzzle-piece-canvas';
+                canvas.width = pieceSize;
+                canvas.height = pieceSize;
+                canvas.dataset.id = piece.id;
 
-                // 計算這塊的顯示內容（部分 emoji 效果）
+                // 繪製圖片切片
+                const ctx = canvas.getContext('2d');
+                const srcSize = loadedImage.width / gridSize;
                 const row = Math.floor(piece.id / gridSize);
                 const col = piece.id % gridSize;
 
-                // 簡化版：每塊顯示編號和部分圖案
-                div.innerHTML = `
-                    <div style="font-size: ${pieceSize * 0.5}px; opacity: 0.3;">${selectedImage.emoji}</div>
-                    <div style="position: absolute; font-size: 0.8rem; bottom: 2px; right: 5px; color: #999;">${piece.id + 1}</div>
-                `;
-                div.style.position = 'relative';
+                ctx.drawImage(
+                    loadedImage,
+                    col * srcSize, row * srcSize,
+                    srcSize, srcSize,
+                    0, 0,
+                    pieceSize, pieceSize
+                );
 
                 // 正確位置標記
                 if (piece.currentPos === piece.correctPos) {
-                    div.classList.add('correct');
-                    div.style.background = 'linear-gradient(135deg, #a8edea, #fed6e3)';
+                    canvas.classList.add('correct');
                 }
 
-                div.dataset.id = piece.id;
-                div.onclick = () => handlePieceClick(piece);
-
-                grid.appendChild(div);
+                canvas.onclick = () => handlePieceClick(piece, canvas);
+                grid.appendChild(canvas);
             });
         }
 
         // 洗牌
         function shufflePuzzle() {
-            // Fisher-Yates 洗牌
-            const positions = pieces.map((_, i) => i);
-            for (let i = positions.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [positions[i], positions[j]] = [positions[j], positions[i]];
-            }
-
-            pieces.forEach((piece, index) => {
-                piece.currentPos = positions[index];
-            });
-
+            shuffleArray();
             renderPuzzle();
             if (typeof GameSound !== 'undefined') GameSound.play('pop');
         }
 
         // 處理拼圖塊點擊
-        function handlePieceClick(piece) {
+        function handlePieceClick(piece, canvas) {
             if (!isGameActive) return;
 
             if (selectedPiece === null) {
-                // 選擇第一塊
-                selectedPiece = piece;
-                highlightPiece(piece, true);
+                selectedPiece = { piece, canvas };
+                canvas.classList.add('selected');
                 if (typeof GameSound !== 'undefined') GameSound.play('click');
-            } else if (selectedPiece.id === piece.id) {
-                // 取消選擇
-                highlightPiece(piece, false);
+            } else if (selectedPiece.piece.id === piece.id) {
+                canvas.classList.remove('selected');
                 selectedPiece = null;
             } else {
                 // 交換位置
-                swapPieces(selectedPiece, piece);
-                highlightPiece(selectedPiece, false);
+                const temp = selectedPiece.piece.currentPos;
+                selectedPiece.piece.currentPos = piece.currentPos;
+                piece.currentPos = temp;
+
+                selectedPiece.canvas.classList.remove('selected');
                 selectedPiece = null;
                 moves++;
                 document.getElementById('moves').textContent = moves;
 
+                renderPuzzle();
                 if (typeof GameSound !== 'undefined') GameSound.play('pop');
-
-                // 檢查是否完成
                 checkWin();
             }
-        }
-
-        // 高亮拼圖塊
-        function highlightPiece(piece, highlight) {
-            const grid = document.getElementById('puzzle-grid');
-            const children = grid.children;
-            const sortedPieces = [...pieces].sort((a, b) => a.currentPos - b.currentPos);
-            const index = sortedPieces.findIndex(p => p.id === piece.id);
-
-            if (index >= 0 && children[index]) {
-                if (highlight) {
-                    children[index].classList.add('selected');
-                } else {
-                    children[index].classList.remove('selected');
-                }
-            }
-        }
-
-        // 交換拼圖塊
-        function swapPieces(piece1, piece2) {
-            const temp = piece1.currentPos;
-            piece1.currentPos = piece2.currentPos;
-            piece2.currentPos = temp;
-            renderPuzzle();
         }
 
         // 檢查是否勝利
@@ -320,11 +420,12 @@
 
         // 顯示提示
         function showHint() {
-            // 找出一個位置錯誤的塊，短暫高亮正確位置
             const wrongPiece = pieces.find(p => p.currentPos !== p.correctPos);
             if (wrongPiece) {
                 if (typeof GameAudio !== 'undefined') {
-                    GameAudio.speak(`試試把第 ${wrongPiece.id + 1} 塊移到正確位置！`);
+                    const row = Math.floor(wrongPiece.correctPos / gridSize) + 1;
+                    const col = wrongPiece.correctPos % gridSize + 1;
+                    GameAudio.speak(`提示：找到放錯位置的拼圖塊！`);
                 }
             }
             if (typeof GameSound !== 'undefined') GameSound.play('click');
@@ -341,7 +442,8 @@
             document.getElementById('win-overlay').classList.add('hidden');
             document.getElementById('puzzle-area').style.display = 'none';
             document.getElementById('image-selection').classList.add('hidden');
-            document.getElementById('difficulty-selection').classList.remove('hidden');
+            document.getElementById('difficulty-selection').classList.add('hidden');
+            document.getElementById('theme-selection').classList.remove('hidden');
 
             if (timerInterval) clearInterval(timerInterval);
             isGameActive = false;
