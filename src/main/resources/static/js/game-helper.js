@@ -7,7 +7,8 @@
 // ========================================
 // 語音朗讀系統
 // ========================================
-const GameAudio = {
+// 避免重複宣告（可能已由 audio-manager.js 定義）
+const GameAudio = window.GameAudio || {
     enabled: true,
     rate: 0.85,
     pitch: 1.15,
@@ -67,7 +68,8 @@ const GameAudio = {
 // ========================================
 // 音效系統
 // ========================================
-const GameSound = {
+// 避免重複宣告（可能已由 audio-manager.js 定義）
+const GameSound = window.GameSound || {
     audioCtx: null,
     enabled: true,
 

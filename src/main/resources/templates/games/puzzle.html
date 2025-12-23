@@ -173,11 +173,22 @@
                 // 繪製裝飾圓圈
                 ctx.globalAlpha = 0.3;
                 for (let i = 0; i < 5; i++) {
-                    ctx.beginPath(); ctx.arc(Math.random() * 400, Math.random() * 400, 30 + Math.random()
-                        * 50, 0, Math.PI * 2); ctx.fillStyle = '#ffffff'; ctx.fill();
-                } ctx.globalAlpha = 1; // 繪製 emoji（大尺寸）
-                ctx.font = '180px Arial'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(imgData.emoji, 200,
-                    200); // 轉換為圖片 const img=new Image(); img.onload=()=> resolve(img);
+                    ctx.beginPath();
+                    ctx.arc(Math.random() * 400, Math.random() * 400, 30 + Math.random() * 50, 0, Math.PI * 2);
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fill();
+                }
+                ctx.globalAlpha = 1;
+
+                // 繪製 emoji（大尺寸）
+                ctx.font = '180px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(imgData.emoji, 200, 200);
+
+                // 轉換為圖片
+                const img = new Image();
+                img.onload = () => resolve(img);
                 img.src = canvas.toDataURL();
             });
         }
@@ -290,20 +301,35 @@
             pieces = [];
             const totalPieces = gridSize * gridSize;
 
-            for (let i = 0; i < totalPieces; i++) { pieces.push({ id: i, currentPos: i, correctPos: i }); } // 洗牌
-            shuffleArray(); renderPuzzle(); // 重置狀態 moves=0; document.getElementById('moves').textContent='0' ;
-            startTime = Date.now(); isGameActive = true; if (timerInterval) clearInterval(timerInterval);
-            timerInterval = setInterval(updateTimer, 1000);
-        } // 洗牌陣列 function shuffleArray() { const
-        positions = pieces.map((_, i) => i);
-        for (let i = positions.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [positions[i], positions[j]] = [positions[j], positions[i]];
-        }
-        pieces.forEach((piece, index) => {
-            piece.currentPos = positions[index];
-        });
+            for (let i = 0; i < totalPieces; i++) {
+                pieces.push({ id: i, currentPos: i, correctPos: i });
             }
+
+            // 洗牌
+            shuffleArray();
+            renderPuzzle();
+
+            // 重置狀態
+            moves = 0;
+            document.getElementById('moves').textContent = '0';
+            startTime = Date.now();
+            isGameActive = true;
+
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+
+        // 洗牌陣列
+        function shuffleArray() {
+            const positions = pieces.map((_, i) => i);
+            for (let i = positions.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [positions[i], positions[j]] = [positions[j], positions[i]];
+            }
+            pieces.forEach((piece, index) => {
+                piece.currentPos = positions[index];
+            });
+        }
 
         // 渲染拼圖
         function renderPuzzle() {

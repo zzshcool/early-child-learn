@@ -160,8 +160,8 @@ class AudioManager {
 // 全局實例
 const audioManager = AudioManager.getInstance();
 
-// 相容性別名（向後兼容）
-const GameAudio = {
+// 相容性別名（向後兼容，避免重複宣告）
+const GameAudio = window.GameAudio || {
     speak: (text, callback) => audioManager.speak(text, callback),
     correct: () => audioManager.correct(),
     tryAgain: () => audioManager.tryAgain(),
@@ -169,6 +169,11 @@ const GameAudio = {
     setVolume: (volume) => audioManager.setVolume(volume)
 };
 
-const GameSound = {
+const GameSound = window.GameSound || {
     play: (soundName) => audioManager.play(soundName)
 };
+
+// 確保全域可用
+window.GameAudio = GameAudio;
+window.GameSound = GameSound;
+window.audioManager = audioManager;
