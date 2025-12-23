@@ -79,12 +79,49 @@
 /* ============================================
    控制按鈕
    ============================================ */
-.stroke-controls {
+.stroke-controls,
+.controls {
     margin-top: 1rem;
     display: flex;
     justify-content: center;
     gap: 1rem;
     flex-wrap: wrap;
+}
+
+/* 字符導覽區 */
+.char-nav {
+    margin-bottom: 2rem;
+}
+
+.char-display {
+    font-size: 2rem;
+    align-self: center;
+}
+
+/* 注音專用：顯示背景字符 */
+.canvas-container.bopomofo .background-char {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 200px;
+    color: #eee;
+    pointer-events: none;
+    font-family: "KaiTi", "BiauKai", "Microsoft JhengHei", sans-serif;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* 按鈕顏色變體 */
+.btn-clear,
+.btn.btn-clear {
+    background-color: #ff6b6b;
+}
+
+.btn-check,
+.btn.btn-check {
+    background-color: #4CAF50;
 }
 
 /* ============================================

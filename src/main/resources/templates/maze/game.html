@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="zh-TW" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>走迷宮 - 快樂學習樂園</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <style>
@@ -107,6 +107,30 @@
                 transform: translate(-50%, -50%) scale(1);
             }
         }
+
+        /* 迷宮容器相對定位 */
+        .game-container.maze {
+            position: relative;
+        }
+
+        /* 勝利彈窗樣式 */
+        .win-title {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+        }
+
+        .win-message {
+            font-size: 1.5rem;
+        }
+
+        .win-actions {
+            margin-top: 2rem;
+        }
+
+        .btn-exit {
+            background-color: #95a5a6;
+            margin-right: 1rem;
+        }
     </style>
 </head>
 
@@ -114,31 +138,29 @@
     <header>
         <h1>走迷宮</h1>
     </header>
-    <main>
-        <a href="/" class="back-link">← 回首頁</a>
-        <div class="game-container" style="position: relative;">
-            <canvas id="mazeCanvas" width="500" height="500"></canvas>
-            <div id="start-msg" class="start-overlay">點擊或滑動開始！</div>
+    <div th:replace="~{fragments :: nav('/', '上一頁')}"></div>
+    <div class="game-container maze">
+        <canvas id="mazeCanvas" width="500" height="500"></canvas>
+        <div id="start-msg" class="start-overlay">點擊或滑動開始！</div>
 
-            <div class="controls">
-                <div></div>
-                <button class="control-btn" onclick="movePlayer(0, -1)">⬆️</button>
-                <div></div>
-                <button class="control-btn" onclick="movePlayer(-1, 0)">⬅️</button>
-                <button class="control-btn" onclick="movePlayer(0, 1)">⬇️</button>
-                <button class="control-btn" onclick="movePlayer(1, 0)">➡️</button>
-            </div>
+        <div class="controls">
+            <div></div>
+            <button class="control-btn" onclick="movePlayer(0, -1)">⬆️</button>
+            <div></div>
+            <button class="control-btn" onclick="movePlayer(-1, 0)">⬅️</button>
+            <button class="control-btn" onclick="movePlayer(0, 1)">⬇️</button>
+            <button class="control-btn" onclick="movePlayer(1, 0)">➡️</button>
         </div>
+    </div>
     </main>
 
     <!-- Win Modal -->
     <div id="winModal" class="modal">
         <div class="modal-content">
-            <h2 style="color: var(--primary-color); font-size: 2.5rem;">過關了！🎉</h2>
-            <p style="font-size: 1.5rem;">太厲害了！要挑戰下一個嗎？</p>
-            <div style="margin-top: 2rem;">
-                <button onclick="location.href='/'" class="btn"
-                    style="background-color: #95a5a6; margin-right: 1rem;">離開</button>
+            <h2 class="win-title">過關了！🎉</h2>
+            <p class="win-message">太厲害了！要挑戰下一個嗎？</p>
+            <div class="win-actions">
+                <button onclick="location.href='/'" class="btn btn-exit">離開</button>
                 <button onclick="location.href='/maze/loading'" class="btn">下一個迷宮</button>
             </div>
         </div>

@@ -13,7 +13,7 @@ public class GamesController {
         return "games/menu";
     }
 
-    @GetMapping("/rock-paper-scissors")
+    @GetMapping({ "/rock-paper-scissors", "/rock_paper_scissors" })
     public String rockPaperScissors() {
         return "games/rock_paper_scissors";
     }

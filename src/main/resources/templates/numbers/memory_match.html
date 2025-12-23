@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="zh-TW" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>數字配對遊戲 - 快樂學習樂園</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <style>
@@ -250,6 +250,12 @@
                 font-size: 1.2rem;
             }
         }
+
+        /* 難度選擇標題 */
+        .difficulty-title {
+            width: 100%;
+            color: var(--primary-color);
+        }
     </style>
 </head>
 
@@ -265,7 +271,7 @@
         <div class="game-container">
             <!-- 尺寸選擇界面 -->
             <div id="size-selection" class="size-selection">
-                <h2 style="width: 100%; color: var(--primary-color);">選擇遊戲難度</h2>
+                <h2 class="difficulty-title">選擇遊戲難度</h2>
                 <button class="size-btn" onclick="startGame(2, 2)">2×2<br>(4張)</button>
                 <button class="size-btn" onclick="startGame(2, 3)">2×3<br>(6張)</button>
                 <button class="size-btn" onclick="startGame(2, 4)">2×4<br>(8張)</button>

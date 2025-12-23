@@ -22,6 +22,7 @@
     transition: var(--transition-elastic);
     text-decoration: none;
     touch-action: manipulation;
+    -webkit-user-select: none;
     user-select: none;
     min-height: var(--touch-target-min);
 }
@@ -49,6 +50,21 @@
 
 .btn-success {
     background-color: var(--color-success);
+    color: var(--color-text-light);
+}
+
+.btn-danger {
+    background-color: var(--color-error, #E74C3C);
+    color: var(--color-text-light);
+}
+
+.btn-warning {
+    background-color: var(--color-warning, #F39C12);
+    color: var(--color-text-light);
+}
+
+.btn-neutral {
+    background-color: #95a5a6;
     color: var(--color-text-light);
 }
 

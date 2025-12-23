@@ -6,244 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>拼圖遊戲 - 快樂學習樂園</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
-    <style>
-        .puzzle-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .difficulty-selection {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .difficulty-btn {
-            padding: 20px 30px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            background: linear-gradient(135deg, #4ECDC4, #44A08D);
-            color: white;
-            border: none;
-            border-radius: 15px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4);
-            transition: all 0.3s ease;
-            min-width: 120px;
-        }
-
-        .difficulty-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(78, 205, 196, 0.6);
-        }
-
-        .image-selection {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin: 20px 0;
-            max-width: 500px;
-        }
-
-        .image-btn {
-            width: 120px;
-            height: 120px;
-            border: 4px solid #FFD700;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 4rem;
-            background: white;
-        }
-
-        .image-btn:hover {
-            transform: scale(1.1);
-            border-color: #FF6B6B;
-        }
-
-        .puzzle-area {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .puzzle-info {
-            font-size: 1.5rem;
-            margin: 15px 0;
-            padding: 15px 30px;
-            background: linear-gradient(135deg, #FFE66D, #FFF9E6);
-            border-radius: 15px;
-            font-weight: bold;
-        }
-
-        .puzzle-grid {
-            display: grid;
-            gap: 3px;
-            background: #333;
-            padding: 5px;
-            border-radius: 15px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-        }
-
-        .puzzle-piece {
-            background: #fff;
-            cursor: grab;
-            transition: all 0.2s ease;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2rem;
-            user-select: none;
-            border-radius: 5px;
-        }
-
-        .puzzle-piece:hover {
-            transform: scale(1.05);
-            z-index: 10;
-        }
-
-        .puzzle-piece.selected {
-            border: 4px solid #FF6B6B;
-            box-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
-        }
-
-        .puzzle-piece.correct {
-            pointer-events: none;
-            opacity: 0.9;
-        }
-
-        .reference-image {
-            width: 150px;
-            height: 150px;
-            border: 4px solid #4ECDC4;
-            border-radius: 15px;
-            margin: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 5rem;
-            background: white;
-        }
-
-        .controls {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .control-btn {
-            padding: 15px 25px;
-            font-size: 1.3rem;
-            font-weight: bold;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-shuffle {
-            background: linear-gradient(135deg, #9B59B6, #8E44AD);
-            color: white;
-        }
-
-        .btn-hint {
-            background: linear-gradient(135deg, #3498DB, #2980B9);
-            color: white;
-        }
-
-        .btn-back {
-            background: linear-gradient(135deg, #E74C3C, #C0392B);
-            color: white;
-        }
-
-        .control-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        .win-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .win-content {
-            text-align: center;
-            color: white;
-            animation: bounceIn 0.5s ease;
-        }
-
-        .win-emoji {
-            font-size: 8rem;
-            margin-bottom: 20px;
-        }
-
-        .win-text {
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-        }
-
-        .win-time {
-            font-size: 1.5rem;
-            color: #FFE66D;
-        }
-
-        @keyframes bounceIn {
-            0% {
-                transform: scale(0);
-            }
-
-            50% {
-                transform: scale(1.2);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        /* 響應式 */
-        @media (max-width: 768px) {
-            .image-btn {
-                width: 90px;
-                height: 90px;
-                font-size: 3rem;
-            }
-
-            .reference-image {
-                width: 100px;
-                height: 100px;
-                font-size: 3.5rem;
-            }
-
-            .difficulty-btn {
-                padding: 15px 20px;
-                font-size: 1.2rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/puzzle.css}">
 </head>
 
 <body>
@@ -256,7 +19,7 @@
         <div class="puzzle-container">
             <!-- 難度選擇 -->
             <div id="difficulty-selection">
-                <h2 style="width: 100%; text-align: center; color: #FF6B6B;">選擇難度</h2>
+                <h2 class="section-title difficulty">選擇難度</h2>
                 <div class="difficulty-selection">
                     <button class="difficulty-btn" onclick="selectDifficulty(2)">2×2<br>(4片)</button>
                     <button class="difficulty-btn" onclick="selectDifficulty(3)">3×3<br>(9片)</button>
@@ -266,7 +29,7 @@
 
             <!-- 圖片選擇 -->
             <div id="image-selection" class="hidden">
-                <h2 style="text-align: center; color: #4ECDC4;">選擇圖片</h2>
+                <h2 class="section-title image">選擇圖片</h2>
                 <div class="image-selection" id="image-grid">
                     <!-- 由 JS 生成 -->
                 </div>
@@ -284,7 +47,7 @@
                     <!-- 拼圖塊由 JS 生成 -->
                 </div>
 
-                <div class="controls">
+                <div class="controls puzzle-controls">
                     <button class="control-btn btn-shuffle" onclick="shufflePuzzle()">🔀 重新洗牌</button>
                     <button class="control-btn btn-hint" onclick="showHint()">💡 提示</button>
                     <button class="control-btn btn-back" onclick="backToSelection()">🔙 返回選擇</button>
@@ -297,7 +60,7 @@
                     <div class="win-emoji">🎉</div>
                     <div class="win-text">恭喜完成拼圖！</div>
                     <div class="win-time" id="win-time"></div>
-                    <div class="controls" style="margin-top: 30px;">
+                    <div class="controls puzzle-controls">
                         <button class="control-btn btn-shuffle" onclick="playAgain()">🔄 再玩一次</button>
                         <button class="control-btn btn-back" onclick="backToSelection()">🔙 選擇其他</button>
                     </div>
