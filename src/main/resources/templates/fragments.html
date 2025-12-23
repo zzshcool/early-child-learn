@@ -16,11 +16,15 @@
 
 <!-- 遊戲共用腳本引入 -->
 <th:block th:fragment="game-scripts">
+    <link rel="stylesheet" th:href="@{/css/tokens.css}">
+    <link rel="stylesheet" th:href="@{/css/components.css}">
     <link rel="stylesheet" th:href="@{/css/game-standard.css}">
     <script th:src="@{/js/script.js}"></script>
+    <script th:src="@{/js/audio-manager.js}"></script>
     <script th:src="@{/js/game-helper.js}"></script>
     <script th:src="@{/js/base-game.js}"></script>
     <script th:src="@{/js/reward-system.js}"></script>
+    <script th:src="@{/js/a11y-helper.js}"></script>
     <script>
         // 初始化獎勵系統星星顯示
         document.addEventListener('DOMContentLoaded', function () {

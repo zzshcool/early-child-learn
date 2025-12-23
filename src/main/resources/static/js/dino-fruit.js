@@ -16,9 +16,6 @@ const dinosaur = document.getElementById('dino-img');
 const bubble = document.getElementById('bubble');
 const fruitsContainer = document.getElementById('fruits-container');
 
-// 音效系統
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
 function startGame() {
     document.getElementById('tutorial-overlay').classList.add('hidden');
     if (audioCtx.state === 'suspended') audioCtx.resume();
@@ -31,49 +28,15 @@ function startGame() {
     }
 }
 
+// 統一音效系統 - 使用 GameSound
 function playSound(type) {
-    if (window.SoundHelper) {
+    if (typeof GameSound !== 'undefined') {
         switch (type) {
-            case 'eat': SoundHelper.play('correct'); break;
-            case 'wrong': SoundHelper.play('wrong'); break;
-            case 'end': SoundHelper.play('win'); break;
-            default: SoundHelper.play('click');
+            case 'eat': GameSound.play('correct'); break;
+            case 'wrong': GameSound.play('wrong'); break;
+            case 'end': GameSound.play('win'); break;
+            default: GameSound.play('click');
         }
-        return;
-    }
-
-    // 備用音效
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-
-    if (type === 'eat') {
-        osc.frequency.setValueAtTime(400, audioCtx.currentTime);
-        osc.frequency.linearRampToValueAtTime(600, audioCtx.currentTime + 0.2);
-        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
-        gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.3);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.3);
-    } else if (type === 'wrong') {
-        osc.frequency.setValueAtTime(150, audioCtx.currentTime);
-        gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-        osc.type = 'sawtooth';
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.3);
-    } else if (type === 'end') {
-        const notes = [400, 500, 600, 800];
-        notes.forEach((f, i) => {
-            const o = audioCtx.createOscillator();
-            const g = audioCtx.createGain();
-            o.connect(g);
-            g.connect(audioCtx.destination);
-            o.frequency.value = f;
-            g.gain.value = 0.15;
-            g.gain.linearRampToValueAtTime(0, audioCtx.currentTime + i * 0.2 + 0.3);
-            o.start(audioCtx.currentTime + i * 0.2);
-            o.stop(audioCtx.currentTime + i * 0.2 + 0.3);
-        });
     }
 }
 

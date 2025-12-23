@@ -1,0 +1,108 @@
+/**
+ * Design Tokens - 全站設計變數
+ * 統一管理顏色、間距、字體、動畫等設計系統變數
+ */
+
+:root {
+    /* === 品牌色彩 === */
+    --color-primary: #FF6B6B;
+    /* 主色：珊瑚紅 */
+    --color-secondary: #4ECDC4;
+    /* 輔色：蒂芙尼藍 */
+    --color-accent: #FFE66D;
+    /* 強調色：陽光黃 */
+
+    /* === 語意色彩 === */
+    --color-success: #27AE60;
+    /* 成功綠 */
+    --color-error: #E74C3C;
+    /* 錯誤紅 */
+    --color-warning: #F39C12;
+    /* 警告橘 */
+    --color-info: #3498DB;
+    /* 資訊藍 */
+
+    /* === 中性色彩 === */
+    --color-text-primary: #2C3E50;
+    /* 主要文字 */
+    --color-text-secondary: #7F8C8D;
+    /* 次要文字 */
+    --color-text-light: #FFFFFF;
+    /* 淺色文字 */
+    --color-bg-primary: #F7F9FC;
+    /* 主背景 */
+    --color-bg-secondary: #FFFFFF;
+    /* 卡片背景 */
+    --color-bg-overlay: rgba(0, 0, 0, 0.8);
+    /* 覆蓋層背景 */
+
+    /* === 間距系統 (8px 基準) === */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-2xl: 48px;
+    --spacing-3xl: 64px;
+
+    /* === 圓角 === */
+    --radius-sm: 8px;
+    --radius-md: 15px;
+    --radius-lg: 20px;
+    --radius-xl: 25px;
+    --radius-full: 50%;
+
+    /* === 陰影 === */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
+    --shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.25);
+
+    /* === 字體 === */
+    --font-family-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-family-display: 'Fredoka One', cursive;
+
+    --font-size-xs: 0.75rem;
+    /* 12px */
+    --font-size-sm: 0.875rem;
+    /* 14px */
+    --font-size-base: 1rem;
+    /* 16px */
+    --font-size-lg: 1.25rem;
+    /* 20px */
+    --font-size-xl: 1.5rem;
+    /* 24px */
+    --font-size-2xl: 2rem;
+    /* 32px */
+    --font-size-3xl: 2.5rem;
+    /* 40px */
+    --font-size-4xl: 3rem;
+    /* 48px */
+
+    /* === 動畫 === */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    --transition-elastic: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    /* === 觸控目標 (幼兒友善) === */
+    --touch-target-min: 80px;
+    --touch-target-recommended: 100px;
+    --touch-target-large: 140px;
+
+    /* === Z-index 層級 === */
+    --z-dropdown: 100;
+    --z-sticky: 200;
+    --z-overlay: 300;
+    --z-modal: 400;
+    --z-tooltip: 500;
+}
+
+/* === 深色模式支援（未來擴展）=== */
+/* 
+@media (prefers-color-scheme: dark) {
+    :root {
+        覆蓋變數實現深色模式
+    }
+}
+*/

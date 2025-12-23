@@ -5,75 +5,298 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>快樂學習樂園</title>
+    <link rel="stylesheet" th:href="@{/css/tokens.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        /* 首頁專屬動畫 */
+        .card {
+            animation: cardFadeIn 0.6s ease-out backwards;
+        }
+
+        .card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .card:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        @keyframes cardFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .card:hover .card-icon {
+            animation: iconBounce 0.5s ease;
+        }
+
+        @keyframes iconBounce {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2) rotate(5deg);
+            }
+        }
+
+        /* 吉祥物助手 */
+        .mascot-container {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 100;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .mascot-container:hover {
+            transform: scale(1.1);
+        }
+
+        .mascot {
+            font-size: 4rem;
+            animation: mascotFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes mascotFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .mascot-bubble {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            border-radius: 15px;
+            padding: 10px 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            font-size: 1rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .mascot-bubble::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 8px solid transparent;
+            border-top-color: white;
+        }
+
+        .mascot-container:hover .mascot-bubble,
+        .mascot-container.speaking .mascot-bubble {
+            opacity: 1;
+        }
+
+        /* 歡迎動畫 */
+        .welcome-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 1000;
+            transition: opacity 0.5s ease;
+        }
+
+        .welcome-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .welcome-text {
+            font-size: 3rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            animation: welcomePulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes welcomePulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .welcome-emoji {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            animation: welcomeSpin 2s ease-in-out infinite;
+        }
+
+        @keyframes welcomeSpin {
+
+            0%,
+            100% {
+                transform: rotate(-5deg);
+            }
+
+            50% {
+                transform: rotate(5deg);
+            }
+        }
+    </style>
 </head>
 
 <body>
+    <!-- 歡迎動畫覆蓋層 -->
+    <div class="welcome-overlay" id="welcome-overlay">
+        <div class="welcome-emoji">🎉</div>
+        <div class="welcome-text">歡迎來到快樂學習樂園！</div>
+    </div>
+
     <header>
-        <h1>快樂學習樂園</h1>
+        <h1>🌟 快樂學習樂園 🌟</h1>
     </header>
     <main>
         <div class="container">
-            <a href="/numbers/menu" class="card">
-                <div class="card-icon">123</div>
+            <a href="/numbers/menu" class="card" aria-label="數字學習">
+                <div class="card-icon">🔢</div>
                 <h2>數字 1-100</h2>
                 <p>一起來學數數吧！</p>
                 <span class="btn">開始學習</span>
             </a>
-            <a href="/english/menu" class="card">
-                <div class="card-icon">ABC</div>
+            <a href="/english/menu" class="card" aria-label="英文學習">
+                <div class="card-icon">🔤</div>
                 <h2>英文 A-Z</h2>
                 <p>認識英文字母！</p>
                 <span class="btn">開始學習</span>
             </a>
-            <a href="/bopomofo/menu" class="card">
+            <a href="/bopomofo/menu" class="card" aria-label="注音符號學習">
                 <div class="card-icon">ㄅㄆㄇ</div>
                 <h2>注音符號</h2>
                 <p>學習ㄅㄆㄇ！</p>
                 <span class="btn">開始學習</span>
             </a>
-            <a href="/cognitive/menu" class="card">
+            <a href="/cognitive/menu" class="card" aria-label="認知學習">
                 <div class="card-icon">🧠</div>
                 <h2>認知學習</h2>
-                <p>形狀、顏色、大小、找不同、規律！</p>
+                <p>形狀、顏色、大小、找不同！</p>
                 <span class="btn">開始學習</span>
             </a>
-            <a href="/games/menu" class="card">
+            <a href="/games/menu" class="card" aria-label="小遊戲">
                 <div class="card-icon">🎮</div>
                 <h2>小遊戲</h2>
-                <p>剪刀石頭布、走迷宮！</p>
+                <p>有趣的互動遊戲！</p>
                 <span class="btn">開始遊戲</span>
             </a>
         </div>
 
-        <!-- Scroll to Top Button -->
-        <button id="scrollToTop" class="scroll-to-top" title="回到頂部">
+        <!-- 吉祥物助手 -->
+        <div class="mascot-container" id="mascot" onclick="mascotSpeak()">
+            <div class="mascot-bubble" id="mascot-bubble">點我聽語音導覽！</div>
+            <div class="mascot">🐻</div>
+        </div>
+
+        <!-- 回頂部按鈕 -->
+        <button id="scrollToTop" class="scroll-to-top" title="回到頂部" aria-label="回到頂部">
             ⬆️ 回頂部
         </button>
     </main>
 
+    <script th:src="@{/js/audio-manager.js}"></script>
     <script>
-        // Scroll to top functionality
+        // 歡迎動畫
+        window.addEventListener('load', function () {
+            const welcomeOverlay = document.getElementById('welcome-overlay');
+
+            // 首次訪問顯示歡迎動畫
+            const hasVisited = sessionStorage.getItem('hasVisited');
+            if (hasVisited) {
+                welcomeOverlay.classList.add('hidden');
+            } else {
+                sessionStorage.setItem('hasVisited', 'true');
+
+                // 播放歡迎語音
+                setTimeout(() => {
+                    if (typeof GameAudio !== 'undefined') {
+                        GameAudio.speak('歡迎來到快樂學習樂園！');
+                    }
+                }, 500);
+
+                // 2.5秒後隱藏歡迎動畫
+                setTimeout(() => {
+                    welcomeOverlay.classList.add('hidden');
+                }, 2500);
+            }
+        });
+
+        // 吉祥物語音導覽
+        function mascotSpeak() {
+            const mascot = document.getElementById('mascot');
+            const bubble = document.getElementById('mascot-bubble');
+
+            mascot.classList.add('speaking');
+            bubble.textContent = '正在說話...';
+
+            if (typeof GameAudio !== 'undefined') {
+                GameAudio.speak('小朋友你好！這裡有數字、英文、注音和好玩的遊戲喔！選一個開始學習吧！', () => {
+                    mascot.classList.remove('speaking');
+                    bubble.textContent = '點我聽語音導覽！';
+                });
+            }
+        }
+
+        // 回頂部功能
         const scrollToTopBtn = document.getElementById('scrollToTop');
 
-        // Show button when scrolled away from top (懸浮效果)
         window.addEventListener('scroll', function () {
-            if (window.pageYOffset > 0) {
+            if (window.pageYOffset > 100) {
                 scrollToTopBtn.classList.add('show');
             } else {
                 scrollToTopBtn.classList.remove('show');
             }
         });
 
-        // Scroll to top when clicked
         scrollToTopBtn.addEventListener('click', function () {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     </script>
-    <script th:src="@{/js/script.js}"></script>
 </body>
 
 </html>

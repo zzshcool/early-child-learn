@@ -12,16 +12,12 @@ let itemsProcessed = 0;
 const totalItems = shapes.length;
 let currentDragging = null;
 
-// 初始化音效
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
 function startGame() {
     document.getElementById('tutorial-overlay').classList.add('hidden');
-    if (audioCtx.state === 'suspended') audioCtx.resume();
 
     // 語音說明
-    if (window.SpeechHelper) {
-        SpeechHelper.speak('把形狀拖到正確的洞裡！', init);
+    if (typeof GameAudio !== 'undefined') {
+        GameAudio.speak('把形狀拖到正確的洞裡！', init);
     } else {
         init();
     }
@@ -57,32 +53,10 @@ function init() {
     updateProgress();
 }
 
+// 統一音效系統
 function playSound(success) {
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-
-    if (window.SoundHelper) {
-        SoundHelper.play(success ? 'correct' : 'wrong');
-    } else {
-        // 備用音效
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-
-        if (success) {
-            osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
-            osc.frequency.linearRampToValueAtTime(783.99, audioCtx.currentTime + 0.1);
-            gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
-            gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.3);
-            osc.start();
-            osc.stop(audioCtx.currentTime + 0.3);
-        } else {
-            osc.frequency.setValueAtTime(150, audioCtx.currentTime);
-            gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-            osc.type = 'sawtooth';
-            osc.start();
-            osc.stop(audioCtx.currentTime + 0.2);
-        }
+    if (typeof GameSound !== 'undefined') {
+        GameSound.play(success ? 'correct' : 'wrong');
     }
 }
 
