@@ -1,0 +1,372 @@
+/**
+ * 遊戲 UI 統一樣式
+ * 包含導航列、回饋效果、載入動畫等共用 UI 元件
+ */
+
+/* === 固定導航列 === */
+.game-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(135deg, var(--color-primary, #FF6B6B), #FF8E8E);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+}
+
+.game-header-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.game-header-left,
+.game-header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.header-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+/* === 固定底部工具列 === */
+.game-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    background: linear-gradient(135deg, #2C3E50, #34495E);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+}
+
+.footer-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 8px 12px;
+    border-radius: 10px;
+}
+
+.footer-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-3px);
+}
+
+.footer-btn .icon {
+    font-size: 1.5rem;
+}
+
+.footer-btn .label {
+    font-size: 0.8rem;
+    opacity: 0.9;
+}
+
+/* === 內容區域間距（配合固定導航） === */
+.game-content {
+    padding-top: 70px;
+    padding-bottom: 80px;
+    min-height: calc(100vh - 150px);
+}
+
+/* === 成功回饋動畫 === */
+@keyframes successPop {
+    0% { transform: scale(0) rotate(-10deg); opacity: 0; }
+    50% { transform: scale(1.2) rotate(5deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+@keyframes successShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px) rotate(-2deg); }
+    75% { transform: translateX(5px) rotate(2deg); }
+}
+
+.feedback-success {
+    animation: successPop 0.5s ease-out;
+    background: linear-gradient(135deg, var(--color-success, #27AE60), #2ECC71) !important;
+    color: white !important;
+    box-shadow: 0 0 30px rgba(39, 174, 96, 0.5) !important;
+}
+
+/* === 錯誤回饋動畫 === */
+@keyframes errorShake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-8px); }
+    20%, 40%, 60%, 80% { transform: translateX(8px); }
+}
+
+.feedback-error {
+    animation: errorShake 0.6s ease;
+    border-color: var(--color-error, #E74C3C) !important;
+    box-shadow: 0 0 20px rgba(231, 76, 60, 0.4) !important;
+}
+
+/* === 星星獲得動畫 === */
+@keyframes starBurst {
+    0% { 
+        transform: scale(0) rotate(0deg); 
+        opacity: 1; 
+    }
+    50% { 
+        transform: scale(1.5) rotate(180deg); 
+        opacity: 1; 
+    }
+    100% { 
+        transform: scale(0.5) rotate(360deg) translateY(-100px); 
+        opacity: 0; 
+    }
+}
+
+.star-burst {
+    position: fixed;
+    font-size: 3rem;
+    pointer-events: none;
+    z-index: 10000;
+    animation: starBurst 1s ease-out forwards;
+}
+
+/* === 載入動畫 === */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.loading-character {
+    font-size: 5rem;
+    animation: loadingBounce 1s infinite ease-in-out;
+}
+
+@keyframes loadingBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.loading-text {
+    font-size: 1.5rem;
+    color: var(--color-primary, #FF6B6B);
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.loading-dots::after {
+    content: '';
+    animation: loadingDots 1.5s infinite;
+}
+
+@keyframes loadingDots {
+    0% { content: ''; }
+    25% { content: '.'; }
+    50% { content: '..'; }
+    75% { content: '...'; }
+}
+
+/* === 提示氣泡 === */
+.tooltip-bubble {
+    position: absolute;
+    background: white;
+    border-radius: 15px;
+    padding: 12px 18px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    font-size: 1rem;
+    color: #333;
+    max-width: 200px;
+    z-index: 1001;
+    animation: tooltipFadeIn 0.3s ease;
+}
+
+.tooltip-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 10px solid transparent;
+    border-top-color: white;
+}
+
+@keyframes tooltipFadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* === 進度條（遊戲用） === */
+.game-progress-bar {
+    width: 100%;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.game-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-secondary, #4ECDC4), var(--color-success, #27AE60));
+    border-radius: 10px;
+    transition: width 0.5s ease;
+    position: relative;
+}
+
+.game-progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), transparent);
+    border-radius: 10px 10px 0 0;
+}
+
+/* === 確認對話框 === */
+.confirm-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.confirm-content {
+    background: white;
+    border-radius: 25px;
+    padding: 30px;
+    text-align: center;
+    max-width: 350px;
+    width: 90%;
+    animation: confirmSlideIn 0.3s ease;
+}
+
+@keyframes confirmSlideIn {
+    from { transform: translateY(-30px) scale(0.9); opacity: 0; }
+    to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.confirm-icon {
+    font-size: 4rem;
+    margin-bottom: 15px;
+}
+
+.confirm-message {
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 25px;
+}
+
+.confirm-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.confirm-btn {
+    padding: 12px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.confirm-btn-yes {
+    background: linear-gradient(135deg, var(--color-success, #27AE60), #2ECC71);
+    color: white;
+}
+
+.confirm-btn-no {
+    background: linear-gradient(135deg, #95A5A6, #7F8C8D);
+    color: white;
+}
+
+.confirm-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* === 響應式調整 === */
+@media (max-width: 768px) {
+    .game-header {
+        height: 55px;
+        padding: 0 10px;
+    }
+    
+    .game-header-title {
+        font-size: 1.2rem;
+    }
+    
+    .header-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+    }
+    
+    .game-footer {
+        height: 65px;
+    }
+    
+    .footer-btn .icon {
+        font-size: 1.3rem;
+    }
+    
+    .footer-btn .label {
+        font-size: 0.7rem;
+    }
+    
+    .game-content {
+        padding-top: 65px;
+        padding-bottom: 75px;
+    }
+}

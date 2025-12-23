@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-TW" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>塗鴉畫板 - 快樂學習樂園</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .drawing-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            max-width: 100%;
+        }
+
+        .canvas-wrapper {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            padding: 10px;
+            margin: 10px 0;
+            touch-action: none;
+        }
+
+        #drawing-canvas {
+            border: 4px solid #FFD700;
+            border-radius: 15px;
+            cursor: crosshair;
+            background: white;
+            touch-action: none;
+        }
+
+        .tools-panel {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+            max-width: 600px;
+        }
+
+        .color-palette {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .color-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .color-btn:hover {
+            transform: scale(1.15);
+        }
+
+        .color-btn.active {
+            border-color: #333;
+            transform: scale(1.2);
+            box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.5);
+        }
+
+        .brush-sizes {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .size-btn {
+            background: #333;
+            border-radius: 50%;
+            border: 3px solid white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .size-btn:hover {
+            transform: scale(1.2);
+        }
+
+        .size-btn.active {
+            border-color: #FF6B6B;
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.5);
+        }
+
+        .size-small {
+            width: 20px;
+            height: 20px;
+        }
+
+        .size-medium {
+            width: 30px;
+            height: 30px;
+        }
+
+        .size-large {
+            width: 40px;
+            height: 40px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .action-btn {
+            padding: 15px 25px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-clear {
+            background: linear-gradient(135deg, #E74C3C, #C0392B);
+            color: white;
+        }
+
+        .btn-eraser {
+            background: linear-gradient(135deg, #95A5A6, #7F8C8D);
+            color: white;
+        }
+
+        .btn-eraser.active {
+            background: linear-gradient(135deg, #F39C12, #E67E22);
+        }
+
+        .btn-save {
+            background: linear-gradient(135deg, #27AE60, #1E8449);
+            color: white;
+        }
+
+        .btn-undo {
+            background: linear-gradient(135deg, #3498DB, #2980B9);
+            color: white;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .action-btn:active {
+            transform: scale(0.95);
+        }
+
+        .mode-indicator {
+            font-size: 1.2rem;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #FFE66D, #FFF9E6);
+            border-radius: 20px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .color-btn {
+                width: 40px;
+                height: 40px;
+            }
+
+            .action-btn {
+                padding: 12px 20px;
+                font-size: 1.1rem;
+            }
+
+            .size-small {
+                width: 16px;
+                height: 16px;
+            }
+
+            .size-medium {
+                width: 24px;
+                height: 24px;
+            }
+
+            .size-large {
+                width: 32px;
+                height: 32px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .color-btn {
+                width: 35px;
+                height: 35px;
+            }
+
+            .action-btn {
+                padding: 10px 15px;
+                font-size: 1rem;
+            }
+        }
+
+        /* 儲存成功動畫 */
+        .save-success {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(39, 174, 96, 0.95);
+            color: white;
+            padding: 30px 50px;
+            border-radius: 20px;
+            font-size: 2rem;
+            font-weight: bold;
+            z-index: 1000;
+            animation: popIn 0.5s ease;
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 0;
+            }
+
+            50% {
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>🎨 塗鴉畫板</h1>
+    </header>
+    <main>
+        <div th:replace="~{fragments :: nav('/games/menu', '← 上一頁')}"></div>
+
+        <div class="drawing-container">
+            <div class="mode-indicator" id="mode-indicator">🖌️ 畫筆模式</div>
+
+            <div class="canvas-wrapper">
+                <canvas id="drawing-canvas" width="600" height="450"></canvas>
+            </div>
+
+            <div class="tools-panel">
+                <div class="color-palette" id="color-palette">
+                    <!-- 顏色按鈕由 JS 生成 -->
+                </div>
+            </div>
+
+            <div class="tools-panel">
+                <div class="brush-sizes">
+                    <span style="font-weight: bold;">筆刷大小：</span>
+                    <button class="size-btn size-small" data-size="5" title="小"></button>
+                    <button class="size-btn size-medium active" data-size="12" title="中"></button>
+                    <button class="size-btn size-large" data-size="24" title="大"></button>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="action-btn btn-eraser" id="eraser-btn" onclick="toggleEraser()">🧽 橡皮擦</button>
+                <button class="action-btn btn-undo" onclick="undoLast()">↩️ 復原</button>
+                <button class="action-btn btn-clear" onclick="clearCanvas()">🗑️ 清除</button>
+                <button class="action-btn btn-save" onclick="saveDrawing()">💾 儲存</button>
+            </div>
+        </div>
+    </main>
+
+    <th:block th:replace="~{fragments :: game-scripts}"></th:block>
+
+    <script>
+        // 顏色定義
+        const colors = [
+            { name: '紅色', hex: '#E74C3C' },
+            { name: '橘色', hex: '#E67E22' },
+            { name: '黃色', hex: '#F1C40F' },
+            { name: '綠色', hex: '#27AE60' },
+            { name: '藍色', hex: '#3498DB' },
+            { name: '紫色', hex: '#9B59B6' },
+            { name: '粉紅', hex: '#FF69B4' },
+            { name: '棕色', hex: '#8B4513' },
+            { name: '黑色', hex: '#2C3E50' },
+            { name: '白色', hex: '#FFFFFF' }
+        ];
+
+        // 畫布相關變數
+        const canvas = document.getElementById('drawing-canvas');
+        const ctx = canvas.getContext('2d');
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+        let currentColor = '#2C3E50';
+        let brushSize = 12;
+        let isEraser = false;
+        let history = [];
+        let historyIndex = -1;
+
+        // 初始化
+        function init() {
+            setupCanvas();
+            generateColorPalette();
+            setupEventListeners();
+            saveState();
+
+            if (typeof RewardSystem !== 'undefined') {
+                RewardSystem.createStarDisplay();
+            }
+            if (typeof GameAudio !== 'undefined') {
+                GameAudio.speak('歡迎來到塗鴉畫板！選擇顏色開始畫畫吧！');
+            }
+        }
+
+        // 設置畫布尺寸（響應式）
+        function setupCanvas() {
+            const container = canvas.parentElement;
+            const maxWidth = Math.min(600, window.innerWidth - 40);
+            const ratio = 450 / 600;
+
+            canvas.width = maxWidth;
+            canvas.height = maxWidth * ratio;
+
+            // 設定初始背景為白色
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+        // 生成顏色選擇器
+        function generateColorPalette() {
+            const palette = document.getElementById('color-palette');
+            colors.forEach((color, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'color-btn' + (color.hex === currentColor ? ' active' : '');
+                btn.style.backgroundColor = color.hex;
+                if (color.hex === '#FFFFFF') {
+                    btn.style.border = '4px solid #ddd';
+                }
+                btn.title = color.name;
+                btn.onclick = () => selectColor(color.hex, btn);
+                palette.appendChild(btn);
+            });
+        }
+
+        // 選擇顏色
+        function selectColor(hex, btn) {
+            currentColor = hex;
+            isEraser = false;
+
+            document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('eraser-btn').classList.remove('active');
+            document.getElementById('mode-indicator').textContent = '🖌️ 畫筆模式';
+
+            if (typeof GameSound !== 'undefined') GameSound.play('click');
+        }
+
+        // 設置事件監聽器
+        function setupEventListeners() {
+            // 滑鼠事件
+            canvas.addEventListener('mousedown', startDrawing);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', stopDrawing);
+            canvas.addEventListener('mouseout', stopDrawing);
+
+            // 觸控事件
+            canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
+            canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
+            canvas.addEventListener('touchend', stopDrawing);
+
+            // 筆刷大小
+            document.querySelectorAll('.size-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    brushSize = parseInt(btn.dataset.size);
+                    document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    if (typeof GameSound !== 'undefined') GameSound.play('click');
+                });
+            });
+
+            // 視窗大小變化
+            window.addEventListener('resize', () => {
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                setupCanvas();
+                ctx.putImageData(imageData, 0, 0);
+            });
+        }
+
+        // 開始繪畫
+        function startDrawing(e) {
+            isDrawing = true;
+            [lastX, lastY] = getPosition(e);
+        }
+
+        // 繪畫
+        function draw(e) {
+            if (!isDrawing) return;
+
+            const [x, y] = getPosition(e);
+
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(x, y);
+            ctx.strokeStyle = isEraser ? 'white' : currentColor;
+            ctx.lineWidth = brushSize;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.stroke();
+
+            [lastX, lastY] = [x, y];
+        }
+
+        // 停止繪畫
+        function stopDrawing() {
+            if (isDrawing) {
+                isDrawing = false;
+                saveState();
+            }
+        }
+
+        // 取得位置（支援滑鼠和觸控）
+        function getPosition(e) {
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+
+            if (e.touches) {
+                return [
+                    (e.touches[0].clientX - rect.left) * scaleX,
+                    (e.touches[0].clientY - rect.top) * scaleY
+                ];
+            }
+            return [
+                (e.clientX - rect.left) * scaleX,
+                (e.clientY - rect.top) * scaleY
+            ];
+        }
+
+        // 觸控事件處理
+        function handleTouchStart(e) {
+            e.preventDefault();
+            startDrawing(e);
+        }
+
+        function handleTouchMove(e) {
+            e.preventDefault();
+            draw(e);
+        }
+
+        // 切換橡皮擦
+        function toggleEraser() {
+            isEraser = !isEraser;
+            const btn = document.getElementById('eraser-btn');
+            const indicator = document.getElementById('mode-indicator');
+
+            if (isEraser) {
+                btn.classList.add('active');
+                indicator.textContent = '🧽 橡皮擦模式';
+                document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
+            } else {
+                btn.classList.remove('active');
+                indicator.textContent = '🖌️ 畫筆模式';
+            }
+
+            if (typeof GameSound !== 'undefined') GameSound.play('click');
+        }
+
+        // 清除畫布
+        function clearCanvas() {
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            saveState();
+
+            if (typeof GameSound !== 'undefined') GameSound.play('pop');
+            if (typeof GameAudio !== 'undefined') GameAudio.speak('畫布已清除！');
+        }
+
+        // 儲存狀態（用於復原）
+        function saveState() {
+            historyIndex++;
+            history = history.slice(0, historyIndex);
+            history.push(canvas.toDataURL());
+
+            // 限制歷史記錄數量
+            if (history.length > 20) {
+                history.shift();
+                historyIndex--;
+            }
+        }
+
+        // 復原
+        function undoLast() {
+            if (historyIndex > 0) {
+                historyIndex--;
+                const img = new Image();
+                img.onload = () => {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(img, 0, 0);
+                };
+                img.src = history[historyIndex];
+
+                if (typeof GameSound !== 'undefined') GameSound.play('click');
+            }
+        }
+
+        // 儲存作品
+        function saveDrawing() {
+            const link = document.createElement('a');
+            link.download = '我的塗鴉作品_' + new Date().toLocaleDateString('zh-TW') + '.png';
+            link.href = canvas.toDataURL();
+            link.click();
+
+            // 顯示成功訊息
+            const msg = document.createElement('div');
+            msg.className = 'save-success';
+            msg.textContent = '🎉 作品已儲存！';
+            document.body.appendChild(msg);
+
+            setTimeout(() => msg.remove(), 2000);
+
+            if (typeof GameSound !== 'undefined') GameSound.play('win');
+            if (typeof GameAudio !== 'undefined') GameAudio.speak('太棒了！作品已儲存！');
+            if (typeof RewardSystem !== 'undefined') {
+                RewardSystem.addStars(2);
+            }
+        }
+
+        // 頁面載入
+        window.onload = init;
+    </script>
+</body>
+
+</html>

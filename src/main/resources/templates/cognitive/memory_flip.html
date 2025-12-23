@@ -216,56 +216,63 @@
         }
 
         function initGame() {
-            const grid = document.getElementById('cards-grid');
-            const instruction = document.getElementById('instruction');
-            const targetContainer = document.getElementById('target-container');
-            const targetEmoji = document.getElementById('target-emoji');
-            const restartBtn = document.getElementById('restart-btn');
+            try {
+                const grid = document.getElementById('cards-grid');
+                const instruction = document.getElementById('instruction');
+                const targetContainer = document.getElementById('target-container');
+                const targetEmoji = document.getElementById('target-emoji');
+                const restartBtn = document.getElementById('restart-btn');
 
-            grid.innerHTML = '';
-            targetContainer.classList.remove('hidden');
-            restartBtn.classList.add('hidden');
-            instruction.textContent = '記住這個圖片的位置！';
-            instruction.style.color = '#333';
+                grid.innerHTML = '';
+                targetContainer.classList.remove('hidden');
+                restartBtn.classList.add('hidden');
+                instruction.textContent = '記住這個圖片的位置！';
+                instruction.style.color = '#333';
 
-            // Randomly select 4 to 8 cards
-            const numCards = Math.floor(Math.random() * 5) + 4; // 4 to 8
-            const gameEmojis = shuffle([...emojis]).slice(0, numCards);
+                // Randomly select 4 to 8 cards
+                const numCards = Math.floor(Math.random() * 5) + 4; // 4 to 8
+                const gameEmojis = shuffle([...emojis]).slice(0, numCards);
 
-            currentCards = gameEmojis.map((emoji, index) => ({
-                id: index,
-                emoji: emoji
-            }));
+                currentCards = gameEmojis.map((emoji, index) => ({
+                    id: index,
+                    emoji: emoji
+                }));
 
-            // Select target first (before showing cards)
-            const randomIndex = Math.floor(Math.random() * currentCards.length);
-            targetCard = currentCards[randomIndex];
-            targetEmoji.textContent = targetCard.emoji;
+                // Select target first (before showing cards)
+                const randomIndex = Math.floor(Math.random() * currentCards.length);
+                targetCard = currentCards[randomIndex];
+                targetEmoji.textContent = targetCard.emoji;
 
-            // Render cards (face-up initially)
-            currentCards.forEach(card => {
-                const cardEl = document.createElement('div');
-                cardEl.className = 'memory-card';
-                cardEl.textContent = card.emoji;
-                cardEl.dataset.id = card.id;
-                cardEl.onclick = () => handleCardClick(cardEl, card);
-                grid.appendChild(cardEl);
-            });
+                // Render cards (face-up initially)
+                currentCards.forEach(card => {
+                    const cardEl = document.createElement('div');
+                    cardEl.className = 'memory-card';
+                    cardEl.textContent = card.emoji;
+                    cardEl.dataset.id = card.id;
+                    cardEl.onclick = () => handleCardClick(cardEl, card);
+                    grid.appendChild(cardEl);
+                });
 
-            isGameActive = false;
+                isGameActive = false;
 
-            // Countdown 6 seconds
-            let countdown = 6;
-            instruction.innerHTML = `<span class="countdown-big">倒數 ${countdown} 秒</span>`;
-            const timer = setInterval(() => {
-                countdown--;
-                if (countdown > 0) {
-                    instruction.innerHTML = `<span class="countdown-big">倒數 ${countdown} 秒</span>`;
-                } else {
-                    clearInterval(timer);
-                    startGame();
-                }
-            }, 1000);
+                // Countdown 6 seconds
+                let countdown = 6;
+                instruction.innerHTML = `<span class="countdown-big">倒數 ${countdown} 秒</span>`;
+
+                const timer = setInterval(() => {
+                    countdown--;
+                    if (countdown > 0) {
+                        instruction.innerHTML = `<span class="countdown-big">倒數 ${countdown} 秒</span>`;
+                    } else {
+                        clearInterval(timer);
+                        startGame();
+                    }
+                }, 1000);
+            } catch (error) {
+                console.error('initGame error:', error);
+                // 即使出錯也嘗試啟動遊戲
+                setTimeout(startGame, 1000);
+            }
         }
 
         function startGame() {
@@ -291,7 +298,7 @@
             // Reveal the card
             cardEl.classList.remove('flipped');
 
-            GameSound.play('click');
+            if (typeof GameSound !== 'undefined') GameSound.play('click');
 
             if (card.id === targetCard.id) {
                 cardEl.style.backgroundColor = '#4CAF50';
@@ -304,10 +311,12 @@
                 isGameActive = false;
                 document.getElementById('restart-btn').classList.remove('hidden');
 
-                GameSound.play('correct');
-                GameAudio.correct();
-                RewardSystem.addStars(2);
-                RewardSystem.recordGameComplete('memory');
+                if (typeof GameSound !== 'undefined') GameSound.play('correct');
+                if (typeof GameAudio !== 'undefined') GameAudio.correct();
+                if (typeof RewardSystem !== 'undefined') {
+                    RewardSystem.addStars(2);
+                    RewardSystem.recordGameComplete('memory');
+                }
 
                 setTimeout(() => {
                     document.querySelectorAll('.memory-card').forEach(c => c.classList.remove('flipped'));
@@ -319,7 +328,7 @@
                 const instruction = document.getElementById('instruction');
                 instruction.textContent = '錯了！再試一次！';
                 instruction.style.color = '#ff5252';
-                GameSound.play('wrong');
+                if (typeof GameSound !== 'undefined') GameSound.play('wrong');
 
                 setTimeout(() => {
                     cardEl.classList.remove('shake');
@@ -332,7 +341,17 @@
         }
 
         window.onload = function () {
-            GameAudio.speak('歡迎來到圖像記憶遊戲！');
+            // 確保 RewardSystem 可用
+            if (typeof RewardSystem !== 'undefined') {
+                RewardSystem.createStarDisplay();
+            }
+
+            // 播放歡迎語音（不阻塞遊戲初始化）
+            if (typeof GameAudio !== 'undefined') {
+                GameAudio.speak('歡迎來到圖像記憶遊戲！');
+            }
+
+            // 延遲初始化遊戲
             setTimeout(initGame, 1500);
         };
     </script>

@@ -363,7 +363,7 @@
             const messageEl = document.getElementById('message');
             messageEl.innerHTML = `<span class="countdown-big">${countdown}</span>`;
 
-            playGameSound('記住數字的位置！');
+            if (typeof GameAudio !== 'undefined') GameAudio.speak('記住數字的位置！');
 
             const countdownTimer = setInterval(() => {
                 countdown--;
@@ -375,7 +375,7 @@
                     messageEl.textContent = '開始配對！';
                     gameStarted = true;
                     startTimer();
-                    playGameSound('開始！');
+                    if (typeof GameAudio !== 'undefined') GameAudio.speak('開始！');
                 }
             }, 1000);
         }
@@ -431,9 +431,9 @@
 
                     flippedCards = [];
 
-                    GameSound.play('correct');
-                    GameAudio.speak('答對了！');
-                    RewardSystem.addStars(1);
+                    if (typeof GameSound !== 'undefined') GameSound.play('correct');
+                    if (typeof GameAudio !== 'undefined') GameAudio.speak('答對了！');
+                    if (typeof RewardSystem !== 'undefined') RewardSystem.addStars(1);
 
                     if (matchedPairs === totalPairs) {
                         gameWon();
@@ -443,7 +443,7 @@
                 gameStarted = false;
                 first.el.classList.add('shake');
                 second.el.classList.add('shake');
-                GameSound.play('wrong');
+                if (typeof GameSound !== 'undefined') GameSound.play('wrong');
 
                 setTimeout(() => {
                     first.el.classList.remove('shake');
@@ -468,10 +468,12 @@
             document.getElementById('restart-btn').classList.remove('hidden');
             document.getElementById('back-btn').classList.remove('hidden');
 
-            GameSound.play('win');
-            GameAudio.speak(`太棒了！你用了 ${Math.floor(seconds)} 秒完成遊戲！`);
-            RewardSystem.addStars(3);
-            RewardSystem.recordGameComplete('numbers');
+            if (typeof GameSound !== 'undefined') GameSound.play('win');
+            if (typeof GameAudio !== 'undefined') GameAudio.speak(`太棒了！你用了 ${Math.floor(seconds)} 秒完成遊戲！`);
+            if (typeof RewardSystem !== 'undefined') {
+                RewardSystem.addStars(3);
+                RewardSystem.recordGameComplete('numbers');
+            }
         }
 
         function resetGame() {
@@ -488,7 +490,8 @@
         }
 
         window.onload = function () {
-            GameAudio.speak('歡迎來到數字配對遊戲！請選擇難度。');
+            if (typeof RewardSystem !== 'undefined') RewardSystem.createStarDisplay();
+            if (typeof GameAudio !== 'undefined') GameAudio.speak('歡迎來到數字配對遊戲！請選擇難度。');
         };
     </script>
 </body>

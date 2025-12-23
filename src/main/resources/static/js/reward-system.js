@@ -109,11 +109,18 @@ const RewardSystem = {
      * 記錄答對
      */
     recordCorrectAnswer() {
-        const data = this.getData();
+        // 先更新 correctStreak
+        let data = this.getData();
         data.correctStreak++;
-        this.addStars(1);
         this.saveData(data);
+
+        // 添加星星（這會更新 data.stars 並儲存）
+        this.addStars(1);
+
+        // 重新讀取最新資料以檢查徽章
+        data = this.getData();
         this.checkBadges(data);
+
         return data.correctStreak;
     },
 

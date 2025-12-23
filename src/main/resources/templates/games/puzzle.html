@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="zh-TW" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拼圖遊戲 - 快樂學習樂園</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .puzzle-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .difficulty-selection {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .difficulty-btn {
+            padding: 20px 30px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #4ECDC4, #44A08D);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4);
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        .difficulty-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(78, 205, 196, 0.6);
+        }
+
+        .image-selection {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+            max-width: 500px;
+        }
+
+        .image-btn {
+            width: 120px;
+            height: 120px;
+            border: 4px solid #FFD700;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 4rem;
+            background: white;
+        }
+
+        .image-btn:hover {
+            transform: scale(1.1);
+            border-color: #FF6B6B;
+        }
+
+        .puzzle-area {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .puzzle-info {
+            font-size: 1.5rem;
+            margin: 15px 0;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #FFE66D, #FFF9E6);
+            border-radius: 15px;
+            font-weight: bold;
+        }
+
+        .puzzle-grid {
+            display: grid;
+            gap: 3px;
+            background: #333;
+            padding: 5px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .puzzle-piece {
+            background: #fff;
+            cursor: grab;
+            transition: all 0.2s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            user-select: none;
+            border-radius: 5px;
+        }
+
+        .puzzle-piece:hover {
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        .puzzle-piece.selected {
+            border: 4px solid #FF6B6B;
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+        }
+
+        .puzzle-piece.correct {
+            pointer-events: none;
+            opacity: 0.9;
+        }
+
+        .reference-image {
+            width: 150px;
+            height: 150px;
+            border: 4px solid #4ECDC4;
+            border-radius: 15px;
+            margin: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 5rem;
+            background: white;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .control-btn {
+            padding: 15px 25px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-shuffle {
+            background: linear-gradient(135deg, #9B59B6, #8E44AD);
+            color: white;
+        }
+
+        .btn-hint {
+            background: linear-gradient(135deg, #3498DB, #2980B9);
+            color: white;
+        }
+
+        .btn-back {
+            background: linear-gradient(135deg, #E74C3C, #C0392B);
+            color: white;
+        }
+
+        .control-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .win-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .win-content {
+            text-align: center;
+            color: white;
+            animation: bounceIn 0.5s ease;
+        }
+
+        .win-emoji {
+            font-size: 8rem;
+            margin-bottom: 20px;
+        }
+
+        .win-text {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        .win-time {
+            font-size: 1.5rem;
+            color: #FFE66D;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* 響應式 */
+        @media (max-width: 768px) {
+            .image-btn {
+                width: 90px;
+                height: 90px;
+                font-size: 3rem;
+            }
+
+            .reference-image {
+                width: 100px;
+                height: 100px;
+                font-size: 3.5rem;
+            }
+
+            .difficulty-btn {
+                padding: 15px 20px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>🧩 拼圖遊戲</h1>
+    </header>
+    <main>
+        <div th:replace="~{fragments :: nav('/games/menu', '← 上一頁')}"></div>
+
+        <div class="puzzle-container">
+            <!-- 難度選擇 -->
+            <div id="difficulty-selection">
+                <h2 style="width: 100%; text-align: center; color: #FF6B6B;">選擇難度</h2>
+                <div class="difficulty-selection">
+                    <button class="difficulty-btn" onclick="selectDifficulty(2)">2×2<br>(4片)</button>
+                    <button class="difficulty-btn" onclick="selectDifficulty(3)">3×3<br>(9片)</button>
+                    <button class="difficulty-btn" onclick="selectDifficulty(4)">4×4<br>(16片)</button>
+                </div>
+            </div>
+
+            <!-- 圖片選擇 -->
+            <div id="image-selection" class="hidden">
+                <h2 style="text-align: center; color: #4ECDC4;">選擇圖片</h2>
+                <div class="image-selection" id="image-grid">
+                    <!-- 由 JS 生成 -->
+                </div>
+            </div>
+
+            <!-- 遊戲區域 -->
+            <div id="puzzle-area" class="puzzle-area">
+                <div class="puzzle-info">
+                    <span id="timer">00:00</span> | 移動次數：<span id="moves">0</span>
+                </div>
+
+                <div class="reference-image" id="reference"></div>
+
+                <div class="puzzle-grid" id="puzzle-grid">
+                    <!-- 拼圖塊由 JS 生成 -->
+                </div>
+
+                <div class="controls">
+                    <button class="control-btn btn-shuffle" onclick="shufflePuzzle()">🔀 重新洗牌</button>
+                    <button class="control-btn btn-hint" onclick="showHint()">💡 提示</button>
+                    <button class="control-btn btn-back" onclick="backToSelection()">🔙 返回選擇</button>
+                </div>
+            </div>
+
+            <!-- 勝利覆蓋層 -->
+            <div id="win-overlay" class="win-overlay hidden">
+                <div class="win-content">
+                    <div class="win-emoji">🎉</div>
+                    <div class="win-text">恭喜完成拼圖！</div>
+                    <div class="win-time" id="win-time"></div>
+                    <div class="controls" style="margin-top: 30px;">
+                        <button class="control-btn btn-shuffle" onclick="playAgain()">🔄 再玩一次</button>
+                        <button class="control-btn btn-back" onclick="backToSelection()">🔙 選擇其他</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <th:block th:replace="~{fragments :: game-scripts}"></th:block>
+
+    <script>
+        // 圖片定義（使用 emoji）
+        const images = [
+            { id: 'cat', emoji: '🐱', name: '小貓' },
+            { id: 'dog', emoji: '🐶', name: '小狗' },
+            { id: 'rabbit', emoji: '🐰', name: '兔子' },
+            { id: 'bear', emoji: '🐻', name: '小熊' },
+            { id: 'lion', emoji: '🦁', name: '獅子' },
+            { id: 'panda', emoji: '🐼', name: '熊貓' },
+            { id: 'apple', emoji: '🍎', name: '蘋果' },
+            { id: 'star', emoji: '⭐', name: '星星' },
+            { id: 'rainbow', emoji: '🌈', name: '彩虹' }
+        ];
+
+        let gridSize = 3;
+        let selectedImage = null;
+        let pieces = [];
+        let selectedPiece = null;
+        let moves = 0;
+        let startTime = null;
+        let timerInterval = null;
+        let isGameActive = false;
+
+        // 初始化
+        function init() {
+            generateImageGrid();
+            if (typeof RewardSystem !== 'undefined') {
+                RewardSystem.createStarDisplay();
+            }
+            if (typeof GameAudio !== 'undefined') {
+                GameAudio.speak('歡迎來到拼圖遊戲！選擇難度開始！');
+            }
+        }
+
+        // 生成圖片選擇網格
+        function generateImageGrid() {
+            const grid = document.getElementById('image-grid');
+            grid.innerHTML = '';
+            images.forEach(img => {
+                const btn = document.createElement('button');
+                btn.className = 'image-btn';
+                btn.textContent = img.emoji;
+                btn.onclick = () => selectImage(img);
+                grid.appendChild(btn);
+            });
+        }
+
+        // 選擇難度
+        function selectDifficulty(size) {
+            gridSize = size;
+            document.getElementById('difficulty-selection').classList.add('hidden');
+            document.getElementById('image-selection').classList.remove('hidden');
+            if (typeof GameSound !== 'undefined') GameSound.play('click');
+        }
+
+        // 選擇圖片
+        function selectImage(img) {
+            selectedImage = img;
+            document.getElementById('image-selection').classList.add('hidden');
+            document.getElementById('puzzle-area').style.display = 'flex';
+            document.getElementById('reference').textContent = img.emoji;
+
+            if (typeof GameAudio !== 'undefined') {
+                GameAudio.speak(`選擇了${img.name}！開始拼圖！`);
+            }
+
+            initPuzzle();
+        }
+
+        // 初始化拼圖
+        function initPuzzle() {
+            const grid = document.getElementById('puzzle-grid');
+            const pieceSize = Math.min(80, (window.innerWidth - 60) / gridSize);
+
+            grid.style.gridTemplateColumns = `repeat(${gridSize}, ${pieceSize}px)`;
+            grid.innerHTML = '';
+
+            // 創建拼圖塊
+            pieces = [];
+            const totalPieces = gridSize * gridSize;
+
+            for (let i = 0; i < totalPieces; i++) {
+                pieces.push({
+                    id: i,
+                    currentPos: i,
+                    correctPos: i
+                });
+            }
+
+            // 洗牌
+            shufflePuzzle();
+
+            // 重置狀態
+            moves = 0;
+            document.getElementById('moves').textContent = '0';
+            startTime = Date.now();
+            isGameActive = true;
+
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+
+        // 渲染拼圖
+        function renderPuzzle() {
+            const grid = document.getElementById('puzzle-grid');
+            const pieceSize = Math.min(80, (window.innerWidth - 60) / gridSize);
+            grid.innerHTML = '';
+
+            // 按當前位置排序
+            const sortedPieces = [...pieces].sort((a, b) => a.currentPos - b.currentPos);
+
+            sortedPieces.forEach(piece => {
+                const div = document.createElement('div');
+                div.className = 'puzzle-piece';
+                div.style.width = pieceSize + 'px';
+                div.style.height = pieceSize + 'px';
+
+                // 計算這塊的顯示內容（部分 emoji 效果）
+                const row = Math.floor(piece.id / gridSize);
+                const col = piece.id % gridSize;
+
+                // 簡化版：每塊顯示編號和部分圖案
+                div.innerHTML = `
+                    <div style="font-size: ${pieceSize * 0.5}px; opacity: 0.3;">${selectedImage.emoji}</div>
+                    <div style="position: absolute; font-size: 0.8rem; bottom: 2px; right: 5px; color: #999;">${piece.id + 1}</div>
+                `;
+                div.style.position = 'relative';
+
+                // 正確位置標記
+                if (piece.currentPos === piece.correctPos) {
+                    div.classList.add('correct');
+                    div.style.background = 'linear-gradient(135deg, #a8edea, #fed6e3)';
+                }
+
+                div.dataset.id = piece.id;
+                div.onclick = () => handlePieceClick(piece);
+
+                grid.appendChild(div);
+            });
+        }
+
+        // 洗牌
+        function shufflePuzzle() {
+            // Fisher-Yates 洗牌
+            const positions = pieces.map((_, i) => i);
+            for (let i = positions.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [positions[i], positions[j]] = [positions[j], positions[i]];
+            }
+
+            pieces.forEach((piece, index) => {
+                piece.currentPos = positions[index];
+            });
+
+            renderPuzzle();
+            if (typeof GameSound !== 'undefined') GameSound.play('pop');
+        }
+
+        // 處理拼圖塊點擊
+        function handlePieceClick(piece) {
+            if (!isGameActive) return;
+
+            if (selectedPiece === null) {
+                // 選擇第一塊
+                selectedPiece = piece;
+                highlightPiece(piece, true);
+                if (typeof GameSound !== 'undefined') GameSound.play('click');
+            } else if (selectedPiece.id === piece.id) {
+                // 取消選擇
+                highlightPiece(piece, false);
+                selectedPiece = null;
+            } else {
+                // 交換位置
+                swapPieces(selectedPiece, piece);
+                highlightPiece(selectedPiece, false);
+                selectedPiece = null;
+                moves++;
+                document.getElementById('moves').textContent = moves;
+
+                if (typeof GameSound !== 'undefined') GameSound.play('pop');
+
+                // 檢查是否完成
+                checkWin();
+            }
+        }
+
+        // 高亮拼圖塊
+        function highlightPiece(piece, highlight) {
+            const grid = document.getElementById('puzzle-grid');
+            const children = grid.children;
+            const sortedPieces = [...pieces].sort((a, b) => a.currentPos - b.currentPos);
+            const index = sortedPieces.findIndex(p => p.id === piece.id);
+
+            if (index >= 0 && children[index]) {
+                if (highlight) {
+                    children[index].classList.add('selected');
+                } else {
+                    children[index].classList.remove('selected');
+                }
+            }
+        }
+
+        // 交換拼圖塊
+        function swapPieces(piece1, piece2) {
+            const temp = piece1.currentPos;
+            piece1.currentPos = piece2.currentPos;
+            piece2.currentPos = temp;
+            renderPuzzle();
+        }
+
+        // 檢查是否勝利
+        function checkWin() {
+            const isComplete = pieces.every(p => p.currentPos === p.correctPos);
+
+            if (isComplete) {
+                isGameActive = false;
+                clearInterval(timerInterval);
+
+                const elapsed = Math.floor((Date.now() - startTime) / 1000);
+                const minutes = Math.floor(elapsed / 60);
+                const seconds = elapsed % 60;
+
+                document.getElementById('win-time').textContent =
+                    `用時：${minutes}分${seconds}秒 | 移動：${moves}次`;
+                document.getElementById('win-overlay').classList.remove('hidden');
+
+                if (typeof GameSound !== 'undefined') GameSound.play('win');
+                if (typeof GameAudio !== 'undefined') {
+                    GameAudio.speak('太棒了！你完成了拼圖！');
+                }
+                if (typeof RewardSystem !== 'undefined') {
+                    RewardSystem.addStars(gridSize);
+                    RewardSystem.recordGameComplete('cognitive');
+                }
+            }
+        }
+
+        // 更新計時器
+        function updateTimer() {
+            if (!startTime) return;
+            const elapsed = Math.floor((Date.now() - startTime) / 1000);
+            const minutes = Math.floor(elapsed / 60);
+            const seconds = elapsed % 60;
+            document.getElementById('timer').textContent =
+                `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+
+        // 顯示提示
+        function showHint() {
+            // 找出一個位置錯誤的塊，短暫高亮正確位置
+            const wrongPiece = pieces.find(p => p.currentPos !== p.correctPos);
+            if (wrongPiece) {
+                if (typeof GameAudio !== 'undefined') {
+                    GameAudio.speak(`試試把第 ${wrongPiece.id + 1} 塊移到正確位置！`);
+                }
+            }
+            if (typeof GameSound !== 'undefined') GameSound.play('click');
+        }
+
+        // 再玩一次
+        function playAgain() {
+            document.getElementById('win-overlay').classList.add('hidden');
+            initPuzzle();
+        }
+
+        // 返回選擇
+        function backToSelection() {
+            document.getElementById('win-overlay').classList.add('hidden');
+            document.getElementById('puzzle-area').style.display = 'none';
+            document.getElementById('image-selection').classList.add('hidden');
+            document.getElementById('difficulty-selection').classList.remove('hidden');
+
+            if (timerInterval) clearInterval(timerInterval);
+            isGameActive = false;
+        }
+
+        // 頁面載入
+        window.onload = init;
+    </script>
+</body>
+
+</html>

@@ -62,4 +62,14 @@ public class GamesController {
     public String carHome() {
         return "games/car-home";
     }
+
+    @GetMapping("/drawing")
+    public String drawing() {
+        return "games/drawing";
+    }
+
+    @GetMapping("/puzzle")
+    public String puzzle() {
+        return "games/puzzle";
+    }
 }
