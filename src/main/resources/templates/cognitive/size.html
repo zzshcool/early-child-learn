@@ -7,53 +7,113 @@
     <title>大小認知 - 快樂學習樂園</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <style>
+        .game-area {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .question {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        /* 兩個大選項並排 */
         .size-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 3rem;
-            margin: 2rem 0;
-            min-height: 200px;
+            gap: 30px;
+            margin: 2rem auto;
+            max-width: 500px;
         }
 
         .size-item {
-            background: none;
-            border: none;
+            background: white;
+            border: 6px solid #4ECDC4;
+            border-radius: 25px;
             cursor: pointer;
-            transition: transform 0.2s;
-            padding: 10px;
-            border-radius: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            padding: 20px;
+            min-width: 150px;
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
         }
 
         .size-item:hover {
-            background-color: rgba(0, 0, 0, 0.05);
-            transform: scale(1.1);
+            transform: scale(1.08);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+            border-color: #FF6B6B;
+        }
+
+        .size-item:active {
+            transform: scale(0.95);
         }
 
         .item-content {
             display: inline-block;
+        }
+
+        .size-label {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #666;
+        }
+
+        #feedback {
+            font-size: 2rem;
+            margin-top: 20px;
+            min-height: 3rem;
+        }
+
+        .btn {
+            font-size: 1.5rem;
+            padding: 15px 40px;
+            margin-top: 20px;
+        }
+
+        /* 行動端響應式 */
+        @media (max-width: 480px) {
+            .size-container {
+                gap: 15px;
+            }
+
+            .size-item {
+                min-width: 120px;
+                min-height: 120px;
+                padding: 15px;
+            }
+
+            .question {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 
 <body>
     <header>
-        <h1>大小認知</h1>
+        <h1>📏 大小認知</h1>
     </header>
     <main>
         <div th:replace="~{fragments :: nav('/cognitive/menu', '上一頁')}"></div>
         <div class="game-area">
             <div id="question" class="question"></div>
             <div id="options-container" class="size-container"></div>
-            <div id="feedback" style="font-size: 2rem; margin-top: 20px; min-height: 3rem;"></div>
-            <button onclick="initGame()" class="btn" style="margin-top: 20px;">下一題</button>
+            <div id="feedback"></div>
+            <button onclick="initGame()" class="btn">🔄 下一題</button>
         </div>
     </main>
 
     <th:block th:replace="~{fragments :: game-scripts}"></th:block>
 
     <script>
-        const emojis = ['🍎', '🚗', '🐶', '⚽', '🐻', '⭐'];
+        const emojis = ['🍎', '🚗', '🐶', '⚽', '🐻', '⭐', '🎈', '🌻'];
 
         function initGame() {
             const feedback = document.getElementById('feedback');
@@ -61,13 +121,15 @@
             feedback.style.color = 'inherit';
 
             const isFindBig = Math.random() > 0.5;
-            const questionText = isFindBig ? '哪一個比較大？ (Big)' : '哪一個比較小？ (Small)';
+            const questionText = isFindBig ? '👆 點選比較大的！' : '👇 點選比較小的！';
             document.getElementById('question').textContent = questionText;
+
+            GameAudio.speak(isFindBig ? '點選比較大的喔！' : '點選比較小的喔！');
 
             const emoji = emojis[Math.floor(Math.random() * emojis.length)];
             const sizes = [
-                { id: 'big', scale: 3.0, isBig: true },
-                { id: 'small', scale: 1.5, isBig: false }
+                { id: 'big', scale: 5, isBig: true, label: '大' },
+                { id: 'small', scale: 2.5, isBig: false, label: '小' }
             ];
             sizes.sort(() => Math.random() - 0.5);
 
@@ -77,7 +139,10 @@
             sizes.forEach(size => {
                 const btn = document.createElement('button');
                 btn.className = 'size-item';
-                btn.innerHTML = `<span class="item-content" style="font-size: ${size.scale}rem;">${emoji}</span>`;
+                btn.innerHTML = `
+                    <span class="item-content" style="font-size: ${size.scale}rem;">${emoji}</span>
+                    <span class="size-label">${size.label}</span>
+                `;
                 btn.onclick = () => checkAnswer(size.isBig, isFindBig);
                 optionsContainer.appendChild(btn);
             });
@@ -88,15 +153,15 @@
             GameSound.play('click');
 
             if (isBigItem === isFindBigQuestion) {
-                feedback.textContent = '答對了！好棒！ 🎉';
-                feedback.style.color = 'green';
+                feedback.textContent = '🎉 答對了！好棒！';
+                feedback.style.color = '#27AE60';
                 GameSound.play('correct');
                 GameAudio.correct();
                 RewardSystem.recordCorrectAnswer();
-                setTimeout(initGame, 1500);
+                setTimeout(initGame, 2000);
             } else {
-                feedback.textContent = '再試試看喔！ 💪';
-                feedback.style.color = 'red';
+                feedback.textContent = '💪 再試試看喔！';
+                feedback.style.color = '#E74C3C';
                 GameSound.play('wrong');
                 GameAudio.tryAgain();
                 RewardSystem.resetCorrectStreak();
@@ -104,6 +169,7 @@
         }
 
         window.onload = function () {
+            RewardSystem.createStarDisplay();
             GameAudio.speak('歡迎來到大小認知遊戲！');
             setTimeout(initGame, 1500);
         };

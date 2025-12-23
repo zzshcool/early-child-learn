@@ -7,48 +7,95 @@
     <title>找不同 - 快樂學習樂園</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <style>
+        .game-area {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .question {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        /* 3x2 網格 - 每個格子更大 */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            max-width: 500px;
+            gap: 15px;
+            max-width: 450px;
             margin: 2rem auto;
+            padding: 10px;
         }
 
         .grid-item {
             background-color: white;
-            border-radius: 15px;
-            padding: 1rem;
+            border-radius: 20px;
+            border: 5px solid #E8E8E8;
             font-size: 4rem;
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
             cursor: pointer;
-            transition: transform 0.2s;
-            border: none;
+            transition: transform 0.2s, border-color 0.2s;
             aspect-ratio: 1;
             display: flex;
             align-items: center;
             justify-content: center;
+            min-height: 100px;
         }
 
         .grid-item:hover {
-            transform: scale(1.05);
-            background-color: var(--bg-color);
+            transform: scale(1.08);
+            border-color: #FF6B6B;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .grid-item:active {
+            transform: scale(0.95);
+        }
+
+        #feedback {
+            font-size: 2rem;
+            margin-top: 20px;
+            min-height: 3rem;
+        }
+
+        .btn {
+            font-size: 1.5rem;
+            padding: 15px 40px;
+            margin-top: 20px;
+        }
+
+        /* 行動端響應式 */
+        @media (max-width: 480px) {
+            .grid-container {
+                max-width: 320px;
+                gap: 10px;
+            }
+
+            .grid-item {
+                font-size: 3rem;
+                min-height: 80px;
+            }
+
+            .question {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 
 <body>
     <header>
-        <h1>找不同</h1>
+        <h1>🔍 找不同</h1>
     </header>
     <main>
         <div th:replace="~{fragments :: nav('/cognitive/menu', '上一頁')}"></div>
         <div class="game-area">
-            <div class="question">哪一個不一樣？</div>
+            <div class="question">哪一個不一樣？👀</div>
             <div id="game-container" class="grid-container"></div>
-            <div id="feedback" style="font-size: 2rem; margin-top: 20px; min-height: 3rem;"></div>
-            <button onclick="initGame()" class="btn" style="margin-top: 20px;">下一題</button>
+            <div id="feedback"></div>
+            <button onclick="initGame()" class="btn">🔄 下一題</button>
         </div>
     </main>
 
@@ -56,14 +103,14 @@
 
     <script>
         const pairs = [
-            { common: '🍎', odd: '🍌' },
-            { common: '🐶', odd: '🐱' },
-            { common: '🚗', odd: '✈️' },
-            { common: '⚽', odd: '🏀' },
-            { common: '🌞', odd: '🌛' },
-            { common: '🟩', odd: '🟥' },
-            { common: '🐟', odd: '🦀' },
-            { common: '👕', odd: '👖' },
+            { common: '🍎', odd: '🍌', hint: '水果' },
+            { common: '🐶', odd: '🐱', hint: '動物' },
+            { common: '🚗', odd: '✈️', hint: '交通工具' },
+            { common: '⚽', odd: '🏀', hint: '球' },
+            { common: '🌞', odd: '🌛', hint: '天空' },
+            { common: '🟩', odd: '🟥', hint: '顏色' },
+            { common: '🐟', odd: '🦀', hint: '海洋生物' },
+            { common: '🍕', odd: '🍔', hint: '食物' },
         ];
 
         function initGame() {
@@ -76,6 +123,8 @@
             let items = Array(totalItems - 1).fill({ type: 'common', icon: pair.common });
             items.push({ type: 'odd', icon: pair.odd });
             items.sort(() => Math.random() - 0.5);
+
+            GameAudio.speak('找出不一樣的那一個喔！');
 
             const container = document.getElementById('game-container');
             container.innerHTML = '';
@@ -94,22 +143,23 @@
             GameSound.play('click');
 
             if (type === 'odd') {
-                feedback.textContent = '答對了！好眼力！ 🎉';
-                feedback.style.color = 'green';
+                feedback.textContent = '🎉 答對了！好眼力！';
+                feedback.style.color = '#27AE60';
                 GameSound.play('correct');
-                GameAudio.speak('答對了！好眼力！');
+                GameAudio.correct();
                 RewardSystem.recordCorrectAnswer();
-                setTimeout(initGame, 1500);
+                setTimeout(initGame, 2000);
             } else {
-                feedback.textContent = '再仔細看看喔！ 👀';
-                feedback.style.color = 'red';
+                feedback.textContent = '👀 再仔細看看喔！';
+                feedback.style.color = '#E74C3C';
                 GameSound.play('wrong');
-                GameAudio.speak('再仔細看看喔！');
+                GameAudio.tryAgain();
                 RewardSystem.resetCorrectStreak();
             }
         }
 
         window.onload = function () {
+            RewardSystem.createStarDisplay();
             GameAudio.speak('歡迎來到找不同遊戲！');
             setTimeout(initGame, 1500);
         };

@@ -7,43 +7,96 @@
     <title>顏色認知 - 快樂學習樂園</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <style>
-        .color-sample {
-            width: 150px;
-            height: 150px;
-            border-radius: 20px;
-            margin: 0 auto 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .game-area {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .question {
             font-size: 2rem;
+            margin-bottom: 1rem;
             color: #333;
-            background-color: #eee;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #target-display {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 4 個大方塊選項 - 2x2 網格佈局 */
+        .options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 10px;
         }
 
         .option-btn {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            border: 4px solid white;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin: 10px;
-            flex-shrink: 0;
-        }
-
-        /* 響應式選項容器 */
-        .options {
+            width: 100%;
+            min-height: 140px;
+            border-radius: 20px;
+            border: 6px solid white;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
-            gap: 15px;
-            max-width: 100%;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
 
+        .option-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .option-btn:active {
+            transform: scale(0.95);
+        }
+
+        .option-btn .color-emoji {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        #feedback {
+            font-size: 2rem;
+            margin-top: 20px;
+            min-height: 3rem;
+        }
+
+        .btn {
+            font-size: 1.5rem;
+            padding: 15px 40px;
+            margin-top: 20px;
+        }
+
+        /* 行動端響應式 */
         @media (max-width: 480px) {
+            .options {
+                max-width: 320px;
+                gap: 15px;
+            }
+
             .option-btn {
-                width: 70px;
-                height: 70px;
+                min-height: 120px;
+                font-size: 1.2rem;
+            }
+
+            .option-btn .color-emoji {
+                font-size: 2.5rem;
+            }
+
+            #target-display {
+                font-size: 2.5rem;
             }
         }
     </style>
@@ -51,33 +104,34 @@
 
 <body>
     <header>
-        <h1>顏色認知</h1>
+        <h1>🎨 顏色認知</h1>
     </header>
     <main>
         <div th:replace="~{fragments :: nav('/cognitive/menu', '上一頁')}"></div>
         <div class="game-area">
             <div class="question">找出正確的顏色！</div>
-            <div id="target-display" style="font-size: 3rem; margin-bottom: 2rem; font-weight: bold;">
+            <div id="target-display">
                 <!-- Target color name -->
             </div>
             <div id="options-container" class="options">
                 <!-- Options go here -->
             </div>
-            <div id="feedback" style="font-size: 2rem; margin-top: 20px; min-height: 3rem;"></div>
-            <button onclick="initGame()" class="btn" style="margin-top: 20px;">下一題</button>
+            <div id="feedback"></div>
+            <button onclick="initGame()" class="btn">🔄 下一題</button>
         </div>
     </main>
 
     <th:block th:replace="~{fragments :: game-scripts}"></th:block>
 
     <script>
+        // 高對比度色彩 - 適合 3-6 歲幼兒辨識
         const colors = [
-            { name: '紅色', hex: '#FF6B6B' },
-            { name: '藍色', hex: '#4ECDC4' },
-            { name: '黃色', hex: '#FFE66D' },
-            { name: '綠色', hex: '#95E1D3' },
-            { name: '橘色', hex: '#FFA500' },
-            { name: '紫色', hex: '#9B59B6' }
+            { name: '紅色', hex: '#E74C3C', emoji: '🔴' },
+            { name: '藍色', hex: '#3498DB', emoji: '🔵' },
+            { name: '黃色', hex: '#F1C40F', emoji: '🟡' },
+            { name: '綠色', hex: '#27AE60', emoji: '🟢' },
+            { name: '橘色', hex: '#E67E22', emoji: '🟠' },
+            { name: '紫色', hex: '#9B59B6', emoji: '🟣' }
         ];
 
         function initGame() {
@@ -87,9 +141,9 @@
 
             const target = colors[Math.floor(Math.random() * colors.length)];
             const targetDisplay = document.getElementById('target-display');
-            targetDisplay.textContent = `找出: ${target.name}`;
-            targetDisplay.style.color = target.hex;
-            GameAudio.speak('找出正確的顏色喔！');
+            targetDisplay.innerHTML = `${target.emoji} 找出 <span style="color:${target.hex}">${target.name}</span>`;
+
+            GameAudio.speak(`找出${target.name}喔！`);
 
             const optionsContainer = document.getElementById('options-container');
             optionsContainer.innerHTML = '';
@@ -97,7 +151,7 @@
             let options = [target];
             while (options.length < 4) {
                 const randomColor = colors[Math.floor(Math.random() * colors.length)];
-                if (!options.includes(randomColor)) {
+                if (!options.find(c => c.name === randomColor.name)) {
                     options.push(randomColor);
                 }
             }
@@ -107,6 +161,7 @@
                 const btn = document.createElement('button');
                 btn.className = 'option-btn';
                 btn.style.backgroundColor = color.hex;
+                btn.innerHTML = `<span class="color-emoji">${color.emoji}</span><span>${color.name}</span>`;
                 btn.onclick = () => checkAnswer(color, target);
                 optionsContainer.appendChild(btn);
             });
@@ -117,15 +172,15 @@
             GameSound.play('click');
 
             if (selected.name === target.name) {
-                feedback.textContent = '答對了！好棒！ 🎉';
-                feedback.style.color = 'green';
+                feedback.textContent = '🎉 答對了！好棒！';
+                feedback.style.color = '#27AE60';
                 GameSound.play('correct');
                 GameAudio.correct();
                 RewardSystem.recordCorrectAnswer();
-                setTimeout(initGame, 1500);
+                setTimeout(initGame, 2000);
             } else {
-                feedback.textContent = '再試試看喔！ 💪';
-                feedback.style.color = 'red';
+                feedback.textContent = '💪 再試試看喔！';
+                feedback.style.color = '#E74C3C';
                 GameSound.play('wrong');
                 GameAudio.tryAgain();
                 RewardSystem.resetCorrectStreak();
@@ -133,6 +188,7 @@
         }
 
         window.onload = function () {
+            RewardSystem.createStarDisplay();
             GameAudio.speak('歡迎來到顏色認知遊戲！');
             setTimeout(initGame, 1500);
         };

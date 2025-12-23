@@ -7,79 +7,154 @@
     <title>規律排序 - 快樂學習樂園</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <style>
+        .game-area {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .question {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        /* 序列展示區 */
         .sequence-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 1rem;
+            gap: 12px;
             margin: 2rem auto;
             flex-wrap: wrap;
+            max-width: 600px;
         }
 
         .sequence-item {
-            width: 80px;
-            height: 80px;
+            width: 90px;
+            height: 90px;
             background-color: white;
-            border-radius: 10px;
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-size: 3.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .question-mark {
-            background-color: var(--accent-color);
-            color: var(--text-color);
+            background: linear-gradient(135deg, #FFE66D, #FF6B6B);
+            font-size: 3rem;
             font-weight: bold;
+            animation: pulse 1s infinite;
         }
 
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        /* 選項區 - 大按鈕 */
         .options-container {
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            margin-top: 3rem;
+            gap: 30px;
+            margin-top: 2.5rem;
             flex-wrap: wrap;
         }
 
         .option-btn {
-            width: 100px;
-            height: 100px;
-            border-radius: 15px;
-            border: none;
+            width: 140px;
+            height: 140px;
+            border-radius: 25px;
+            border: 6px solid white;
             background-color: white;
-            font-size: 3.5rem;
+            font-size: 5rem;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .option-btn:hover {
             transform: scale(1.1);
-            background-color: var(--secondary-color);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+            border-color: #4ECDC4;
+        }
+
+        .option-btn:active {
+            transform: scale(0.95);
+        }
+
+        #feedback {
+            font-size: 2rem;
+            margin-top: 20px;
+            min-height: 3rem;
+        }
+
+        .btn {
+            font-size: 1.5rem;
+            padding: 15px 40px;
+            margin-top: 20px;
+        }
+
+        /* 行動端響應式 */
+        @media (max-width: 480px) {
+            .sequence-container {
+                gap: 8px;
+            }
+
+            .sequence-item {
+                width: 60px;
+                height: 60px;
+                font-size: 2.5rem;
+            }
+
+            .question-mark {
+                font-size: 2rem;
+            }
+
+            .options-container {
+                gap: 20px;
+            }
+
+            .option-btn {
+                width: 110px;
+                height: 110px;
+                font-size: 4rem;
+            }
+
+            .question {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 
 <body>
     <header>
-        <h1>規律排序</h1>
+        <h1>🔢 規律排序</h1>
     </header>
     <main>
         <div th:replace="~{fragments :: nav('/cognitive/menu', '上一頁')}"></div>
         <div class="game-area">
-            <div class="question">下一個是什麼？</div>
+            <div class="question">下一個是什麼？🤔</div>
             <div id="sequence-container" class="sequence-container"></div>
             <div id="options-container" class="options-container"></div>
-            <div id="feedback" style="font-size: 2rem; margin-top: 20px; min-height: 3rem;"></div>
-            <button onclick="initGame()" class="btn" style="margin-top: 20px;">下一題</button>
+            <div id="feedback"></div>
+            <button onclick="initGame()" class="btn">🔄 下一題</button>
         </div>
     </main>
 
     <th:block th:replace="~{fragments :: game-scripts}"></th:block>
 
     <script>
-        const items = ['🍎', '🍌', '🍇', '🍊', '🐶', '🐱', '🚗', '⭐'];
+        const items = ['🍎', '🍌', '🍇', '🍊', '🐶', '🐱', '🚗', '⭐', '🌻', '🎈'];
 
         function initGame() {
             const feedback = document.getElementById('feedback');
@@ -106,6 +181,8 @@
                 sequence = [itemA, itemB, itemB, itemA, itemB];
                 answer = itemB;
             }
+
+            GameAudio.speak('看看規律，下一個是什麼呢？');
 
             const seqContainer = document.getElementById('sequence-container');
             seqContainer.innerHTML = '';
@@ -140,8 +217,8 @@
             GameSound.play('click');
 
             if (selected === correct) {
-                feedback.textContent = '答對了！好棒！ 🎉';
-                feedback.style.color = 'green';
+                feedback.textContent = '🎉 答對了！好棒！';
+                feedback.style.color = '#27AE60';
                 GameSound.play('correct');
                 GameAudio.correct();
                 RewardSystem.recordCorrectAnswer();
@@ -150,20 +227,21 @@
                 if (qMark) {
                     qMark.textContent = correct;
                     qMark.classList.remove('question-mark');
-                    qMark.style.backgroundColor = '#95E1D3';
+                    qMark.style.background = '#4ECDC4';
                 }
 
-                setTimeout(initGame, 1500);
+                setTimeout(initGame, 2000);
             } else {
-                feedback.textContent = '再想一想喔！ 🤔';
-                feedback.style.color = 'red';
+                feedback.textContent = '🤔 再想一想喔！';
+                feedback.style.color = '#E74C3C';
                 GameSound.play('wrong');
-                GameAudio.speak('再想一想喔！');
+                GameAudio.tryAgain();
                 RewardSystem.resetCorrectStreak();
             }
         }
 
         window.onload = function () {
+            RewardSystem.createStarDisplay();
             GameAudio.speak('歡迎來到規律排序遊戲！');
             setTimeout(initGame, 1500);
         };

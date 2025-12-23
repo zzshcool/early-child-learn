@@ -7,91 +7,205 @@
     <title>形狀認知 - 快樂學習樂園</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <style>
+        .game-area {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .question {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        /* 目標形狀展示區 */
         .shape-display {
-            width: 150px;
-            height: 150px;
+            width: 180px;
+            height: 180px;
             margin: 0 auto 2rem;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
+        /* 形狀樣式 - 放大版本 */
         .shape {
-            width: 100px;
-            height: 100px;
-            background-color: var(--primary-color);
             display: inline-block;
         }
 
-        .circle {
+        .shape.circle {
+            width: 120px;
+            height: 120px;
+            background-color: #3498DB;
             border-radius: 50%;
         }
 
-        .square {
-            border-radius: 0;
+        .shape.square {
+            width: 120px;
+            height: 120px;
+            background-color: #E74C3C;
+            border-radius: 8px;
         }
 
-        .triangle {
+        .shape.triangle {
             width: 0;
             height: 0;
-            border-left: 50px solid transparent;
-            border-right: 50px solid transparent;
-            border-bottom: 100px solid var(--primary-color);
+            border-left: 60px solid transparent;
+            border-right: 60px solid transparent;
+            border-bottom: 120px solid #27AE60;
             background-color: transparent;
         }
 
-        .rectangle {
-            width: 120px;
-            height: 80px;
+        .shape.rectangle {
+            width: 140px;
+            height: 90px;
+            background-color: #9B59B6;
+            border-radius: 8px;
+        }
+
+        /* 4 個大方塊選項 - 2x2 網格佈局 */
+        .options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 10px;
         }
 
         .option-btn {
-            width: 120px;
-            height: 120px;
+            width: 100%;
+            min-height: 140px;
+            border-radius: 20px;
+            border: 6px solid white;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 10px;
-            margin: 10px;
-            flex-shrink: 0;
+            padding: 15px;
         }
 
-        /* 響應式選項容器 */
-        .options {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            max-width: 100%;
+        .option-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
         }
 
-        @media (max-width: 480px) {
-            .option-btn {
-                width: 80px;
-                height: 80px;
-            }
+        .option-btn:active {
+            transform: scale(0.95);
+        }
 
-            .shape {
-                width: 60px;
-                height: 60px;
-            }
+        /* 選項內的形狀 - 縮小版本 */
+        .option-btn .shape.circle {
+            width: 80px;
+            height: 80px;
+        }
 
-            .triangle {
-                border-left-width: 30px;
-                border-right-width: 30px;
-                border-bottom-width: 60px;
-            }
+        .option-btn .shape.square {
+            width: 80px;
+            height: 80px;
+        }
+
+        .option-btn .shape.triangle {
+            border-left-width: 40px;
+            border-right-width: 40px;
+            border-bottom-width: 80px;
+        }
+
+        .option-btn .shape.rectangle {
+            width: 100px;
+            height: 60px;
         }
 
         .option-btn .shape {
             pointer-events: none;
+        }
+
+        .shape-label {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        #feedback {
+            font-size: 2rem;
+            margin-top: 20px;
+            min-height: 3rem;
+        }
+
+        .btn {
+            font-size: 1.5rem;
+            padding: 15px 40px;
+            margin-top: 20px;
+        }
+
+        /* 行動端響應式 */
+        @media (max-width: 480px) {
+            .shape-display {
+                width: 140px;
+                height: 140px;
+            }
+
+            .shape-display .shape.circle,
+            .shape-display .shape.square {
+                width: 90px;
+                height: 90px;
+            }
+
+            .shape-display .shape.triangle {
+                border-left-width: 45px;
+                border-right-width: 45px;
+                border-bottom-width: 90px;
+            }
+
+            .shape-display .shape.rectangle {
+                width: 110px;
+                height: 70px;
+            }
+
+            .options {
+                max-width: 320px;
+                gap: 15px;
+            }
+
+            .option-btn {
+                min-height: 110px;
+            }
+
+            .option-btn .shape.circle,
+            .option-btn .shape.square {
+                width: 60px;
+                height: 60px;
+            }
+
+            .option-btn .shape.triangle {
+                border-left-width: 30px;
+                border-right-width: 30px;
+                border-bottom-width: 60px;
+            }
+
+            .option-btn .shape.rectangle {
+                width: 80px;
+                height: 50px;
+            }
+
+            .shape-label {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
 
 <body>
     <header>
-        <h1>形狀認知</h1>
+        <h1>🔷 形狀認知</h1>
     </header>
     <main>
         <div th:replace="~{fragments :: nav('/cognitive/menu', '上一頁')}"></div>
@@ -99,15 +213,21 @@
             <div class="question">找出一樣的形狀！</div>
             <div id="target-container" class="shape-display"></div>
             <div id="options-container" class="options"></div>
-            <div id="feedback" style="font-size: 2rem; margin-top: 20px; min-height: 3rem;"></div>
-            <button onclick="initGame()" class="btn" style="margin-top: 20px;">下一題</button>
+            <div id="feedback"></div>
+            <button onclick="initGame()" class="btn">🔄 下一題</button>
         </div>
     </main>
 
     <th:block th:replace="~{fragments :: game-scripts}"></th:block>
 
     <script>
-        const shapes = ['circle', 'square', 'triangle', 'rectangle'];
+        // 形狀定義 - 包含名稱用於語音與標籤
+        const shapes = [
+            { type: 'circle', name: '圓形', emoji: '🔵' },
+            { type: 'square', name: '正方形', emoji: '🟥' },
+            { type: 'triangle', name: '三角形', emoji: '🔺' },
+            { type: 'rectangle', name: '長方形', emoji: '🟪' }
+        ];
 
         function initGame() {
             const feedback = document.getElementById('feedback');
@@ -116,8 +236,9 @@
 
             const targetShape = shapes[Math.floor(Math.random() * shapes.length)];
             const targetContainer = document.getElementById('target-container');
-            targetContainer.innerHTML = `<div class="shape ${targetShape}"></div>`;
-            GameAudio.speak('找出一樣的形狀喔！');
+            targetContainer.innerHTML = `<div class="shape ${targetShape.type}"></div>`;
+
+            GameAudio.speak(`找出${targetShape.name}喔！`);
 
             const optionsContainer = document.getElementById('options-container');
             optionsContainer.innerHTML = '';
@@ -125,17 +246,19 @@
             let options = [targetShape];
             while (options.length < 4) {
                 const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
-                if (!options.includes(randomShape)) {
+                if (!options.find(s => s.type === randomShape.type)) {
                     options.push(randomShape);
                 }
-                if (shapes.length <= 4 && options.length === shapes.length) break;
             }
             options.sort(() => Math.random() - 0.5);
 
             options.forEach(shape => {
                 const btn = document.createElement('button');
                 btn.className = 'option-btn';
-                btn.innerHTML = `<div class="shape ${shape}"></div>`;
+                btn.innerHTML = `
+                    <div class="shape ${shape.type}"></div>
+                    <span class="shape-label">${shape.emoji} ${shape.name}</span>
+                `;
                 btn.onclick = () => checkAnswer(shape, targetShape);
                 optionsContainer.appendChild(btn);
             });
@@ -145,16 +268,16 @@
             const feedback = document.getElementById('feedback');
             GameSound.play('click');
 
-            if (selected === target) {
-                feedback.textContent = '答對了！好棒！ 🎉';
-                feedback.style.color = 'green';
+            if (selected.type === target.type) {
+                feedback.textContent = '🎉 答對了！好棒！';
+                feedback.style.color = '#27AE60';
                 GameSound.play('correct');
                 GameAudio.correct();
                 RewardSystem.recordCorrectAnswer();
-                setTimeout(initGame, 1500);
+                setTimeout(initGame, 2000);
             } else {
-                feedback.textContent = '再試試看喔！ 💪';
-                feedback.style.color = 'red';
+                feedback.textContent = '💪 再試試看喔！';
+                feedback.style.color = '#E74C3C';
                 GameSound.play('wrong');
                 GameAudio.tryAgain();
                 RewardSystem.resetCorrectStreak();
@@ -162,6 +285,7 @@
         }
 
         window.onload = function () {
+            RewardSystem.createStarDisplay();
             GameAudio.speak('歡迎來到形狀認知遊戲！');
             setTimeout(initGame, 1500);
         };
