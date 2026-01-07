@@ -16,7 +16,8 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # 階段 2: 運行階段
-FROM eclipse-temurin:17-jre-alpine
+# 使用 IBM Semeru Runtimes (OpenJ9) 以獲得極致的記憶體效率
+FROM ibm-semeru-runtimes:open-17-jre
 
 # 設定工作目錄
 WORKDIR /app
@@ -27,13 +28,12 @@ COPY --from=build /app/target/*.jar app.jar
 # 暴露應用程式端口（Spring Boot 預設為 8080）
 EXPOSE 8080
 
-# 設定 JVM 參數以優化容器環境
-# 設定 JVM 參數以優化容器環境 (極致記憶體優化)
-# -XX:+UseSerialGC: 使用串行垃圾回收器 (低記憶體開銷)
-# -XX:TieredStopAtLevel=1: 限制 JIT 編譯器優化層級 (大幅減少 Code Cache)
+# 設定 JVM 參數以優化容器環境 (OpenJ9 極致優化)
+# -Xquickstart: 犧牲峰值吞吐量換取快速啟動和低編譯活動
+# -Xtune:virtualized: 針對容器/虛擬化環境優化
+# -Xmx64m: 限制最大堆積記憶體 (OpenJ9 對 Heap 的利用率更高，可以設得更小)
 # -Xss256k: 減少執行緒堆疊大小
-# -Xmx256m: 限制最大堆積記憶體
-ENV JAVA_OPTS="-Xmx256m -Xss256k -XX:+UseSerialGC -XX:TieredStopAtLevel=1 -noverify"
+ENV JAVA_OPTS="-Xmx64m -Xss256k -Xquickstart -Xtune:virtualized -noverify"
 
 # 執行應用程式
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
