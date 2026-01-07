@@ -51,6 +51,9 @@
 			<plugin>
 				<groupId>org.graalvm.buildtools</groupId>
 				<artifactId>native-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>com.zzschool.earlychildlearn.EarlyChildLearnApplication</mainClass>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
