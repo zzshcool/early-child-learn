@@ -1,0 +1,1623 @@
+{
+  "status": "offline-neural-speech-generated",
+  "source": "Chinese: MeloTTS, MyShell.ai, MIT. English: Piper LJSpeech medium, trained from scratch on public-domain LJ Speech. Rendered offline with sherpa-onnx. Official Zhuyin: Taiwan MOE, CC BY 4.0.",
+  "items": [
+    {
+      "id": "word_apple",
+      "lang": "en",
+      "text": "apple"
+    },
+    {
+      "id": "word_apple",
+      "lang": "zh",
+      "text": "蘋果"
+    },
+    {
+      "id": "word_ant",
+      "lang": "en",
+      "text": "ant"
+    },
+    {
+      "id": "word_ant",
+      "lang": "zh",
+      "text": "螞蟻"
+    },
+    {
+      "id": "word_airplane",
+      "lang": "en",
+      "text": "airplane"
+    },
+    {
+      "id": "word_airplane",
+      "lang": "zh",
+      "text": "飛機"
+    },
+    {
+      "id": "word_alligator",
+      "lang": "en",
+      "text": "alligator"
+    },
+    {
+      "id": "word_alligator",
+      "lang": "zh",
+      "text": "短吻鱷"
+    },
+    {
+      "id": "word_ball",
+      "lang": "en",
+      "text": "ball"
+    },
+    {
+      "id": "word_ball",
+      "lang": "zh",
+      "text": "球"
+    },
+    {
+      "id": "word_banana",
+      "lang": "en",
+      "text": "banana"
+    },
+    {
+      "id": "word_banana",
+      "lang": "zh",
+      "text": "香蕉"
+    },
+    {
+      "id": "word_bear",
+      "lang": "en",
+      "text": "bear"
+    },
+    {
+      "id": "word_bear",
+      "lang": "zh",
+      "text": "熊"
+    },
+    {
+      "id": "word_bus",
+      "lang": "en",
+      "text": "bus"
+    },
+    {
+      "id": "word_bus",
+      "lang": "zh",
+      "text": "公車"
+    },
+    {
+      "id": "word_cat",
+      "lang": "en",
+      "text": "cat"
+    },
+    {
+      "id": "word_cat",
+      "lang": "zh",
+      "text": "貓"
+    },
+    {
+      "id": "word_car",
+      "lang": "en",
+      "text": "car"
+    },
+    {
+      "id": "word_car",
+      "lang": "zh",
+      "text": "汽車"
+    },
+    {
+      "id": "word_cake",
+      "lang": "en",
+      "text": "cake"
+    },
+    {
+      "id": "word_cake",
+      "lang": "zh",
+      "text": "蛋糕"
+    },
+    {
+      "id": "word_cow",
+      "lang": "en",
+      "text": "cow"
+    },
+    {
+      "id": "word_cow",
+      "lang": "zh",
+      "text": "牛"
+    },
+    {
+      "id": "word_dog",
+      "lang": "en",
+      "text": "dog"
+    },
+    {
+      "id": "word_dog",
+      "lang": "zh",
+      "text": "狗"
+    },
+    {
+      "id": "word_duck",
+      "lang": "en",
+      "text": "duck"
+    },
+    {
+      "id": "word_duck",
+      "lang": "zh",
+      "text": "鴨子"
+    },
+    {
+      "id": "word_door",
+      "lang": "en",
+      "text": "door"
+    },
+    {
+      "id": "word_door",
+      "lang": "zh",
+      "text": "門"
+    },
+    {
+      "id": "word_drum",
+      "lang": "en",
+      "text": "drum"
+    },
+    {
+      "id": "word_drum",
+      "lang": "zh",
+      "text": "鼓"
+    },
+    {
+      "id": "word_egg",
+      "lang": "en",
+      "text": "egg"
+    },
+    {
+      "id": "word_egg",
+      "lang": "zh",
+      "text": "蛋"
+    },
+    {
+      "id": "word_elephant",
+      "lang": "en",
+      "text": "elephant"
+    },
+    {
+      "id": "word_elephant",
+      "lang": "zh",
+      "text": "大象"
+    },
+    {
+      "id": "word_ear",
+      "lang": "en",
+      "text": "ear"
+    },
+    {
+      "id": "word_ear",
+      "lang": "zh",
+      "text": "耳朵"
+    },
+    {
+      "id": "word_eye",
+      "lang": "en",
+      "text": "eye"
+    },
+    {
+      "id": "word_eye",
+      "lang": "zh",
+      "text": "眼睛"
+    },
+    {
+      "id": "word_fish",
+      "lang": "en",
+      "text": "fish"
+    },
+    {
+      "id": "word_fish",
+      "lang": "zh",
+      "text": "魚"
+    },
+    {
+      "id": "word_frog",
+      "lang": "en",
+      "text": "frog"
+    },
+    {
+      "id": "word_frog",
+      "lang": "zh",
+      "text": "青蛙"
+    },
+    {
+      "id": "word_flower",
+      "lang": "en",
+      "text": "flower"
+    },
+    {
+      "id": "word_flower",
+      "lang": "zh",
+      "text": "花"
+    },
+    {
+      "id": "word_fire_truck",
+      "lang": "en",
+      "text": "fire truck"
+    },
+    {
+      "id": "word_fire_truck",
+      "lang": "zh",
+      "text": "消防車"
+    },
+    {
+      "id": "word_goat",
+      "lang": "en",
+      "text": "goat"
+    },
+    {
+      "id": "word_goat",
+      "lang": "zh",
+      "text": "山羊"
+    },
+    {
+      "id": "word_grape",
+      "lang": "en",
+      "text": "grape"
+    },
+    {
+      "id": "word_grape",
+      "lang": "zh",
+      "text": "葡萄"
+    },
+    {
+      "id": "word_giraffe",
+      "lang": "en",
+      "text": "giraffe"
+    },
+    {
+      "id": "word_giraffe",
+      "lang": "zh",
+      "text": "長頸鹿"
+    },
+    {
+      "id": "word_guitar",
+      "lang": "en",
+      "text": "guitar"
+    },
+    {
+      "id": "word_guitar",
+      "lang": "zh",
+      "text": "吉他"
+    },
+    {
+      "id": "word_hat",
+      "lang": "en",
+      "text": "hat"
+    },
+    {
+      "id": "word_hat",
+      "lang": "zh",
+      "text": "帽子"
+    },
+    {
+      "id": "word_horse",
+      "lang": "en",
+      "text": "horse"
+    },
+    {
+      "id": "word_horse",
+      "lang": "zh",
+      "text": "馬"
+    },
+    {
+      "id": "word_house",
+      "lang": "en",
+      "text": "house"
+    },
+    {
+      "id": "word_house",
+      "lang": "zh",
+      "text": "房子"
+    },
+    {
+      "id": "word_hand",
+      "lang": "en",
+      "text": "hand"
+    },
+    {
+      "id": "word_hand",
+      "lang": "zh",
+      "text": "手"
+    },
+    {
+      "id": "word_ice_cream",
+      "lang": "en",
+      "text": "ice cream"
+    },
+    {
+      "id": "word_ice_cream",
+      "lang": "zh",
+      "text": "冰淇淋"
+    },
+    {
+      "id": "word_igloo",
+      "lang": "en",
+      "text": "igloo"
+    },
+    {
+      "id": "word_igloo",
+      "lang": "zh",
+      "text": "冰屋"
+    },
+    {
+      "id": "word_insect",
+      "lang": "en",
+      "text": "insect"
+    },
+    {
+      "id": "word_insect",
+      "lang": "zh",
+      "text": "昆蟲"
+    },
+    {
+      "id": "word_iguana",
+      "lang": "en",
+      "text": "iguana"
+    },
+    {
+      "id": "word_iguana",
+      "lang": "zh",
+      "text": "鬣蜥"
+    },
+    {
+      "id": "word_juice",
+      "lang": "en",
+      "text": "juice"
+    },
+    {
+      "id": "word_juice",
+      "lang": "zh",
+      "text": "果汁"
+    },
+    {
+      "id": "word_jacket",
+      "lang": "en",
+      "text": "jacket"
+    },
+    {
+      "id": "word_jacket",
+      "lang": "zh",
+      "text": "外套"
+    },
+    {
+      "id": "word_jellyfish",
+      "lang": "en",
+      "text": "jellyfish"
+    },
+    {
+      "id": "word_jellyfish",
+      "lang": "zh",
+      "text": "水母"
+    },
+    {
+      "id": "word_jar",
+      "lang": "en",
+      "text": "jar"
+    },
+    {
+      "id": "word_jar",
+      "lang": "zh",
+      "text": "罐子"
+    },
+    {
+      "id": "word_kite",
+      "lang": "en",
+      "text": "kite"
+    },
+    {
+      "id": "word_kite",
+      "lang": "zh",
+      "text": "風箏"
+    },
+    {
+      "id": "word_key",
+      "lang": "en",
+      "text": "key"
+    },
+    {
+      "id": "word_key",
+      "lang": "zh",
+      "text": "鑰匙"
+    },
+    {
+      "id": "word_kangaroo",
+      "lang": "en",
+      "text": "kangaroo"
+    },
+    {
+      "id": "word_kangaroo",
+      "lang": "zh",
+      "text": "袋鼠"
+    },
+    {
+      "id": "word_koala",
+      "lang": "en",
+      "text": "koala"
+    },
+    {
+      "id": "word_koala",
+      "lang": "zh",
+      "text": "無尾熊"
+    },
+    {
+      "id": "word_lion",
+      "lang": "en",
+      "text": "lion"
+    },
+    {
+      "id": "word_lion",
+      "lang": "zh",
+      "text": "獅子"
+    },
+    {
+      "id": "word_lemon",
+      "lang": "en",
+      "text": "lemon"
+    },
+    {
+      "id": "word_lemon",
+      "lang": "zh",
+      "text": "檸檬"
+    },
+    {
+      "id": "word_leaf",
+      "lang": "en",
+      "text": "leaf"
+    },
+    {
+      "id": "word_leaf",
+      "lang": "zh",
+      "text": "葉子"
+    },
+    {
+      "id": "word_lamp",
+      "lang": "en",
+      "text": "lamp"
+    },
+    {
+      "id": "word_lamp",
+      "lang": "zh",
+      "text": "燈"
+    },
+    {
+      "id": "word_moon",
+      "lang": "en",
+      "text": "moon"
+    },
+    {
+      "id": "word_moon",
+      "lang": "zh",
+      "text": "月亮"
+    },
+    {
+      "id": "word_monkey",
+      "lang": "en",
+      "text": "monkey"
+    },
+    {
+      "id": "word_monkey",
+      "lang": "zh",
+      "text": "猴子"
+    },
+    {
+      "id": "word_milk",
+      "lang": "en",
+      "text": "milk"
+    },
+    {
+      "id": "word_milk",
+      "lang": "zh",
+      "text": "牛奶"
+    },
+    {
+      "id": "word_mouse",
+      "lang": "en",
+      "text": "mouse"
+    },
+    {
+      "id": "word_mouse",
+      "lang": "zh",
+      "text": "老鼠"
+    },
+    {
+      "id": "word_nose",
+      "lang": "en",
+      "text": "nose"
+    },
+    {
+      "id": "word_nose",
+      "lang": "zh",
+      "text": "鼻子"
+    },
+    {
+      "id": "word_nest",
+      "lang": "en",
+      "text": "nest"
+    },
+    {
+      "id": "word_nest",
+      "lang": "zh",
+      "text": "鳥巢"
+    },
+    {
+      "id": "word_net",
+      "lang": "en",
+      "text": "net"
+    },
+    {
+      "id": "word_net",
+      "lang": "zh",
+      "text": "網子"
+    },
+    {
+      "id": "word_noodles",
+      "lang": "en",
+      "text": "noodles"
+    },
+    {
+      "id": "word_noodles",
+      "lang": "zh",
+      "text": "麵"
+    },
+    {
+      "id": "word_orange",
+      "lang": "en",
+      "text": "orange"
+    },
+    {
+      "id": "word_orange",
+      "lang": "zh",
+      "text": "柳橙"
+    },
+    {
+      "id": "word_owl",
+      "lang": "en",
+      "text": "owl"
+    },
+    {
+      "id": "word_owl",
+      "lang": "zh",
+      "text": "貓頭鷹"
+    },
+    {
+      "id": "word_octopus",
+      "lang": "en",
+      "text": "octopus"
+    },
+    {
+      "id": "word_octopus",
+      "lang": "zh",
+      "text": "章魚"
+    },
+    {
+      "id": "word_onion",
+      "lang": "en",
+      "text": "onion"
+    },
+    {
+      "id": "word_onion",
+      "lang": "zh",
+      "text": "洋蔥"
+    },
+    {
+      "id": "word_pig",
+      "lang": "en",
+      "text": "pig"
+    },
+    {
+      "id": "word_pig",
+      "lang": "zh",
+      "text": "豬"
+    },
+    {
+      "id": "word_panda",
+      "lang": "en",
+      "text": "panda"
+    },
+    {
+      "id": "word_panda",
+      "lang": "zh",
+      "text": "貓熊"
+    },
+    {
+      "id": "word_pear",
+      "lang": "en",
+      "text": "pear"
+    },
+    {
+      "id": "word_pear",
+      "lang": "zh",
+      "text": "梨子"
+    },
+    {
+      "id": "word_pencil",
+      "lang": "en",
+      "text": "pencil"
+    },
+    {
+      "id": "word_pencil",
+      "lang": "zh",
+      "text": "鉛筆"
+    },
+    {
+      "id": "word_queen",
+      "lang": "en",
+      "text": "queen"
+    },
+    {
+      "id": "word_queen",
+      "lang": "zh",
+      "text": "女王"
+    },
+    {
+      "id": "word_quilt",
+      "lang": "en",
+      "text": "quilt"
+    },
+    {
+      "id": "word_quilt",
+      "lang": "zh",
+      "text": "被子"
+    },
+    {
+      "id": "word_quail",
+      "lang": "en",
+      "text": "quail"
+    },
+    {
+      "id": "word_quail",
+      "lang": "zh",
+      "text": "鵪鶉"
+    },
+    {
+      "id": "word_quill",
+      "lang": "en",
+      "text": "quill"
+    },
+    {
+      "id": "word_quill",
+      "lang": "zh",
+      "text": "羽毛筆"
+    },
+    {
+      "id": "word_rabbit",
+      "lang": "en",
+      "text": "rabbit"
+    },
+    {
+      "id": "word_rabbit",
+      "lang": "zh",
+      "text": "兔子"
+    },
+    {
+      "id": "word_rainbow",
+      "lang": "en",
+      "text": "rainbow"
+    },
+    {
+      "id": "word_rainbow",
+      "lang": "zh",
+      "text": "彩虹"
+    },
+    {
+      "id": "word_robot",
+      "lang": "en",
+      "text": "robot"
+    },
+    {
+      "id": "word_robot",
+      "lang": "zh",
+      "text": "機器人"
+    },
+    {
+      "id": "word_ring",
+      "lang": "en",
+      "text": "ring"
+    },
+    {
+      "id": "word_ring",
+      "lang": "zh",
+      "text": "戒指"
+    },
+    {
+      "id": "word_sun",
+      "lang": "en",
+      "text": "sun"
+    },
+    {
+      "id": "word_sun",
+      "lang": "zh",
+      "text": "太陽"
+    },
+    {
+      "id": "word_star",
+      "lang": "en",
+      "text": "star"
+    },
+    {
+      "id": "word_star",
+      "lang": "zh",
+      "text": "星星"
+    },
+    {
+      "id": "word_snake",
+      "lang": "en",
+      "text": "snake"
+    },
+    {
+      "id": "word_snake",
+      "lang": "zh",
+      "text": "蛇"
+    },
+    {
+      "id": "word_shoe",
+      "lang": "en",
+      "text": "shoe"
+    },
+    {
+      "id": "word_shoe",
+      "lang": "zh",
+      "text": "鞋子"
+    },
+    {
+      "id": "word_tiger",
+      "lang": "en",
+      "text": "tiger"
+    },
+    {
+      "id": "word_tiger",
+      "lang": "zh",
+      "text": "老虎"
+    },
+    {
+      "id": "word_train",
+      "lang": "en",
+      "text": "train"
+    },
+    {
+      "id": "word_train",
+      "lang": "zh",
+      "text": "火車"
+    },
+    {
+      "id": "word_tree",
+      "lang": "en",
+      "text": "tree"
+    },
+    {
+      "id": "word_tree",
+      "lang": "zh",
+      "text": "樹"
+    },
+    {
+      "id": "word_turtle",
+      "lang": "en",
+      "text": "turtle"
+    },
+    {
+      "id": "word_turtle",
+      "lang": "zh",
+      "text": "烏龜"
+    },
+    {
+      "id": "word_umbrella",
+      "lang": "en",
+      "text": "umbrella"
+    },
+    {
+      "id": "word_umbrella",
+      "lang": "zh",
+      "text": "雨傘"
+    },
+    {
+      "id": "word_uncle",
+      "lang": "en",
+      "text": "uncle"
+    },
+    {
+      "id": "word_uncle",
+      "lang": "zh",
+      "text": "叔叔"
+    },
+    {
+      "id": "word_uniform",
+      "lang": "en",
+      "text": "uniform"
+    },
+    {
+      "id": "word_uniform",
+      "lang": "zh",
+      "text": "制服"
+    },
+    {
+      "id": "word_unicorn",
+      "lang": "en",
+      "text": "unicorn"
+    },
+    {
+      "id": "word_unicorn",
+      "lang": "zh",
+      "text": "獨角獸（想像動物）"
+    },
+    {
+      "id": "word_van",
+      "lang": "en",
+      "text": "van"
+    },
+    {
+      "id": "word_van",
+      "lang": "zh",
+      "text": "廂型車"
+    },
+    {
+      "id": "word_vase",
+      "lang": "en",
+      "text": "vase"
+    },
+    {
+      "id": "word_vase",
+      "lang": "zh",
+      "text": "花瓶"
+    },
+    {
+      "id": "word_violin",
+      "lang": "en",
+      "text": "violin"
+    },
+    {
+      "id": "word_violin",
+      "lang": "zh",
+      "text": "小提琴"
+    },
+    {
+      "id": "word_vest",
+      "lang": "en",
+      "text": "vest"
+    },
+    {
+      "id": "word_vest",
+      "lang": "zh",
+      "text": "背心"
+    },
+    {
+      "id": "word_whale",
+      "lang": "en",
+      "text": "whale"
+    },
+    {
+      "id": "word_whale",
+      "lang": "zh",
+      "text": "鯨魚"
+    },
+    {
+      "id": "word_watermelon",
+      "lang": "en",
+      "text": "watermelon"
+    },
+    {
+      "id": "word_watermelon",
+      "lang": "zh",
+      "text": "西瓜"
+    },
+    {
+      "id": "word_watch",
+      "lang": "en",
+      "text": "watch"
+    },
+    {
+      "id": "word_watch",
+      "lang": "zh",
+      "text": "手錶"
+    },
+    {
+      "id": "word_window",
+      "lang": "en",
+      "text": "window"
+    },
+    {
+      "id": "word_window",
+      "lang": "zh",
+      "text": "窗戶"
+    },
+    {
+      "id": "word_x_ray",
+      "lang": "en",
+      "text": "x-ray"
+    },
+    {
+      "id": "word_x_ray",
+      "lang": "zh",
+      "text": "X光影像"
+    },
+    {
+      "id": "word_box",
+      "lang": "en",
+      "text": "box"
+    },
+    {
+      "id": "word_box",
+      "lang": "zh",
+      "text": "盒子"
+    },
+    {
+      "id": "word_fox",
+      "lang": "en",
+      "text": "fox"
+    },
+    {
+      "id": "word_fox",
+      "lang": "zh",
+      "text": "狐狸"
+    },
+    {
+      "id": "word_six",
+      "lang": "en",
+      "text": "six"
+    },
+    {
+      "id": "word_six",
+      "lang": "zh",
+      "text": "六"
+    },
+    {
+      "id": "word_yak",
+      "lang": "en",
+      "text": "yak"
+    },
+    {
+      "id": "word_yak",
+      "lang": "zh",
+      "text": "犛牛"
+    },
+    {
+      "id": "word_yarn",
+      "lang": "en",
+      "text": "yarn"
+    },
+    {
+      "id": "word_yarn",
+      "lang": "zh",
+      "text": "毛線"
+    },
+    {
+      "id": "word_yo_yo",
+      "lang": "en",
+      "text": "yo-yo"
+    },
+    {
+      "id": "word_yo_yo",
+      "lang": "zh",
+      "text": "溜溜球"
+    },
+    {
+      "id": "word_yogurt",
+      "lang": "en",
+      "text": "yogurt"
+    },
+    {
+      "id": "word_yogurt",
+      "lang": "zh",
+      "text": "優格"
+    },
+    {
+      "id": "word_zebra",
+      "lang": "en",
+      "text": "zebra"
+    },
+    {
+      "id": "word_zebra",
+      "lang": "zh",
+      "text": "斑馬"
+    },
+    {
+      "id": "word_zoo",
+      "lang": "en",
+      "text": "zoo"
+    },
+    {
+      "id": "word_zoo",
+      "lang": "zh",
+      "text": "動物園"
+    },
+    {
+      "id": "word_zipper",
+      "lang": "en",
+      "text": "zipper"
+    },
+    {
+      "id": "word_zipper",
+      "lang": "zh",
+      "text": "拉鍊"
+    },
+    {
+      "id": "word_zero",
+      "lang": "en",
+      "text": "zero"
+    },
+    {
+      "id": "word_zero",
+      "lang": "zh",
+      "text": "零"
+    },
+    {
+      "id": "red",
+      "lang": "zh",
+      "text": "找一找紅色。像上面的圖片一樣，選一個。"
+    },
+    {
+      "id": "red",
+      "lang": "en",
+      "text": "Find red. Choose the matching picture."
+    },
+    {
+      "id": "blue",
+      "lang": "zh",
+      "text": "找一找藍色。"
+    },
+    {
+      "id": "blue",
+      "lang": "en",
+      "text": "Find blue."
+    },
+    {
+      "id": "yellow",
+      "lang": "zh",
+      "text": "找一找黃色。"
+    },
+    {
+      "id": "yellow",
+      "lang": "en",
+      "text": "Find yellow."
+    },
+    {
+      "id": "green",
+      "lang": "zh",
+      "text": "找一找綠色。"
+    },
+    {
+      "id": "green",
+      "lang": "en",
+      "text": "Find green."
+    },
+    {
+      "id": "orange",
+      "lang": "zh",
+      "text": "找一找橙色。"
+    },
+    {
+      "id": "orange",
+      "lang": "en",
+      "text": "Find orange."
+    },
+    {
+      "id": "purple",
+      "lang": "zh",
+      "text": "找一找紫色。"
+    },
+    {
+      "id": "purple",
+      "lang": "en",
+      "text": "Find purple."
+    },
+    {
+      "id": "black",
+      "lang": "zh",
+      "text": "找一找黑色。"
+    },
+    {
+      "id": "black",
+      "lang": "en",
+      "text": "Find black."
+    },
+    {
+      "id": "white",
+      "lang": "zh",
+      "text": "找一找白色。"
+    },
+    {
+      "id": "white",
+      "lang": "en",
+      "text": "Find white."
+    },
+    {
+      "id": "circle",
+      "lang": "zh",
+      "text": "找一找圓形。"
+    },
+    {
+      "id": "circle",
+      "lang": "en",
+      "text": "Find the circle."
+    },
+    {
+      "id": "triangle",
+      "lang": "zh",
+      "text": "找一找三角形。"
+    },
+    {
+      "id": "triangle",
+      "lang": "en",
+      "text": "Find the triangle."
+    },
+    {
+      "id": "square",
+      "lang": "zh",
+      "text": "找一找正方形。"
+    },
+    {
+      "id": "square",
+      "lang": "en",
+      "text": "Find the square."
+    },
+    {
+      "id": "rectangle",
+      "lang": "zh",
+      "text": "找一找長方形。"
+    },
+    {
+      "id": "rectangle",
+      "lang": "en",
+      "text": "Find the rectangle."
+    },
+    {
+      "id": "oval",
+      "lang": "zh",
+      "text": "找一找橢圓形。"
+    },
+    {
+      "id": "oval",
+      "lang": "en",
+      "text": "Find the oval."
+    },
+    {
+      "id": "star",
+      "lang": "zh",
+      "text": "找一找星形。"
+    },
+    {
+      "id": "star",
+      "lang": "en",
+      "text": "Find the star."
+    },
+    {
+      "id": "big",
+      "lang": "zh",
+      "text": "找比較大的。"
+    },
+    {
+      "id": "big",
+      "lang": "en",
+      "text": "Find the bigger one."
+    },
+    {
+      "id": "small",
+      "lang": "zh",
+      "text": "找比較小的。"
+    },
+    {
+      "id": "small",
+      "lang": "en",
+      "text": "Find the smaller one."
+    },
+    {
+      "id": "long",
+      "lang": "zh",
+      "text": "找比較長的。"
+    },
+    {
+      "id": "long",
+      "lang": "en",
+      "text": "Find the longer one."
+    },
+    {
+      "id": "short",
+      "lang": "zh",
+      "text": "找比較短的。"
+    },
+    {
+      "id": "short",
+      "lang": "en",
+      "text": "Find the shorter one."
+    },
+    {
+      "id": "count",
+      "lang": "zh",
+      "text": "有幾片葉子？數一數，再選一個數字。"
+    },
+    {
+      "id": "count",
+      "lang": "en",
+      "text": "How many leaves? Count them, then choose a number."
+    },
+    {
+      "id": "correct",
+      "lang": "zh",
+      "text": "找到了，做得很好！"
+    },
+    {
+      "id": "correct",
+      "lang": "en",
+      "text": "You found it! Well done!"
+    },
+    {
+      "id": "weather_question",
+      "lang": "zh",
+      "text": "今天天氣怎麼樣？"
+    },
+    {
+      "id": "weather_question",
+      "lang": "en",
+      "text": "How is the weather today?"
+    },
+    {
+      "id": "sunny",
+      "lang": "zh",
+      "text": "今天是晴天。"
+    },
+    {
+      "id": "sunny",
+      "lang": "en",
+      "text": "It's sunny!"
+    },
+    {
+      "id": "cloudy",
+      "lang": "zh",
+      "text": "今天多雲。"
+    },
+    {
+      "id": "cloudy",
+      "lang": "en",
+      "text": "It's cloudy!"
+    },
+    {
+      "id": "rainy",
+      "lang": "zh",
+      "text": "今天下雨。"
+    },
+    {
+      "id": "rainy",
+      "lang": "en",
+      "text": "It's rainy!"
+    },
+    {
+      "id": "windy",
+      "lang": "zh",
+      "text": "今天有風。"
+    },
+    {
+      "id": "windy",
+      "lang": "en",
+      "text": "It's windy!"
+    },
+    {
+      "id": "letter_A",
+      "lang": "en",
+      "text": "A",
+      "kind": "letter"
+    },
+    {
+      "id": "letter_B",
+      "lang": "en",
+      "text": "B",
+      "kind": "letter"
+    },
+    {
+      "id": "letter_C",
+      "lang": "en",
+      "text": "C",
+      "kind": "letter"
+    },
+    {
+      "id": "letter_D",
+      "lang": "en",
+      "text": "D",
+      "kind": "letter"
+    },
+    {
+      "id": "letter_E",
+      "lang": "en",
+      "text": "E",
+      "kind": "letter"
+    },
+    {
+      "id": "letter_F",
+      "lang": "en",
+      "text": "F",
+      "kind": "letter"
+    },
+    {
+      "id": "letter_G",
+      "lang": "en",
+      "text": "G",
+      "kind": "letter"
+    },
+    {
+      "id": "letter_H",
+      "lang": "en",
+      "text": "H",
+      "kind": "letter"
+    },
+    {
+      "id": "letter_I",
+      "lang": "en",
+      "text": "I",
+      "kind": "letter"
+    },
+    {
+      "id": "letter_J",
+      "lang": "en",
+      "text": "J",
+      "kind": "letter"
+    },
+    {
+      "id": "letter_K",
+      "lang": "en",
+      "text": "K",
+      "kind": "letter"
+    },
+    {
+      "id": "letter_L",
+      "lang": "en",
+      "text": "L",
+      "kind": "letter"
+    },
+    {
+      "id": "letter_M",
+      "lang": "en",
+      "text": "M",
+      "kind": "letter"
+    },
+    {
+      "id": "letter_N",
+      "lang": "en",
+      "text": "N",
+      "kind": "letter"
+    },
+    {
+      "id": "letter_O",
+      "lang": "en",
+      "text": "O",
+      "kind": "letter"
+    },
+    {
+      "id": "letter_P",
+      "lang": "en",
+      "text": "P",
+      "kind": "letter"
+    },
+    {
+      "id": "letter_Q",
+      "lang": "en",
+      "text": "Q",
+      "kind": "letter"
+    },
+    {
+      "id": "letter_R",
+      "lang": "en",
+      "text": "R",
+      "kind": "letter"
+    },
+    {
+      "id": "letter_S",
+      "lang": "en",
+      "text": "S",
+      "kind": "letter"
+    },
+    {
+      "id": "letter_T",
+      "lang": "en",
+      "text": "T",
+      "kind": "letter"
+    },
+    {
+      "id": "letter_U",
+      "lang": "en",
+      "text": "U",
+      "kind": "letter"
+    },
+    {
+      "id": "letter_V",
+      "lang": "en",
+      "text": "V",
+      "kind": "letter"
+    },
+    {
+      "id": "letter_W",
+      "lang": "en",
+      "text": "W",
+      "kind": "letter"
+    },
+    {
+      "id": "letter_X",
+      "lang": "en",
+      "text": "X",
+      "kind": "letter"
+    },
+    {
+      "id": "letter_Y",
+      "lang": "en",
+      "text": "Y",
+      "kind": "letter"
+    },
+    {
+      "id": "letter_Z",
+      "lang": "en",
+      "text": "Z",
+      "kind": "letter"
+    },
+    {
+      "id": "beach_color",
+      "lang": "zh",
+      "text": "幫小兔子找和上面一樣顏色的傘。"
+    },
+    {
+      "id": "beach_color",
+      "lang": "en",
+      "text": "Find an umbrella that matches the color above."
+    },
+    {
+      "id": "beach_shape",
+      "lang": "zh",
+      "text": "把玩具放到一樣的形狀上。"
+    },
+    {
+      "id": "beach_shape",
+      "lang": "en",
+      "text": "Put the toy on the matching shape."
+    },
+    {
+      "id": "beach_big",
+      "lang": "zh",
+      "text": "找比較大的。"
+    },
+    {
+      "id": "beach_big",
+      "lang": "en",
+      "text": "Find the bigger one."
+    },
+    {
+      "id": "beach_small",
+      "lang": "zh",
+      "text": "找比較小的。"
+    },
+    {
+      "id": "beach_small",
+      "lang": "en",
+      "text": "Find the smaller one."
+    },
+    {
+      "id": "beach_tall",
+      "lang": "zh",
+      "text": "找比較高的。"
+    },
+    {
+      "id": "beach_tall",
+      "lang": "en",
+      "text": "Find the taller one."
+    },
+    {
+      "id": "beach_short",
+      "lang": "zh",
+      "text": "找比較矮的。"
+    },
+    {
+      "id": "beach_short",
+      "lang": "en",
+      "text": "Find the shorter one."
+    },
+    {
+      "id": "beach_below",
+      "lang": "zh",
+      "text": "把球放在桌子下面。"
+    },
+    {
+      "id": "beach_below",
+      "lang": "en",
+      "text": "Put the ball under the table."
+    },
+    {
+      "id": "beach_fruit",
+      "lang": "zh",
+      "text": "把水果放進籃子。"
+    },
+    {
+      "id": "beach_fruit",
+      "lang": "en",
+      "text": "Put a fruit in the basket."
+    },
+    {
+      "id": "beach_pattern",
+      "lang": "zh",
+      "text": "接下來放哪個？"
+    },
+    {
+      "id": "beach_pattern",
+      "lang": "en",
+      "text": "Which one comes next?"
+    },
+    {
+      "id": "beach_different",
+      "lang": "zh",
+      "text": "哪個不一樣？"
+    },
+    {
+      "id": "beach_different",
+      "lang": "en",
+      "text": "Which one is different?"
+    },
+    {
+      "id": "beach_more",
+      "lang": "zh",
+      "text": "哪邊比較多？"
+    },
+    {
+      "id": "beach_more",
+      "lang": "en",
+      "text": "Which side has more?"
+    },
+    {
+      "id": "beach_less",
+      "lang": "zh",
+      "text": "哪邊比較少？"
+    },
+    {
+      "id": "beach_less",
+      "lang": "en",
+      "text": "Which side has fewer?"
+    },
+    {
+      "id": "bridge_instruction",
+      "lang": "zh",
+      "text": "選一塊木板，讓小兔子過河。"
+    },
+    {
+      "id": "bridge_instruction",
+      "lang": "en",
+      "text": "Choose a plank so Rabbit can cross."
+    },
+    {
+      "id": "fruit_instruction",
+      "lang": "zh",
+      "text": "照著訂單，把水果放進籃子，再交給小兔子。"
+    },
+    {
+      "id": "fruit_instruction",
+      "lang": "en",
+      "text": "Follow the order. Put the fruit in the basket and give it to Rabbit."
+    },
+    {
+      "id": "station_instruction",
+      "lang": "zh",
+      "text": "把時鐘調好，讓火車出發。"
+    },
+    {
+      "id": "station_instruction",
+      "lang": "en",
+      "text": "Set the clock so the train can leave."
+    },
+    {
+      "id": "writing_instruction",
+      "lang": "zh",
+      "text": "從起點慢慢畫。也可以自由畫畫，再放進作品簿。"
+    },
+    {
+      "id": "writing_instruction",
+      "lang": "en",
+      "text": "Start at the dot and draw slowly. You can also draw freely and save your picture."
+    },
+    {
+      "id": "rest_instruction",
+      "lang": "zh",
+      "text": "休息一下。放下螢幕，看看遠方。"
+    },
+    {
+      "id": "rest_instruction",
+      "lang": "en",
+      "text": "Take a break. Put the screen down and look around."
+    }
+  ],
+  "model_source": "https://huggingface.co/myshell-ai/MeloTTS-Chinese"
+}

@@ -1,0 +1,730 @@
+[
+  {
+    "id": "apple",
+    "letter": "A",
+    "en": "apple",
+    "zh": "蘋果",
+    "picture": "🍎"
+  },
+  {
+    "id": "ant",
+    "letter": "A",
+    "en": "ant",
+    "zh": "螞蟻",
+    "picture": "🐜"
+  },
+  {
+    "id": "airplane",
+    "letter": "A",
+    "en": "airplane",
+    "zh": "飛機",
+    "picture": "✈️"
+  },
+  {
+    "id": "alligator",
+    "letter": "A",
+    "en": "alligator",
+    "zh": "短吻鱷",
+    "picture": "🐊"
+  },
+  {
+    "id": "ball",
+    "letter": "B",
+    "en": "ball",
+    "zh": "球",
+    "picture": "⚽"
+  },
+  {
+    "id": "banana",
+    "letter": "B",
+    "en": "banana",
+    "zh": "香蕉",
+    "picture": "🍌"
+  },
+  {
+    "id": "bear",
+    "letter": "B",
+    "en": "bear",
+    "zh": "熊",
+    "picture": "🐻"
+  },
+  {
+    "id": "bus",
+    "letter": "B",
+    "en": "bus",
+    "zh": "公車",
+    "picture": "🚌"
+  },
+  {
+    "id": "cat",
+    "letter": "C",
+    "en": "cat",
+    "zh": "貓",
+    "picture": "🐱"
+  },
+  {
+    "id": "car",
+    "letter": "C",
+    "en": "car",
+    "zh": "汽車",
+    "picture": "🚗"
+  },
+  {
+    "id": "cake",
+    "letter": "C",
+    "en": "cake",
+    "zh": "蛋糕",
+    "picture": "🎂"
+  },
+  {
+    "id": "cow",
+    "letter": "C",
+    "en": "cow",
+    "zh": "牛",
+    "picture": "🐄"
+  },
+  {
+    "id": "dog",
+    "letter": "D",
+    "en": "dog",
+    "zh": "狗",
+    "picture": "🐶"
+  },
+  {
+    "id": "duck",
+    "letter": "D",
+    "en": "duck",
+    "zh": "鴨子",
+    "picture": "🦆"
+  },
+  {
+    "id": "door",
+    "letter": "D",
+    "en": "door",
+    "zh": "門",
+    "picture": "🚪"
+  },
+  {
+    "id": "drum",
+    "letter": "D",
+    "en": "drum",
+    "zh": "鼓",
+    "picture": "🥁"
+  },
+  {
+    "id": "egg",
+    "letter": "E",
+    "en": "egg",
+    "zh": "蛋",
+    "picture": "🥚"
+  },
+  {
+    "id": "elephant",
+    "letter": "E",
+    "en": "elephant",
+    "zh": "大象",
+    "picture": "🐘"
+  },
+  {
+    "id": "ear",
+    "letter": "E",
+    "en": "ear",
+    "zh": "耳朵",
+    "picture": "👂"
+  },
+  {
+    "id": "eye",
+    "letter": "E",
+    "en": "eye",
+    "zh": "眼睛",
+    "picture": "👁️"
+  },
+  {
+    "id": "fish",
+    "letter": "F",
+    "en": "fish",
+    "zh": "魚",
+    "picture": "🐟"
+  },
+  {
+    "id": "frog",
+    "letter": "F",
+    "en": "frog",
+    "zh": "青蛙",
+    "picture": "🐸"
+  },
+  {
+    "id": "flower",
+    "letter": "F",
+    "en": "flower",
+    "zh": "花",
+    "picture": "🌻"
+  },
+  {
+    "id": "fire_truck",
+    "letter": "F",
+    "en": "fire truck",
+    "zh": "消防車",
+    "picture": "🚒"
+  },
+  {
+    "id": "goat",
+    "letter": "G",
+    "en": "goat",
+    "zh": "山羊",
+    "picture": "🐐"
+  },
+  {
+    "id": "grape",
+    "letter": "G",
+    "en": "grape",
+    "zh": "葡萄",
+    "picture": "🍇"
+  },
+  {
+    "id": "giraffe",
+    "letter": "G",
+    "en": "giraffe",
+    "zh": "長頸鹿",
+    "picture": "🦒"
+  },
+  {
+    "id": "guitar",
+    "letter": "G",
+    "en": "guitar",
+    "zh": "吉他",
+    "picture": "🎸"
+  },
+  {
+    "id": "hat",
+    "letter": "H",
+    "en": "hat",
+    "zh": "帽子",
+    "picture": "👒"
+  },
+  {
+    "id": "horse",
+    "letter": "H",
+    "en": "horse",
+    "zh": "馬",
+    "picture": "🐎"
+  },
+  {
+    "id": "house",
+    "letter": "H",
+    "en": "house",
+    "zh": "房子",
+    "picture": "🏠"
+  },
+  {
+    "id": "hand",
+    "letter": "H",
+    "en": "hand",
+    "zh": "手",
+    "picture": "✋"
+  },
+  {
+    "id": "ice_cream",
+    "letter": "I",
+    "en": "ice cream",
+    "zh": "冰淇淋",
+    "picture": "🍦"
+  },
+  {
+    "id": "igloo",
+    "letter": "I",
+    "en": "igloo",
+    "zh": "冰屋",
+    "picture": "🧊"
+  },
+  {
+    "id": "insect",
+    "letter": "I",
+    "en": "insect",
+    "zh": "昆蟲",
+    "picture": "🐞"
+  },
+  {
+    "id": "iguana",
+    "letter": "I",
+    "en": "iguana",
+    "zh": "鬣蜥",
+    "picture": "🦎"
+  },
+  {
+    "id": "juice",
+    "letter": "J",
+    "en": "juice",
+    "zh": "果汁",
+    "picture": "🧃"
+  },
+  {
+    "id": "jacket",
+    "letter": "J",
+    "en": "jacket",
+    "zh": "外套",
+    "picture": "🧥"
+  },
+  {
+    "id": "jellyfish",
+    "letter": "J",
+    "en": "jellyfish",
+    "zh": "水母",
+    "picture": "🪼"
+  },
+  {
+    "id": "jar",
+    "letter": "J",
+    "en": "jar",
+    "zh": "罐子",
+    "picture": "🫙"
+  },
+  {
+    "id": "kite",
+    "letter": "K",
+    "en": "kite",
+    "zh": "風箏",
+    "picture": "🪁"
+  },
+  {
+    "id": "key",
+    "letter": "K",
+    "en": "key",
+    "zh": "鑰匙",
+    "picture": "🔑"
+  },
+  {
+    "id": "kangaroo",
+    "letter": "K",
+    "en": "kangaroo",
+    "zh": "袋鼠",
+    "picture": "🦘"
+  },
+  {
+    "id": "koala",
+    "letter": "K",
+    "en": "koala",
+    "zh": "無尾熊",
+    "picture": "🐨"
+  },
+  {
+    "id": "lion",
+    "letter": "L",
+    "en": "lion",
+    "zh": "獅子",
+    "picture": "🦁"
+  },
+  {
+    "id": "lemon",
+    "letter": "L",
+    "en": "lemon",
+    "zh": "檸檬",
+    "picture": "🍋"
+  },
+  {
+    "id": "leaf",
+    "letter": "L",
+    "en": "leaf",
+    "zh": "葉子",
+    "picture": "🍃"
+  },
+  {
+    "id": "lamp",
+    "letter": "L",
+    "en": "lamp",
+    "zh": "燈",
+    "picture": "💡"
+  },
+  {
+    "id": "moon",
+    "letter": "M",
+    "en": "moon",
+    "zh": "月亮",
+    "picture": "🌙"
+  },
+  {
+    "id": "monkey",
+    "letter": "M",
+    "en": "monkey",
+    "zh": "猴子",
+    "picture": "🐒"
+  },
+  {
+    "id": "milk",
+    "letter": "M",
+    "en": "milk",
+    "zh": "牛奶",
+    "picture": "🥛"
+  },
+  {
+    "id": "mouse",
+    "letter": "M",
+    "en": "mouse",
+    "zh": "老鼠",
+    "picture": "🐭"
+  },
+  {
+    "id": "nose",
+    "letter": "N",
+    "en": "nose",
+    "zh": "鼻子",
+    "picture": "👃"
+  },
+  {
+    "id": "nest",
+    "letter": "N",
+    "en": "nest",
+    "zh": "鳥巢",
+    "picture": "🪺"
+  },
+  {
+    "id": "net",
+    "letter": "N",
+    "en": "net",
+    "zh": "網子",
+    "picture": "🥅"
+  },
+  {
+    "id": "noodles",
+    "letter": "N",
+    "en": "noodles",
+    "zh": "麵",
+    "picture": "🍜"
+  },
+  {
+    "id": "orange",
+    "letter": "O",
+    "en": "orange",
+    "zh": "柳橙",
+    "picture": "🍊"
+  },
+  {
+    "id": "owl",
+    "letter": "O",
+    "en": "owl",
+    "zh": "貓頭鷹",
+    "picture": "🦉"
+  },
+  {
+    "id": "octopus",
+    "letter": "O",
+    "en": "octopus",
+    "zh": "章魚",
+    "picture": "🐙"
+  },
+  {
+    "id": "onion",
+    "letter": "O",
+    "en": "onion",
+    "zh": "洋蔥",
+    "picture": "🧅"
+  },
+  {
+    "id": "pig",
+    "letter": "P",
+    "en": "pig",
+    "zh": "豬",
+    "picture": "🐷"
+  },
+  {
+    "id": "panda",
+    "letter": "P",
+    "en": "panda",
+    "zh": "貓熊",
+    "picture": "🐼"
+  },
+  {
+    "id": "pear",
+    "letter": "P",
+    "en": "pear",
+    "zh": "梨子",
+    "picture": "🍐"
+  },
+  {
+    "id": "pencil",
+    "letter": "P",
+    "en": "pencil",
+    "zh": "鉛筆",
+    "picture": "✏️"
+  },
+  {
+    "id": "queen",
+    "letter": "Q",
+    "en": "queen",
+    "zh": "女王",
+    "picture": "👸"
+  },
+  {
+    "id": "quilt",
+    "letter": "Q",
+    "en": "quilt",
+    "zh": "被子",
+    "picture": "🛏️"
+  },
+  {
+    "id": "quail",
+    "letter": "Q",
+    "en": "quail",
+    "zh": "鵪鶉",
+    "picture": "🐦"
+  },
+  {
+    "id": "quill",
+    "letter": "Q",
+    "en": "quill",
+    "zh": "羽毛筆",
+    "picture": "🪶"
+  },
+  {
+    "id": "rabbit",
+    "letter": "R",
+    "en": "rabbit",
+    "zh": "兔子",
+    "picture": "🐰"
+  },
+  {
+    "id": "rainbow",
+    "letter": "R",
+    "en": "rainbow",
+    "zh": "彩虹",
+    "picture": "🌈"
+  },
+  {
+    "id": "robot",
+    "letter": "R",
+    "en": "robot",
+    "zh": "機器人",
+    "picture": "🤖"
+  },
+  {
+    "id": "ring",
+    "letter": "R",
+    "en": "ring",
+    "zh": "戒指",
+    "picture": "💍"
+  },
+  {
+    "id": "sun",
+    "letter": "S",
+    "en": "sun",
+    "zh": "太陽",
+    "picture": "☀️"
+  },
+  {
+    "id": "star",
+    "letter": "S",
+    "en": "star",
+    "zh": "星星",
+    "picture": "⭐"
+  },
+  {
+    "id": "snake",
+    "letter": "S",
+    "en": "snake",
+    "zh": "蛇",
+    "picture": "🐍"
+  },
+  {
+    "id": "shoe",
+    "letter": "S",
+    "en": "shoe",
+    "zh": "鞋子",
+    "picture": "👟"
+  },
+  {
+    "id": "tiger",
+    "letter": "T",
+    "en": "tiger",
+    "zh": "老虎",
+    "picture": "🐯"
+  },
+  {
+    "id": "train",
+    "letter": "T",
+    "en": "train",
+    "zh": "火車",
+    "picture": "🚂"
+  },
+  {
+    "id": "tree",
+    "letter": "T",
+    "en": "tree",
+    "zh": "樹",
+    "picture": "🌳"
+  },
+  {
+    "id": "turtle",
+    "letter": "T",
+    "en": "turtle",
+    "zh": "烏龜",
+    "picture": "🐢"
+  },
+  {
+    "id": "umbrella",
+    "letter": "U",
+    "en": "umbrella",
+    "zh": "雨傘",
+    "picture": "☂️"
+  },
+  {
+    "id": "uncle",
+    "letter": "U",
+    "en": "uncle",
+    "zh": "叔叔",
+    "picture": "👨"
+  },
+  {
+    "id": "uniform",
+    "letter": "U",
+    "en": "uniform",
+    "zh": "制服",
+    "picture": "👔"
+  },
+  {
+    "id": "unicorn",
+    "letter": "U",
+    "en": "unicorn",
+    "zh": "獨角獸（想像動物）",
+    "picture": "🦄"
+  },
+  {
+    "id": "van",
+    "letter": "V",
+    "en": "van",
+    "zh": "廂型車",
+    "picture": "🚐"
+  },
+  {
+    "id": "vase",
+    "letter": "V",
+    "en": "vase",
+    "zh": "花瓶",
+    "picture": "🏺"
+  },
+  {
+    "id": "violin",
+    "letter": "V",
+    "en": "violin",
+    "zh": "小提琴",
+    "picture": "🎻"
+  },
+  {
+    "id": "vest",
+    "letter": "V",
+    "en": "vest",
+    "zh": "背心",
+    "picture": "🦺"
+  },
+  {
+    "id": "whale",
+    "letter": "W",
+    "en": "whale",
+    "zh": "鯨魚",
+    "picture": "🐳"
+  },
+  {
+    "id": "watermelon",
+    "letter": "W",
+    "en": "watermelon",
+    "zh": "西瓜",
+    "picture": "🍉"
+  },
+  {
+    "id": "watch",
+    "letter": "W",
+    "en": "watch",
+    "zh": "手錶",
+    "picture": "⌚"
+  },
+  {
+    "id": "window",
+    "letter": "W",
+    "en": "window",
+    "zh": "窗戶",
+    "picture": "🪟"
+  },
+  {
+    "id": "x_ray",
+    "letter": "X",
+    "en": "x-ray",
+    "zh": "X光影像",
+    "picture": "🩻"
+  },
+  {
+    "id": "box",
+    "letter": "X",
+    "en": "box",
+    "zh": "盒子",
+    "picture": "📦"
+  },
+  {
+    "id": "fox",
+    "letter": "X",
+    "en": "fox",
+    "zh": "狐狸",
+    "picture": "🦊"
+  },
+  {
+    "id": "six",
+    "letter": "X",
+    "en": "six",
+    "zh": "六",
+    "picture": "6"
+  },
+  {
+    "id": "yak",
+    "letter": "Y",
+    "en": "yak",
+    "zh": "犛牛",
+    "picture": "🐂"
+  },
+  {
+    "id": "yarn",
+    "letter": "Y",
+    "en": "yarn",
+    "zh": "毛線",
+    "picture": "🧶"
+  },
+  {
+    "id": "yo_yo",
+    "letter": "Y",
+    "en": "yo-yo",
+    "zh": "溜溜球",
+    "picture": "🪀"
+  },
+  {
+    "id": "yogurt",
+    "letter": "Y",
+    "en": "yogurt",
+    "zh": "優格",
+    "picture": "🥣"
+  },
+  {
+    "id": "zebra",
+    "letter": "Z",
+    "en": "zebra",
+    "zh": "斑馬",
+    "picture": "🦓"
+  },
+  {
+    "id": "zoo",
+    "letter": "Z",
+    "en": "zoo",
+    "zh": "動物園",
+    "picture": "🦒"
+  },
+  {
+    "id": "zipper",
+    "letter": "Z",
+    "en": "zipper",
+    "zh": "拉鍊",
+    "picture": "🤐"
+  },
+  {
+    "id": "zero",
+    "letter": "Z",
+    "en": "zero",
+    "zh": "零",
+    "picture": "0"
+  }
+]
