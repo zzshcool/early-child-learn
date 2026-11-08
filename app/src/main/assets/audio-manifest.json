@@ -1617,6 +1617,626 @@
       "id": "rest_instruction",
       "lang": "en",
       "text": "Take a break. Put the screen down and look around."
+    },
+    {
+      "id": "fruit_free_prompt",
+      "lang": "zh",
+      "text": "自由選水果，裝籃、拿出或交給小兔子。"
+    },
+    {
+      "id": "fruit_free_prompt",
+      "lang": "en",
+      "text": "Pick fruit freely, pack or give to Rabbit."
+    },
+    {
+      "id": "fruit_step_take_pineapple",
+      "lang": "zh",
+      "text": "把籃子裡的鳳梨拿出來。"
+    },
+    {
+      "id": "fruit_step_take_pineapple",
+      "lang": "en",
+      "text": "Take the pineapple out of the basket."
+    },
+    {
+      "id": "fruit_step_put_pineapple",
+      "lang": "zh",
+      "text": "把鳳梨放進籃子。"
+    },
+    {
+      "id": "fruit_step_put_pineapple",
+      "lang": "en",
+      "text": "Put pineapple into the basket."
+    },
+    {
+      "id": "fruit_combo_strawberries",
+      "lang": "zh",
+      "text": "再拿兩顆草莓。"
+    },
+    {
+      "id": "fruit_combo_strawberries",
+      "lang": "en",
+      "text": "Take two more strawberries."
+    },
+    {
+      "id": "fruit_combo_two_guests",
+      "lang": "zh",
+      "text": "分給兩位客人水果。"
+    },
+    {
+      "id": "fruit_combo_two_guests",
+      "lang": "en",
+      "text": "Share fruit with two guests."
+    },
+    {
+      "id": "fruit_chal_fix_order",
+      "lang": "zh",
+      "text": "客人的籃子多了一顆鳳梨，請修正成訂單上的內容。"
+    },
+    {
+      "id": "fruit_chal_fix_order",
+      "lang": "en",
+      "text": "Fix the basket contents matching the order."
+    },
+    {
+      "id": "fruit_chal_exchange",
+      "lang": "zh",
+      "text": "換成客人需要的水果。"
+    },
+    {
+      "id": "fruit_chal_exchange",
+      "lang": "en",
+      "text": "Exchange fruit for guest."
+    },
+    {
+      "id": "beach_free_prompt",
+      "lang": "zh",
+      "text": "在沙灘上自由玩耍。"
+    },
+    {
+      "id": "beach_free_prompt",
+      "lang": "en",
+      "text": "Play freely on the beach."
+    },
+    {
+      "id": "bridge_free_prompt",
+      "lang": "zh",
+      "text": "試試搭木板過河。"
+    },
+    {
+      "id": "bridge_free_prompt",
+      "lang": "en",
+      "text": "Try wooden planks across river."
+    },
+    {
+      "id": "bridge_combo_prompt",
+      "lang": "zh",
+      "text": "用兩塊木板補齊小橋。"
+    },
+    {
+      "id": "bridge_combo_prompt",
+      "lang": "en",
+      "text": "Use two planks to complete bridge."
+    },
+    {
+      "id": "bridge_chal_prompt",
+      "lang": "zh",
+      "text": "換上長度剛好的木板。"
+    },
+    {
+      "id": "bridge_chal_prompt",
+      "lang": "en",
+      "text": "Replace with correct plank."
+    },
+    {
+      "id": "delivery_free_prompt",
+      "lang": "zh",
+      "text": "自由選貨物裝上小船。"
+    },
+    {
+      "id": "delivery_free_prompt",
+      "lang": "en",
+      "text": "Load cargo onto boat freely."
+    },
+    {
+      "id": "delivery_step_prompt",
+      "lang": "zh",
+      "text": "對照圖片，把貨物裝上船。"
+    },
+    {
+      "id": "delivery_step_prompt",
+      "lang": "en",
+      "text": "Match picture to load cargo."
+    },
+    {
+      "id": "delivery_combo_prompt",
+      "lang": "zh",
+      "text": "聽英文單字，送貨到小屋。"
+    },
+    {
+      "id": "delivery_combo_prompt",
+      "lang": "en",
+      "text": "Listen to English word and deliver."
+    },
+    {
+      "id": "delivery_chal_prompt",
+      "lang": "zh",
+      "text": "拿下多裝的貨物。"
+    },
+    {
+      "id": "delivery_chal_prompt",
+      "lang": "en",
+      "text": "Remove excess cargo from boat."
+    },
+    {
+      "id": "writing_step_prompt",
+      "lang": "zh",
+      "text": "從起點開始慢慢畫。"
+    },
+    {
+      "id": "writing_step_prompt",
+      "lang": "en",
+      "text": "Start from dot and trace."
+    },
+    {
+      "id": "writing_combo_prompt",
+      "lang": "zh",
+      "text": "按筆順描寫。"
+    },
+    {
+      "id": "writing_combo_prompt",
+      "lang": "en",
+      "text": "Trace in stroke order."
+    },
+    {
+      "id": "writing_chal_prompt",
+      "lang": "zh",
+      "text": "看圖選字並描寫。"
+    },
+    {
+      "id": "writing_chal_prompt",
+      "lang": "en",
+      "text": "Look at picture and trace."
+    },
+    {
+      "id": "clock_free_prompt",
+      "lang": "zh",
+      "text": "自由撥動時鐘。"
+    },
+    {
+      "id": "clock_free_prompt",
+      "lang": "en",
+      "text": "Turn clock hands freely."
+    },
+    {
+      "id": "clock_step_prompt",
+      "lang": "zh",
+      "text": "找一找短的時針。"
+    },
+    {
+      "id": "clock_step_prompt",
+      "lang": "en",
+      "text": "Find the short hour hand."
+    },
+    {
+      "id": "clock_chal_prompt",
+      "lang": "zh",
+      "text": "火車還有五分鐘開車，調好時鐘出發。"
+    },
+    {
+      "id": "clock_chal_prompt",
+      "lang": "en",
+      "text": "Train leaves in five minutes."
+    },
+    {
+      "id": "weather_step_prompt",
+      "lang": "zh",
+      "text": "看窗外景色，選出對應的天氣。"
+    },
+    {
+      "id": "weather_step_prompt",
+      "lang": "en",
+      "text": "Look out window for weather."
+    },
+    {
+      "id": "weather_combo_prompt",
+      "lang": "zh",
+      "text": "下雨了，幫兔子拿雨傘。"
+    },
+    {
+      "id": "weather_combo_prompt",
+      "lang": "en",
+      "text": "It is raining, get umbrella for Rabbit."
+    },
+    {
+      "id": "weather_chal_prompt",
+      "lang": "zh",
+      "text": "換上合適的用品。"
+    },
+    {
+      "id": "weather_chal_prompt",
+      "lang": "en",
+      "text": "Put on right equipment."
+    },
+    {
+      "id": "clean_free_prompt",
+      "lang": "zh",
+      "text": "自由收拾清潔站。"
+    },
+    {
+      "id": "clean_free_prompt",
+      "lang": "en",
+      "text": "Tidy up cleaning station freely."
+    },
+    {
+      "id": "clean_trash_bin",
+      "lang": "zh",
+      "text": "把垃圾放進垃圾桶。"
+    },
+    {
+      "id": "clean_trash_bin",
+      "lang": "en",
+      "text": "Put trash into trash bin."
+    },
+    {
+      "id": "clean_recycle",
+      "lang": "zh",
+      "text": "垃圾與資源回收分開。"
+    },
+    {
+      "id": "clean_recycle",
+      "lang": "en",
+      "text": "Separate trash and recycling."
+    },
+    {
+      "id": "clean_load_truck",
+      "lang": "zh",
+      "text": "把垃圾袋搬上垃圾車。"
+    },
+    {
+      "id": "clean_load_truck",
+      "lang": "en",
+      "text": "Load trash bags onto truck."
+    },
+    {
+      "id": "clean_missing_bags",
+      "lang": "zh",
+      "text": "數一數，還少幾袋垃圾？"
+    },
+    {
+      "id": "clean_missing_bags",
+      "lang": "en",
+      "text": "How many bags are missing?"
+    },
+    {
+      "id": "clean_remove_wrong",
+      "lang": "zh",
+      "text": "把裝錯的物品拿下來。"
+    },
+    {
+      "id": "clean_remove_wrong",
+      "lang": "en",
+      "text": "Remove wrong items from truck."
+    },
+    {
+      "id": "clean_route",
+      "lang": "zh",
+      "text": "沿著路線清掃垃圾。"
+    },
+    {
+      "id": "clean_route",
+      "lang": "en",
+      "text": "Clean along the route."
+    },
+    {
+      "id": "sports_free_prompt",
+      "lang": "zh",
+      "text": "在球場上自由投球。"
+    },
+    {
+      "id": "sports_free_prompt",
+      "lang": "en",
+      "text": "Play balls freely on court."
+    },
+    {
+      "id": "sports_store_basket",
+      "lang": "zh",
+      "text": "把球放回地上的收納籃。"
+    },
+    {
+      "id": "sports_store_basket",
+      "lang": "en",
+      "text": "Put balls in storage basket."
+    },
+    {
+      "id": "sports_basketball_hoop",
+      "lang": "zh",
+      "text": "把籃球投進籃框！"
+    },
+    {
+      "id": "sports_basketball_hoop",
+      "lang": "en",
+      "text": "Shoot basketball into hoop."
+    },
+    {
+      "id": "sports_soccer_goal",
+      "lang": "zh",
+      "text": "把足球踢進球門！"
+    },
+    {
+      "id": "sports_soccer_goal",
+      "lang": "en",
+      "text": "Kick soccer ball into goal."
+    },
+    {
+      "id": "sports_score_three",
+      "lang": "zh",
+      "text": "連續進三球，計分板加分！"
+    },
+    {
+      "id": "sports_score_three",
+      "lang": "en",
+      "text": "Score three goals."
+    },
+    {
+      "id": "sports_sort_places",
+      "lang": "zh",
+      "text": "把球送到對的地方。"
+    },
+    {
+      "id": "sports_sort_places",
+      "lang": "en",
+      "text": "Put balls in right places."
+    },
+    {
+      "id": "sports_pass_ball",
+      "lang": "zh",
+      "text": "大家輪流傳球。"
+    },
+    {
+      "id": "sports_pass_ball",
+      "lang": "en",
+      "text": "Pass ball in turn."
+    },
+    {
+      "id": "sports_divide_teams",
+      "lang": "zh",
+      "text": "平分給兩隊一樣多的球。"
+    },
+    {
+      "id": "sports_divide_teams",
+      "lang": "en",
+      "text": "Divide balls evenly between teams."
+    },
+    {
+      "id": "toy_free_prompt",
+      "lang": "zh",
+      "text": "自由整理玩具屋。"
+    },
+    {
+      "id": "toy_free_prompt",
+      "lang": "en",
+      "text": "Tidy toy room freely."
+    },
+    {
+      "id": "toy_home_prompt",
+      "lang": "zh",
+      "text": "讓玩具回到各自的家。"
+    },
+    {
+      "id": "toy_home_prompt",
+      "lang": "en",
+      "text": "Put toys back to their homes."
+    },
+    {
+      "id": "toy_pair_prompt",
+      "lang": "zh",
+      "text": "找出一模一樣的一雙。"
+    },
+    {
+      "id": "toy_pair_prompt",
+      "lang": "en",
+      "text": "Find a matching pair."
+    },
+    {
+      "id": "toy_size_prompt",
+      "lang": "zh",
+      "text": "依照大中小收進格子。"
+    },
+    {
+      "id": "toy_size_prompt",
+      "lang": "en",
+      "text": "Sort by size into slots."
+    },
+    {
+      "id": "toy_position_prompt",
+      "lang": "zh",
+      "text": "依照位置擺放好物品。"
+    },
+    {
+      "id": "toy_position_prompt",
+      "lang": "en",
+      "text": "Place items in position."
+    },
+    {
+      "id": "toy_excess_prompt",
+      "lang": "zh",
+      "text": "找出多放的物品移開。"
+    },
+    {
+      "id": "toy_excess_prompt",
+      "lang": "en",
+      "text": "Find and remove extra item."
+    },
+    {
+      "id": "dining_free_prompt",
+      "lang": "zh",
+      "text": "在餐桌上準備點心。"
+    },
+    {
+      "id": "dining_free_prompt",
+      "lang": "en",
+      "text": "Prepare treats on table freely."
+    },
+    {
+      "id": "dining_set_table",
+      "lang": "zh",
+      "text": "幫大家擺好餐盤與湯匙。"
+    },
+    {
+      "id": "dining_set_table",
+      "lang": "en",
+      "text": "Set table with plates and spoons."
+    },
+    {
+      "id": "dining_fill_missing",
+      "lang": "zh",
+      "text": "補齊缺少的水杯。"
+    },
+    {
+      "id": "dining_fill_missing",
+      "lang": "en",
+      "text": "Add the missing cups."
+    },
+    {
+      "id": "dining_share_treats",
+      "lang": "zh",
+      "text": "分點心給大家吃。"
+    },
+    {
+      "id": "dining_share_treats",
+      "lang": "en",
+      "text": "Share treats with guests."
+    },
+    {
+      "id": "dining_clean_table",
+      "lang": "zh",
+      "text": "收拾餐桌並擦乾淨。"
+    },
+    {
+      "id": "dining_clean_table",
+      "lang": "en",
+      "text": "Clean and wipe the table."
+    },
+    {
+      "id": "dining_change_order",
+      "lang": "zh",
+      "text": "客人改訂單了，調整盤子裡的水果。"
+    },
+    {
+      "id": "dining_change_order",
+      "lang": "en",
+      "text": "Change order as requested."
+    },
+    {
+      "id": "shop_free_prompt",
+      "lang": "zh",
+      "text": "在商店自由挑選商品。"
+    },
+    {
+      "id": "shop_free_prompt",
+      "lang": "en",
+      "text": "Pick goods freely in shop."
+    },
+    {
+      "id": "shop_shopping_list",
+      "lang": "zh",
+      "text": "依照購物清單挑選商品。"
+    },
+    {
+      "id": "shop_shopping_list",
+      "lang": "en",
+      "text": "Pick items from shopping list."
+    },
+    {
+      "id": "shop_restock_shelf",
+      "lang": "zh",
+      "text": "把貨架上的空位補滿。"
+    },
+    {
+      "id": "shop_restock_shelf",
+      "lang": "en",
+      "text": "Restock the empty shelves."
+    },
+    {
+      "id": "shop_deliver_address",
+      "lang": "zh",
+      "text": "依照門牌送到指定地址。"
+    },
+    {
+      "id": "shop_deliver_address",
+      "lang": "en",
+      "text": "Deliver to matching address."
+    },
+    {
+      "id": "shop_remove_extra",
+      "lang": "zh",
+      "text": "拿回多買的商品放回貨架。"
+    },
+    {
+      "id": "shop_remove_extra",
+      "lang": "en",
+      "text": "Put extra item back to shelf."
+    },
+    {
+      "id": "garden_free_prompt",
+      "lang": "zh",
+      "text": "在花園自由種植與照顧。"
+    },
+    {
+      "id": "garden_free_prompt",
+      "lang": "en",
+      "text": "Garden and plant freely."
+    },
+    {
+      "id": "garden_seed_prompt",
+      "lang": "zh",
+      "text": "一個洞放一顆種子。"
+    },
+    {
+      "id": "garden_seed_prompt",
+      "lang": "en",
+      "text": "Put one seed in each hole."
+    },
+    {
+      "id": "garden_water_prompt",
+      "lang": "zh",
+      "text": "幫乾燥的泥土澆澆水。"
+    },
+    {
+      "id": "garden_water_prompt",
+      "lang": "en",
+      "text": "Water the dry soil."
+    },
+    {
+      "id": "garden_grow_prompt",
+      "lang": "zh",
+      "text": "照顧花朵，讓它長大開花。"
+    },
+    {
+      "id": "garden_grow_prompt",
+      "lang": "en",
+      "text": "Care for flower to bloom."
+    },
+    {
+      "id": "garden_harvest_prompt",
+      "lang": "zh",
+      "text": "採收好吃的紅蘿蔔放進推車。"
+    },
+    {
+      "id": "garden_harvest_prompt",
+      "lang": "en",
+      "text": "Harvest carrots into cart."
+    },
+    {
+      "id": "garden_feed_prompt",
+      "lang": "zh",
+      "text": "把好吃的食物餵給小動物。"
+    },
+    {
+      "id": "garden_feed_prompt",
+      "lang": "en",
+      "text": "Feed delicious food to animals."
     }
   ],
   "model_source": "https://huggingface.co/myshell-ai/MeloTTS-Chinese"

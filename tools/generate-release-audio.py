@@ -57,6 +57,9 @@ assets = ROOT / "app/src/main/assets"
 manifest = json.loads((assets / "audio-manifest.json").read_text(encoding="utf-8"))
 converter = OpenCC("t2s")
 for index, item in enumerate(manifest["items"]):
+    output = assets / "audio" / item["lang"] / (item["id"] + ".wav")
+    if output.exists() and output.stat().st_size > 500:
+        continue
     text = item["text"]
     if item["lang"] == "zh":
         text = converter.convert(text)
@@ -66,15 +69,13 @@ for index, item in enumerate(manifest["items"]):
     audio = (english_tts if item["lang"] == "en" else tts).generate(text + ".", sid=0, speed=0.85)
     if len(audio.samples) < audio.sample_rate * 0.12:
         raise RuntimeError(f"Empty or truncated speech: {item['lang']}/{item['id']}")
-    output = assets / "audio" / item["lang"] / (item["id"] + ".wav")
     samples = array.array("h", (int(max(-1, min(1, float(v))) * 32767) for v in audio.samples))
     with wave.open(str(output), "wb") as file:
         file.setnchannels(1)
         file.setsampwidth(2)
         file.setframerate(audio.sample_rate)
         file.writeframes(samples.tobytes())
-    if index % 40 == 0:
-        print(f"Rendered {index + 1}/{len(manifest['items'])} audio files", flush=True)
+    print(f"Rendered [{item['lang']}] {item['id']}: {item['text']}", flush=True)
 shutil.copyfile(model / "LICENSE", assets / "legal/melotts-MIT.txt")
 shutil.copyfile(english_model / "MODEL_CARD", assets / "legal/ljspeech-model-card.txt")
 manifest["status"] = "offline-neural-speech-generated"

@@ -143,5 +143,26 @@ internal fun DrawScope.art(id: String) {
         "yo_yo"->{oval(20f,39f,57f,46f,Rose);oval(27f,44f,43f,35f,Gold);line(50f,60f,70f,10f,Outline,2f);oval(44f,54f,13f,13f,Rose)}
         "zoo"->{box(11f,32f,78f,60f,Sand);repeat(6){i->line(18f+i*13,39f,18f+i*13,90f,Outline,3f)};poly(Leaf,5f,32f,50f,8f,95f,32f);oval(29f,45f,37f,30f,Gold);eye(39f,54f);eye(54f,54f)}
         "zipper"->{box(29f,5f,44f,90f,Blue);repeat(10){i->box(40f+(i%2)*10,9f+i*8,11f,5f,Gold)};box(39f,30f,23f,28f,Outline);box(44f,37f,13f,13f,Sand)}
+        // 生活場景擴充插畫
+        "trash_bin"->{poly(Color(0xFF6B7B75),22f,24f,78f,24f,70f,88f,30f,88f);box(18f,16f,64f,8f,Color(0xFF53615C));line(45f,12f,55f,12f,Outline,4f);repeat(3){i->line(38f+i*12,32f,38f+i*12,80f,Color.White,2f)}}
+        "recycle_bin"->{poly(Blue,22f,24f,78f,24f,70f,88f,30f,88f);box(18f,16f,64f,8f,Color(0xFF4C87A5));line(45f,12f,55f,12f,Outline,4f);poly(Color.White,50f,35f,65f,55f,35f,55f)}
+        "garbage_truck"->{box(12f,34f,50f,38f,Color(0xFF5D9870));box(62f,44f,26f,28f,Color(0xFF7CB88F));box(68f,48f,16f,14f,Color.White);wheels();oval(50f,45f,8f,18f,Color(0xFF344C46))}
+        "trash_bag","bag"->{oval(25f,35f,50f,50f,Color(0xFF5B6964));poly(Color(0xFF45514D),40f,18f,60f,18f,54f,38f,46f,38f);line(44f,28f,56f,28f,Gold,3f)}
+        "bottle"->{box(36f,38f,28f,50f,Blue);box(42f,18f,16f,20f,Color(0xFFA2D3E8));box(40f,12f,20f,6f,Rose)}
+        "can"->{box(32f,24f,36f,56f,Color(0xFFB5BAC0));oval(32f,18f,36f,12f,Color(0xFFD6DBE0));oval(32f,74f,36f,12f,Color(0xFF8F949A))}
+        "basketball_hoop"->{box(12f,12f,76f,48f,Color.White);box(16f,16f,68f,40f,Rose);line(50f,50f,50f,85f,Outline,6f);drawArc(Gold,0f,180f,false,Offset(32f,46f),Size(36f,14f),style=Stroke(5f));repeat(4){i->line(34f+i*10,53f,38f+i*8,75f,Outline,2f)}}
+        "soccer_goal"->{box(15f,25f,70f,55f,Color.White);repeat(5){i->line(20f+i*15,25f,20f+i*15,80f,Blue,1.5f);line(15f,30f+i*12,85f,30f+i*12,Blue,1.5f)};line(15f,25f,85f,25f,Outline,5f);line(15f,25f,15f,80f,Outline,5f);line(85f,25f,85f,80f,Outline,5f)}
+        "volleyball"->{drawCircle(Color.White,36f,Offset(50f,50f),style=Stroke(3f));drawCircle(Blue,34f,Offset(50f,50f));repeat(3){i->drawArc(Gold,i*120f,60f,true,Offset(16f,16f),Size(68f,68f))}}
+        "toy_car"->{box(20f,40f,60f,24f,Rose);box(35f,24f,32f,18f,Color(0xFFFFC5BF));wheels()}
+        "blocks"->{box(20f,45f,28f,28f,Blue);box(52f,45f,28f,28f,Gold);poly(Rose,20f,45f,34f,20f,48f,45f)}
+        "doll"->{head(Sand);box(30f,55f,40f,32f,Rose);line(20f,65f,30f,60f,Sand,6f);line(70f,60f,80f,65f,Sand,6f)}
+        "socks"->{poly(Rose,32f,16f,52f,16f,52f,58f,72f,72f,62f,84f,32f,64f);line(32f,24f,52f,24f,Color.White,4f)}
+        "plate"->{oval(12f,30f,76f,40f,Color(0xFFE8ECEF));oval(22f,36f,56f,28f,Color.White)}
+        "spoon"->{oval(20f,25f,22f,30f,Color(0xFFB5BAC0));line(38f,46f,78f,76f,Color(0xFFB5BAC0),6f)}
+        "cookie"->{oval(22f,22f,56f,56f,Color(0xFFD49B5B));repeat(5){i->drawCircle(Color(0xFF5C3A1E),3f,Offset(36f+(i%3)*14,36f+(i/3)*16))}}
+        "pot"->{poly(Color(0xFFC86A4B),22f,36f,78f,36f,68f,86f,32f,86f);box(18f,28f,64f,10f,Color(0xFFB05B3F))}
+        "seed"->{oval(38f,38f,24f,30f,Color(0xFF5C3A1E));oval(42f,40f,8f,14f,Color(0xFF8B5A2B))}
+        "watering_can"->{box(26f,38f,38f,42f,Blue);line(64f,48f,86f,28f,Blue,7f);oval(84f,22f,12f,18f,Color(0xFFA2D3E8));drawArc(Outline,180f,180f,false,Offset(14f,30f),Size(24f,48f),style=Stroke(4f))}
+        "hay"->{repeat(7){i->line(25f+i*8,78f,32f+i*7,30f,Gold,5f)}}
     }
 }

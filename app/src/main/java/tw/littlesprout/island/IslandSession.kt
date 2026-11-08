@@ -60,17 +60,60 @@ class IslandSession(app: Application) : AndroidViewModel(app) {
         val strokes = zhuyinData.getJSONObject(symbol).getJSONArray("strokes")
         return List(strokes.length()) { i -> val points = strokes.getJSONArray(i); List(points.length()) { j -> val point = points.getJSONArray(j); androidx.compose.ui.geometry.Offset(point.getDouble(0).toFloat(), point.getDouble(1).toFloat()) } }
     }
-    fun completeGame(scene: String): Boolean {
-        if (worldValue("$scene.done") == 1) return false
+    var currentAudioPrompt by mutableStateOf("")
+    fun getSceneMode(scene: String): GameMode {
+        val saved = worldText("$scene.mode")
+        return if (saved.isNotBlank()) GameMode.fromId(saved) else GameMode.FREE
+    }
+    fun setSceneMode(scene: String, mode: GameMode) {
+        saveWorldText("$scene.mode", mode.id)
+        saveWorld("$scene.taskIndex", 0)
+        saveWorld("$scene.done", 0)
+        saveWorld("$scene.round", 0)
+        stopAudio()
+    }
+    fun getTaskIndex(scene: String): Int = worldValue("$scene.taskIndex")
+    fun setTaskIndex(scene: String, index: Int) {
+        saveWorld("$scene.taskIndex", index)
+        saveWorld("$scene.done", 0)
+        stopAudio()
+    }
+    fun completeTask(scene: String, mode: GameMode, index: Int): Boolean {
+        val key = "task.$scene.${mode.id}.$index"
+        val wasDone = worldValue("$scene.done") == 1
         world = org.json.JSONObject(world.toString()).put("$scene.done", 1).put("$scene.wins", worldValue("$scene.wins") + 1)
         prefs.edit().putString("world", world.toString()).apply()
-        mark("game.$scene.${worldValue("$scene.round")}"); play("correct"); return true
+        mark(key)
+        mark("game.$scene.${worldValue("$scene.round")}")
+        if (!wasDone) play("correct")
+        return true
     }
-    fun nextGame(scene: String) {
-        world = org.json.JSONObject(world.toString()).put("$scene.round", worldValue("$scene.round") + 1).put("$scene.done", 0)
-        listOf("count", "selected", "second", "phase").forEach { world.remove("$scene.$it") }
+    fun nextTask(scene: String) {
+        val mode = getModeForScene(scene)
+        val tasks = GameplayRegistry.getTasks(scene, mode)
+        val current = getTaskIndex(scene)
+        val next = if (tasks.isNotEmpty()) (current + 1) % tasks.size else current + 1
+        world = org.json.JSONObject(world.toString()).put("$scene.taskIndex", next).put("$scene.round", worldValue("$scene.round") + 1).put("$scene.done", 0)
+        listOf("count", "selected", "second", "phase", "step").forEach { world.remove("$scene.$it") }
         prefs.edit().putString("world", world.toString()).apply()
         if (due) beginRest()
+    }
+    fun replayTask(scene: String) {
+        world = org.json.JSONObject(world.toString()).put("$scene.done", 0)
+        listOf("count", "selected", "second", "phase", "step").forEach { world.remove("$scene.$it") }
+        prefs.edit().putString("world", world.toString()).apply()
+        if (currentAudioPrompt.isNotBlank()) play(currentAudioPrompt)
+    }
+    fun getModeForScene(scene: String): GameMode = getSceneMode(scene)
+    fun isTaskCompleted(scene: String, mode: GameMode, index: Int): Boolean = "task.$scene.${mode.id}.$index" in completed
+    fun completeGame(scene: String): Boolean {
+        if (worldValue("$scene.done") == 1) return false
+        val mode = getSceneMode(scene)
+        val taskIndex = getTaskIndex(scene)
+        return completeTask(scene, mode, taskIndex)
+    }
+    fun nextGame(scene: String) {
+        nextTask(scene)
     }
     var world by mutableStateOf(org.json.JSONObject(prefs.getString("world", "{}")!!)); private set
     fun worldValue(key: String) = world.optInt(key)
