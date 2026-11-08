@@ -61,7 +61,7 @@ fun IslandApp(s: IslandSession) {
                         "cover" -> Cover(s)
                         "setup" -> Settings(s, true)
                         "home" -> Home(s, wide)
-                        "beach", "bridge", "fruit", "delivery" -> IslandGame(s, s.page)
+                        "beach", "bridge", "fruit", "delivery", "cleaning", "sports", "toyroom", "dining", "shop", "garden" -> IslandGame(s, s.page)
                         "cognition", "numbers" -> Quiz(s, wide)
                         "english" -> EnglishHall(s, wide)
                         "weather" -> WeatherHouse(s)
@@ -135,23 +135,126 @@ fun IslandApp(s: IslandSession) {
 }
 
 @Composable private fun EnglishHall(s: IslandSession, wide: Boolean) {
+    var viewMode by rememberSaveable { mutableStateOf("themes") } // "themes" or "az"
+    var selectedTheme by rememberSaveable { mutableStateOf("animals") }
+    var playType by rememberSaveable { mutableStateOf("explore") } // "explore", "listen", "action"
     var letter by rememberSaveable { mutableStateOf("A") }
-    var themed by rememberSaveable { mutableStateOf(s.topic in listOf("fruit", "animals")) }
-    Title(s.text("英文", "English"))
-    Grid(('A'..'Z').map { it.toString() }, if (wide) 9 else 5) { value ->
-        OutlinedButton(onClick = { letter = value; themed = false; s.stopAudio() }, modifier = Modifier.heightIn(min = 56.dp), contentPadding = PaddingValues(6.dp)) { Text(value, fontSize = 22.sp, color = if (letter == value && !themed) Green else Ink) }
-    }
-    Text("$letter ${letter.lowercase()}", fontSize = 48.sp, fontWeight = FontWeight.Bold, color = Green)
-    if (letter == "X") Text(s.text("找找單字裡的 X。", "Find X in these words."))
-    val topicWords = if (s.topic == "fruit") setOf("apple", "banana", "grape", "lemon", "orange", "pear", "watermelon") else setOf("cat", "dog", "bear", "cow", "duck", "elephant", "fish", "frog", "goat", "giraffe", "horse", "koala", "lion", "monkey", "mouse", "owl", "panda", "pig", "rabbit", "tiger", "turtle", "zebra")
-    if (themed) Text(s.text("本週主題圖片", "This week's picture collection"))
-    Grid(s.words.filter { if (themed) it.id in topicWords else it.letter == letter }, if (wide) 4 else 2) { word ->
-        Tile(word.en, { s.play("word_${word.id}", "en"); s.mark("word.${word.id}.explored") }) {
-            WordArt(word.id, Modifier.size(76.dp))
-            Text(word.zh, fontSize = 16.sp)
+
+    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+        Title(s.text("英文探索", "English Island"))
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            OutlinedButton(
+                onClick = { viewMode = "themes" },
+                colors = ButtonDefaults.outlinedButtonColors(containerColor = if (viewMode == "themes") Color(0xFFDCECDC) else Color.Transparent)
+            ) {
+                Text(s.text("情境主題", "Themes"), color = if (viewMode == "themes") Green else Ink)
+            }
+            OutlinedButton(
+                onClick = { viewMode = "az" },
+                colors = ButtonDefaults.outlinedButtonColors(containerColor = if (viewMode == "az") Color(0xFFDCECDC) else Color.Transparent)
+            ) {
+                Text("A～Z", color = if (viewMode == "az") Green else Ink)
+            }
         }
     }
-    Text(s.text(if (s.muted) "選一張圖片。" else "點圖片，聽單字。", if (s.muted) "Choose a picture." else "Tap a picture to hear the word."), textAlign = TextAlign.Center)
+
+    if (viewMode == "themes") {
+        // 5.8 節 四張情境卡
+        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+            EnglishThemes.categories.forEach { cat ->
+                val sel = cat.id == selectedTheme
+                OutlinedButton(
+                    onClick = { selectedTheme = cat.id },
+                    modifier = Modifier.weight(1f),
+                    contentPadding = PaddingValues(horizontal = 4.dp, vertical = 6.dp),
+                    colors = ButtonDefaults.outlinedButtonColors(containerColor = if (sel) Color(0xFFDCECDC) else Color.Transparent)
+                ) {
+                    Text(
+                        (if (sel) "● " else "") + s.text(cat.zh.split(" ")[0], cat.en),
+                        fontSize = 13.sp,
+                        color = if (sel) Green else Ink
+                    )
+                }
+            }
+        }
+
+        // 玩法切換: 認識單字 / 聽音找物 / 動手完成
+        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
+            listOf("explore" to ("認識單字" to "Words"), "listen" to ("聽音找物" to "Listen"), "action" to ("動手完成" to "Action")).forEach { (type, labels) ->
+                val active = playType == type
+                TextButton(
+                    onClick = { playType = type },
+                    modifier = Modifier.background(if (active) Color(0xFFDCECDC) else Color.Transparent, RoundedCornerShape(12.dp))
+                ) {
+                    Text((if (active) "✓ " else "") + s.text(labels.first, labels.second), color = if (active) Green else Ink, fontSize = 15.sp)
+                }
+            }
+        }
+
+        val currentCat = EnglishThemes.categories.first { it.id == selectedTheme }
+        val words = s.words.filter { it.id in currentCat.wordIds }
+
+        when (playType) {
+            "listen" -> {
+                val targetWord = remember(selectedTheme, s.lessonIndex) { words.randomOrNull() ?: words.first() }
+                LaunchedEffect(targetWord.id, s.muted) { s.play("word_${targetWord.id}", "en") }
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                    Text(s.text("聽音選圖：", "Listen and pick:"), fontSize = 18.sp, color = Green)
+                    if (!s.muted) TextButton(onClick = { s.play("word_${targetWord.id}", "en") }) { Text(s.text("再聽一次", "Hear again")) }
+                }
+                Grid(words.take(4), if (wide) 4 else 2) { word ->
+                    Tile(if (s.selected == targetWord.id && word.id == targetWord.id) word.en else "???", {
+                        s.selected = word.id
+                        if (word.id == targetWord.id) {
+                            s.play("correct")
+                            s.mark("word.${word.id}.listening")
+                        } else {
+                            s.play("word_${word.id}", "en")
+                        }
+                    }, selected = s.selected == word.id) {
+                        WordArt(word.id, Modifier.size(76.dp))
+                    }
+                }
+            }
+            "action" -> {
+                Text(s.text("依照英文情境動手操作！", "Complete the action!"), fontSize = 16.sp, color = Green)
+                Grid(words.take(4), if (wide) 4 else 2) { word ->
+                    Tile(word.en, {
+                        s.play("word_${word.id}", "en")
+                        s.mark("word.${word.id}.action")
+                    }) {
+                        WordArt(word.id, Modifier.size(76.dp))
+                        Text(word.zh, fontSize = 15.sp)
+                    }
+                }
+            }
+            else -> {
+                // 認識單字
+                Text(s.text(if (s.muted) "選一張圖片。" else "點圖片，聽單字發音。", if (s.muted) "Choose a picture." else "Tap a picture to hear the word."), textAlign = TextAlign.Center)
+                Grid(words, if (wide) 4 else 2) { word ->
+                    Tile(word.en, { s.play("word_${word.id}", "en"); s.mark("word.${word.id}.explored") }) {
+                        WordArt(word.id, Modifier.size(76.dp))
+                        Text(word.zh, fontSize = 16.sp)
+                    }
+                }
+            }
+        }
+    } else {
+        // A～Z 模式
+        Grid(('A'..'Z').map { it.toString() }, if (wide) 9 else 5) { value ->
+            OutlinedButton(onClick = { letter = value; s.stopAudio() }, modifier = Modifier.heightIn(min = 52.dp), contentPadding = PaddingValues(4.dp)) {
+                Text(value, fontSize = 20.sp, color = if (letter == value) Green else Ink)
+            }
+        }
+        Text("$letter ${letter.lowercase()}", fontSize = 42.sp, fontWeight = FontWeight.Bold, color = Green)
+        if (letter == "X") Text(s.text("找找單字裡的 X。", "Find X in these words."))
+        Grid(s.words.filter { it.letter == letter }, if (wide) 4 else 2) { word ->
+            Tile(word.en, { s.play("word_${word.id}", "en"); s.mark("word.${word.id}.explored") }) {
+                WordArt(word.id, Modifier.size(76.dp))
+                Text(word.zh, fontSize = 16.sp)
+            }
+        }
+    }
 }
 @Composable private fun Weather(s: IslandSession, wide: Boolean) {
     Title("How is the weather today?")
@@ -208,11 +311,6 @@ fun IslandApp(s: IslandSession) {
     Setting(s.text("英文介面", "English interface"), s.english) { s.configure(en = it) }
     Setting(s.text("一般提示使用英文語音", "English spoken instructions"), s.audioEnglish) { s.configure(soundEn = it) }
     Setting(s.text("無聲模式", "Quiet mode"), s.muted) { s.configure(silent = it) }
-    Text(s.text("推薦起點", "Starting level"), fontWeight = FontWeight.Bold)
-    Grid(listOf("幼幼班|Toddler", "小班|Junior", "中班|Middle", "大班|Senior", "6–8 歲|Advanced").withIndex().toList(), 2) { item ->
-        val names = item.value.split('|')
-        OutlinedButton(onClick = { s.configure(level = item.index) }, modifier = Modifier.heightIn(min = 56.dp)) { Text((if (s.grade == item.index) "✓ " else "") + s.text(names[0], names[1])) }
-    }
     Text(s.text("休息提醒（分鐘）", "Break reminder (minutes)"), fontWeight = FontWeight.Bold)
     Grid(listOf(10, 15, 20, 0), 4) { value -> OutlinedButton(onClick = { s.configure(minutes = value) }, contentPadding = PaddingValues(4.dp)) { Text((if (s.interval == value) "✓" else "") + if (value == 0) s.text("關閉", "Off") else "$value") } }
     Text(s.text("本週主題", "This week's theme"), fontWeight = FontWeight.Bold)

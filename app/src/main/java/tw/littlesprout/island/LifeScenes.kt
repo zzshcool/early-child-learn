@@ -22,14 +22,22 @@ import kotlin.math.*
 @Composable fun StationGame(s:IslandSession){Column(Modifier.fillMaxWidth(),horizontalAlignment=Alignment.CenterHorizontally,verticalArrangement=Arrangement.spacedBy(6.dp)){StationContents(s)}}
 @Composable private fun StationContents(s:IslandSession){
     val round=s.worldValue("clock.round");val done=s.worldValue("clock.done")==1
-    val difficulty=if(s.world.has("clock.difficulty"))s.worldValue("clock.difficulty").coerceIn(0,3)else listOf(0,0,1,2,3)[s.grade]
-    val grade=listOf(0,2,3,4)[difficulty]
-    val target=GameRules.clockTarget(round,grade);val time=s.worldValue("clock.time")%720
-    LaunchedEffect(round,s.muted,s.audioEnglish){if(!done)s.play("station_instruction")}
-    var hand by remember{mutableIntStateOf(0)}
-    Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically,horizontalArrangement=Arrangement.spacedBy(4.dp)){Text(s.text("車站","Station"),Modifier.weight(1f),fontSize=22.sp);repeat(4){level->OutlinedButton(onClick={s.saveWorld("clock.difficulty",level);s.saveWorld("clock.done",0);s.saveWorld("clock.round",0)},contentPadding=PaddingValues(5.dp),modifier=Modifier.sizeIn(minWidth=44.dp,minHeight=48.dp)){Text((if(level==difficulty)"● " else "")+"${level+1}")}}}
-    Text(s.text("把時鐘調好，讓火車出發。","Set the clock so the train can leave."))
-    Text(GameRules.clockLabel(target),fontSize=28.sp,color=Color(0xFF43856B))
+    val mode = s.getSceneMode("clock")
+    val tasks = GameplayRegistry.getTasks("clock", mode)
+    val taskIndex = s.getTaskIndex("clock").coerceIn(0, maxOf(0, tasks.lastIndex))
+    val currentTask = tasks.getOrNull(taskIndex) ?: tasks.firstOrNull() ?: IslandTask("clock_task", "clock", mode, "車站", "Station", "把時鐘調好，讓火車出發。", "Set the clock.", "station_instruction")
+    val grade = when(mode) { GameMode.FREE -> 0; GameMode.STEP -> 2; GameMode.COMBO -> 3; GameMode.CHALLENGE -> 4 }
+    val target = GameRules.clockTarget(round, grade); val time = s.worldValue("clock.time") % 720
+    LaunchedEffect(round, s.muted, s.audioEnglish) {
+        if (!done) {
+            s.currentAudioPrompt = currentTask.audioId
+            s.play(currentTask.audioId)
+        }
+    }
+    var hand by remember { mutableIntStateOf(0) }
+    ModeSelectorBar(s, "clock", mode)
+    TaskPromptBar(s, currentTask)
+    Text(GameRules.clockLabel(target), fontSize = 28.sp, color = Color(0xFF43856B))
     SceneStage("clock",done)
     val clockModifier=Modifier.widthIn(max=240.dp).fillMaxWidth().aspectRatio(1f).pointerInput(done){
         if(!done)detectDragGestures(onDragStart={point->
@@ -72,21 +80,28 @@ import kotlin.math.*
 @Composable fun WeatherHouse(s:IslandSession){Column(Modifier.fillMaxWidth(),horizontalAlignment=Alignment.CenterHorizontally,verticalArrangement=Arrangement.spacedBy(6.dp)){WeatherContents(s)}}
 @Composable private fun WeatherContents(s:IslandSession){
     val round=s.worldValue("weather.round")
-    val difficulty=if(s.world.has("weather.difficulty"))s.worldValue("weather.difficulty").coerceIn(0,3)else listOf(0,0,1,2,3)[s.grade]
-    val kind=s.worldValue("weather.kind").coerceIn(0,3)
-    val equipment=s.worldValue("weather.equipment")-1
-    val done=s.worldValue("weather.done")==1
-    val target=round%Lessons.weather.size
-    val listening=difficulty==3&&!s.muted
-    val needsWeather=difficulty>=2
-    val observed=!needsWeather||s.worldValue("weather.observed")==1
-    var hint by remember(round,difficulty,kind){mutableStateOf("")}
-    LaunchedEffect(round,difficulty,s.muted){if(!done)s.play(if(needsWeather)Lessons.weather[target].id else "weather_question","en")}
-    Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically,horizontalArrangement=Arrangement.spacedBy(4.dp)){
-        Text(s.text("小屋","House"),Modifier.weight(1f),fontSize=22.sp)
-        repeat(4){level->OutlinedButton(onClick={s.saveWorld("weather.difficulty",level);s.saveWorld("weather.done",0);s.saveWorld("weather.round",0);s.saveWorld("weather.equipment",0);s.saveWorld("weather.observed",0)},contentPadding=PaddingValues(5.dp),modifier=Modifier.sizeIn(minWidth=44.dp,minHeight=48.dp)){Text((if(level==difficulty)"● " else "")+"${level+1}")}}
+    val mode = s.getSceneMode("weather")
+    val tasks = GameplayRegistry.getTasks("weather", mode)
+    val taskIndex = s.getTaskIndex("weather").coerceIn(0, maxOf(0, tasks.lastIndex))
+    val currentTask = tasks.getOrNull(taskIndex) ?: tasks.firstOrNull() ?: IslandTask("weather_task", "weather", mode, "小屋", "House", "觀察天氣並準備出門。", "Observe weather.", "weather_question")
+    val difficulty = when(mode) { GameMode.FREE -> 0; GameMode.STEP -> 1; GameMode.COMBO -> 2; GameMode.CHALLENGE -> 3 }
+    val kind = s.worldValue("weather.kind").coerceIn(0, 3)
+    val equipment = s.worldValue("weather.equipment") - 1
+    val done = s.worldValue("weather.done") == 1
+    val target = round % Lessons.weather.size
+    val listening = difficulty == 3 && !s.muted
+    val needsWeather = difficulty >= 2
+    val observed = !needsWeather || s.worldValue("weather.observed") == 1
+    var hint by remember(round, difficulty, kind) { mutableStateOf("") }
+    LaunchedEffect(round, difficulty, s.muted) {
+        if (!done) {
+            s.currentAudioPrompt = currentTask.audioId
+            s.play(if (needsWeather) Lessons.weather[target].id else currentTask.audioId)
+        }
     }
-    Text("How is the weather today?",fontSize=24.sp)
+    ModeSelectorBar(s, "weather", mode)
+    TaskPromptBar(s, currentTask)
+    Text("How is the weather today?", fontSize = 24.sp)
     if(needsWeather&&!observed){
         if(listening)TextButton(onClick={s.play(Lessons.weather[target].id,"en")}){Text(s.text("再聽一次","Listen again"))}
         else if(difficulty==2&&!s.muted)Text("It's ${Lessons.weather[target].id}!",fontSize=24.sp)

@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.unit.dp
 import kotlin.math.sin
+import kotlin.math.abs
 
 @Composable fun SceneStage(scene: String, done: Boolean, modifier: Modifier = Modifier, color: Color = Color(0xFFE58075), plank: Int = -1, gap: Int = 0, count: Int = 0, secondCount: Int = 0, cargo: String = "apple", weather: Int = 0, equipment: Int = -1) {
     val progress by animateFloatAsState(if(done) 1f else 0f, tween(1100), label="scene-result")
@@ -28,6 +29,7 @@ import kotlin.math.sin
             drawCircle(Color(0xFFF1D689),18f,Offset(282f,30f))
             repeat(3){i->drawOval(Color.White.copy(alpha=.65f),Offset(25f+i*100,23f+(i%2)*11),Size(43f,14f))}
             drawOval(Color(0xFFEDDDAF),Offset(-25f,height*.62f),Size(380f,height*.6f))
+            fun poly(c: Color, vararg xy: Float) { val p = Path(); p.moveTo(xy[0], xy[1]); var i = 2; while(i < xy.size) { p.lineTo(xy[i], xy[i + 1]); i += 2 }; p.close(); drawPath(p, c) }
             fun objectAt(id:String,x:Float,y:Float,extent:Float) { translate(x,y){scale(extent/100,extent/100,Offset.Zero){art(id)}} }
             fun rabbit(x:Float,y:Float) {
                 val step=sin(progress*22)*3
@@ -84,6 +86,52 @@ import kotlin.math.sin
                     when(equipment){0->objectAt("umbrella",50f+progress*40,height*.2f,80f);1->objectAt("hat",91f+progress*40,height*.27f,48f);2->objectAt("jacket",89f+progress*40,height*.61f,52f)}
                 }
                 "writing"->{drawRoundRect(Color(0xFFD2BB8A),Offset(100f,height*.55f),Size(120f,60f),cornerRadius=androidx.compose.ui.geometry.CornerRadius(8f));drawLine(Color(0xFF775537),Offset(145f,height*.8f),Offset(165f,height*.6f),3f);drawLine(Color(0xFF775537),Offset(165f,height*.6f),Offset(185f,height*.8f),3f);objectAt("pencil",190f,height*.45f,60f);rabbit(35f,height*.52f)}
+                "cleaning"->{
+                    drawRect(Color(0xFF90A4AE),Offset(0f,height*.75f),Size(330f,height*.25f))
+                    objectAt("garbage_truck",180f+progress*150,height*.32f,75f)
+                    objectAt("trash_bin",110f,height*.52f,38f)
+                    objectAt("recycle_bin",145f,height*.52f,38f)
+                    rabbit(30f+progress*60,height*.5f)
+                }
+                "sports"->{
+                    drawRect(Color(0xFF81C784),Offset(0f,height*.7f),Size(330f,height*.3f))
+                    drawLine(Color.White,Offset(0f,height*.85f),Offset(330f,height*.85f),3f)
+                    objectAt("basketball_hoop",240f,height*.18f,70f)
+                    objectAt("soccer_goal",20f,height*.45f,65f)
+                    rabbit(130f+progress*50,height*.45f-abs(sin(progress*15))*15f)
+                }
+                "toyroom"->{
+                    drawRect(Color(0xFFFFECB3),Offset(0f,height*.65f),Size(330f,height*.35f))
+                    drawRoundRect(Color(0xFFBA8450),Offset(200f,height*.25f),Size(90f,65f),cornerRadius=androidx.compose.ui.geometry.CornerRadius(8f))
+                    objectAt("doll",210f,height*.35f,32f)
+                    objectAt("toy_car",250f,height*.42f,32f)
+                    rabbit(60f+progress*40,height*.5f)
+                }
+                "dining"->{
+                    drawRect(Color(0xFFFFE0B2),Offset(0f,height*.65f),Size(330f,height*.35f))
+                    drawRoundRect(Color(0xFFBA8450),Offset(110f,height*.55f),Size(120f,40f),cornerRadius=androidx.compose.ui.geometry.CornerRadius(6f))
+                    drawRect(Color.White,Offset(125f,height*.57f),Size(90f,20f))
+                    objectAt("plate",140f,height*.5f,30f)
+                    objectAt("cup",185f,height*.45f,26f)
+                    rabbit(35f+progress*30,height*.48f)
+                }
+                "shop"->{
+                    drawRect(Color(0xFFCFD8DC),Offset(0f,height*.7f),Size(330f,height*.3f))
+                    poly(Color(0xFFE58075),140f,height*.25f,310f,height*.25f,300f,height*.42f,130f,height*.42f)
+                    drawRoundRect(Color(0xFFBA8450),Offset(150f,height*.45f),Size(140f,45f),cornerRadius=androidx.compose.ui.geometry.CornerRadius(6f))
+                    objectAt("apple",165f,height*.48f,24f)
+                    objectAt("milk",200f,height*.45f,24f)
+                    objectAt("box",240f,height*.45f,28f)
+                    rabbit(40f+progress*40,height*.52f)
+                }
+                "garden"->{
+                    drawRect(Color(0xFF8D6E63),Offset(0f,height*.68f),Size(330f,height*.32f))
+                    drawOval(Color(0xFF6D4C41),Offset(120f,height*.72f),Size(190f,28f))
+                    repeat(3){i->objectAt("carrot",140f+i*50,height*.58f,32f)}
+                    objectAt("flower",40f,height*.42f,40f)
+                    objectAt("watering_can",90f,height*.62f,32f)
+                    rabbit(20f+progress*50,height*.48f)
+                }
                 else->{objectAt("house",220f,height*.25f,90f);rabbit(50f,height*.52f)}
             }
         }
