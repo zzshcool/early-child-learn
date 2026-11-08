@@ -129,7 +129,9 @@ fun IslandGame(s: IslandSession, scene: String) {
             "beach" -> BeachGameWrapper(s, currentTask, done)
             "bridge" -> BridgeGameWrapper(s, currentTask, done) { hint = it }
             "delivery" -> DeliveryHarborGame(s, currentTask, done) { hint = it }
-            else -> LifeTasksGame(s, scene)
+            else -> LifeTasksGame(s, scene, currentTask, done) { correct ->
+                if (correct) s.completeGame(scene) else hint = s.text("放錯位置或數量不對喔，再試試看！", "Not quite there. Try again!")
+            }
         }
 
         if (hint.isNotBlank() && !done) {
@@ -153,65 +155,84 @@ fun IslandGame(s: IslandSession, scene: String) {
     }
 }
 
-// 4. 水果攤完整互動範本
+// 4. 水果攤完整互動範本 (UX03 & UX05 修正：PlayItem 唯一 ID、可解題庫、單件選取、視覺同步)
 @Composable
 private fun FruitStandGame(s: IslandSession, task: IslandTask, done: Boolean, onVerify: (Boolean) -> Unit) {
-    val isTakeOutTask = task.id == "fruit_step_1" // 把籃子裡的鳳梨拿出來放回桌上
-    val isFixOrderTask = task.id == "fruit_chal_1" // 籃子多了一顆鳳梨，修正成訂單
-    val isComboTask = task.id == "fruit_combo_1" // 放入兩顆草莓，再把鳳梨拿出來
-
-    var tableFruits by remember(task.id) {
-        mutableStateOf(
-            if (isTakeOutTask) listOf("pineapple", "apple", "banana")
-            else if (isFixOrderTask) listOf("apple", "strawberry")
-            else listOf("apple", "banana", "pineapple", "strawberry", "pear", "orange")
-        )
+    // 依據 task 配置產生具備唯一 ID 的水果物件 (保證同種水果可獨立選取與移動)
+    val initialTable = remember(task.id) {
+        if (task.initialTable.isNotEmpty()) {
+            task.initialTable.mapIndexed { idx, type -> PlayItem("tbl_${type}_$idx", type) }
+        } else {
+            listOf("apple", "banana", "pineapple", "strawberry", "pear", "orange").mapIndexed { idx, type ->
+                PlayItem("tbl_${type}_$idx", type)
+            }
+        }
     }
-    var basketFruits by remember(task.id) {
-        mutableStateOf(
-            if (isTakeOutTask) listOf("pineapple", "strawberry")
-            else if (isFixOrderTask) listOf("pineapple", "apple", "apple")
-            else emptyList()
-        )
+    val initialBasket = remember(task.id) {
+        task.initialBasket.mapIndexed { idx, type -> PlayItem("bsk_${type}_$idx", type) }
     }
-    var selectedFrom by remember(task.id) { mutableStateOf<Pair<String, String>?>(null) } // (item, location)
 
-    SceneStage("fruit", done, count = basketFruits.count { it == "apple" }, secondCount = basketFruits.count { it == "pear" })
+    var tableFruits by remember(task.id) { mutableStateOf(initialTable) }
+    var basketFruits by remember(task.id) { mutableStateOf(initialBasket) }
+    var selectedFruit by remember(task.id) { mutableStateOf<Pair<PlayItem, String>?>(null) } // (item, "table" | "basket")
+
+    // 舞台同步顯示真實籃子內蘋果與梨子數量
+    SceneStage(
+        "fruit",
+        done,
+        count = basketFruits.count { it.type == "apple" },
+        secondCount = basketFruits.count { it.type == "strawberry" || it.type == "pear" }
+    )
 
     // 區域 1: 桌面 (Table)
     Card(
         modifier = Modifier.fillMaxWidth().clickable {
-            selectedFrom?.let { (item, loc) ->
+            selectedFruit?.let { (item, loc) ->
                 if (loc == "basket") {
-                    basketFruits = basketFruits.toMutableList().apply { remove(item) }
+                    basketFruits = basketFruits - item
                     tableFruits = tableFruits + item
-                    selectedFrom = null
+                    selectedFruit = null
                 }
             }
         },
         shape = RoundedCornerShape(18.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFFF7EED8))
+        colors = CardDefaults.cardColors(
+            containerColor = if (selectedFruit?.second == "basket") Color(0xFFF3E7C4) else Color(0xFFF7EED8)
+        )
     ) {
         Column(Modifier.padding(12.dp)) {
-            Text(s.text("水果攤桌面（點選水果拿取或放回）：", "Table Area (Tap fruit to move):"), fontSize = 15.sp, color = Color(0xFF775537))
-            Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                tableFruits.forEachIndexed { idx, fruit ->
-                    val isSelected = selectedFrom?.first == fruit && selectedFrom?.second == "table"
+            Text(
+                s.text("水果攤桌面（點選水果拿取或放回）：", "Table Area (Tap fruit to move):"),
+                fontSize = 14.sp,
+                color = Color(0xFF775537)
+            )
+            Spacer(Modifier.height(6.dp))
+            Row(
+                Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                tableFruits.forEach { fruit ->
+                    val isSelected = selectedFruit?.first?.id == fruit.id
                     Card(
                         modifier = Modifier.size(68.dp).clickable {
-                            if (isSelected) selectedFrom = null
-                            else selectedFrom = fruit to "table"
+                            selectedFruit = if (isSelected) null else fruit to "table"
                         },
                         shape = RoundedCornerShape(14.dp),
                         colors = CardDefaults.cardColors(containerColor = if (isSelected) Color(0xFFDCECDC) else Color.White)
                     ) {
                         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                            WordArt(fruit, Modifier.size(46.dp))
+                            WordArt(fruit.type, Modifier.size(46.dp))
                         }
                     }
                 }
                 if (tableFruits.isEmpty()) {
-                    Text(s.text("桌面上沒有水果", "Table is empty"), fontSize = 14.sp, color = Color.Gray, modifier = Modifier.padding(12.dp))
+                    Text(
+                        s.text("桌面上沒有水果", "Table is empty"),
+                        fontSize = 13.sp,
+                        color = Color.Gray,
+                        modifier = Modifier.padding(12.dp)
+                    )
                 }
             }
         }
@@ -220,61 +241,88 @@ private fun FruitStandGame(s: IslandSession, task: IslandTask, done: Boolean, on
     // 區域 2: 客人的籃子 (Basket)
     Card(
         modifier = Modifier.fillMaxWidth().clickable {
-            selectedFrom?.let { (item, loc) ->
+            selectedFruit?.let { (item, loc) ->
                 if (loc == "table") {
-                    tableFruits = tableFruits.toMutableList().apply { remove(item) }
+                    tableFruits = tableFruits - item
                     basketFruits = basketFruits + item
-                    selectedFrom = null
+                    selectedFruit = null
                 }
             }
         },
         shape = RoundedCornerShape(18.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFFE8D7B8))
+        colors = CardDefaults.cardColors(
+            containerColor = if (selectedFruit?.second == "table") Color(0xFFDCECDC) else Color(0xFFE8D7B8)
+        )
     ) {
         Column(Modifier.padding(12.dp)) {
-            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-                Text(s.text("小兔子的籃子：", "Rabbit's Basket:"), fontSize = 15.sp, color = SeaGreen)
-                Text(s.text("共 ${basketFruits.size} 個", "Total: ${basketFruits.size}"), fontSize = 14.sp, color = SeaGreen)
+            Row(
+                Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(s.text("小兔子的籃子：", "Rabbit's Basket:"), fontSize = 14.sp, color = SeaGreen)
+                Text(s.text("共 ${basketFruits.size} 個", "Total: ${basketFruits.size}"), fontSize = 13.sp, color = SeaGreen)
             }
-            Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                basketFruits.forEachIndexed { idx, fruit ->
-                    val isSelected = selectedFrom?.first == fruit && selectedFrom?.second == "basket"
+            Spacer(Modifier.height(6.dp))
+            Row(
+                Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                basketFruits.forEach { fruit ->
+                    val isSelected = selectedFruit?.first?.id == fruit.id
                     Card(
                         modifier = Modifier.size(68.dp).clickable {
-                            if (isSelected) selectedFrom = null
-                            else selectedFrom = fruit to "basket"
+                            selectedFruit = if (isSelected) null else fruit to "basket"
                         },
                         shape = RoundedCornerShape(14.dp),
-                        colors = CardDefaults.cardColors(containerColor = if (isSelected) Color(0xFFDCECDC) else Color.White)
+                        colors = CardDefaults.cardColors(containerColor = if (isSelected) Color(0xFFF9D6C4) else Color.White)
                     ) {
                         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                            WordArt(fruit, Modifier.size(46.dp))
+                            WordArt(fruit.type, Modifier.size(46.dp))
                         }
                     }
                 }
                 if (basketFruits.isEmpty()) {
-                    Text(s.text("籃子是空的，把水果放進來吧！", "Basket is empty. Put fruit in!"), fontSize = 14.sp, color = Color.Gray, modifier = Modifier.padding(12.dp))
+                    Text(
+                        s.text("籃子是空的，把水果放進來吧！", "Basket is empty. Put fruit in!"),
+                        fontSize = 13.sp,
+                        color = Color.Gray,
+                        modifier = Modifier.padding(12.dp)
+                    )
                 }
             }
         }
     }
 
     if (!done) {
-        Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.padding(top = 6.dp)) {
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            modifier = Modifier.padding(top = 4.dp).fillMaxWidth()
+        ) {
             Button(
                 onClick = {
-                    val correct = when {
-                        isTakeOutTask -> "pineapple" !in basketFruits && "strawberry" in basketFruits && "pineapple" in tableFruits
-                        isFixOrderTask -> "pineapple" !in basketFruits && basketFruits.count { it == "apple" } == 2
-                        isComboTask -> basketFruits.count { it == "strawberry" } == 2 && "pineapple" !in basketFruits
-                        task.mode == GameMode.FREE -> basketFruits.isNotEmpty()
-                        else -> basketFruits.isNotEmpty()
+                    val correct = when (task.id) {
+                        "fruit_step_1" -> basketFruits.none { it.type == "pineapple" } &&
+                                          tableFruits.any { it.type == "pineapple" } &&
+                                          basketFruits.any { it.type == "strawberry" }
+                        "fruit_step_2" -> basketFruits.any { it.type == "pineapple" }
+                        "fruit_combo_1" -> basketFruits.count { it.type == "strawberry" } == 2 &&
+                                           basketFruits.none { it.type == "pineapple" }
+                        "fruit_combo_2" -> basketFruits.count { it.type == "apple" } == 2 &&
+                                           basketFruits.count { it.type == "pear" } == 1
+                        "fruit_chal_1" -> basketFruits.count { it.type == "apple" } == 2 &&
+                                          basketFruits.none { it.type == "pineapple" }
+                        "fruit_chal_2" -> basketFruits.count { it.type == "orange" } == 1 &&
+                                          basketFruits.none { it.type == "banana" }
+                        else -> if (task.mode == GameMode.FREE) basketFruits.isNotEmpty() else basketFruits.isNotEmpty()
                     }
                     onVerify(correct)
                 },
-                modifier = Modifier.heightIn(min = 56.dp)
+                modifier = Modifier.fillMaxWidth().heightIn(min = 54.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = SeaGreen)
             ) {
-                Text(s.text("裝好了，交給小兔子", "Give Basket to Rabbit"), fontSize = 18.sp)
+                Text(s.text("裝好了，交給小兔子", "Give Basket to Rabbit"), fontSize = 17.sp)
             }
         }
     }

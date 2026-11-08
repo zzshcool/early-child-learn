@@ -1,12 +1,42 @@
+# Gradle & Build outputs
 .gradle/
 .kotlin/
 **/build/
 local.properties
+
+# Signing & Keys
 *.jks
 *.keystore
 *.apk
+.signing/
+credentials.json
+
+# IDE & Editor files
 .idea/
 *.iml
-.signing/
+.vscode/
+
+# Android profiling
+captures/
+.externalNativeBuild/
+.cxx/
+*.hprof
+
+# Python (for tools/)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# OS metadata
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Logs
+*.log
+
+# Test outputs & screenshots
+delivery/qa/
 delivery/screenshots/
-delivery/
+delivery/test-results/

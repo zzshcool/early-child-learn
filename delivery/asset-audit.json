@@ -1,0 +1,2882 @@
+{
+  "word_cards": 104,
+  "letters": 26,
+  "official_zhuyin": 37,
+  "audio_files": 479,
+  "audio": [
+    {
+      "file": "en/beach_below.wav",
+      "seconds": 1.916,
+      "peak": 12275,
+      "sha256": "7dae93baf639b73812bcfac373ab57ad360fa7389b774513d78842ad7bdc18fd"
+    },
+    {
+      "file": "en/beach_big.wav",
+      "seconds": 1.66,
+      "peak": 10390,
+      "sha256": "995581bc26d7284b552eb02a25014985802498bbc069c0914f65c8ea0d225ca8"
+    },
+    {
+      "file": "en/beach_color.wav",
+      "seconds": 3.074,
+      "peak": 15229,
+      "sha256": "87e1ae38450b099a6100d881c198b74c6298f69faf6df13439b21bc24bf4afa9"
+    },
+    {
+      "file": "en/beach_different.wav",
+      "seconds": 1.231,
+      "peak": 9313,
+      "sha256": "b453d640228ef0fb3dbee4d92a4fe4042e26ff9b1cf1bc87fe568f16fecee750"
+    },
+    {
+      "file": "en/beach_free_prompt.wav",
+      "seconds": 2.09,
+      "peak": 10583,
+      "sha256": "3682dbb7f84ba17d8964ef5653602eca14580185fb760c82b20087796bc9b364"
+    },
+    {
+      "file": "en/beach_fruit.wav",
+      "seconds": 2.194,
+      "peak": 13812,
+      "sha256": "80905a54940bf9d4c47be60bd4c48f6349071491baf28923468326186ecd8141"
+    },
+    {
+      "file": "en/beach_less.wav",
+      "seconds": 1.533,
+      "peak": 12676,
+      "sha256": "bae6e72de9c7272fd274f0e3d8d9fd8010d5da2b372f0cbc03433c839ad3fa40"
+    },
+    {
+      "file": "en/beach_more.wav",
+      "seconds": 1.451,
+      "peak": 10751,
+      "sha256": "51b0c934e10a37cdd7225c7c7ff6c490d55349af77adeb9d80d18f3dabb50b7a"
+    },
+    {
+      "file": "en/beach_pattern.wav",
+      "seconds": 1.916,
+      "peak": 13621,
+      "sha256": "8c68d6965b5f7c7a5443f094078e37de23f0a06a6c471264993e66055e61e743"
+    },
+    {
+      "file": "en/beach_shape.wav",
+      "seconds": 2.206,
+      "peak": 11616,
+      "sha256": "33776490845918f3af382e34c3de9a441a959850b9df72c7e884c6cc9545850b"
+    },
+    {
+      "file": "en/beach_short.wav",
+      "seconds": 1.741,
+      "peak": 11455,
+      "sha256": "6ad239ced5e89eec60d4d2c1b55ee90f05f7c386ef2c9c93bcfffdf423b36c80"
+    },
+    {
+      "file": "en/beach_small.wav",
+      "seconds": 1.8,
+      "peak": 15447,
+      "sha256": "ad26d0fb703bd17573880c4c16794902f3b0f80884ac482cded884f9d960d421"
+    },
+    {
+      "file": "en/beach_tall.wav",
+      "seconds": 1.8,
+      "peak": 15826,
+      "sha256": "baf041abaa58f34472ad9e12eee445dabb077a6acde63306a835bab215a538f8"
+    },
+    {
+      "file": "en/big.wav",
+      "seconds": 1.637,
+      "peak": 11783,
+      "sha256": "e49e2367ec10cec51c0fccac0bb3bb0bd7d2d7e951ac01bb3964998903a4e6ac"
+    },
+    {
+      "file": "en/black.wav",
+      "seconds": 1.3,
+      "peak": 12265,
+      "sha256": "4091c01fbd7eeadac6442df1434657ab7edefecd8b62dc6c7c57bd79c21eea26"
+    },
+    {
+      "file": "en/blue.wav",
+      "seconds": 1.312,
+      "peak": 12574,
+      "sha256": "3c18e3d99a76edb7a283f8a723a6effd3156dca253491562481dbce1d721120a"
+    },
+    {
+      "file": "en/bridge_chal_prompt.wav",
+      "seconds": 2.183,
+      "peak": 14112,
+      "sha256": "4091ed28d91439c0021996695dd09ce6c8ed267b2bc59362738aa9da54f0531d"
+    },
+    {
+      "file": "en/bridge_combo_prompt.wav",
+      "seconds": 3.239,
+      "peak": 9542,
+      "sha256": "c635dacf9851456762e4d743dd9970f5bfbf87cd25fbf19f2411f76ddb6ad6f5"
+    },
+    {
+      "file": "en/bridge_free_prompt.wav",
+      "seconds": 2.392,
+      "peak": 12470,
+      "sha256": "15345a348e4a197b71a2c1305c5388dd322f62b04d97b3e6f47216c34952db72"
+    },
+    {
+      "file": "en/bridge_instruction.wav",
+      "seconds": 2.914,
+      "peak": 14288,
+      "sha256": "a95245cb9dbd40397ad234e903a1c4c23bf8578be90533f4ba87a13164998232"
+    },
+    {
+      "file": "en/circle.wav",
+      "seconds": 1.428,
+      "peak": 11134,
+      "sha256": "0d5ca6327f1dba076b2f3bf8e3deda9fac75bb536cda7a24d2dbaeabdcdab1b9"
+    },
+    {
+      "file": "en/clean_free_prompt.wav",
+      "seconds": 2.659,
+      "peak": 12875,
+      "sha256": "227fe1889d4580fdc4887e9aa758e9dc046cb6a3f2db239e77a81cb228231b26"
+    },
+    {
+      "file": "en/clean_load_truck.wav",
+      "seconds": 2.496,
+      "peak": 11999,
+      "sha256": "e6804c72dbe6f489ceb87e00c1a230f9cac40315d9f609905bf2e8521fde4200"
+    },
+    {
+      "file": "en/clean_missing_bags.wav",
+      "seconds": 1.985,
+      "peak": 13194,
+      "sha256": "7a99956d9097e8ee6951dc62067572c42413703529b061b26a9d95e9442d1ebe"
+    },
+    {
+      "file": "en/clean_recycle.wav",
+      "seconds": 2.371,
+      "peak": 12426,
+      "sha256": "d39a1ebab8ff8c95a4e5d70b8a22b66256eaabcbac9aa115cb5df4701b812189"
+    },
+    {
+      "file": "en/clean_remove_wrong.wav",
+      "seconds": 2.252,
+      "peak": 15923,
+      "sha256": "a642d98bfc4204b21fe695374375beebb7d4306f4bf075c67e60183588e6a42c"
+    },
+    {
+      "file": "en/clean_route.wav",
+      "seconds": 2.148,
+      "peak": 11408,
+      "sha256": "3afa6a730f8bd8a18876653b3bf074bb38251a36b01e88581cce6cc6980ed60f"
+    },
+    {
+      "file": "en/clean_trash_bin.wav",
+      "seconds": 2.485,
+      "peak": 10672,
+      "sha256": "aedcf67ce06ec03decbc0f425f45a9a4ccd393f51b560cec06d7d99db9b45a9a"
+    },
+    {
+      "file": "en/clock_chal_prompt.wav",
+      "seconds": 2.682,
+      "peak": 12551,
+      "sha256": "5cd95e5045e945780d8cb8a56b2690df16c1c7fefcb9c11ad95f96ccb864086a"
+    },
+    {
+      "file": "en/clock_free_prompt.wav",
+      "seconds": 2.125,
+      "peak": 12170,
+      "sha256": "6c455c64b65cb8ddb4d386df8a6446d75a6bdf8de5157b5338d769e84351f0d6"
+    },
+    {
+      "file": "en/clock_step_prompt.wav",
+      "seconds": 2.276,
+      "peak": 12997,
+      "sha256": "65f5596631e529edcea48e64a067f4cb944ac722c1dc3fdb32dcf5357c505e68"
+    },
+    {
+      "file": "en/cloudy.wav",
+      "seconds": 0.987,
+      "peak": 13279,
+      "sha256": "6f7a8b4cda008bd4acf5b5d3b46aeadc34d227ac037de2bd311f3ff6900c63d6"
+    },
+    {
+      "file": "en/correct.wav",
+      "seconds": 2.113,
+      "peak": 18041,
+      "sha256": "c2b46f4d1631dcc8f1ba09248ddf08bc23042ac0f18be9a901fd3dd94a244b6a"
+    },
+    {
+      "file": "en/count.wav",
+      "seconds": 3.439,
+      "peak": 15127,
+      "sha256": "48d13d2068d8548d248fc76282d1ba8ac8f7becfb9f1e284e5499abd9eeac3a5"
+    },
+    {
+      "file": "en/delivery_chal_prompt.wav",
+      "seconds": 2.496,
+      "peak": 9597,
+      "sha256": "b074588c3941a227716ebc705a14cb9a790ba715cc1a0074372a07efb3e808f4"
+    },
+    {
+      "file": "en/delivery_combo_prompt.wav",
+      "seconds": 2.705,
+      "peak": 12534,
+      "sha256": "2b12d1ede4c2bc7d0484da708eb34d065d6e3beef71d45b341fb4563b82b6117"
+    },
+    {
+      "file": "en/delivery_free_prompt.wav",
+      "seconds": 2.485,
+      "peak": 11501,
+      "sha256": "41e9b35770a5f45b7cbb4cf531860e60cf629bca7c547f2eb9f41217dbfc49a7"
+    },
+    {
+      "file": "en/delivery_step_prompt.wav",
+      "seconds": 2.218,
+      "peak": 9088,
+      "sha256": "c18f6f4abad84304140042a18964ebbf6db06a94a6e333aa38ba7c3a606da448"
+    },
+    {
+      "file": "en/dining_change_order.wav",
+      "seconds": 2.403,
+      "peak": 10100,
+      "sha256": "4898b6b5fac47f2c55e6f049faf7087046ec6faf7fc6ac8db97a8fcea79394a5"
+    },
+    {
+      "file": "en/dining_clean_table.wav",
+      "seconds": 2.241,
+      "peak": 12272,
+      "sha256": "4e6bd7218c3891e3ad265b71a0e69cee4e61cf8c8db59531b4952b236cc3f870"
+    },
+    {
+      "file": "en/dining_fill_missing.wav",
+      "seconds": 1.962,
+      "peak": 11258,
+      "sha256": "2b2e608a4f2d54c283b488a60d29ef010e3aa1bfcdf736da7a083c039b984e43"
+    },
+    {
+      "file": "en/dining_free_prompt.wav",
+      "seconds": 2.38,
+      "peak": 11113,
+      "sha256": "439d2bb0caef866978793cf9af7ce90868f82ae67340df418786f22aba227131"
+    },
+    {
+      "file": "en/dining_set_table.wav",
+      "seconds": 2.937,
+      "peak": 13069,
+      "sha256": "f7519e3118d219fc71004a2c50ea5648287fdad849edb5394d657f2c28134b66"
+    },
+    {
+      "file": "en/dining_share_treats.wav",
+      "seconds": 2.148,
+      "peak": 12659,
+      "sha256": "bc60d6ea672d5f8a80e62c19d6bfede4fc83bb4b031d80167e3133faf912932f"
+    },
+    {
+      "file": "en/fruit_chal_exchange.wav",
+      "seconds": 2.183,
+      "peak": 11454,
+      "sha256": "50e77828c0af0cfc2281d239d37131ddfb50149a7d1551d77cb9ee76b5ffb427"
+    },
+    {
+      "file": "en/fruit_chal_fix_order.wav",
+      "seconds": 3.1,
+      "peak": 11450,
+      "sha256": "16ea46b1da1f0a21e351e3d724283af434da233f293a06cec05c6b4cc9ff2d69"
+    },
+    {
+      "file": "en/fruit_combo_strawberries.wav",
+      "seconds": 2.206,
+      "peak": 12858,
+      "sha256": "b3cc6022e2de672e0ed8c76292361695e4244c9e0832e81b76ce08945c9547d4"
+    },
+    {
+      "file": "en/fruit_combo_two_guests.wav",
+      "seconds": 2.299,
+      "peak": 10651,
+      "sha256": "cc799a324684a26c98666b6dc3d35f268ee4af65f3d10a73b391c146253ba3fe"
+    },
+    {
+      "file": "en/fruit_free_prompt.wav",
+      "seconds": 2.929,
+      "peak": 18504,
+      "sha256": "fafc09191014baa1be5a9de6eaa6bd9c828d0a07b2548a1800066ca87b233550"
+    },
+    {
+      "file": "en/fruit_instruction.wav",
+      "seconds": 4.458,
+      "peak": 15677,
+      "sha256": "3747e4f0e306295b3c7b5ad2a0d4d928c391ba99b6731206d0b2e91c507db5c4"
+    },
+    {
+      "file": "en/fruit_step_put_pineapple.wav",
+      "seconds": 2.357,
+      "peak": 12930,
+      "sha256": "0bbcdf1d71691dc51b530b2e41c484d13b27773eba37773c5bef845b117b7678"
+    },
+    {
+      "file": "en/fruit_step_take_pineapple.wav",
+      "seconds": 2.508,
+      "peak": 15625,
+      "sha256": "bd6f7c0d5a98017b84b2c1840c3087c8aca02717d912c8dc4f4c743c853dc40a"
+    },
+    {
+      "file": "en/garden_feed_prompt.wav",
+      "seconds": 2.74,
+      "peak": 12562,
+      "sha256": "4b7ec503e8f444f42c68beab7d8513461764cc14a6f66208c8cada3751eb79dd"
+    },
+    {
+      "file": "en/garden_free_prompt.wav",
+      "seconds": 2.218,
+      "peak": 12819,
+      "sha256": "ce0aca9aa8f9cfced1cd93a0079bb62032867b80230c7c8e3032d5a4e8048e97"
+    },
+    {
+      "file": "en/garden_grow_prompt.wav",
+      "seconds": 2.218,
+      "peak": 13189,
+      "sha256": "9cede81a1e69033a5cc0151f80e7b6c819d00841239a163ff8c81bde57e6bebb"
+    },
+    {
+      "file": "en/garden_harvest_prompt.wav",
+      "seconds": 2.276,
+      "peak": 12049,
+      "sha256": "8dabd3bd98a6aaa6215e53e4f791f47bb796f20c4f8885c12f07f0f86a093681"
+    },
+    {
+      "file": "en/garden_seed_prompt.wav",
+      "seconds": 2.438,
+      "peak": 12026,
+      "sha256": "5cf7d7c91d08680086d748c314527d53104e72ff236fe7fd2744749b3eeeb24b"
+    },
+    {
+      "file": "en/garden_water_prompt.wav",
+      "seconds": 1.672,
+      "peak": 14255,
+      "sha256": "776d6c226702347019a4e8debf4ed27e97576bed63f0a44231ac37c9ab49bafb"
+    },
+    {
+      "file": "en/green.wav",
+      "seconds": 1.428,
+      "peak": 11471,
+      "sha256": "dc1fa2c917200a0223a17acd57c7f12b699fef418026c6df0eacdfa8237e4020"
+    },
+    {
+      "file": "en/letter_A.wav",
+      "seconds": 0.488,
+      "peak": 10780,
+      "sha256": "faa4f18439cc2e9cc0d25bff06671b1dc934635c769f57174c17a9f262aa93ca"
+    },
+    {
+      "file": "en/letter_B.wav",
+      "seconds": 0.464,
+      "peak": 4165,
+      "sha256": "c66f4bff69fddcc20c1bc73eba01397451fbf4f431ffe1e6e50603718390e9a7"
+    },
+    {
+      "file": "en/letter_C.wav",
+      "seconds": 0.569,
+      "peak": 6631,
+      "sha256": "44aafae567fbc35ca29efd187604d1240cd6f64d865991ba73a668c0dd637bc4"
+    },
+    {
+      "file": "en/letter_D.wav",
+      "seconds": 0.453,
+      "peak": 4430,
+      "sha256": "00ab5fb2a8e85310fc4a45c2fdc90b3d5256da23e1550999c1c9856524b1d8cc"
+    },
+    {
+      "file": "en/letter_E.wav",
+      "seconds": 0.464,
+      "peak": 4172,
+      "sha256": "8a54c9867d211e14cf68ab4145f7829da7b5d46ab0e1e5b0f370ec781cf2bc6f"
+    },
+    {
+      "file": "en/letter_F.wav",
+      "seconds": 0.383,
+      "peak": 7193,
+      "sha256": "c022cc69ea15e2cf4967e1ab412eebb0a128aaa166d858340960d95be27f7fb8"
+    },
+    {
+      "file": "en/letter_G.wav",
+      "seconds": 0.557,
+      "peak": 4481,
+      "sha256": "afe30accc505f0b173f8d7440fbd86ba203d9cf3f165d3f63bd99b58388fbe06"
+    },
+    {
+      "file": "en/letter_H.wav",
+      "seconds": 0.639,
+      "peak": 5421,
+      "sha256": "fb195fbb0f7f0eb32ac4bf531a168d835d9e8f75bc0d0abfd81a2a1cc9b4884f"
+    },
+    {
+      "file": "en/letter_I.wav",
+      "seconds": 0.592,
+      "peak": 8312,
+      "sha256": "c310cb3f7b1c09f9ed916d26f76734efbd03350e6c72ea160e35becc26ee35fa"
+    },
+    {
+      "file": "en/letter_J.wav",
+      "seconds": 0.604,
+      "peak": 8477,
+      "sha256": "fa0d0de108b26720b0a3a0f6a31498a3d107c0a1de710348e37155a6f30f925a"
+    },
+    {
+      "file": "en/letter_K.wav",
+      "seconds": 0.546,
+      "peak": 10438,
+      "sha256": "d811fb468305a9d78a3b7fe9e6409e13dfdd7176bb017a5bdf34daccb1b7e8c3"
+    },
+    {
+      "file": "en/letter_L.wav",
+      "seconds": 0.337,
+      "peak": 10718,
+      "sha256": "430cede40a86e8bf2fc440324cb40ce240f2420ec2dd9bcb3e3b0eb4356d588a"
+    },
+    {
+      "file": "en/letter_M.wav",
+      "seconds": 0.464,
+      "peak": 10186,
+      "sha256": "f240ad5854cc9802a81b785354ad4a4e05cb899c14b1d1c786d2ef76b243b724"
+    },
+    {
+      "file": "en/letter_N.wav",
+      "seconds": 0.325,
+      "peak": 5362,
+      "sha256": "ac7d030ac19a0018390593b579d8fdde9e491f624fb8a2b4cfeb1587181895ae"
+    },
+    {
+      "file": "en/letter_O.wav",
+      "seconds": 0.569,
+      "peak": 9443,
+      "sha256": "47530c376511d8c4b4a28c99011bba4390c0af82c9f6dccf6cc215c7ace4918f"
+    },
+    {
+      "file": "en/letter_P.wav",
+      "seconds": 0.499,
+      "peak": 6390,
+      "sha256": "3ea1fc9ccf6324d1523f2523bea938d4e06a5795d737d74b78c2c48a046e5d8f"
+    },
+    {
+      "file": "en/letter_Q.wav",
+      "seconds": 0.58,
+      "peak": 8309,
+      "sha256": "ecb7fc8f66a560eb3c7cf763ef7ee6c9b5a4397ba75265c137a712f7fa8e75fa"
+    },
+    {
+      "file": "en/letter_R.wav",
+      "seconds": 0.43,
+      "peak": 6672,
+      "sha256": "3329fd9e9da7ba927c88c6208249498c7e4c11e60720e5c906641a2aa75f5f1d"
+    },
+    {
+      "file": "en/letter_S.wav",
+      "seconds": 0.65,
+      "peak": 13372,
+      "sha256": "6f4ba09fbf028480a4ee4c354bdfb816a28c8f69d8d8f4422b1728a8f307e8d2"
+    },
+    {
+      "file": "en/letter_T.wav",
+      "seconds": 0.453,
+      "peak": 3620,
+      "sha256": "3702140f6bf2f641e9c7ab2881182cbf0f136da50a405e8d28be8d8ed940bc74"
+    },
+    {
+      "file": "en/letter_U.wav",
+      "seconds": 0.511,
+      "peak": 5887,
+      "sha256": "2f0ebd61ebd8934c12aa4b1d38c0283aea56a14a1629be97646040e5aef63c0a"
+    },
+    {
+      "file": "en/letter_V.wav",
+      "seconds": 0.464,
+      "peak": 4852,
+      "sha256": "615c4cf93828072ae92882eed0ecd44058bf35dc29008166ca5a53598633f926"
+    },
+    {
+      "file": "en/letter_W.wav",
+      "seconds": 0.731,
+      "peak": 9421,
+      "sha256": "98b93ae9812226af126f160f7372d1d523fd58d55e78e7bebe9d1be310ab2433"
+    },
+    {
+      "file": "en/letter_X.wav",
+      "seconds": 0.662,
+      "peak": 10169,
+      "sha256": "02d1be3342f13ac5bab30038251f1942875a101ed24ab987679894d3f5c2d258"
+    },
+    {
+      "file": "en/letter_Y.wav",
+      "seconds": 0.604,
+      "peak": 11192,
+      "sha256": "afbe8f35715f6a08db1f603ef5c31ad652c3e3c9cf2296a21038dcfcf7c5c19f"
+    },
+    {
+      "file": "en/letter_Z.wav",
+      "seconds": 0.488,
+      "peak": 11756,
+      "sha256": "08036d7bc8dfa233cf8e9e373073086d83a55b1f934b4de2d2a66600e223e55a"
+    },
+    {
+      "file": "en/long.wav",
+      "seconds": 1.591,
+      "peak": 13124,
+      "sha256": "087813f972d7a32e9bdee9b8ffa16406d3974bf5a62b79975264447f659c9410"
+    },
+    {
+      "file": "en/orange.wav",
+      "seconds": 1.509,
+      "peak": 10437,
+      "sha256": "4a0a1d53614b8c792aee4104189bf416f4010b28a5bb5d4377aaff174710d471"
+    },
+    {
+      "file": "en/oval.wav",
+      "seconds": 1.358,
+      "peak": 10436,
+      "sha256": "1228c2869aceb30eec1bbaf29c6b5df090c94ca2937580c153b820574a72d056"
+    },
+    {
+      "file": "en/purple.wav",
+      "seconds": 1.312,
+      "peak": 10553,
+      "sha256": "d8dbd6442054731a9fd759dacc3e13fda35b50a02701b0587eaeba63ce3b09a3"
+    },
+    {
+      "file": "en/rainy.wav",
+      "seconds": 0.801,
+      "peak": 8871,
+      "sha256": "79d6c1d51608c2bb11f394f2d81d3cc9de75cd72184286927b0855479006a3c0"
+    },
+    {
+      "file": "en/rectangle.wav",
+      "seconds": 1.521,
+      "peak": 15429,
+      "sha256": "6cfa9f208ca15e823c366cd7429658ef10b835c0b8a8bcd4889f76820b5787fd"
+    },
+    {
+      "file": "en/red.wav",
+      "seconds": 2.554,
+      "peak": 12851,
+      "sha256": "46d8c69d3682690308fd9fca565956abc130ab04cebda3e9f7eddeb8a5d24b0e"
+    },
+    {
+      "file": "en/rest_instruction.wav",
+      "seconds": 3.553,
+      "peak": 13635,
+      "sha256": "176a2ab5fe57822ee7a2d2594647460ad81ad5604da785da5a1568ddbcf3f8ab"
+    },
+    {
+      "file": "en/shop_deliver_address.wav",
+      "seconds": 2.264,
+      "peak": 10602,
+      "sha256": "f4160394d06ea08127e820e08650fce109a90f09c4490545ead76d459e4a6daf"
+    },
+    {
+      "file": "en/shop_free_prompt.wav",
+      "seconds": 2.204,
+      "peak": 11086,
+      "sha256": "bda28a457deb0e9e78aa3736322c500fa04949647054f6548e3f5646cbd2a617"
+    },
+    {
+      "file": "en/shop_remove_extra.wav",
+      "seconds": 2.554,
+      "peak": 12062,
+      "sha256": "1efbe379e8fe8924868cab7a49fb1e0aa84c0297a8350122e04eda8f1a1757bb"
+    },
+    {
+      "file": "en/shop_restock_shelf.wav",
+      "seconds": 2.183,
+      "peak": 14761,
+      "sha256": "0081aa0688c1dabf40a246554f3eedf3c7e218e71c12e20031a61c9f07cb70ee"
+    },
+    {
+      "file": "en/shop_shopping_list.wav",
+      "seconds": 2.519,
+      "peak": 14217,
+      "sha256": "99b6025131faee748b4b4341ca986435b93bd20f8ba668aac9a24b4289578995"
+    },
+    {
+      "file": "en/short.wav",
+      "seconds": 1.707,
+      "peak": 11825,
+      "sha256": "896b35f2c1bbc262bbfbbcbb5a0fbd10153c1c00fa483e17137d0e76311bdb34"
+    },
+    {
+      "file": "en/small.wav",
+      "seconds": 1.788,
+      "peak": 16119,
+      "sha256": "b3dde0d9ea104d6ee8ab540eb37b7e341b33d2082a75905caced458143b503d3"
+    },
+    {
+      "file": "en/sports_basketball_hoop.wav",
+      "seconds": 2.171,
+      "peak": 13752,
+      "sha256": "c57b9accc8342d252dc8d96356b4daaf3aed3b67340acef591a34a2861a2b636"
+    },
+    {
+      "file": "en/sports_divide_teams.wav",
+      "seconds": 3.239,
+      "peak": 15496,
+      "sha256": "2e316307436419e7900e3722fac4b83bfcfaf9b2baae0a747c425fc529d4bc36"
+    },
+    {
+      "file": "en/sports_free_prompt.wav",
+      "seconds": 2.554,
+      "peak": 10963,
+      "sha256": "a4aff6241c0e4e35080e3c5a18045c56b0ed60ff6263c7d1bfc8646b564a1864"
+    },
+    {
+      "file": "en/sports_pass_ball.wav",
+      "seconds": 1.846,
+      "peak": 13792,
+      "sha256": "c4a13aedc3d4686b488b4fa9bbab2e485d2209a3c86899403dd05d918dd64edf"
+    },
+    {
+      "file": "en/sports_score_three.wav",
+      "seconds": 1.939,
+      "peak": 10953,
+      "sha256": "c311af08616d276be8444e74bdd01af0e13bfc64219b0a07829d3050289aebe1"
+    },
+    {
+      "file": "en/sports_soccer_goal.wav",
+      "seconds": 2.241,
+      "peak": 12511,
+      "sha256": "e76c5e8222cce58808cf015404792297683df41aca03604f8399973bcdd8135a"
+    },
+    {
+      "file": "en/sports_sort_places.wav",
+      "seconds": 2.38,
+      "peak": 15913,
+      "sha256": "9330666f7d4cac17de0c21728335439d39dce86d666a68af8487fdae14341e45"
+    },
+    {
+      "file": "en/sports_store_basket.wav",
+      "seconds": 2.368,
+      "peak": 14039,
+      "sha256": "0281b0889f901cf881468b6a97f46bb2413802e047769fafbd4c421f174f6c1a"
+    },
+    {
+      "file": "en/square.wav",
+      "seconds": 1.498,
+      "peak": 14226,
+      "sha256": "bc7e08e4d3071d064308000a52b208ac95398374f0d0a659df15f635e0985177"
+    },
+    {
+      "file": "en/star.wav",
+      "seconds": 1.474,
+      "peak": 9787,
+      "sha256": "b89513fd24eb4e8739a85774b6a6bdce0aa73595ba01866b5ad3ebccf83663c4"
+    },
+    {
+      "file": "en/station_instruction.wav",
+      "seconds": 2.868,
+      "peak": 13208,
+      "sha256": "1b52ad5dff96f1d1193b657ef8561b9ef623cfde888e9b54b876bb0c39d0efd0"
+    },
+    {
+      "file": "en/sunny.wav",
+      "seconds": 0.755,
+      "peak": 13879,
+      "sha256": "4fd402b1bd100e5cd3c9317fd7591439d8c438d9d17a8d3734f2a571fbfc967c"
+    },
+    {
+      "file": "en/toy_excess_prompt.wav",
+      "seconds": 2.38,
+      "peak": 11756,
+      "sha256": "87a36e4d5576e05063b9dd7ebf1adbd6ad612ddaaeafa025f2425a979faa42a6"
+    },
+    {
+      "file": "en/toy_free_prompt.wav",
+      "seconds": 2.125,
+      "peak": 16417,
+      "sha256": "a62516a693f67a2de04c78a832093ba4e2f9e2dbf54c130a1acc91f96348f3b8"
+    },
+    {
+      "file": "en/toy_home_prompt.wav",
+      "seconds": 2.543,
+      "peak": 13045,
+      "sha256": "e533fe8b0de66180473b6d490bce2aa9e6ac47915925bb89c80bd9f1fb430037"
+    },
+    {
+      "file": "en/toy_pair_prompt.wav",
+      "seconds": 1.765,
+      "peak": 13466,
+      "sha256": "7f363c6768da236c641992134a617cfc4578ad6bb82b2ed732e90df611bf5014"
+    },
+    {
+      "file": "en/toy_position_prompt.wav",
+      "seconds": 2.183,
+      "peak": 12207,
+      "sha256": "0f4ad41daeef65edc349b083725eb6b950613e114a17f68498cf113112b04497"
+    },
+    {
+      "file": "en/toy_size_prompt.wav",
+      "seconds": 2.81,
+      "peak": 12640,
+      "sha256": "ed934f7055cc34d2e673cd2a80d3ed596da82ee40067254d5cfa9b69b20b95c6"
+    },
+    {
+      "file": "en/triangle.wav",
+      "seconds": 1.567,
+      "peak": 11801,
+      "sha256": "3aff245a7b1781a48f7c33256fd83aa5798e51949b8227cc3b21f3cfb93604df"
+    },
+    {
+      "file": "en/weather_chal_prompt.wav",
+      "seconds": 1.916,
+      "peak": 12994,
+      "sha256": "6fa02f72e00efcbc8589c7bdb462ad4d9c7a3a9e71d2f1c1058fac5216c3718d"
+    },
+    {
+      "file": "en/weather_combo_prompt.wav",
+      "seconds": 2.833,
+      "peak": 14166,
+      "sha256": "98097e1f65426bdf1e360e954160f3626208082de233f2292ad23cd49eb19bc5"
+    },
+    {
+      "file": "en/weather_question.wav",
+      "seconds": 1.521,
+      "peak": 17394,
+      "sha256": "c5457153926a9ac3f66783d3f18cd3917c780e6a28a41be599c2a0a61fa4f07b"
+    },
+    {
+      "file": "en/weather_step_prompt.wav",
+      "seconds": 1.927,
+      "peak": 15647,
+      "sha256": "bc323c11702d137a2823b35c07a960d3d1f33d346c4d72bc2499de6c68a49f58"
+    },
+    {
+      "file": "en/white.wav",
+      "seconds": 1.3,
+      "peak": 9449,
+      "sha256": "9e31a200331b49206a6d18082a10f01d87cbf68a6fbfb906d8fd1391244bade2"
+    },
+    {
+      "file": "en/windy.wav",
+      "seconds": 0.848,
+      "peak": 10741,
+      "sha256": "7d7943a81495c641288e945102a4ef9153fa7f42d2b70fcec43316a2e1ab1ca5"
+    },
+    {
+      "file": "en/word_airplane.wav",
+      "seconds": 0.801,
+      "peak": 7887,
+      "sha256": "8153a04f8a71c61fba2e228e5bf265fb19ff7f0a10a415585f69399602757a83"
+    },
+    {
+      "file": "en/word_alligator.wav",
+      "seconds": 0.801,
+      "peak": 12985,
+      "sha256": "9fabaeb182d387e6d161eabf57d2eddc381840e8d6838482239615ab33e50818"
+    },
+    {
+      "file": "en/word_ant.wav",
+      "seconds": 0.453,
+      "peak": 8130,
+      "sha256": "bea184602916d4e9978ce3cecafb2001bb61f291718e0eadb52c59dae1180645"
+    },
+    {
+      "file": "en/word_apple.wav",
+      "seconds": 0.522,
+      "peak": 14603,
+      "sha256": "9d44675021f1f1a79c7cba1726f077eac0093b16ecf1769f055503c69ddc1e5f"
+    },
+    {
+      "file": "en/word_ball.wav",
+      "seconds": 0.592,
+      "peak": 16017,
+      "sha256": "ab6645578f3ab096573916c0849dd7bf7ceb1888ac25f63ff8663ec6eae46f97"
+    },
+    {
+      "file": "en/word_banana.wav",
+      "seconds": 0.72,
+      "peak": 8422,
+      "sha256": "5d2112563ecc6fca4039910e17f3b349f19adcb78eef5115dc6eac362fd54dbc"
+    },
+    {
+      "file": "en/word_bear.wav",
+      "seconds": 0.464,
+      "peak": 10157,
+      "sha256": "77153b4964fdad151008d51e070e556c38881a32f658006ca5b9ff326f7c7cc7"
+    },
+    {
+      "file": "en/word_box.wav",
+      "seconds": 0.731,
+      "peak": 9241,
+      "sha256": "4276cbe423b5b4151e7f5033bdcf369ffc0dab5a154d50e9e4696ba8badd60be"
+    },
+    {
+      "file": "en/word_bus.wav",
+      "seconds": 0.522,
+      "peak": 10540,
+      "sha256": "4d979ef9a07c0ab8c5eabaaaabd902c2257dd2f41164b28424752d80e1eec857"
+    },
+    {
+      "file": "en/word_cake.wav",
+      "seconds": 0.476,
+      "peak": 7248,
+      "sha256": "26a32368dd51530ccc48a293a85db7f6637d2b3f49e041cb4b4494f5e69740e8"
+    },
+    {
+      "file": "en/word_car.wav",
+      "seconds": 0.464,
+      "peak": 9640,
+      "sha256": "c38b6fd52cc7b1f1f45ac57f0c7609aa2d7119dc7a49dac79bfce3138dc32fcc"
+    },
+    {
+      "file": "en/word_cat.wav",
+      "seconds": 0.534,
+      "peak": 7489,
+      "sha256": "f2765d92cd670b3897e113e0ecb6ad2caa7c7958734277e9966a3600f4d7e4b9"
+    },
+    {
+      "file": "en/word_cow.wav",
+      "seconds": 0.673,
+      "peak": 13327,
+      "sha256": "c1a064c0568a918180782e2baf58e0b30795ed14b0639bebcba10767dd513935"
+    },
+    {
+      "file": "en/word_dog.wav",
+      "seconds": 0.441,
+      "peak": 8264,
+      "sha256": "39e274127f76a97f94f6dccf687d7323e9c79cfd4f2bbd1a3e9e54be23efcd10"
+    },
+    {
+      "file": "en/word_door.wav",
+      "seconds": 0.557,
+      "peak": 6163,
+      "sha256": "84ae7d17bff6d30b3e8d4d1a07d19e781015a5ffc4327631f66ba69f5c3482b0"
+    },
+    {
+      "file": "en/word_drum.wav",
+      "seconds": 0.65,
+      "peak": 11727,
+      "sha256": "4df655b113cc96aea16f6a40a8b425bfaeb6d228ee3c8c6d83208b470d9a3bd2"
+    },
+    {
+      "file": "en/word_duck.wav",
+      "seconds": 0.476,
+      "peak": 9038,
+      "sha256": "a8d5ed6a7cf641f371751d6f4a2af3186539259d1d524c95e7e5895be837004c"
+    },
+    {
+      "file": "en/word_ear.wav",
+      "seconds": 0.453,
+      "peak": 5157,
+      "sha256": "dea7161e6e59ade332b7c637dd5d56d8643598e6006c9c6d4d95a6306ad03e0e"
+    },
+    {
+      "file": "en/word_egg.wav",
+      "seconds": 0.43,
+      "peak": 6843,
+      "sha256": "d3a2cbdaed95bb38ce9a1544b0f3995d11476da63870ae75b23d2af6edc4eb93"
+    },
+    {
+      "file": "en/word_elephant.wav",
+      "seconds": 0.743,
+      "peak": 9402,
+      "sha256": "6aaa225e1c75a4be61443128b0cd621fee9cdf14ef125e7672e5a9734b16f991"
+    },
+    {
+      "file": "en/word_eye.wav",
+      "seconds": 0.546,
+      "peak": 9257,
+      "sha256": "190c6cb4dce17f297e8d7b666f7d4e45e8f2f96b3ed7355dd815cdb30feeb03b"
+    },
+    {
+      "file": "en/word_fire_truck.wav",
+      "seconds": 0.94,
+      "peak": 14115,
+      "sha256": "86d1c48ad577ec51b95da4bf2cd7540a440f08b0983bc5ff421d93d3fb0f2c4e"
+    },
+    {
+      "file": "en/word_fish.wav",
+      "seconds": 0.639,
+      "peak": 7685,
+      "sha256": "916f4f21818c28bd5f0526c40de0aa99a0c8d9bbcaab6a08bf0133b08034c5fc"
+    },
+    {
+      "file": "en/word_flower.wav",
+      "seconds": 0.708,
+      "peak": 13002,
+      "sha256": "fac91578c561a82683897251a41e61395e5d00bd40aeaf3aff9558db8436aaab"
+    },
+    {
+      "file": "en/word_fox.wav",
+      "seconds": 0.755,
+      "peak": 11509,
+      "sha256": "202d4aab9918c750899cf129fe9b988d6b489d75c01901fcc976bf2d471d3e90"
+    },
+    {
+      "file": "en/word_frog.wav",
+      "seconds": 0.522,
+      "peak": 14319,
+      "sha256": "77db4eeb1476b6374fa9141975aecac2a691d8f853ab5ef88ada848748029c6e"
+    },
+    {
+      "file": "en/word_giraffe.wav",
+      "seconds": 0.801,
+      "peak": 13780,
+      "sha256": "3fe2d1d5e78660706cd106a494d6fda6a261cf035b9d85ac2c85a6014f741a64"
+    },
+    {
+      "file": "en/word_goat.wav",
+      "seconds": 0.557,
+      "peak": 9623,
+      "sha256": "9495352f7c6be2db79d27b37a960024769ed8db6297a3b45906880561eade0ed"
+    },
+    {
+      "file": "en/word_grape.wav",
+      "seconds": 0.396,
+      "peak": 10291,
+      "sha256": "08411537a2bb76cfb86d903492d8dc9bd4a56b27e810f22b233ffd3803ae9152"
+    },
+    {
+      "file": "en/word_guitar.wav",
+      "seconds": 0.685,
+      "peak": 10246,
+      "sha256": "fe2be90a653991ee6feacb06db9020c0753a8d22fdb45d06e68051918c95cbd5"
+    },
+    {
+      "file": "en/word_hand.wav",
+      "seconds": 0.592,
+      "peak": 14688,
+      "sha256": "5863e6b5fe1abccc195911bfd0f70ac35d69649dc0dbe921a1f9cb0218040bed"
+    },
+    {
+      "file": "en/word_hat.wav",
+      "seconds": 0.476,
+      "peak": 8159,
+      "sha256": "0b259d30e8cee202330de0cd2796c3bbd839f36153a84254478c9ac98c6d456e"
+    },
+    {
+      "file": "en/word_horse.wav",
+      "seconds": 0.766,
+      "peak": 9820,
+      "sha256": "3812cd13c4d670f996680735b4f4d9144188869b718a2135cf844fc34cc8e44c"
+    },
+    {
+      "file": "en/word_house.wav",
+      "seconds": 0.697,
+      "peak": 10034,
+      "sha256": "3269de9fd84f6b7c82ba58469d4cb4076981af5838ef44fb308af7916101edcf"
+    },
+    {
+      "file": "en/word_ice_cream.wav",
+      "seconds": 1.01,
+      "peak": 14522,
+      "sha256": "00d3511a6af6b52a9d7c775f74daad281ee6f07c9435a28e65fa01b21d35b5b6"
+    },
+    {
+      "file": "en/word_igloo.wav",
+      "seconds": 0.511,
+      "peak": 5912,
+      "sha256": "b0e26ff59aa88d7ceb37b4c89e255b97a5351cc87a490594db2d2055c43cb146"
+    },
+    {
+      "file": "en/word_iguana.wav",
+      "seconds": 0.859,
+      "peak": 10324,
+      "sha256": "2b370f64b53f03ded7dd10bc9a40266982758156bfb33edf999a3413fc100204"
+    },
+    {
+      "file": "en/word_insect.wav",
+      "seconds": 0.696,
+      "peak": 9453,
+      "sha256": "f923d7f93bbc1177f83be353552fcb50e97a3a6592567b87e3ded94fe371c43f"
+    },
+    {
+      "file": "en/word_jacket.wav",
+      "seconds": 0.801,
+      "peak": 11811,
+      "sha256": "b44d1c098aa199900301eb8b1d720aebce17b2b5a86276a90a3f6719230d3dad"
+    },
+    {
+      "file": "en/word_jar.wav",
+      "seconds": 0.511,
+      "peak": 9661,
+      "sha256": "be951a02fdd6cc5eb60380210a03f29c587b2e9e4c8c26ee34ba14e119905346"
+    },
+    {
+      "file": "en/word_jellyfish.wav",
+      "seconds": 0.964,
+      "peak": 12685,
+      "sha256": "062092fe9144f04bacfe7bec42609305560532649a78d8fce722216f030f3536"
+    },
+    {
+      "file": "en/word_juice.wav",
+      "seconds": 0.778,
+      "peak": 5330,
+      "sha256": "938936e8142670b8a01f391ac977e75e744e0a291d3262f3e051fca8bc6c6915"
+    },
+    {
+      "file": "en/word_kangaroo.wav",
+      "seconds": 0.755,
+      "peak": 13273,
+      "sha256": "455e792ffe484e3d58aa78fb986cab4d4b93d9a9a8f8f72804f6235ab5f8645a"
+    },
+    {
+      "file": "en/word_key.wav",
+      "seconds": 0.58,
+      "peak": 6016,
+      "sha256": "b5c1c6119ce491837d3a61c49b2dd678b388295baf50cf3586b6f285e4dea4e6"
+    },
+    {
+      "file": "en/word_kite.wav",
+      "seconds": 0.604,
+      "peak": 11247,
+      "sha256": "80f8a449dab0db6ebfc97b95349b624569bf43a9312c6722935eeaf410a74434"
+    },
+    {
+      "file": "en/word_koala.wav",
+      "seconds": 0.685,
+      "peak": 10545,
+      "sha256": "3c445aa0b2ca2ed4faa329879c92c3177f92bc464bf6c77ef7a010db44773edb"
+    },
+    {
+      "file": "en/word_lamp.wav",
+      "seconds": 0.476,
+      "peak": 12397,
+      "sha256": "1189c54442d11b50f3822aee314d45787d9e9fadcc918efcca0bc0d2d5853d1d"
+    },
+    {
+      "file": "en/word_leaf.wav",
+      "seconds": 0.546,
+      "peak": 4967,
+      "sha256": "bd1877d82dc55dfc7124e8f89721803cac9fe3fa646a92bdb08a4b0cab694181"
+    },
+    {
+      "file": "en/word_lemon.wav",
+      "seconds": 0.557,
+      "peak": 13138,
+      "sha256": "4daa097c124f6ef0850ddf35c60c71c9a906a2f14a5a56fbb167cf9eed091fa9"
+    },
+    {
+      "file": "en/word_lion.wav",
+      "seconds": 0.557,
+      "peak": 11992,
+      "sha256": "706743f6982fe09fca6d1300ad8f8fdcfb11f5eae1ecededf370c2f2c5fd866b"
+    },
+    {
+      "file": "en/word_milk.wav",
+      "seconds": 0.464,
+      "peak": 9238,
+      "sha256": "f098d848a7ca8cd298485f7dc87d95959d7e3e40b24cf5706092679a482feabb"
+    },
+    {
+      "file": "en/word_monkey.wav",
+      "seconds": 0.604,
+      "peak": 10643,
+      "sha256": "8ae3e6b384f81b8bd104d9a244175cddbe1c3089b70c40665d5397d28d840d05"
+    },
+    {
+      "file": "en/word_moon.wav",
+      "seconds": 0.58,
+      "peak": 5690,
+      "sha256": "6befa58802dee09b1a5ae082fd68e522f37bb0ef7c733e7961a8f0b3f245da78"
+    },
+    {
+      "file": "en/word_mouse.wav",
+      "seconds": 0.673,
+      "peak": 15243,
+      "sha256": "74a310513d78c629f58fb2ee2b342ad98697942eaae0f204d2259359ee79aa6f"
+    },
+    {
+      "file": "en/word_nest.wav",
+      "seconds": 0.685,
+      "peak": 10952,
+      "sha256": "89abf6e594638e249ac9a1655f0119af121752dff7efefcb1507cb3d4c85ee3e"
+    },
+    {
+      "file": "en/word_net.wav",
+      "seconds": 0.546,
+      "peak": 8874,
+      "sha256": "a6ab57808e8d8ff1b665b17410275f62ecd5c496314a3668d179c2d97a9a5c14"
+    },
+    {
+      "file": "en/word_noodles.wav",
+      "seconds": 0.813,
+      "peak": 8028,
+      "sha256": "dc23f203af7b22e394f6f3fec54528560aa6a99e58a1cdbd466ee11f98062e85"
+    },
+    {
+      "file": "en/word_nose.wav",
+      "seconds": 0.836,
+      "peak": 8680,
+      "sha256": "cca4e9dcb1046d1fdb010cf7873194fd985aa6641cf795d16312e6119812936a"
+    },
+    {
+      "file": "en/word_octopus.wav",
+      "seconds": 0.94,
+      "peak": 10649,
+      "sha256": "3f3584c2198f8159d4b07907a991fd5cee954b652c4e7f30c4826a7168c705f6"
+    },
+    {
+      "file": "en/word_onion.wav",
+      "seconds": 0.731,
+      "peak": 11040,
+      "sha256": "101f6dddb9aeb5498c9c730ef4cfc5b3c4748fbf1bc6261c379b5b33511ee2da"
+    },
+    {
+      "file": "en/word_orange.wav",
+      "seconds": 0.824,
+      "peak": 9485,
+      "sha256": "f2608d978e65485679f9560ca7954a69e995aeb97bb5d9846b5115ad936a4583"
+    },
+    {
+      "file": "en/word_owl.wav",
+      "seconds": 0.441,
+      "peak": 10668,
+      "sha256": "9f36ea9ae8b2e494777c558846c6a469cc33a5c25b02237a53b36fed090ff1f2"
+    },
+    {
+      "file": "en/word_panda.wav",
+      "seconds": 0.662,
+      "peak": 12278,
+      "sha256": "a0cbf0f5ee80e4c4fade47ebdbcbd3abec3eee1e20acc61d62f4b89ef17e0022"
+    },
+    {
+      "file": "en/word_pear.wav",
+      "seconds": 0.522,
+      "peak": 8904,
+      "sha256": "a4f3649a722e66ac68d4975412151c48c5a365c454e9525afdbb98ee1dadaf46"
+    },
+    {
+      "file": "en/word_pencil.wav",
+      "seconds": 0.72,
+      "peak": 13263,
+      "sha256": "fdacbca4e4bcc860e6d5449e54f29214b1e4795815306058b293bc56e4786788"
+    },
+    {
+      "file": "en/word_pig.wav",
+      "seconds": 0.511,
+      "peak": 6504,
+      "sha256": "491db854c83514e0b90119249514a348403fbf6454f6e2e5700eb8581ff2fb5b"
+    },
+    {
+      "file": "en/word_quail.wav",
+      "seconds": 0.557,
+      "peak": 8080,
+      "sha256": "5c10122882ca4c9a62fa545fed00ba030896bae0f9e9fe0a60332c782232e0d8"
+    },
+    {
+      "file": "en/word_queen.wav",
+      "seconds": 0.58,
+      "peak": 10067,
+      "sha256": "f494aa05e8d635c461b7eae27b42bbdae5d2cc3fb51da58966d120fb7275ddd2"
+    },
+    {
+      "file": "en/word_quill.wav",
+      "seconds": 0.499,
+      "peak": 11731,
+      "sha256": "841ce3377a7cfb3d0339f2ef5ab714717f51407611a4a1ebf6fc203f0eccee3b"
+    },
+    {
+      "file": "en/word_quilt.wav",
+      "seconds": 0.534,
+      "peak": 10616,
+      "sha256": "4a72d66a99fe961b77d98dc44a133ab108cfc6182f52294d8f62edaee89ed101"
+    },
+    {
+      "file": "en/word_rabbit.wav",
+      "seconds": 0.673,
+      "peak": 16998,
+      "sha256": "a29ec747913b2fad36dbf0aae72bb9b7452c53794b1b14c9da4c8e62d85d873a"
+    },
+    {
+      "file": "en/word_rainbow.wav",
+      "seconds": 0.743,
+      "peak": 8587,
+      "sha256": "b2e1d5bf752703a9d551a761dc2da968cb5affffadc28c2f1d13e8c7228e802b"
+    },
+    {
+      "file": "en/word_ring.wav",
+      "seconds": 0.449,
+      "peak": 10115,
+      "sha256": "5bbb72ac6f87bda513475f4525bb023d8d0b66b5dbae2d79efeac01a61007e98"
+    },
+    {
+      "file": "en/word_robot.wav",
+      "seconds": 0.627,
+      "peak": 13087,
+      "sha256": "6eea195961df09b1552f238d1e60a3a8c65e9890db415ab184d67d7849363e9a"
+    },
+    {
+      "file": "en/word_shoe.wav",
+      "seconds": 0.65,
+      "peak": 7240,
+      "sha256": "660b5658944db83dc994cadadb33a5c160e29f8c06b58a93d20abd6e9e9d0f22"
+    },
+    {
+      "file": "en/word_six.wav",
+      "seconds": 0.766,
+      "peak": 8940,
+      "sha256": "26f714509fc6836efd3ac02aae4ec09a6450103318fcde2ed8d353a491bfdf13"
+    },
+    {
+      "file": "en/word_snake.wav",
+      "seconds": 0.639,
+      "peak": 7617,
+      "sha256": "183ff921399118831a7c656ac95bbd3e6c24fa7792a2bca4983aa2e317eacd09"
+    },
+    {
+      "file": "en/word_star.wav",
+      "seconds": 0.546,
+      "peak": 12045,
+      "sha256": "c328a672b8e7b047d9118f56df535f28010f80ff9ce946036b2c0e588ad19eb6"
+    },
+    {
+      "file": "en/word_sun.wav",
+      "seconds": 0.522,
+      "peak": 11805,
+      "sha256": "bd928ecbf3c1dcfb0602610e030b892fd11ebb55e6aaf8748182271ae60460a8"
+    },
+    {
+      "file": "en/word_tiger.wav",
+      "seconds": 0.511,
+      "peak": 13437,
+      "sha256": "744d1c9f98a213a4bbac5bf35321cb96dc89981490f1431d8d8a06ab2b8134ae"
+    },
+    {
+      "file": "en/word_train.wav",
+      "seconds": 0.615,
+      "peak": 8188,
+      "sha256": "a03c2872749748517d7f1865eaea06bad081a16189a479de0b8fec6a57ec1fa6"
+    },
+    {
+      "file": "en/word_tree.wav",
+      "seconds": 0.546,
+      "peak": 5045,
+      "sha256": "9f913f39f15a90bc24aa59a44b13710c3fd4ab6b3319027021f74e0619537f60"
+    },
+    {
+      "file": "en/word_turtle.wav",
+      "seconds": 0.615,
+      "peak": 11107,
+      "sha256": "14fc81ce46c017c61f713a1b54eafd7880d0e264828412fc20dc295c7aa25e31"
+    },
+    {
+      "file": "en/word_umbrella.wav",
+      "seconds": 0.639,
+      "peak": 11930,
+      "sha256": "f7275d4ff9b10228b111b16f5cfdd7f8d8e39bcca8d932b5f3b55c6929e67f04"
+    },
+    {
+      "file": "en/word_uncle.wav",
+      "seconds": 0.557,
+      "peak": 6337,
+      "sha256": "ea7ab502e33ca5373f0039d8ae166c23b933a229f5f2a30dc17c83d718e44cf5"
+    },
+    {
+      "file": "en/word_unicorn.wav",
+      "seconds": 0.778,
+      "peak": 7648,
+      "sha256": "59ada4800191f39f89f23106ff5c2a79e95ae2e1bb2be6066a99cae39b7fc29e"
+    },
+    {
+      "file": "en/word_uniform.wav",
+      "seconds": 0.882,
+      "peak": 8590,
+      "sha256": "390547619834b07b6a33d4dd4c8011665331cb9dae3f391970d89b9f1662f8a7"
+    },
+    {
+      "file": "en/word_van.wav",
+      "seconds": 0.488,
+      "peak": 14019,
+      "sha256": "f990bb9eb6dec03c1f01260e06b8dde5a6fe9b3111cbf37cfed06b1c478b36ae"
+    },
+    {
+      "file": "en/word_vase.wav",
+      "seconds": 0.708,
+      "peak": 8654,
+      "sha256": "4c0c49254d7bdffb54f372aef1af5aa1cac7d3c9aea951c230468f891ea8c943"
+    },
+    {
+      "file": "en/word_vest.wav",
+      "seconds": 0.604,
+      "peak": 10095,
+      "sha256": "052cfb4124f66d6858cf60dd1059f0adce190d975493e084f96b8b9ac04cd407"
+    },
+    {
+      "file": "en/word_violin.wav",
+      "seconds": 0.766,
+      "peak": 18893,
+      "sha256": "9e4299f92bbe26f3c37ac78afdcd06d733fcfb0a109357dc418d6bec9da18c32"
+    },
+    {
+      "file": "en/word_watch.wav",
+      "seconds": 0.65,
+      "peak": 12352,
+      "sha256": "05cb6e572c7abfe421babc2cdd41c0b7df9a3f78a3dd39f3d1a8cb211307a64c"
+    },
+    {
+      "file": "en/word_watermelon.wav",
+      "seconds": 0.801,
+      "peak": 16201,
+      "sha256": "bed18ca12b1e341d45098d4c4cc5d969d67131fca6f12e15dbade6a847beba11"
+    },
+    {
+      "file": "en/word_whale.wav",
+      "seconds": 0.534,
+      "peak": 9373,
+      "sha256": "8370a5e51fb0a9926a59de4c68f05b9b1097ac843b3295e4b76093dd4e09112b"
+    },
+    {
+      "file": "en/word_window.wav",
+      "seconds": 0.627,
+      "peak": 9776,
+      "sha256": "333bd24d78a2cc462d651114c29e14ed77068d8737d7e9d2a049156ddd115a47"
+    },
+    {
+      "file": "en/word_x_ray.wav",
+      "seconds": 0.766,
+      "peak": 15195,
+      "sha256": "a651b5c632d407038c2fa0395b35f0dead9342b0111926d65d6b4dab33c9b988"
+    },
+    {
+      "file": "en/word_yak.wav",
+      "seconds": 0.453,
+      "peak": 11959,
+      "sha256": "7f7aaf689e4cdacb325db052d94b08f531d2dea45479357d7c79ceaf9dae6c44"
+    },
+    {
+      "file": "en/word_yarn.wav",
+      "seconds": 0.499,
+      "peak": 13127,
+      "sha256": "d44ddd89f2f02f63ee5b89ec1c88194ad02a3604b773f8461e9a937a09511366"
+    },
+    {
+      "file": "en/word_yo_yo.wav",
+      "seconds": 0.743,
+      "peak": 9698,
+      "sha256": "f7a9be578990ad65bc34aa75683def8dd99cb530925ff5dea8068eeb49d201e7"
+    },
+    {
+      "file": "en/word_yogurt.wav",
+      "seconds": 0.755,
+      "peak": 12821,
+      "sha256": "e3e8e61f4d2a5de7ffcd28e1d67b229b1834d49b1567830efb4d4f5a2cbc7da6"
+    },
+    {
+      "file": "en/word_zebra.wav",
+      "seconds": 0.685,
+      "peak": 15872,
+      "sha256": "0dacfea74eebec989b6923b720ae7676dbb62b33900694ba6c25f31b57d640cc"
+    },
+    {
+      "file": "en/word_zero.wav",
+      "seconds": 0.627,
+      "peak": 8841,
+      "sha256": "239f6e91802db96aa6ef88b92597f4dfc5c373c1615b3c933efce564c3176240"
+    },
+    {
+      "file": "en/word_zipper.wav",
+      "seconds": 0.65,
+      "peak": 12361,
+      "sha256": "c5050d949f70ab08b345fa1de8dd084d63417a21b1a91f50863446bca8cd5669"
+    },
+    {
+      "file": "en/word_zoo.wav",
+      "seconds": 0.604,
+      "peak": 5408,
+      "sha256": "c422d8a2edd9a832a2bb0b194d517c486c55941d9967c2dd2ec5a48f7a5bdb91"
+    },
+    {
+      "file": "en/writing_chal_prompt.wav",
+      "seconds": 2.148,
+      "peak": 12963,
+      "sha256": "92da67d752a2eeff6ef6157f2385124af852f35148e924f9fb849e21b7d71380"
+    },
+    {
+      "file": "en/writing_combo_prompt.wav",
+      "seconds": 1.858,
+      "peak": 10534,
+      "sha256": "15114a785193f1b306ce34c5c1cb215d597b075e2c044fca765b57cc9819dcfe"
+    },
+    {
+      "file": "en/writing_instruction.wav",
+      "seconds": 5.828,
+      "peak": 16435,
+      "sha256": "dbfaba53b43d03b1b0b3092a5ddebbd7c28896bbb751da0420e00a2a786aaffa"
+    },
+    {
+      "file": "en/writing_step_prompt.wav",
+      "seconds": 2.218,
+      "peak": 9736,
+      "sha256": "bd6d9687574105027f51c776a796b03c1cfe7362d4bacf2782c250754bc22d17"
+    },
+    {
+      "file": "en/yellow.wav",
+      "seconds": 1.3,
+      "peak": 10219,
+      "sha256": "a2acb0cad4f53a798d7bcbcfe0fc07bac21ee5a7c4d309cbc3e1ece439287e80"
+    },
+    {
+      "file": "zh/beach_below.wav",
+      "seconds": 1.904,
+      "peak": 4256,
+      "sha256": "3ee1c55ceb77588c487f4977fc2389fb191265fc8fc6f4ca1921f6a93215f9d9"
+    },
+    {
+      "file": "zh/beach_big.wav",
+      "seconds": 1.37,
+      "peak": 5167,
+      "sha256": "a581e92fb132c2d6343b852dcecc11617db1db3e25a6c9e0904a461fb3b0fb42"
+    },
+    {
+      "file": "zh/beach_color.wav",
+      "seconds": 2.81,
+      "peak": 7334,
+      "sha256": "ec61d69d8e2b57cf4263b740c7f4b826e1b3ef76e4e9733a1f79695a2085ed72"
+    },
+    {
+      "file": "zh/beach_different.wav",
+      "seconds": 1.184,
+      "peak": 3268,
+      "sha256": "621475c7df8101c4d954180760f35247806e1c3f18e22f00783c70f640ec41e0"
+    },
+    {
+      "file": "zh/beach_free_prompt.wav",
+      "seconds": 2.055,
+      "peak": 3666,
+      "sha256": "88ff321c601476763722cb223fc619b95e740eaac2212513e63dfbf2d4d374ff"
+    },
+    {
+      "file": "zh/beach_fruit.wav",
+      "seconds": 1.707,
+      "peak": 4518,
+      "sha256": "2c86dcd010f40333a41cde39fab8724e8c1dad2207a12d9179ed15de2f07322d"
+    },
+    {
+      "file": "zh/beach_less.wav",
+      "seconds": 1.382,
+      "peak": 4076,
+      "sha256": "a8f7073959d1760e6093e31b72521acd761ae321a07a1eac56a6f47839677d7b"
+    },
+    {
+      "file": "zh/beach_more.wav",
+      "seconds": 1.405,
+      "peak": 3832,
+      "sha256": "dd58493d7b80a1f6ba62bea4ae7bd1fde13d75a80665637da0fa3bd476f0d3a2"
+    },
+    {
+      "file": "zh/beach_pattern.wav",
+      "seconds": 1.532,
+      "peak": 4984,
+      "sha256": "902277319c0b15910a470853b9170bf1a9a4b4fcd895c27441a21f76513d7b83"
+    },
+    {
+      "file": "zh/beach_shape.wav",
+      "seconds": 2.392,
+      "peak": 6246,
+      "sha256": "35a790c5cd1bb1ecd183b579917001268ccb14526c9dfce9e8b76ee439098919"
+    },
+    {
+      "file": "zh/beach_short.wav",
+      "seconds": 1.382,
+      "peak": 4012,
+      "sha256": "cc0d3c5bfe71ccc03ea3f35092fb5ec8f8083b3c2e408c277e5d75a75027c428"
+    },
+    {
+      "file": "zh/beach_small.wav",
+      "seconds": 1.273,
+      "peak": 3973,
+      "sha256": "7fe44dc9df79250053a4a15f9e305cd68b61d60e88454ffa995a7cfabafeb926"
+    },
+    {
+      "file": "zh/beach_tall.wav",
+      "seconds": 1.393,
+      "peak": 4232,
+      "sha256": "25e6a3c9f33a4a827f2d635fcf8c72c6057a5a5f748d5f83821ca341fe86b72f"
+    },
+    {
+      "file": "zh/big.wav",
+      "seconds": 1.37,
+      "peak": 5624,
+      "sha256": "00b6a1757f1293769893a8ac0b5ad21e0fdaabb70aecc17124658f43b2202e99"
+    },
+    {
+      "file": "zh/black.wav",
+      "seconds": 1.316,
+      "peak": 3979,
+      "sha256": "da4b0f9fde70df6db5aded1adec8ececd95bee8c42f826446ade248954054911"
+    },
+    {
+      "file": "zh/blue.wav",
+      "seconds": 1.387,
+      "peak": 3803,
+      "sha256": "0c1ab24215f12cc2eaf0556f7afab2e19fba0dc1135b0a937c4e1607df0d113d"
+    },
+    {
+      "file": "zh/bridge_chal_prompt.wav",
+      "seconds": 2.1,
+      "peak": 5878,
+      "sha256": "0237dc3944f77bbb31b29d3f00598b7b3427ed65ab3450c5d0a4bdcae5ed65a8"
+    },
+    {
+      "file": "zh/bridge_combo_prompt.wav",
+      "seconds": 2.334,
+      "peak": 9073,
+      "sha256": "e7e38f983957eddbba77c3164b2802208110a0e5abc527f5876096a5542b707c"
+    },
+    {
+      "file": "zh/bridge_free_prompt.wav",
+      "seconds": 1.881,
+      "peak": 4582,
+      "sha256": "88f75be48a283c84b95796177c1c583fb4798eb40e3a36bac1e940daa1132fdb"
+    },
+    {
+      "file": "zh/bridge_instruction.wav",
+      "seconds": 2.763,
+      "peak": 4417,
+      "sha256": "522e5dcf363177b8715c42b4f122003a4000c864fe326181b0bbda80dfd8ad44"
+    },
+    {
+      "file": "zh/circle.wav",
+      "seconds": 1.347,
+      "peak": 3654,
+      "sha256": "4ad09dce876bbb267707cdb89c6822b6552bc17d0194d48b5b919aa00e4407cc"
+    },
+    {
+      "file": "zh/clean_free_prompt.wav",
+      "seconds": 1.654,
+      "peak": 3472,
+      "sha256": "992e648af24038f9760eabf43d5b8d2b3a05e920b4d5165a4ac7f124a61fa3f2"
+    },
+    {
+      "file": "zh/clean_load_truck.wav",
+      "seconds": 2.148,
+      "peak": 4292,
+      "sha256": "59f3895de34e2ea337600efb33aa4278bfea9697bd1bb431f9ebfc1051bf460c"
+    },
+    {
+      "file": "zh/clean_missing_bags.wav",
+      "seconds": 2.403,
+      "peak": 3955,
+      "sha256": "565be346e115831e63294e8cb8c33bcc3bb2d2ffe0c17e7e9c0d05cd7354b6b0"
+    },
+    {
+      "file": "zh/clean_recycle.wav",
+      "seconds": 1.92,
+      "peak": 5356,
+      "sha256": "eb57bb065b601f7580953d2632ef5d1cf353af73421c60e88472a6ff6fe2318f"
+    },
+    {
+      "file": "zh/clean_remove_wrong.wav",
+      "seconds": 1.974,
+      "peak": 4940,
+      "sha256": "99bd9696b54cfcf2f9a3fda121a3cd09b4ac3db6a8fd7937fd3ff32077471bb1"
+    },
+    {
+      "file": "zh/clean_route.wav",
+      "seconds": 1.985,
+      "peak": 5421,
+      "sha256": "1ae4dd85d16c06f6f7bf97a10368b87fbcbe58d912cf9862149407f5cf373761"
+    },
+    {
+      "file": "zh/clean_trash_bin.wav",
+      "seconds": 1.723,
+      "peak": 3573,
+      "sha256": "eea49e1da8f2488dd40e3f73c6ba3898ecce952834b9309019fd7554bfceaf58"
+    },
+    {
+      "file": "zh/clock_chal_prompt.wav",
+      "seconds": 3.762,
+      "peak": 4095,
+      "sha256": "8b309d9276f56d9bfb8992102302d4fac756b6462698ea69c79802d768d1e73d"
+    },
+    {
+      "file": "zh/clock_free_prompt.wav",
+      "seconds": 1.467,
+      "peak": 4606,
+      "sha256": "f0055201fc8857ed9143df286afe1a3eefd0b7feca8bc1cb12896d8355b672f1"
+    },
+    {
+      "file": "zh/clock_step_prompt.wav",
+      "seconds": 1.741,
+      "peak": 3458,
+      "sha256": "3c770d945918ad11dc3e018247611df817f11f6af214a66a894dc6a4f61a7ef8"
+    },
+    {
+      "file": "zh/cloudy.wav",
+      "seconds": 1.026,
+      "peak": 2844,
+      "sha256": "b170c9e1a0f9192e3f6efcbe9731c7e8513d270ecc65565d3bb76cc66242ac6a"
+    },
+    {
+      "file": "zh/correct.wav",
+      "seconds": 1.77,
+      "peak": 3735,
+      "sha256": "4507cc8d86e22f8aab6f4d3f0a48bef67559cc36cdbc925f5dc1023e3e5ec178"
+    },
+    {
+      "file": "zh/count.wav",
+      "seconds": 3.64,
+      "peak": 5203,
+      "sha256": "5a404339531e52f65acc0a1432f007de21bad6d8c63c5d4008a80ee076d8c6a1"
+    },
+    {
+      "file": "zh/delivery_chal_prompt.wav",
+      "seconds": 1.578,
+      "peak": 5500,
+      "sha256": "644a507563a41f3873f208c5f850fd6ae16e8e6a96a3c2a6a8fdcc7b0d322466"
+    },
+    {
+      "file": "zh/delivery_combo_prompt.wav",
+      "seconds": 2.26,
+      "peak": 4866,
+      "sha256": "839b37eab82c04a9441b78f2069f579024a944c54940ea867431a28caf586fa4"
+    },
+    {
+      "file": "zh/delivery_free_prompt.wav",
+      "seconds": 2.146,
+      "peak": 4873,
+      "sha256": "bd3e067499effeac4e06ed2d09cc52a69905ca4b2bc1f4386531bdbf1fb7427f"
+    },
+    {
+      "file": "zh/delivery_step_prompt.wav",
+      "seconds": 2.752,
+      "peak": 4509,
+      "sha256": "c5e61dce9674d8eb0419f93c8fac7a04b9b9e0b30446601556b1cfcf2b14ab53"
+    },
+    {
+      "file": "zh/dining_change_order.wav",
+      "seconds": 3.518,
+      "peak": 4668,
+      "sha256": "832d8c160b0416e8303e7626ca4539d866561374790a3fb538dfc59d082b1f65"
+    },
+    {
+      "file": "zh/dining_clean_table.wav",
+      "seconds": 1.974,
+      "peak": 3100,
+      "sha256": "ec9ab618f3d9d1f0c4777c81be908170619b719bd6b25160d1bcbca443e98973"
+    },
+    {
+      "file": "zh/dining_fill_missing.wav",
+      "seconds": 1.73,
+      "peak": 5191,
+      "sha256": "858bf7742c3aa64bf6545a564f61f72fe3d002da8fea8832152033708f070b91"
+    },
+    {
+      "file": "zh/dining_free_prompt.wav",
+      "seconds": 2.067,
+      "peak": 5116,
+      "sha256": "4b7858538132bb11786700ac963408c5008a7a33ac0343ae253a0fc744348d6a"
+    },
+    {
+      "file": "zh/dining_set_table.wav",
+      "seconds": 2.334,
+      "peak": 6018,
+      "sha256": "c8eaef0c2a2a3c4775f9ea2cc404fc0eb8644e47c48871387dd1b6a422b612d0"
+    },
+    {
+      "file": "zh/dining_share_treats.wav",
+      "seconds": 1.625,
+      "peak": 4395,
+      "sha256": "03d220edd61704c861bc00c0649360d12ecb6f5a0ce2ae4daf98f13a7a928de5"
+    },
+    {
+      "file": "zh/fruit_chal_exchange.wav",
+      "seconds": 2.103,
+      "peak": 7679,
+      "sha256": "b00903db322bab0881a620e1f0207874fb208ed80bd35f14deb1646baf16d7ab"
+    },
+    {
+      "file": "zh/fruit_chal_fix_order.wav",
+      "seconds": 4.494,
+      "peak": 5690,
+      "sha256": "d77e90d0f818ceac2acc939e5e0283ea552142f05e87b88d1bd2a690cdbcc14a"
+    },
+    {
+      "file": "zh/fruit_combo_strawberries.wav",
+      "seconds": 1.506,
+      "peak": 4049,
+      "sha256": "5473296389e498bd4429105c999c4d2a8fbb50d540ba44c9bfa13f9878bfa02a"
+    },
+    {
+      "file": "zh/fruit_combo_two_guests.wav",
+      "seconds": 2.02,
+      "peak": 6016,
+      "sha256": "175b225d6b4675e1c547877e75550387f0d2f1b153553efb13a96db3d71b49ba"
+    },
+    {
+      "file": "zh/fruit_free_prompt.wav",
+      "seconds": 3.653,
+      "peak": 5342,
+      "sha256": "44a2ba19676e9b4e259a46b7e5b087f56bb681ba0c0a8c5272b94aa43dc4f51f"
+    },
+    {
+      "file": "zh/fruit_instruction.wav",
+      "seconds": 4.354,
+      "peak": 4779,
+      "sha256": "4cb60e200d1ea43426fd94a19b0747f845d356d0e4f95bf301c644864e4ce0d2"
+    },
+    {
+      "file": "zh/fruit_step_put_pineapple.wav",
+      "seconds": 1.776,
+      "peak": 3921,
+      "sha256": "78775950b889f55aa99251bfe6b081fbb3a96d8fe521d58b4b593d2d248880ab"
+    },
+    {
+      "file": "zh/fruit_step_take_pineapple.wav",
+      "seconds": 1.922,
+      "peak": 4054,
+      "sha256": "01e84768923f292d5e5beb7ea02a0f2fe179225b65cbdf70594d0edf211dfea8"
+    },
+    {
+      "file": "zh/garden_feed_prompt.wav",
+      "seconds": 2.252,
+      "peak": 4043,
+      "sha256": "3bf0c5e1daa0b7053d8b1401b566a438983edf3f11e817bd3c100b6429fe63a3"
+    },
+    {
+      "file": "zh/garden_free_prompt.wav",
+      "seconds": 2.334,
+      "peak": 5662,
+      "sha256": "c3d0af7da5ab46268bf0f64670cc2f36fdfc4f8da5e70f2fcab3b062f335f3f6"
+    },
+    {
+      "file": "zh/garden_grow_prompt.wav",
+      "seconds": 2.682,
+      "peak": 4044,
+      "sha256": "89eb20392f223f9a869c0f815c5d9e967d9ac16c2006a1b2c7d262a9cbbc5d61"
+    },
+    {
+      "file": "zh/garden_harvest_prompt.wav",
+      "seconds": 2.763,
+      "peak": 5995,
+      "sha256": "c8cb5cb898b6447e05bdea4a8b49d2b4e4742b3d66e0f8bf34f07795fe6d7e5e"
+    },
+    {
+      "file": "zh/garden_seed_prompt.wav",
+      "seconds": 1.997,
+      "peak": 6427,
+      "sha256": "eb23bb9d18c2ef0d379ce72ab3ec1c1ed2810ee2e68149bf69a7d0fcbe67b278"
+    },
+    {
+      "file": "zh/garden_water_prompt.wav",
+      "seconds": 2.171,
+      "peak": 4937,
+      "sha256": "4d8bd8e5b29767da541033455475d3b924897dc5e98f2bda49404e75bb576e71"
+    },
+    {
+      "file": "zh/green.wav",
+      "seconds": 1.324,
+      "peak": 4411,
+      "sha256": "3f53f079a5c56697a91c6d15f466bd6f6ef810af731a00fc61447a857c6bfaf4"
+    },
+    {
+      "file": "zh/long.wav",
+      "seconds": 1.451,
+      "peak": 3681,
+      "sha256": "23613f4ea2334e289856948d290a3fc5b0a1a843536394fcb0cc13187abca64a"
+    },
+    {
+      "file": "zh/orange.wav",
+      "seconds": 1.32,
+      "peak": 2832,
+      "sha256": "324c06977ce344ee42ddeb00ac9aa7e6a85a360029241a856b8c698c6a09f5bc"
+    },
+    {
+      "file": "zh/oval.wav",
+      "seconds": 1.579,
+      "peak": 4649,
+      "sha256": "49bb62452593cb7fc43406025a6eadc1cbd862a3f425b722a4d999d9cf07fce4"
+    },
+    {
+      "file": "zh/purple.wav",
+      "seconds": 1.331,
+      "peak": 3964,
+      "sha256": "13baa292769b41b4b5b1b6ac4fee22f9167c4ce9a23432465e554ec0c2314c93"
+    },
+    {
+      "file": "zh/rainy.wav",
+      "seconds": 1.079,
+      "peak": 3441,
+      "sha256": "713867403e74eba68e5c426422b8caf1ccd05a3494554c701a4dae7cccc4c995"
+    },
+    {
+      "file": "zh/rectangle.wav",
+      "seconds": 1.591,
+      "peak": 3573,
+      "sha256": "ffc1475a4a2bddca95b929b51907181ab846993129a0185cd75de7980f42363a"
+    },
+    {
+      "file": "zh/red.wav",
+      "seconds": 4.185,
+      "peak": 3901,
+      "sha256": "d937eab9d8e5a0df5d704ca2042feb972723e09df224572f6141baeee5412840"
+    },
+    {
+      "file": "zh/rest_instruction.wav",
+      "seconds": 2.991,
+      "peak": 4721,
+      "sha256": "13f86be662ed7f1b08c9fdbd151b519c755a22167643b00461e03eb73ca59363"
+    },
+    {
+      "file": "zh/shop_deliver_address.wav",
+      "seconds": 2.252,
+      "peak": 5786,
+      "sha256": "64c72543014f16f47e7fad96c1307fc73b40f961c0c13bc9589d2fb7e4c71dba"
+    },
+    {
+      "file": "zh/shop_free_prompt.wav",
+      "seconds": 2.287,
+      "peak": 4887,
+      "sha256": "bdd1a993b1f6c0213e8439d2dc961432ad4349d729018723d4a2dafdcd15dbac"
+    },
+    {
+      "file": "zh/shop_remove_extra.wav",
+      "seconds": 2.543,
+      "peak": 6442,
+      "sha256": "c689e25d9de5bcdac2d6e4ee9ae3be636e051c303737d5073c6cc94dd3ddbba2"
+    },
+    {
+      "file": "zh/shop_restock_shelf.wav",
+      "seconds": 1.974,
+      "peak": 5512,
+      "sha256": "d33539ca56a008815590afe18e98ee9cb74c9d70cc4f1340db9ff24adf52a819"
+    },
+    {
+      "file": "zh/shop_shopping_list.wav",
+      "seconds": 2.415,
+      "peak": 5299,
+      "sha256": "7414997476f5822b1dec44a2ef7617cbca3190bbf069b54ad2b41dfe65ddc81f"
+    },
+    {
+      "file": "zh/short.wav",
+      "seconds": 1.393,
+      "peak": 3692,
+      "sha256": "80b2e3074e4a64ea0006c311b3627de67aa88e3f17875227e64d372bf2202a20"
+    },
+    {
+      "file": "zh/small.wav",
+      "seconds": 1.271,
+      "peak": 3684,
+      "sha256": "233f26dd2439709492f09c219f0d0d82df4b4fce1b6f5b830968697afcaf6424"
+    },
+    {
+      "file": "zh/sports_basketball_hoop.wav",
+      "seconds": 1.718,
+      "peak": 3689,
+      "sha256": "800dcba011f1b950153b6588f5bcd67ed8a1e3bb921c9aa00a2fc2ecef022c52"
+    },
+    {
+      "file": "zh/sports_divide_teams.wav",
+      "seconds": 2.357,
+      "peak": 5034,
+      "sha256": "3c3b49eb811fa3715ba12a09fd41570847192414564f1adce58d486cd4dfbb43"
+    },
+    {
+      "file": "zh/sports_free_prompt.wav",
+      "seconds": 1.929,
+      "peak": 4289,
+      "sha256": "853d8186b9ae58dc49524aa498ee6becca10a3f5c8f46e8e6cc81d991a3f528f"
+    },
+    {
+      "file": "zh/sports_pass_ball.wav",
+      "seconds": 1.567,
+      "peak": 4102,
+      "sha256": "47d51f048f97005714cafed5c77f3e00c1de02da7ba946b6c5c0f251e57caff5"
+    },
+    {
+      "file": "zh/sports_score_three.wav",
+      "seconds": 2.592,
+      "peak": 4535,
+      "sha256": "6e956ef423009afdf59f636c2d68d4e19115bc0bee320fea81601751778ff795"
+    },
+    {
+      "file": "zh/sports_soccer_goal.wav",
+      "seconds": 1.672,
+      "peak": 2901,
+      "sha256": "575e8cd4b49260abc4bda33d0c4bbc2d4db73ae9e7e5c7b6c731e0eba9f55872"
+    },
+    {
+      "file": "zh/sports_sort_places.wav",
+      "seconds": 1.846,
+      "peak": 4913,
+      "sha256": "3ff82a76300f7a2875ba40d27c48e40379c75f9aba126272846119a7a427af9b"
+    },
+    {
+      "file": "zh/sports_store_basket.wav",
+      "seconds": 2.241,
+      "peak": 5182,
+      "sha256": "869cd6e540a6ce387bbcc829e5751e001ac04670070cab0d81344d2d60ac4a40"
+    },
+    {
+      "file": "zh/square.wav",
+      "seconds": 1.637,
+      "peak": 3696,
+      "sha256": "5064aa39540955cde3641272383c4ba3eb94958a66d36c79e62c8076622162eb"
+    },
+    {
+      "file": "zh/star.wav",
+      "seconds": 1.405,
+      "peak": 3111,
+      "sha256": "947328486250e4325c06d941f3108d22885963d57f57998cf28334ce176d12d3"
+    },
+    {
+      "file": "zh/station_instruction.wav",
+      "seconds": 2.554,
+      "peak": 4248,
+      "sha256": "54237a54a8ca0a48205e5a13acee5225e53dbf0e0e6e99c4b19b12f51a2c05e7"
+    },
+    {
+      "file": "zh/sunny.wav",
+      "seconds": 1.296,
+      "peak": 3791,
+      "sha256": "8ae1f78ed70e7b68982c531c7d3db609dc7d5d9dcfd11d11a6f536118c1f3783"
+    },
+    {
+      "file": "zh/toy_excess_prompt.wav",
+      "seconds": 1.822,
+      "peak": 5125,
+      "sha256": "931feea0c87b02ab940eda358e3d32b499c6bfeee9e2ce81c9b6404e43d442b4"
+    },
+    {
+      "file": "zh/toy_free_prompt.wav",
+      "seconds": 1.549,
+      "peak": 4594,
+      "sha256": "9d5b99f4712fb8c36706c64b87159d6a10344a6dbb3b88004fe7d125d96ebe6a"
+    },
+    {
+      "file": "zh/toy_home_prompt.wav",
+      "seconds": 2.009,
+      "peak": 4366,
+      "sha256": "6e2498d5c36e5e3649edb4fd1bb53cb83f67b66b917567b85e442f74e6d9bd98"
+    },
+    {
+      "file": "zh/toy_pair_prompt.wav",
+      "seconds": 2.032,
+      "peak": 5042,
+      "sha256": "0479e9d248234cbc0615f79cfe3a9fb86df3aa66fe8a5309016ff45d921238e5"
+    },
+    {
+      "file": "zh/toy_position_prompt.wav",
+      "seconds": 2.136,
+      "peak": 4521,
+      "sha256": "ebce79fea80284be1eadad8768ae4b32b8079d0a43cb8547a573e1acb2980bb5"
+    },
+    {
+      "file": "zh/toy_size_prompt.wav",
+      "seconds": 2.065,
+      "peak": 5506,
+      "sha256": "4806aafe9d07a0312377b2f0f2c6549bdc10fec867fcd651964110c21be7315f"
+    },
+    {
+      "file": "zh/triangle.wav",
+      "seconds": 1.509,
+      "peak": 3429,
+      "sha256": "b50afed9a43caadfa42bd0741100db72b9993b064ea7637234be1fd089b3a2eb"
+    },
+    {
+      "file": "zh/weather_chal_prompt.wav",
+      "seconds": 1.592,
+      "peak": 6134,
+      "sha256": "a92d569e538c5e1b8f0d1f508d94bfbd4a4d9e246e71661cb2273bdc10c7cbfc"
+    },
+    {
+      "file": "zh/weather_combo_prompt.wav",
+      "seconds": 2.184,
+      "peak": 3907,
+      "sha256": "efa8f0e5995b37ac0353810e0ff4c2524f0902cc16782c6e37c77967e7e1456a"
+    },
+    {
+      "file": "zh/weather_question.wav",
+      "seconds": 1.509,
+      "peak": 3525,
+      "sha256": "1ff8e1531a62ece167c71ad20eb880a6fc3ca0753597673494c1b2e67b79587f"
+    },
+    {
+      "file": "zh/weather_step_prompt.wav",
+      "seconds": 2.961,
+      "peak": 5005,
+      "sha256": "43f65e0f25afab169019fec51c7dd11d643072427cc6fcb9dcc045e328725b03"
+    },
+    {
+      "file": "zh/white.wav",
+      "seconds": 1.292,
+      "peak": 3249,
+      "sha256": "14e881f2fff7a01a7dac59765f78e80499bc63ca1e1c2e26cf6af380139304cc"
+    },
+    {
+      "file": "zh/windy.wav",
+      "seconds": 0.904,
+      "peak": 3062,
+      "sha256": "b901695a069d63e19643e1d32e75e34a4ac523a4594c07f428f02f42ff5f4e3a"
+    },
+    {
+      "file": "zh/word_airplane.wav",
+      "seconds": 1.604,
+      "peak": 3915,
+      "sha256": "a2954a6b3319a467a0e60493a1b825ba4bb586bcade7e9f2070f66394e5f3aa7"
+    },
+    {
+      "file": "zh/word_alligator.wav",
+      "seconds": 1.997,
+      "peak": 3342,
+      "sha256": "f1a9dc0684d880c620d4c7b98e41ed9ea013b140f639da20dadfadca6c0a0bfd"
+    },
+    {
+      "file": "zh/word_ant.wav",
+      "seconds": 1.412,
+      "peak": 3568,
+      "sha256": "34048abf99c0a687cb4f348d7f964d16f5ccbd5ed8bdac7b01e12e786fb721b0"
+    },
+    {
+      "file": "zh/word_apple.wav",
+      "seconds": 1.866,
+      "peak": 3954,
+      "sha256": "15097b12b3f838091ca2a55582be58c5b147435e2552a228a52d938eb2980113"
+    },
+    {
+      "file": "zh/word_ball.wav",
+      "seconds": 1.281,
+      "peak": 2916,
+      "sha256": "6c25754ec7f980ec4296632af10fb09824cbe66d163d50592c935257511897b8"
+    },
+    {
+      "file": "zh/word_banana.wav",
+      "seconds": 1.897,
+      "peak": 3589,
+      "sha256": "3ebefe91389c1cddd80660b6bd092fa37b697f72827517bb5f1799e4c428dc99"
+    },
+    {
+      "file": "zh/word_bear.wav",
+      "seconds": 1.07,
+      "peak": 3079,
+      "sha256": "c28b9a14d684aae93c25eb0095508d817a9524f9da54c64542e287607da37df2"
+    },
+    {
+      "file": "zh/word_box.wav",
+      "seconds": 1.728,
+      "peak": 2964,
+      "sha256": "128178de7324e6191712d631646e44456f6decee55e5554a74c7a76f8c5a3081"
+    },
+    {
+      "file": "zh/word_bus.wav",
+      "seconds": 1.89,
+      "peak": 4303,
+      "sha256": "36e1917ce6fe9c541720579adde14b3cdc59d48b140354e320bb5a11832c4714"
+    },
+    {
+      "file": "zh/word_cake.wav",
+      "seconds": 1.536,
+      "peak": 3518,
+      "sha256": "0ed0b3771b89ff425133599fc2033da38f5bc0901a18750e29c29ea9cb147f56"
+    },
+    {
+      "file": "zh/word_car.wav",
+      "seconds": 1.765,
+      "peak": 3629,
+      "sha256": "0a53487b0460571b1800935483402d67b0459d1baf496d8399a83dd4e2adffc7"
+    },
+    {
+      "file": "zh/word_cat.wav",
+      "seconds": 0.871,
+      "peak": 2335,
+      "sha256": "bf14ac3b4b0ee6747071690e1d7e747604b293f4f53ab6dcfa3dcfd5c1685979"
+    },
+    {
+      "file": "zh/word_cow.wav",
+      "seconds": 1.085,
+      "peak": 2084,
+      "sha256": "17ad1f83ae982e5dc33ad7fc0d5c63b69dd75b850122a445d02f55b613f15d72"
+    },
+    {
+      "file": "zh/word_dog.wav",
+      "seconds": 1.08,
+      "peak": 2579,
+      "sha256": "6d8b256a140b5d440d8f0a3db381fff911d23608453013d890d701e1d1ec1f3d"
+    },
+    {
+      "file": "zh/word_door.wav",
+      "seconds": 1.187,
+      "peak": 3056,
+      "sha256": "19202cf8e24f3a592d4f29086c1c04eec3501d86751a610210426cc4c3de3742"
+    },
+    {
+      "file": "zh/word_drum.wav",
+      "seconds": 0.999,
+      "peak": 3217,
+      "sha256": "26fe15e9e38bf91e637c350e5803454ec4114a092ed6d931497745795f3adbfd"
+    },
+    {
+      "file": "zh/word_duck.wav",
+      "seconds": 1.662,
+      "peak": 3957,
+      "sha256": "6c6ade8ad6aaaf63ae13811a399ea19ccae9b8394ed70992d97ea75aa92731ce"
+    },
+    {
+      "file": "zh/word_ear.wav",
+      "seconds": 1.403,
+      "peak": 2988,
+      "sha256": "2750a3b470b24d94bd99fec5ada59c5cbec70c48e02901d5b5296f85e2697957"
+    },
+    {
+      "file": "zh/word_egg.wav",
+      "seconds": 0.931,
+      "peak": 2436,
+      "sha256": "8ecfe6cdaad5fb96a43fe0098a31bd7c3ef7a8decd0caf4482e2eed512f716be"
+    },
+    {
+      "file": "zh/word_elephant.wav",
+      "seconds": 1.609,
+      "peak": 4616,
+      "sha256": "16420fb6d9c0f9ea3b1d5617ef883a5a8e46c54c1b9036d83e60d71cbfe26b55"
+    },
+    {
+      "file": "zh/word_eye.wav",
+      "seconds": 1.95,
+      "peak": 2653,
+      "sha256": "b899b03c7ad262f06925585d5e3be8b787d11d373a484ec8a3f05643646fadea"
+    },
+    {
+      "file": "zh/word_fire_truck.wav",
+      "seconds": 2.577,
+      "peak": 5121,
+      "sha256": "8f4313912b5a5d1cd86cac2d4aec9e40a986844649c48baa208b84abe95a27b5"
+    },
+    {
+      "file": "zh/word_fish.wav",
+      "seconds": 0.821,
+      "peak": 3350,
+      "sha256": "a01d6bef5efdb1a216c297b4694686bedf66ab9853f61e1a0db5da7156619c51"
+    },
+    {
+      "file": "zh/word_flower.wav",
+      "seconds": 1.173,
+      "peak": 3138,
+      "sha256": "8b10389cf9251786e0ade74912d649c6e15e964a14f2ac7a124ba0d8cd45049d"
+    },
+    {
+      "file": "zh/word_fox.wav",
+      "seconds": 1.485,
+      "peak": 3929,
+      "sha256": "9f13c73ba00eefe0eccac7564626d9a8d8bdd39c168359ca248f8a3da239b969"
+    },
+    {
+      "file": "zh/word_frog.wav",
+      "seconds": 1.507,
+      "peak": 3119,
+      "sha256": "197b0da81f61f86654994cc74eff50cf68152614152240437c644e659fdff5f3"
+    },
+    {
+      "file": "zh/word_giraffe.wav",
+      "seconds": 1.896,
+      "peak": 3451,
+      "sha256": "a8e3c88cab7cc9417e9e0f7d624dbf8ee4bc71a016eae87ab4f26c65d17f56e3"
+    },
+    {
+      "file": "zh/word_goat.wav",
+      "seconds": 1.61,
+      "peak": 2982,
+      "sha256": "edf425aeb21c3e17582eef00e340c6a8a3a48e27f2f6e3c30d08bc351d97f166"
+    },
+    {
+      "file": "zh/word_grape.wav",
+      "seconds": 1.567,
+      "peak": 2822,
+      "sha256": "64740b5778830c0845ba6c6b88726d3981dfdc8afad53bc04fbb4ca30d8f1c8b"
+    },
+    {
+      "file": "zh/word_guitar.wav",
+      "seconds": 1.559,
+      "peak": 3005,
+      "sha256": "9ed9816971bb8ed11bc075c9b6fb0ec0efb80ec3a328995aa891ed055eb60088"
+    },
+    {
+      "file": "zh/word_hand.wav",
+      "seconds": 1.27,
+      "peak": 2832,
+      "sha256": "5aa34f32af4728433453177a88667c0f821107bb3f70eb5613dc32e9ca530533"
+    },
+    {
+      "file": "zh/word_hat.wav",
+      "seconds": 1.878,
+      "peak": 4990,
+      "sha256": "465a29c22faa7e9814a1936432b970146d0b4eea18c05d61a81b3a32576f994e"
+    },
+    {
+      "file": "zh/word_horse.wav",
+      "seconds": 0.975,
+      "peak": 2813,
+      "sha256": "1dcfd9f4298c2af86f0647055e70f3a48ff0a09c2f1e33fda4aa6ee36a367277"
+    },
+    {
+      "file": "zh/word_house.wav",
+      "seconds": 1.718,
+      "peak": 3477,
+      "sha256": "f3d10a96d3d4a8802afc72a74d191ce12e6fa2babfb9b3ccf7d5b2d91fbe106f"
+    },
+    {
+      "file": "zh/word_ice_cream.wav",
+      "seconds": 2.194,
+      "peak": 3345,
+      "sha256": "b8616d2f288a9fbe841b9d612f72c0fac7c813c28afb6bd488c7a256d0afd137"
+    },
+    {
+      "file": "zh/word_igloo.wav",
+      "seconds": 1.269,
+      "peak": 2493,
+      "sha256": "ae491ee7f0f6e311e3231657a97f9c2ded119d315e6cc812e9444684b5aad670"
+    },
+    {
+      "file": "zh/word_iguana.wav",
+      "seconds": 1.788,
+      "peak": 3412,
+      "sha256": "d8c24478a6e8637429cc11e95572c8925b00b6daee55182fb91e551913f9059c"
+    },
+    {
+      "file": "zh/word_insect.wav",
+      "seconds": 1.809,
+      "peak": 3667,
+      "sha256": "b268a35831c10ca780131a5306a2a48b7317032ff0824cd91547e4a16758c8a3"
+    },
+    {
+      "file": "zh/word_jacket.wav",
+      "seconds": 1.974,
+      "peak": 3910,
+      "sha256": "13e2f134b47864d475d603be99f6d3ae8d1696f10119573c5cc36df9f764101a"
+    },
+    {
+      "file": "zh/word_jar.wav",
+      "seconds": 1.813,
+      "peak": 3405,
+      "sha256": "753e943a82e96b7f2f6d171ac4572a202d8aad6bce6167dd06dd10973c666c1d"
+    },
+    {
+      "file": "zh/word_jellyfish.wav",
+      "seconds": 1.695,
+      "peak": 2993,
+      "sha256": "9be7ff97499a28d7ac0a723af207f6eec7d057ecad608a3df6c7827db5593508"
+    },
+    {
+      "file": "zh/word_juice.wav",
+      "seconds": 1.785,
+      "peak": 3320,
+      "sha256": "17925f6d406a8845c0fa291a3fe471363b0a06d66cf66923a6029d3dcc8d6d88"
+    },
+    {
+      "file": "zh/word_kangaroo.wav",
+      "seconds": 1.648,
+      "peak": 3598,
+      "sha256": "5d7b461b893169ce15f671f578d1bfc2255a51abc924fe8605658e2149a8dbf0"
+    },
+    {
+      "file": "zh/word_key.wav",
+      "seconds": 1.891,
+      "peak": 2161,
+      "sha256": "e6bfc891525593d8b609f6113bcb02624a7a8fcff4c28d019c7d1441a8b61d90"
+    },
+    {
+      "file": "zh/word_kite.wav",
+      "seconds": 1.888,
+      "peak": 2742,
+      "sha256": "99b312e9675b454eb7828fca38c425a4ec622bc64f8f62201567da3e7c8d80a8"
+    },
+    {
+      "file": "zh/word_koala.wav",
+      "seconds": 2.299,
+      "peak": 4586,
+      "sha256": "07335c93959324cd3d460103c2e8d9afe9579f374bf174c43b054fe1becc17f4"
+    },
+    {
+      "file": "zh/word_lamp.wav",
+      "seconds": 1.117,
+      "peak": 2394,
+      "sha256": "bc97b36e3a21ed70623ccdccc2cfcadc6d94d300ae9758dd8914c97aa90b538c"
+    },
+    {
+      "file": "zh/word_leaf.wav",
+      "seconds": 1.677,
+      "peak": 3290,
+      "sha256": "dc059a4f43c9903945979f8d49249ce2b18a26fd77d9f67617cd88edc696875a"
+    },
+    {
+      "file": "zh/word_lemon.wav",
+      "seconds": 1.556,
+      "peak": 2700,
+      "sha256": "cb4729cd2a4b344191d4de0a7aaae3eee26d1664213c9a0766e89121827bbaf6"
+    },
+    {
+      "file": "zh/word_lion.wav",
+      "seconds": 1.806,
+      "peak": 3148,
+      "sha256": "3f0d0f27fabefb94c127aa8fdaa3c5187de729ce9593cb2fabfab90535e66858"
+    },
+    {
+      "file": "zh/word_milk.wav",
+      "seconds": 1.596,
+      "peak": 2506,
+      "sha256": "c72208562d3d9f05772a377805110b26abdae65b8b2fe279e8c7740020cc9b8b"
+    },
+    {
+      "file": "zh/word_monkey.wav",
+      "seconds": 1.626,
+      "peak": 4584,
+      "sha256": "840901b47b6c8109bf1707b82aead961ef5df79f8845996e6418544a87acdb1d"
+    },
+    {
+      "file": "zh/word_moon.wav",
+      "seconds": 1.512,
+      "peak": 3007,
+      "sha256": "a2e7990fdaa7345de54050a433207ff651722403765bfd50553321a41abb3e3b"
+    },
+    {
+      "file": "zh/word_mouse.wav",
+      "seconds": 1.593,
+      "peak": 3926,
+      "sha256": "4f9a6a1b4db8749a574c709ec4d96991f446b643c5096539f93534f38dac7018"
+    },
+    {
+      "file": "zh/word_nest.wav",
+      "seconds": 1.971,
+      "peak": 2966,
+      "sha256": "c1939a276eb9a75a6c501159aa722d81802f8a27b82dee795477eea07b621f37"
+    },
+    {
+      "file": "zh/word_net.wav",
+      "seconds": 1.749,
+      "peak": 3376,
+      "sha256": "6fdb3e392f788a349080971353afcfba0185378ca5f781c54d321dba46759292"
+    },
+    {
+      "file": "zh/word_noodles.wav",
+      "seconds": 1.174,
+      "peak": 2331,
+      "sha256": "21f78eea3f3fb27333ed506d5dd7f36a831d5d8c182be3d9e89d01d2295fdcc7"
+    },
+    {
+      "file": "zh/word_nose.wav",
+      "seconds": 1.45,
+      "peak": 3077,
+      "sha256": "91bfec95401339832f68767ab73f93707237272f872163364a02fcea12a33b34"
+    },
+    {
+      "file": "zh/word_octopus.wav",
+      "seconds": 1.54,
+      "peak": 4283,
+      "sha256": "d2f97083bf617a0d2f6500cfce0c4bcee349590c4457c6e189d43cb329e20d76"
+    },
+    {
+      "file": "zh/word_onion.wav",
+      "seconds": 1.56,
+      "peak": 3761,
+      "sha256": "1a47b1c53b6df3ac4474245d4519d3f396b741191f1cc5a05345f0cff26074f8"
+    },
+    {
+      "file": "zh/word_orange.wav",
+      "seconds": 1.571,
+      "peak": 3116,
+      "sha256": "ab5bb57dd611ac14adc032bf78733375e3de3948ca6141e4048b50b00d669f16"
+    },
+    {
+      "file": "zh/word_owl.wav",
+      "seconds": 2.136,
+      "peak": 3021,
+      "sha256": "3ac0da70638eee51773f3ef0441aaf80f0773188da75646097937160491cb77d"
+    },
+    {
+      "file": "zh/word_panda.wav",
+      "seconds": 1.879,
+      "peak": 3498,
+      "sha256": "0c7f65dec7a3799cfb2b68a79aa1ee5868c0be8dc2b1db6f11440cc8fa385ec2"
+    },
+    {
+      "file": "zh/word_pear.wav",
+      "seconds": 1.619,
+      "peak": 3328,
+      "sha256": "a763076aead7518367e78d5b04f9210736247caa25e0202a0b9ffe0270d5cfd1"
+    },
+    {
+      "file": "zh/word_pencil.wav",
+      "seconds": 1.597,
+      "peak": 3551,
+      "sha256": "30a41c893b953633f4a4e42b17592afe91be25a31dd10417c521f0cf9817a854"
+    },
+    {
+      "file": "zh/word_pig.wav",
+      "seconds": 1.308,
+      "peak": 2568,
+      "sha256": "3d1779fb72583572f682867cdf492c5f4874e1fe307c4be04ba24ac6df6a6035"
+    },
+    {
+      "file": "zh/word_quail.wav",
+      "seconds": 1.776,
+      "peak": 3723,
+      "sha256": "e1783bc68b239a5a68aae878f035017dc2376745ea781a67cd474fd5d1c83f57"
+    },
+    {
+      "file": "zh/word_queen.wav",
+      "seconds": 1.452,
+      "peak": 2900,
+      "sha256": "4a7d9677832a32d54d36ed1817cb44382f6d58e5da7f023ff3e4f8330cc42325"
+    },
+    {
+      "file": "zh/word_quill.wav",
+      "seconds": 1.81,
+      "peak": 3168,
+      "sha256": "03445d2aa320028b471ffc2760197dc88f6a6e2b167743d0b0c075ac596ae600"
+    },
+    {
+      "file": "zh/word_quilt.wav",
+      "seconds": 1.711,
+      "peak": 4109,
+      "sha256": "f8d97af2dcc556949880755c5f276f94dd70ac8fa9ecaa5f45ecfe19c6421e96"
+    },
+    {
+      "file": "zh/word_rabbit.wav",
+      "seconds": 1.817,
+      "peak": 4277,
+      "sha256": "7be95afd76671251e2aa10449758be1c507204ecd9ae6ecafe9c1a8a69142016"
+    },
+    {
+      "file": "zh/word_rainbow.wav",
+      "seconds": 1.731,
+      "peak": 3630,
+      "sha256": "649a563190c5081b47c263b74c271abf3f4c85435a95b44930a2bce0bbf8dc6d"
+    },
+    {
+      "file": "zh/word_ring.wav",
+      "seconds": 1.653,
+      "peak": 3245,
+      "sha256": "fef62d487536da79a077d3e8f203686c319d49c28b4a23e5178be0cadd08a498"
+    },
+    {
+      "file": "zh/word_robot.wav",
+      "seconds": 2.219,
+      "peak": 3089,
+      "sha256": "9eca73f2052cf2e15b9e479b3e647197556c9d3959069f01b409837dd964cf54"
+    },
+    {
+      "file": "zh/word_shoe.wav",
+      "seconds": 1.641,
+      "peak": 3869,
+      "sha256": "389607194b79a552390e296b1826379663bee13cff1d931b1fb8f5f9ef6ae608"
+    },
+    {
+      "file": "zh/word_six.wav",
+      "seconds": 1.255,
+      "peak": 2347,
+      "sha256": "732e6673d2c2faa51c850a3c265b900755e7484e23c6f5c114ca619541ff448d"
+    },
+    {
+      "file": "zh/word_snake.wav",
+      "seconds": 1.166,
+      "peak": 3097,
+      "sha256": "e89080c89f1f449be021f5445659e4d44d639bf019e40d5194efd48c5304a889"
+    },
+    {
+      "file": "zh/word_star.wav",
+      "seconds": 1.809,
+      "peak": 2563,
+      "sha256": "3b7c1ef48f8cda225f20c96f613b0e0b211425a855a281735a29e0a6a5e938da"
+    },
+    {
+      "file": "zh/word_sun.wav",
+      "seconds": 1.836,
+      "peak": 2945,
+      "sha256": "a5473f3b4cac86575d8b8e9ee1213714ae14d41a86671c1c55ca7bc74bff98d3"
+    },
+    {
+      "file": "zh/word_tiger.wav",
+      "seconds": 1.459,
+      "peak": 3332,
+      "sha256": "d45bcb999388e1a226cda0e17797bd0786c0081da9b2851b678ef2690c730cac"
+    },
+    {
+      "file": "zh/word_train.wav",
+      "seconds": 1.062,
+      "peak": 3592,
+      "sha256": "6ec49e5fae3412b9ad57caf823af4c14c63ee25ccf230fecf5a19a7a97f1eb6f"
+    },
+    {
+      "file": "zh/word_tree.wav",
+      "seconds": 1.292,
+      "peak": 3381,
+      "sha256": "2d82bf8dce0903961bf5fe61cda3dcf808998e5c727ca5df870fbb343487c96c"
+    },
+    {
+      "file": "zh/word_turtle.wav",
+      "seconds": 1.867,
+      "peak": 4024,
+      "sha256": "2d2bc5fd9efb070ab2393c5de81b2c8be5dbb1c44ab182a4b02e6b40f289eace"
+    },
+    {
+      "file": "zh/word_umbrella.wav",
+      "seconds": 1.238,
+      "peak": 3000,
+      "sha256": "588d02c950947928cc6875e1a07ca2d2a3bc6edc6e8b9edeb5b5935394875ecf"
+    },
+    {
+      "file": "zh/word_uncle.wav",
+      "seconds": 1.935,
+      "peak": 3401,
+      "sha256": "df2d7ead69df6e7f2055b3f6877d65d5c073325dd6d6c1f52adca13e17cc9df0"
+    },
+    {
+      "file": "zh/word_unicorn.wav",
+      "seconds": 2.424,
+      "peak": 3708,
+      "sha256": "167455b4f518754f04b8f932c47f6be996dea25a421f51ca5721f1c0303f5070"
+    },
+    {
+      "file": "zh/word_uniform.wav",
+      "seconds": 1.705,
+      "peak": 3494,
+      "sha256": "a028a759cc1fc72614057a1879f90476a5094a0307f730b0499eebdc3744cdac"
+    },
+    {
+      "file": "zh/word_van.wav",
+      "seconds": 2.502,
+      "peak": 3583,
+      "sha256": "67cc70e7ec4c2e9d50c060b587f0b82687b39e756978d74022aeab68b2db794a"
+    },
+    {
+      "file": "zh/word_vase.wav",
+      "seconds": 1.602,
+      "peak": 5141,
+      "sha256": "e9a8f94a129f9ea347114903f713347bbebc4930615356f70911c8b7f41206a6"
+    },
+    {
+      "file": "zh/word_vest.wav",
+      "seconds": 1.705,
+      "peak": 3805,
+      "sha256": "208c0d2c0f0cb51d5b0507890b35efd8ad797fc4e9c00b1b9b9b98b1d90fb74b"
+    },
+    {
+      "file": "zh/word_violin.wav",
+      "seconds": 2.241,
+      "peak": 3037,
+      "sha256": "2272d5f99d2b57fb49080baa93f8d891e06e9772235c47bcc08effed8567b040"
+    },
+    {
+      "file": "zh/word_watch.wav",
+      "seconds": 1.46,
+      "peak": 3267,
+      "sha256": "a06b91c29812d9a950207de7c28100c5f60718b5c1cc6714831ed9ddc53efe80"
+    },
+    {
+      "file": "zh/word_watermelon.wav",
+      "seconds": 1.974,
+      "peak": 3856,
+      "sha256": "2b19953dda194333d647024d21356bf5d2da6309c74683794db13b30d92e048a"
+    },
+    {
+      "file": "zh/word_whale.wav",
+      "seconds": 1.457,
+      "peak": 2955,
+      "sha256": "352c282f139ae2095357cb30989de54779d5a7f32a6bf2934f01ecd224cfa7ca"
+    },
+    {
+      "file": "zh/word_window.wav",
+      "seconds": 1.882,
+      "peak": 3675,
+      "sha256": "940260f9341d9b19e1103ed5facfee407036b3c42b1ae9fdc08b05bc6e8ba8f1"
+    },
+    {
+      "file": "zh/word_x_ray.wav",
+      "seconds": 2.614,
+      "peak": 5840,
+      "sha256": "6fa969cd4458c2744170b1dddcf40d440b7785239ac69157f95a500af5be53ca"
+    },
+    {
+      "file": "zh/word_yak.wav",
+      "seconds": 1.531,
+      "peak": 3364,
+      "sha256": "b371e6f2626412b561f8c3d797334e76138366dceb65cadac799b5127a295682"
+    },
+    {
+      "file": "zh/word_yarn.wav",
+      "seconds": 1.891,
+      "peak": 3639,
+      "sha256": "6391b49c1e61deead575a73a2392ac86b13ad231d58d8d58a122d61c4abf1f47"
+    },
+    {
+      "file": "zh/word_yo_yo.wav",
+      "seconds": 1.999,
+      "peak": 3662,
+      "sha256": "6de2551d4539f64d9ad257d3a5eb3fc2865ad6cc4260bbc4890e44a99012d2a9"
+    },
+    {
+      "file": "zh/word_yogurt.wav",
+      "seconds": 1.622,
+      "peak": 3013,
+      "sha256": "68c80b6be3cb0e4587f3ae84e9e65b35612c09b50bdaa190d3f01a5228c91d5e"
+    },
+    {
+      "file": "zh/word_zebra.wav",
+      "seconds": 1.428,
+      "peak": 4360,
+      "sha256": "78cfef165911b28071bca6d9c3da0ba8a8ac729fc01aecc253376db95fea0bd8"
+    },
+    {
+      "file": "zh/word_zero.wav",
+      "seconds": 1.3,
+      "peak": 2721,
+      "sha256": "c8ba68cc6fe98c15cd4945d03a7e23a1595736d404f40f23f8eec935a3c4e098"
+    },
+    {
+      "file": "zh/word_zipper.wav",
+      "seconds": 1.501,
+      "peak": 2395,
+      "sha256": "e3fd1ac451d6a957915fa860226063c71a305222ae3214e2fcc8a49de7988ccb"
+    },
+    {
+      "file": "zh/word_zoo.wav",
+      "seconds": 2.111,
+      "peak": 5184,
+      "sha256": "46e9fb0bf9095ffd5e3d289280b247f5887bbcc9efcbba79b276af89885b58ff"
+    },
+    {
+      "file": "zh/writing_chal_prompt.wav",
+      "seconds": 1.869,
+      "peak": 3668,
+      "sha256": "738222ed65275c89bd767bd0d15eddad2c58d129a604fd5297b82ee4801d8ccf"
+    },
+    {
+      "file": "zh/writing_combo_prompt.wav",
+      "seconds": 1.237,
+      "peak": 4927,
+      "sha256": "b3101f3dfdc5ce09bd45d3f09e93ef616fdf86e3bb0da2601a4c6eef75eb743c"
+    },
+    {
+      "file": "zh/writing_instruction.wav",
+      "seconds": 4.618,
+      "peak": 6189,
+      "sha256": "ec5c765595b532b0af18749aaf56504e9a269f4f606c28bcf878ee74eb7da88e"
+    },
+    {
+      "file": "zh/writing_step_prompt.wav",
+      "seconds": 1.974,
+      "peak": 4184,
+      "sha256": "270a7b35ca35e72e5fdd5576bb5d813a301783843218790777c1284d8b2b7400"
+    },
+    {
+      "file": "zh/yellow.wav",
+      "seconds": 1.434,
+      "peak": 4223,
+      "sha256": "7abda2ff3e497d78434fc679da58f3ac27c518b7ae1f837b15e15255c6c4f2a3"
+    },
+    {
+      "file": "zh/zhuyin_3105.wav",
+      "seconds": 0.829,
+      "peak": 8179,
+      "sha256": "ff794a493cbb8e582ac70b54da41a57b7639bd2bed8ba8a036425817d8fdae9c"
+    },
+    {
+      "file": "zh/zhuyin_3106.wav",
+      "seconds": 0.803,
+      "peak": 9725,
+      "sha256": "65f7faf3ab4ec318cc489a61b365980bf17877b919b8df2fdc94ad902d1f6573"
+    },
+    {
+      "file": "zh/zhuyin_3107.wav",
+      "seconds": 0.826,
+      "peak": 8997,
+      "sha256": "814481eeb38f357a1181b067b25784d1ec614a01fd7396d27a4c641ebe727add"
+    },
+    {
+      "file": "zh/zhuyin_3108.wav",
+      "seconds": 0.839,
+      "peak": 10574,
+      "sha256": "68bf5b9025831561d62d7d2cce1c2b8d784cbc3b7851b9a2993157f50585b620"
+    },
+    {
+      "file": "zh/zhuyin_3109.wav",
+      "seconds": 0.832,
+      "peak": 10115,
+      "sha256": "49b0a896d93553bf8b57cbf245753460abb2df9c4028d372e2828ee57b004cfe"
+    },
+    {
+      "file": "zh/zhuyin_310a.wav",
+      "seconds": 0.8,
+      "peak": 7330,
+      "sha256": "d8ec83f5359fb9066ca1bb4b7c0a8ed11f378fd05795024f624b432ce1f42afb"
+    },
+    {
+      "file": "zh/zhuyin_310b.wav",
+      "seconds": 0.827,
+      "peak": 8266,
+      "sha256": "a503a0caf984dcdada06b25cfc91cd12046c1ef07874466a18dc45c3a44bdf28"
+    },
+    {
+      "file": "zh/zhuyin_310c.wav",
+      "seconds": 0.837,
+      "peak": 10832,
+      "sha256": "b9b5fc35148fb396667074496668e58a6bf3077f3aaa76454f219c0314ae8a6c"
+    },
+    {
+      "file": "zh/zhuyin_310d.wav",
+      "seconds": 0.837,
+      "peak": 10208,
+      "sha256": "b910b2228d4b6d67228d64cd8caf2bda6f54e89913696b9461bbf139fe3d1bc7"
+    },
+    {
+      "file": "zh/zhuyin_310e.wav",
+      "seconds": 0.835,
+      "peak": 7199,
+      "sha256": "94d68908d8a28d62768b11fa5a4b926babd744719ee68704ae750597d4c90ef5"
+    },
+    {
+      "file": "zh/zhuyin_310f.wav",
+      "seconds": 0.821,
+      "peak": 7388,
+      "sha256": "a5969aaeceb2658ff78624819f905c1dac24a7224fc59a7337fdb8dc609aeb50"
+    },
+    {
+      "file": "zh/zhuyin_3110.wav",
+      "seconds": 0.826,
+      "peak": 12112,
+      "sha256": "bd617d30b34ee3e4dc39d29d82db3e0993ba55262802e2196b5427e559ad24c5"
+    },
+    {
+      "file": "zh/zhuyin_3111.wav",
+      "seconds": 0.824,
+      "peak": 12148,
+      "sha256": "6c002446a5d58421aa47571bde0f34f899a8b3e797c6c3fd551e375ab541c60d"
+    },
+    {
+      "file": "zh/zhuyin_3112.wav",
+      "seconds": 0.839,
+      "peak": 12026,
+      "sha256": "cde858075fa16078457aefdc6c586b7a4c5ee088c3e3ab0eaf46fed915778e7d"
+    },
+    {
+      "file": "zh/zhuyin_3113.wav",
+      "seconds": 0.832,
+      "peak": 5844,
+      "sha256": "74f9b1444b3cb4ac2d8dac14b05d9b8ef1d09a4107a33eae47a8a9355e6be290"
+    },
+    {
+      "file": "zh/zhuyin_3114.wav",
+      "seconds": 0.787,
+      "peak": 11866,
+      "sha256": "080d9be21f769863b5e462743596d79017429834750328a284c3f06753781ee0"
+    },
+    {
+      "file": "zh/zhuyin_3115.wav",
+      "seconds": 0.832,
+      "peak": 8301,
+      "sha256": "fda75dff8b11daab818b94a67c9585414ad7db74fc2ecbb703871018d8c9517e"
+    },
+    {
+      "file": "zh/zhuyin_3116.wav",
+      "seconds": 0.839,
+      "peak": 6756,
+      "sha256": "75224437ecfbbfc752a6a744b7f7eaff257ea2f6709ce02ffe69752bbe88f183"
+    },
+    {
+      "file": "zh/zhuyin_3117.wav",
+      "seconds": 0.826,
+      "peak": 10180,
+      "sha256": "48c6849d0f5d735b5cdddc81fbdea39f6194f6632a7fa30c90ae9e1db7f21e4f"
+    },
+    {
+      "file": "zh/zhuyin_3118.wav",
+      "seconds": 0.818,
+      "peak": 12109,
+      "sha256": "a373b1e3cb43e207fc5de2563d6f4775b6dc234d16744387377106ff9f1051f9"
+    },
+    {
+      "file": "zh/zhuyin_3119.wav",
+      "seconds": 0.815,
+      "peak": 12062,
+      "sha256": "0804096bba32009b07b79de5553c014c18e940b7878924b61618c1a41cf70a53"
+    },
+    {
+      "file": "zh/zhuyin_311a.wav",
+      "seconds": 0.8,
+      "peak": 12123,
+      "sha256": "937acb887c383a7d45eaffce4376ce3a053c514b221bbba13323796287a37100"
+    },
+    {
+      "file": "zh/zhuyin_311b.wav",
+      "seconds": 0.808,
+      "peak": 11951,
+      "sha256": "8f5fc2ca710d36371082e5e395ec9e6538e5a9064213bceb1597b58a540584b1"
+    },
+    {
+      "file": "zh/zhuyin_311c.wav",
+      "seconds": 0.81,
+      "peak": 9412,
+      "sha256": "5c5171e144ad10df390820faa530b0930ea03d70d1d51f30964fd6ec7e20ade6"
+    },
+    {
+      "file": "zh/zhuyin_311d.wav",
+      "seconds": 0.818,
+      "peak": 12014,
+      "sha256": "e0c164d346cdf69e49de36f8b2e6ebb49c09adb1f5c48545c02701232fffd857"
+    },
+    {
+      "file": "zh/zhuyin_311e.wav",
+      "seconds": 0.822,
+      "peak": 11990,
+      "sha256": "03d701ce1feec644b4c3934e75636b728b0edcf7b643a6c5ea14b9be032e9321"
+    },
+    {
+      "file": "zh/zhuyin_311f.wav",
+      "seconds": 0.829,
+      "peak": 10026,
+      "sha256": "d9ff24329b99838d1e97fab27dc821b095734179ef081073344aac2c288b0568"
+    },
+    {
+      "file": "zh/zhuyin_3120.wav",
+      "seconds": 0.827,
+      "peak": 10516,
+      "sha256": "4e4dc81e930be2302ed6142a618d39624df7d8054eb39c6191ae326c592b3a94"
+    },
+    {
+      "file": "zh/zhuyin_3121.wav",
+      "seconds": 0.834,
+      "peak": 9769,
+      "sha256": "168993425e47150ff6e5ac9eca356363d0be109f40a89eef1cc5d9a5588f44f8"
+    },
+    {
+      "file": "zh/zhuyin_3122.wav",
+      "seconds": 0.824,
+      "peak": 11198,
+      "sha256": "e63521363829ccb6ebc0653ec05bcfe5257a9d85a1a40688e4ec0256351282e1"
+    },
+    {
+      "file": "zh/zhuyin_3123.wav",
+      "seconds": 0.834,
+      "peak": 10375,
+      "sha256": "ec4a5014a7ddeaf4c3bf7077035f2434b1970384fe862b379362b163030d6650"
+    },
+    {
+      "file": "zh/zhuyin_3124.wav",
+      "seconds": 0.811,
+      "peak": 11978,
+      "sha256": "5135613be150d43028307d6322319f999a00a6c5d0eb5ad41c64daa00e41d6d0"
+    },
+    {
+      "file": "zh/zhuyin_3125.wav",
+      "seconds": 0.803,
+      "peak": 6875,
+      "sha256": "53487d1215a35ed5291e53621bf28b977489f9dd23fa07aeed020087f9f77fc4"
+    },
+    {
+      "file": "zh/zhuyin_3126.wav",
+      "seconds": 0.839,
+      "peak": 8610,
+      "sha256": "3b7c3d8022d7a08f9fbe95fc874b0b2b0c955798fe54cb2a710abee0871196d8"
+    },
+    {
+      "file": "zh/zhuyin_3127.wav",
+      "seconds": 0.808,
+      "peak": 10220,
+      "sha256": "32f6d205454e5b110abc285012a2731c0355bce6692a19cdb7827cba6deba5e1"
+    },
+    {
+      "file": "zh/zhuyin_3128.wav",
+      "seconds": 0.839,
+      "peak": 5564,
+      "sha256": "5e66d7d1d0f20c9fcbd87d72cefc19312a30150f31c2b0bd3ed75725dccd2161"
+    },
+    {
+      "file": "zh/zhuyin_3129.wav",
+      "seconds": 0.822,
+      "peak": 5857,
+      "sha256": "13408b0d91e0141a2a6c797ad87035a90e5f547ecde3ac3de3f4e0990becaa47"
+    }
+  ]
+}
